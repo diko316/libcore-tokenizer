@@ -2,18 +2,18 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("libcore-alr", [], factory);
+		define("libcore-tokenizer", [], factory);
 	else if(typeof exports === 'object')
-		exports["libcore-alr"] = factory();
+		exports["libcore-tokenizer"] = factory();
 	else
-		root["libcore-alr"] = factory();
+		root["libcore-tokenizer"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function hotDisposeChunk(chunkId) {
 /******/ 		delete installedChunks[chunkId];
 /******/ 	}
-/******/ 	var parentHotUpdateCallback = this["webpackHotUpdatelibcore_alr"];
-/******/ 	this["webpackHotUpdatelibcore_alr"] = 
+/******/ 	var parentHotUpdateCallback = this["webpackHotUpdatelibcore_tokenizer"];
+/******/ 	this["webpackHotUpdatelibcore_tokenizer"] = 
 /******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		hotAddUpdateChunk(chunkId, moreModules);
 /******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
@@ -69,7 +69,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "47f3f64dd98314cad246"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5240ddd7c7fe7c56672c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
