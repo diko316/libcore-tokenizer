@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+  server:
+    build: .
+    image: libcore-tokenizer
+    container_name: "libcore-tokenizer-server"
+    hostname: libdom
+    command: bin/run-devserver.sh
+
+    volumes:
+     - .:/opt/app-source:ro
+
+    ports:
+      - "3000:3000"
+      
+  builder:
+    image: libcore-tokenizer
+    container_name: "libcore-tokenizer-builder"
+    command: bin/autosync-builds.sh
+    
+    environment:
+     - BUILD_MODE=production
+     - SOURCE_MOD_PATH=/opt/app-source-modification
+  
+    volumes:
+      - ./dist:/opt/app/dist
+      - .:/opt/app-source:ro
+      - .:/opt/app-source-modification:rw
+
+
