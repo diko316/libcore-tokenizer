@@ -66,7 +66,7 @@ Tokenizer.prototype = {
             limit = len - from,
             index = from - 1,
             found = null;
-        var chr, c, l, next, list, state, pointer, target;
+        var chr, c, l, next, list, state, pointer, target, not, nmap;
         
         if (limit === 0) {
             return ['$', '', len + 1];
@@ -86,7 +86,7 @@ Tokenizer.prototype = {
                     found = [ends[state], index];
                 }
                 
-                // found
+                // apply positive match
                 if (chr in pointer) {
                     list = pointer[chr];
                     
@@ -94,6 +94,24 @@ Tokenizer.prototype = {
                         target = list[++c];
                         next = [target, next];
                         
+                        // found token
+                        if (target in ends) {
+                            found = [ends[target], index + 1];
+                        }
+                    }
+                }
+                
+                // find negative match
+                not = pointer.not;
+                for (c = -1, l = not.length; l--;) {
+                    target = not[++c];
+                    nmap = target[1];
+                    console.log('negative! ', chr, target);
+                    if (chr in nmap) {
+                        target = target[0];
+                        next = [target, next];
+                        
+                                                
                         // found token
                         if (target in ends) {
                             found = [ends[target], index + 1];

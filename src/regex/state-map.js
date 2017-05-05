@@ -7,7 +7,9 @@ function StateMap(start) {
     
     start = typeof start === 'string' ?
                             start : 'start';
-    states[start] = {};
+    states[start] = {
+        not: []
+    };
     
     this.stateGenId = 0;
     this.start = start;
@@ -32,7 +34,8 @@ StateMap.prototype = {
             idmap = {},
             pending = [fragment],
             pl = 1;
-        var state, stateObject, item, pointer, chr, to, list, l, id;
+        var state, stateObject, item, pointer, chr, to, list, l, id,
+            not, tl, targets, total, notIndex;
         
         idmap[fragment.state.id] = this.start;
         
@@ -42,7 +45,9 @@ StateMap.prototype = {
             
             state = idmap[item.state.id];
             if (!(state in states)) {
-                states[state] = {};
+                states[state] = {
+                    not: []
+                };
             }
             stateObject = states[state];
             
@@ -57,19 +62,50 @@ StateMap.prototype = {
                     pending[pl++] = to;
                 }
                 
-                if (!(chr in stateObject)) {
-                    stateObject[chr] = [];
-                }
-                list = stateObject[chr];
-
+                // finalize state
                 state = to.state.id;
                 if (!(state in idmap)) {
                     idmap[state] = this.generateState();
                 }
                 state = idmap[state];
                 
-                if (list.indexOf(state) === -1) {
-                    list[list.length] = state;
+                // negative
+                if (pointer.negative) {
+                    targets = stateObject.not;
+                    console.log(stateObject);
+                    tl = total = targets.length;
+                    
+                    not = null;
+                    for (; tl--;) {
+                        not = targets[tl];
+                        if (not[0] === state) {
+                            break;
+                        }
+                        not = null;
+                    }
+                    
+                    if (!not) {
+                        not = targets[total++] = [state, {}];
+                    }
+                    
+                    notIndex = not[1];
+                    
+                    if (!(chr in notIndex)) {
+                        notIndex[chr] = 1;
+                    }
+                    
+                }
+                // positive
+                else {
+
+                    if (!(chr in stateObject)) {
+                        stateObject[chr] = [];
+                    }
+                    list = stateObject[chr];
+                    if (list.indexOf(state) === -1) {
+                        list[list.length] = state;
+                    }
+                    
                 }
             }
             

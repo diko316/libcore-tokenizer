@@ -59,20 +59,25 @@ function build(name, regex, stateObject) {
             break;
         
         // character class concat
+        case '^,':
         case ',':
         case '|': // also applicable to alternative
             stack = [stack[0][0],
-                        stack[0][1].merge(stack[1])];
+                        stack[0][1].merge(stack[1],
+                                          token === '^,')];
             break;
         
         // character class range
+        case '^-':
         case '-':
             stack = [stack[0][0],
-                        stack[0][1].fill(stack[1])];
+                        stack[0][1].fill(stack[1],
+                                         token === '^-')];
             break;
         
         case '$$':
             if (!stack || stack[0] !== null) {
+                console.log(stack);
                 throw new Error("Invalid end of expression.");
             }
             
@@ -92,7 +97,9 @@ function build(name, regex, stateObject) {
         case '^':
         case '$':
         case 'char':
-            operand1 = new F(builder, new P(item[1]));
+        case 'negative_char':
+            operand1 = new F(builder,
+                             new P(item[1], token === 'negative_char'));
             
             if (!startState) {
                 startState = operand1.applyState();

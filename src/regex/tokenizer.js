@@ -102,6 +102,13 @@ function tokenize(index, regexString) {
         break;
     
     case "[":
+        if (next < len && regexString.charAt(next) === '^') {
+            token = '[^';
+            next++;
+            break;
+        }
+        
+    /* falls through */
     case "]":
     case "(":
     case ")":

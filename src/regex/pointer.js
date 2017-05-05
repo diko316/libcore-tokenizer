@@ -3,14 +3,17 @@
 var helper = require("./helper.js"),
     libcore = require("libcore");
 
-function Pointer(chr) {
+function Pointer(chr, negative) {
     if (chr) {
         this.chr = chr;
     }
+    
+    this.negative = negative === true;
 }
 
 Pointer.prototype = {
     constructor: Pointer,
+    negative: false,
     chr: '',
     to: null,
     next: null,
@@ -73,7 +76,8 @@ Pointer.prototype = {
             Class = Pointer,
             S = String,
             start = null,
-            end = null;
+            end = null,
+            negative = this.negative;
         var from, len, created;
         
         from = chr.charCodeAt(0);
@@ -82,7 +86,7 @@ Pointer.prototype = {
         len = to - from - 1;
         
         for (; len--;) {
-            created = new Class(S.fromCharCode(++from));
+            created = new Class(S.fromCharCode(++from), negative);
             if (start) {
                 end.next = created;
             }

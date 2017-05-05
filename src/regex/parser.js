@@ -35,7 +35,9 @@ var TOKENIZE = require("./tokenizer.js"),
     FINAL = 6,
     OPERATOR = {
         "[": [ENCLOSED_START, 15, "]"],
+        "[^": [ENCLOSED_START, 15, "]^"],
         "]": [ENCLOSED_END, 1, "[]"],
+        "]^": [ENCLOSED_END, 1, "[^]"],
         "(": [ENCLOSED_START, 15, ")"],
         ")": [ENCLOSED_END, 1, "()"],
         "?": [POSTFIX, 10],
@@ -43,6 +45,8 @@ var TOKENIZE = require("./tokenizer.js"),
         "*": [POSTFIX, 10],
         "range": [POSTFIX, 10],
         "-": [BINARY, 7],
+        "^-": [BINARY, 7],
+        "^,": [BINARY, 5],
         ",": [BINARY, 5],
         ".": [BINARY, 5],
         "|": [BINARY, 3],
@@ -69,7 +73,8 @@ function parse(str) {
         bl = 0,
         bc = 0;
         
-    var token, chr, item, l, op, stackOp, fill, precedence, opName, from;
+    var token, chr, item, l, op, stackOp, fill, precedence, opName, from,
+        currentEnclosure;
     
         
     for (item = tokenize(index, str); item; item = tokenize(index, str))  {
@@ -83,6 +88,7 @@ function parse(str) {
             switch (token) {
             case '(':
             case '[':
+            case '[^':
                 fill = !!lastToken;
             }
         }
@@ -99,14 +105,35 @@ function parse(str) {
             }
         }
         
+        currentEnclosure = enclosure && enclosure[1];
+        
         if (fill) {
-            buffer[bl++] = [enclosure && enclosure[1] === '[' ?
-                                ',' : '.',
+            buffer[bl++] = [currentEnclosure === '[' ?
+                                ',' :
+                                currentEnclosure === '[^' ?
+                                    '^,' :
+                                    '.',
                             null,
                             2,
                             start,
                             0];
         }
+        
+        if (currentEnclosure === '[^') {
+            switch (token) {
+            case '-':
+                token = '^-';
+                break;
+            
+            case ']':
+                token = ']^';
+                break;
+            
+            case 'char':
+                token = 'negative_char';
+            }
+        }
+        
         
         buffer[bl++] = [token, chr, 0, start, index - start];
         start = index;

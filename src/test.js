@@ -1,10 +1,6 @@
 'use strict';
 
-
-var Tokenizer = require("./tokenizer.js"),
-    tokenizer = new Tokenizer(),
-    subject = '12345abc67890';
-var tokenizer2 = new Tokenizer();
+var Tokenizer = require("./tokenizer.js");
 
 function testTokenizer(tokenizer, subject) {
     var token = tokenizer.tokenize(0, subject);
@@ -16,23 +12,47 @@ function testTokenizer(tokenizer, subject) {
     }
     
 }
-
-tokenizer.append(
-    "number",   /[0-9]+/,
     
-    "char",     /[a-c]+/,
-                /[d-z]+/,
-                /[A-Z]+/
-);
+function test1() {
+    var tokenizer = new Tokenizer(),
+        subject = '12345abc67890';
+    var tokenizer2 = new Tokenizer();
+    
+    tokenizer.append(
+        "number",   /[0-9]+/,
+        
+        "char",     /[a-c]+/,
+                    /[d-z]+/,
+                    /[A-Z]+/
+    );
+    
+    testTokenizer(tokenizer, subject);
+    
+    console.log('2nd tokenizer');
+    tokenizer2.load(tokenizer.view());
+    
+    
+    testTokenizer(tokenizer2, subject);
 
-testTokenizer(tokenizer, subject);
+}
 
-console.log('2nd tokenizer');
-tokenizer2.load(tokenizer.view());
+function test2() {
+    var tokenizer = new Tokenizer();
+    
+    tokenizer.append(
+        "test", /[^a-c]/,
+                /[^x-z]/
+    );
+    console.log('try');
+    testTokenizer(tokenizer, 'mn09');
+    
+}
 
+test2();
 
-testTokenizer(tokenizer2, subject);
+console.log('-------------------------');
 
+//test1();
 
 
 
