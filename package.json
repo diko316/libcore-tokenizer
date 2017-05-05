@@ -1,8 +1,8 @@
 {
   "name": "libcore-tokenizer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NFA Tokenizer",
-  "main": "dist/libcore-tokenizer.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "node_modules/.bin/webpack --hide-modules",
