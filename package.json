@@ -1,6 +1,6 @@
 {
   "name": "libcore-tokenizer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "NFA Tokenizer",
   "main": "dist/index.js",
   "scripts": {
