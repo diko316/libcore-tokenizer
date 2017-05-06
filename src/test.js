@@ -5,11 +5,14 @@ var Tokenizer = require("./tokenizer.js");
 function testTokenizer(tokenizer, subject) {
     var token = tokenizer.tokenize(0, subject);
     var next;
-
+    
+    console.log('------------------------- tokenizing ', subject);
     for (; token; token = tokenizer.tokenize(next, subject)) {
         next = token[2];
         console.log(token);
     }
+    
+    console.log('-------------------------');
     
 }
     
@@ -18,18 +21,18 @@ function test1() {
         subject = '12345abc67890';
     var tokenizer2 = new Tokenizer();
     
-    tokenizer.append(
-        "number",   /[0-9]+/,
+    tokenizer.define([
+        "number",      /[0-9]+/,
         
-        "char",     /[a-c]+/,
-                    /[d-z]+/,
-                    /[A-Z]+/
-    );
+        "sequence",     /[a-c]+/,
+                        /[d-z]+/,
+                        /[A-Z]+/
+    ]);
     
     testTokenizer(tokenizer, subject);
     
     console.log('2nd tokenizer');
-    tokenizer2.load(tokenizer.view());
+    tokenizer2.fromJSON(tokenizer.toJSON());
     
     
     testTokenizer(tokenizer2, subject);
@@ -39,20 +42,17 @@ function test1() {
 function test2() {
     var tokenizer = new Tokenizer();
     
-    tokenizer.append(
+    tokenizer.define([
         "test", /[^a-c]/,
                 /[^x-z]/
-    );
-    console.log('try');
+    ]);
+    
     testTokenizer(tokenizer, 'mn09');
     
 }
 
 test2();
-
-console.log('-------------------------');
-
-//test1();
+test1();
 
 
 

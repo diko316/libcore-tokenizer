@@ -72,7 +72,6 @@ StateMap.prototype = {
                 // negative
                 if (pointer.negative) {
                     targets = stateObject.not;
-                    console.log(stateObject);
                     tl = total = targets.length;
                     
                     not = null;

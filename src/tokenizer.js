@@ -14,20 +14,24 @@ Tokenizer.prototype = {
     map: null,
     constructor: Tokenizer,
     
-    append: function () {
+    define: function (definitions) {
         var lib = libcore,
             string = lib.string,
             regex = lib.regex,
             map = this.map,
             build = builder,
-            args = arguments,
-            len = args.length,
-            c = -1,
             name = null;
-        var item;
+        var item, c, len;
+        
+        if (!lib.array(definitions)) {
+            throw new Error("Invalid definitions parameter.");
+        }
+        
+        c = -1;
+        len = definitions.length;
         
         for (; len--;) {
-            item = args[++c];
+            item = definitions[++c];
             
             if (string(item)) {
                 name = item;
@@ -48,12 +52,12 @@ Tokenizer.prototype = {
         return this;
     },
     
-    load: function (data) {
+    fromJSON: function (data) {
         this.map.importDefinition(data);
         return this;
     },
     
-    view: function () {
+    toJSON: function () {
         return this.map.exportDefinition();
     },
     
@@ -106,8 +110,8 @@ Tokenizer.prototype = {
                 for (c = -1, l = not.length; l--;) {
                     target = not[++c];
                     nmap = target[1];
-                    console.log('negative! ', chr, target);
-                    if (chr in nmap) {
+                    
+                    if (!(chr in nmap)) {
                         target = target[0];
                         next = [target, next];
                         
