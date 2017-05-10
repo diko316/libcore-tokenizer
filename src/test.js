@@ -51,8 +51,20 @@ function test2() {
     
 }
 
+function test3() {
+    var tokenizer = new Tokenizer();
+    
+    tokenizer.define([
+        "number", /(\+|\-)?[0-9]+(\.[0-9]+)?/
+    ]);
+    
+    testTokenizer(tokenizer, '09');
+}
+
+test3();
 test2();
 test1();
+
 
 
 

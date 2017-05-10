@@ -4,9 +4,10 @@ var HEX_RE = /^[a-fA-F0-9]{2}$/,
     UTF8_RE = /^[a-fA-F0-9]{4}$/,
     RANGE_RE = /^([0-9]+|[0-9]+\,[0-9]*|[0-9]*\,[0-9]+)$/;
 
-function escape(c, regexString) {
-    var chr = regexString.substring(++c, 2),
-        len = c + 1;
+function escape(index, regexString) {
+    var c = index + 1,
+        len = c + 1,
+        chr = regexString.substring(c, len);
     var match, l;
     
     switch (chr) {
@@ -51,7 +52,7 @@ function range(index, regexString) {
         if (chr === '}') {
             chr = regexString.substring(index + 1, c);
             if (RANGE_RE.test(chr)) {
-                return [chr, c];
+                return [chr, c + 1];
             }
         }
     }
@@ -82,7 +83,7 @@ function tokenize(index, regexString) {
     switch (chr) {
     case "\\":
         chr = escape(index, regexString);
-        next = chr[1] + 1;
+        next = chr[1];
         chr = chr[0];
         token = 'char';
         break;
@@ -90,7 +91,7 @@ function tokenize(index, regexString) {
     case "{":
         chr = range(index, regexString);
         if (chr) {
-            next = chr[1] + 1;
+            next = chr[1];
             chr = chr[0];
             token = 'range';
         }

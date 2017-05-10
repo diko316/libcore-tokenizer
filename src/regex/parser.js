@@ -96,6 +96,7 @@ function parse(str) {
             switch (lastToken) {
             case 'char':
             case ']':
+            case ']^':
             case ')':
             case '+':
             case '?':
@@ -186,8 +187,10 @@ function parse(str) {
                     break;
                 
                 case enclosed_end:
+                    
                     for (; stack; stack = stack[0]) {
                         stackOp = stack[1];
+                        
                         if (stackOp[0] === enclosed_start) {
                             if (stackOp[2] !== token) {
                                 throw new Error("Unmatched token found " + chr);
