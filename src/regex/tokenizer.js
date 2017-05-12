@@ -2,11 +2,22 @@
 
 var HEX_RE = /^[a-fA-F0-9]{2}$/,
     UTF8_RE = /^[a-fA-F0-9]{4}$/,
-    RANGE_RE = /^([0-9]+|[0-9]+\,[0-9]*|[0-9]*\,[0-9]+)$/;
+    RANGE_RE = /^([0-9]+|[0-9]+\,[0-9]*|[0-9]*\,[0-9]+)$/,
+    SPECIAL_CHAR = {
+        "b": "\b",
+        "f": "\f",
+        "n": "\n",
+        "r": "\r",
+        "t": "\t",
+        "v": "\x0B",
+        "\\": "\\",
+        "B": "\\"
+    };
 
 function escape(index, regexString) {
     var c = index + 1,
         len = c + 1,
+        special = SPECIAL_CHAR,
         chr = regexString.substring(c, len);
     var match, l;
     
@@ -38,7 +49,9 @@ function escape(index, regexString) {
                     ["x",
                      len];
     default:
-        return [chr, len];
+        return [chr in special ?
+                    special[chr] : chr,
+                len];
     }
 }
 

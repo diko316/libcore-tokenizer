@@ -61,6 +61,18 @@ function test3() {
     testTokenizer(tokenizer, '09');
 }
 
+function test4() {
+    var tokenizer = new Tokenizer();
+    
+    tokenizer.define([
+        "special", /[\r\n\t ]+/,
+        "let", /[a-z]+/
+    ]);
+    
+    testTokenizer(tokenizer, '\na b cccd');
+}
+
+test4();
 test3();
 test2();
 test1();

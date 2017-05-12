@@ -2,4 +2,4 @@
 
 module.exports = require("./tokenizer.js");
 
-//require("./test.js");
+require("./test.js");
