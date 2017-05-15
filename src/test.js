@@ -1,6 +1,6 @@
 'use strict';
 
-var Tokenizer = require("./tokenizer.js");
+var Tokenizer = require("./index.js");
 
 function testTokenizer(tokenizer, subject) {
     var token = tokenizer.tokenize(0, subject);
