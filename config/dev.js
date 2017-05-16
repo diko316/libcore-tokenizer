@@ -3,7 +3,7 @@
 
 function augment(config) {
     config.devtool = "eval-source-map";
-    config.entry.test = ['./src/test.js'];
+    config.entry.demo = ['./src/demo.js'];
 }
 
 
