@@ -1,15 +1,22 @@
 'use strict';
 
-global.main = require("../index.js");
-console.log('good! ', global.main);
+var Tokenizer = require("../index.js");
 
 
-describe("Test Index",
+global.createTokenizer = function() {
+    return new Tokenizer();
+};
+
+describe("Test Tokenizer API",
     function () {
-        
-        it("1. Should run unit test from here on.",
-            function () {
-                expect(1).toBe(1);
-            });
+        require("./api/definition.js");
+        require("./api/import.js");
+        require("./api/export.js");
+        require("./api/sample.js");
+    });
 
+
+describe("Test Supported Regular Expression operators",
+    function () {
+        require("./regex/alternative.js");
     });

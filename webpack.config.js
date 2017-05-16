@@ -5,17 +5,22 @@ var //PATH = require('path'),
     DEFINITION = require("./package.json"),
     LIB_NAME = DEFINITION.name,
     CONFIG = require("./config/base.js"),
-    hot = true;
+    hot = true,
+    dev = true;
     
 switch (process.env.BUILD_MODE) {
 case "unit-test":
 case "production":
 case "compressed":
     hot = false;
+    dev = false;
     
 /* falls through */
 default:
-    require("./config/dev.js")(CONFIG);
+    if (dev) {
+        require("./config/dev.js")(CONFIG);
+    }
+    
     if (hot) {
         CONFIG.plugins = [new webpack.HotModuleReplacementPlugin()];
         CONFIG.entry[LIB_NAME].

@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/assets/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,151 +81,3261 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar DETECTED = __webpack_require__(3),\n    validSignature = DETECTED.validSignature,\n    OBJECT_SIGNATURE = '[object Object]',\n    OBJECT = Object,\n    O = OBJECT.prototype,\n    toString = O.toString,\n    isSignature = validSignature ?\n                    objectSignature : ieObjectSignature;\n\n/** is object signature **/\nfunction objectSignature(subject) {\n    return toString.call(subject);\n}\n\nfunction ieObjectSignature(subject) {\n    if (subject === null) {\n        return '[object Null]';\n    }\n    else if (subject === void(0)) {\n        return '[object Undefined]';\n    }\n    return toString.call(subject);\n}\n\nfunction isType(subject, type) {\n    return isSignature(subject) === type;\n}\n\n/** is object **/\nfunction isObject(subject) {\n    return toString.call(subject) === OBJECT_SIGNATURE;\n}\n\nfunction ieIsObject(subject) {\n    return subject !== null &&\n            subject !== void(0) &&\n            toString.call(subject) === OBJECT_SIGNATURE;\n}\n\nfunction isNativeObject(subject) {\n    var O = OBJECT;\n    var constructor, result;\n    \n    if (isSignature(subject) === OBJECT_SIGNATURE) {\n        constructor = subject.constructor;\n        \n        // check constructor\n        if (O.hasOwnProperty.call(subject, 'constructor')) {\n            delete subject.constructor;\n            result = subject.constructor === O;\n            subject.constructor = constructor;\n            return result;\n        }\n        return constructor === O;\n    }\n    \n    return false;\n}\n\n/** is string **/\nfunction isString(subject, allowEmpty) {\n    return typeof subject === 'string' &&\n            (allowEmpty === true || subject.length !== 0);\n}\n\n/** is number **/\nfunction isNumber(subject) {\n    return typeof subject === 'number' && isFinite(subject);\n}\n\n/** is scalar **/\nfunction isScalar(subject) {\n    switch (typeof subject) {\n    case 'number': return isFinite(subject);\n    \n    case 'boolean':\n    case 'string': return true;\n    }\n    return false;\n}\n\n/** is function **/\nfunction isFunction(subject) {\n    return toString.call(subject) === '[object Function]';\n}\n\n/** is array **/\nfunction isArray(subject) {\n    return toString.call(subject) === '[object Array]';\n}\n\n/** is date **/\nfunction isDate(subject) {\n    return toString.call(subject) === '[object Date]';\n}\n\n/** is regexp **/\nfunction isRegExp(subject) {\n    return toString.call(subject) === '[object RegExp]';\n}\n\n\nmodule.exports = {\n    signature: isSignature,\n    \n    object: validSignature ?\n                isObject : ieIsObject,\n    \n    nativeObject: isNativeObject,\n    \n    string: isString,\n    \n    number: isNumber,\n    \n    scalar: isScalar,\n    \n    array: isArray,\n    \n    method: isFunction,\n    \n    date: isDate,\n    \n    regex: isRegExp,\n    \n    type: isType\n};//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL3R5cGUuanM/NjRhOSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTtBQUNBIiwiZmlsZSI6IjAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbnZhciBERVRFQ1RFRCA9IHJlcXVpcmUoJy4vZGV0ZWN0LmpzJyksXG4gICAgdmFsaWRTaWduYXR1cmUgPSBERVRFQ1RFRC52YWxpZFNpZ25hdHVyZSxcbiAgICBPQkpFQ1RfU0lHTkFUVVJFID0gJ1tvYmplY3QgT2JqZWN0XScsXG4gICAgT0JKRUNUID0gT2JqZWN0LFxuICAgIE8gPSBPQkpFQ1QucHJvdG90eXBlLFxuICAgIHRvU3RyaW5nID0gTy50b1N0cmluZyxcbiAgICBpc1NpZ25hdHVyZSA9IHZhbGlkU2lnbmF0dXJlID9cbiAgICAgICAgICAgICAgICAgICAgb2JqZWN0U2lnbmF0dXJlIDogaWVPYmplY3RTaWduYXR1cmU7XG5cbi8qKiBpcyBvYmplY3Qgc2lnbmF0dXJlICoqL1xuZnVuY3Rpb24gb2JqZWN0U2lnbmF0dXJlKHN1YmplY3QpIHtcbiAgICByZXR1cm4gdG9TdHJpbmcuY2FsbChzdWJqZWN0KTtcbn1cblxuZnVuY3Rpb24gaWVPYmplY3RTaWduYXR1cmUoc3ViamVjdCkge1xuICAgIGlmIChzdWJqZWN0ID09PSBudWxsKSB7XG4gICAgICAgIHJldHVybiAnW29iamVjdCBOdWxsXSc7XG4gICAgfVxuICAgIGVsc2UgaWYgKHN1YmplY3QgPT09IHZvaWQoMCkpIHtcbiAgICAgICAgcmV0dXJuICdbb2JqZWN0IFVuZGVmaW5lZF0nO1xuICAgIH1cbiAgICByZXR1cm4gdG9TdHJpbmcuY2FsbChzdWJqZWN0KTtcbn1cblxuZnVuY3Rpb24gaXNUeXBlKHN1YmplY3QsIHR5cGUpIHtcbiAgICByZXR1cm4gaXNTaWduYXR1cmUoc3ViamVjdCkgPT09IHR5cGU7XG59XG5cbi8qKiBpcyBvYmplY3QgKiovXG5mdW5jdGlvbiBpc09iamVjdChzdWJqZWN0KSB7XG4gICAgcmV0dXJuIHRvU3RyaW5nLmNhbGwoc3ViamVjdCkgPT09IE9CSkVDVF9TSUdOQVRVUkU7XG59XG5cbmZ1bmN0aW9uIGllSXNPYmplY3Qoc3ViamVjdCkge1xuICAgIHJldHVybiBzdWJqZWN0ICE9PSBudWxsICYmXG4gICAgICAgICAgICBzdWJqZWN0ICE9PSB2b2lkKDApICYmXG4gICAgICAgICAgICB0b1N0cmluZy5jYWxsKHN1YmplY3QpID09PSBPQkpFQ1RfU0lHTkFUVVJFO1xufVxuXG5mdW5jdGlvbiBpc05hdGl2ZU9iamVjdChzdWJqZWN0KSB7XG4gICAgdmFyIE8gPSBPQkpFQ1Q7XG4gICAgdmFyIGNvbnN0cnVjdG9yLCByZXN1bHQ7XG4gICAgXG4gICAgaWYgKGlzU2lnbmF0dXJlKHN1YmplY3QpID09PSBPQkpFQ1RfU0lHTkFUVVJFKSB7XG4gICAgICAgIGNvbnN0cnVjdG9yID0gc3ViamVjdC5jb25zdHJ1Y3RvcjtcbiAgICAgICAgXG4gICAgICAgIC8vIGNoZWNrIGNvbnN0cnVjdG9yXG4gICAgICAgIGlmIChPLmhhc093blByb3BlcnR5LmNhbGwoc3ViamVjdCwgJ2NvbnN0cnVjdG9yJykpIHtcbiAgICAgICAgICAgIGRlbGV0ZSBzdWJqZWN0LmNvbnN0cnVjdG9yO1xuICAgICAgICAgICAgcmVzdWx0ID0gc3ViamVjdC5jb25zdHJ1Y3RvciA9PT0gTztcbiAgICAgICAgICAgIHN1YmplY3QuY29uc3RydWN0b3IgPSBjb25zdHJ1Y3RvcjtcbiAgICAgICAgICAgIHJldHVybiByZXN1bHQ7XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuIGNvbnN0cnVjdG9yID09PSBPO1xuICAgIH1cbiAgICBcbiAgICByZXR1cm4gZmFsc2U7XG59XG5cbi8qKiBpcyBzdHJpbmcgKiovXG5mdW5jdGlvbiBpc1N0cmluZyhzdWJqZWN0LCBhbGxvd0VtcHR5KSB7XG4gICAgcmV0dXJuIHR5cGVvZiBzdWJqZWN0ID09PSAnc3RyaW5nJyAmJlxuICAgICAgICAgICAgKGFsbG93RW1wdHkgPT09IHRydWUgfHwgc3ViamVjdC5sZW5ndGggIT09IDApO1xufVxuXG4vKiogaXMgbnVtYmVyICoqL1xuZnVuY3Rpb24gaXNOdW1iZXIoc3ViamVjdCkge1xuICAgIHJldHVybiB0eXBlb2Ygc3ViamVjdCA9PT0gJ251bWJlcicgJiYgaXNGaW5pdGUoc3ViamVjdCk7XG59XG5cbi8qKiBpcyBzY2FsYXIgKiovXG5mdW5jdGlvbiBpc1NjYWxhcihzdWJqZWN0KSB7XG4gICAgc3dpdGNoICh0eXBlb2Ygc3ViamVjdCkge1xuICAgIGNhc2UgJ251bWJlcic6IHJldHVybiBpc0Zpbml0ZShzdWJqZWN0KTtcbiAgICBcbiAgICBjYXNlICdib29sZWFuJzpcbiAgICBjYXNlICdzdHJpbmcnOiByZXR1cm4gdHJ1ZTtcbiAgICB9XG4gICAgcmV0dXJuIGZhbHNlO1xufVxuXG4vKiogaXMgZnVuY3Rpb24gKiovXG5mdW5jdGlvbiBpc0Z1bmN0aW9uKHN1YmplY3QpIHtcbiAgICByZXR1cm4gdG9TdHJpbmcuY2FsbChzdWJqZWN0KSA9PT0gJ1tvYmplY3QgRnVuY3Rpb25dJztcbn1cblxuLyoqIGlzIGFycmF5ICoqL1xuZnVuY3Rpb24gaXNBcnJheShzdWJqZWN0KSB7XG4gICAgcmV0dXJuIHRvU3RyaW5nLmNhbGwoc3ViamVjdCkgPT09ICdbb2JqZWN0IEFycmF5XSc7XG59XG5cbi8qKiBpcyBkYXRlICoqL1xuZnVuY3Rpb24gaXNEYXRlKHN1YmplY3QpIHtcbiAgICByZXR1cm4gdG9TdHJpbmcuY2FsbChzdWJqZWN0KSA9PT0gJ1tvYmplY3QgRGF0ZV0nO1xufVxuXG4vKiogaXMgcmVnZXhwICoqL1xuZnVuY3Rpb24gaXNSZWdFeHAoc3ViamVjdCkge1xuICAgIHJldHVybiB0b1N0cmluZy5jYWxsKHN1YmplY3QpID09PSAnW29iamVjdCBSZWdFeHBdJztcbn1cblxuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgICBzaWduYXR1cmU6IGlzU2lnbmF0dXJlLFxuICAgIFxuICAgIG9iamVjdDogdmFsaWRTaWduYXR1cmUgP1xuICAgICAgICAgICAgICAgIGlzT2JqZWN0IDogaWVJc09iamVjdCxcbiAgICBcbiAgICBuYXRpdmVPYmplY3Q6IGlzTmF0aXZlT2JqZWN0LFxuICAgIFxuICAgIHN0cmluZzogaXNTdHJpbmcsXG4gICAgXG4gICAgbnVtYmVyOiBpc051bWJlcixcbiAgICBcbiAgICBzY2FsYXI6IGlzU2NhbGFyLFxuICAgIFxuICAgIGFycmF5OiBpc0FycmF5LFxuICAgIFxuICAgIG1ldGhvZDogaXNGdW5jdGlvbixcbiAgICBcbiAgICBkYXRlOiBpc0RhdGUsXG4gICAgXG4gICAgcmVnZXg6IGlzUmVnRXhwLFxuICAgIFxuICAgIHR5cGU6IGlzVHlwZVxufTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL34vbGliY29yZS9zcmMvdHlwZS5qc1xuLy8gbW9kdWxlIGlkID0gMFxuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJzb3VyY2VSb290IjoiIn0=");
+
+
+var DETECTED = __webpack_require__(3),
+    validSignature = DETECTED.validSignature,
+    OBJECT_SIGNATURE = '[object Object]',
+    OBJECT = Object,
+    O = OBJECT.prototype,
+    toString = O.toString,
+    isSignature = validSignature ?
+                    objectSignature : ieObjectSignature;
+
+/** is object signature **/
+function objectSignature(subject) {
+    return toString.call(subject);
+}
+
+function ieObjectSignature(subject) {
+    if (subject === null) {
+        return '[object Null]';
+    }
+    else if (subject === void(0)) {
+        return '[object Undefined]';
+    }
+    return toString.call(subject);
+}
+
+function isType(subject, type) {
+    return isSignature(subject) === type;
+}
+
+/** is object **/
+function isObject(subject) {
+    return toString.call(subject) === OBJECT_SIGNATURE;
+}
+
+function ieIsObject(subject) {
+    return subject !== null &&
+            subject !== void(0) &&
+            toString.call(subject) === OBJECT_SIGNATURE;
+}
+
+function isNativeObject(subject) {
+    var O = OBJECT;
+    var constructor, result;
+    
+    if (isSignature(subject) === OBJECT_SIGNATURE) {
+        constructor = subject.constructor;
+        
+        // check constructor
+        if (O.hasOwnProperty.call(subject, 'constructor')) {
+            delete subject.constructor;
+            result = subject.constructor === O;
+            subject.constructor = constructor;
+            return result;
+        }
+        return constructor === O;
+    }
+    
+    return false;
+}
+
+/** is string **/
+function isString(subject, allowEmpty) {
+    return typeof subject === 'string' &&
+            (allowEmpty === true || subject.length !== 0);
+}
+
+/** is number **/
+function isNumber(subject) {
+    return typeof subject === 'number' && isFinite(subject);
+}
+
+/** is scalar **/
+function isScalar(subject) {
+    switch (typeof subject) {
+    case 'number': return isFinite(subject);
+    
+    case 'boolean':
+    case 'string': return true;
+    }
+    return false;
+}
+
+/** is function **/
+function isFunction(subject) {
+    return toString.call(subject) === '[object Function]';
+}
+
+/** is array **/
+function isArray(subject) {
+    return toString.call(subject) === '[object Array]';
+}
+
+/** is date **/
+function isDate(subject) {
+    return toString.call(subject) === '[object Date]';
+}
+
+/** is regexp **/
+function isRegExp(subject) {
+    return toString.call(subject) === '[object RegExp]';
+}
+
+
+module.exports = {
+    signature: isSignature,
+    
+    object: validSignature ?
+                isObject : ieIsObject,
+    
+    nativeObject: isNativeObject,
+    
+    string: isString,
+    
+    number: isNumber,
+    
+    scalar: isScalar,
+    
+    array: isArray,
+    
+    method: isFunction,
+    
+    date: isDate,
+    
+    regex: isRegExp,
+    
+    type: isType
+};
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n/**\n * @external libcore\n */\n\nvar O = Object.prototype,\n    TYPE = __webpack_require__(0),\n    STRING = __webpack_require__(6),\n    OHasOwn = O.hasOwnProperty,\n    NUMERIC_RE = /^[0-9]*$/;\n\nfunction empty() {\n    \n}\n\n\n/**\n * Assign properties of source Object to target Object\n * @alias module:libcore.assign\n * @param {Object} target - the target object\n * @param {Object} source - the source object containing properties\n *                          to be assigned to target object\n * @param {Object} [defaults] - object containing default properties\n *                          which will be assigned first to\n *                          target before source.\n * @returns {Object} target object from first parameter\n */\nfunction assign(target, source, defaults) {\n    var onAssign = apply,\n        eachProperty = each;\n        \n    if (defaults) {\n        eachProperty(defaults, onAssign, target);\n    }\n    \n    eachProperty(source, onAssign, target);\n    \n    return target;\n}\n\nfunction apply(value, name) {\n    /*jshint validthis:true */\n    this[name] = value;\n}\n\n/**\n * Relocate and rename properties of source Object into target Object.\n * \n * @name libcore.rehash\n * @function\n * @param {Object} target - the target object\n * @param {Object} source - the source object containing properties to be\n *                          relocated.\n * @param {Object} access - the rename map object containing \"renamed property\"\n *                          as map object's property name, and\n *                          \"source property name\" as map object's\n *                          property value. (e.g. { \"newname\": \"from source\" })\n * @returns {Object} target object from first parameter\n */\nfunction assignProperties(target, source, access) {\n    var context = [target, source];\n    each(access, applyProperties, context);\n    context = context[0] = context[1] =  null;\n    return target;\n}\n\nfunction applyProperties(value, name) {\n    /*jshint validthis:true */\n    var target = this;\n    target[0][name] = target[1][value];\n    target = null;\n}\n\nfunction assignAll(target, source, defaults) {\n    var onAssign = apply,\n        eachProperty = each;\n        \n    if (defaults) {\n        eachProperty(defaults, onAssign, target, false);\n    }\n    \n    eachProperty(source, onAssign, target);\n    \n    return target;\n}\n\n\n/**\n * Iterates all iteratable property of an object calling \"handler\" parameter on\n *      each iteration.\n * @name libcore.each\n * @function\n * @param {Object} subject\n * @param {Function} handler - the callback of each iteration of\n *                          \"subject\" object's property.\n * @param {*} [scope] - \"this\" object to use inside the \"handler\" parameter\n * @param {boolean} [hasown] - performs checking to only include\n *                          source object property that is overridden\n *                          (Object.protototype.hasOwnProperty() returns true)\n *                          when this parameter is set to true.\n * @returns {Object} The subject parameter\n */\nfunction each(subject, handler, scope, hasown) {\n    var hasOwn = OHasOwn,\n        noChecking = hasown === false;\n    var name;\n    \n    if (scope === void(0)) {\n        scope = null;\n    }\n    \n    for (name in subject) {\n        if (noChecking || hasOwn.call(subject, name)) {\n            if (handler.call(scope, subject[name], name, subject) === false) {\n                break;\n            }\n        }\n    }\n    \n    return subject;\n}\n\n/**\n * Checks if \"subject\" Object contains overridden property.\n *      The same symantics of Object.prototype.hasOwnProperty.\n *      \n * @name libcore.contains\n * @function\n * @param {Object} subject\n * @param {String} property - Property Name to inspect\n * @returns {boolean} True if subject Object contains property and dirty.\n *                      False if subject Object's property do not exist or not\n *                      dirty.\n */\nfunction contains(subject, property) {\n    return OHasOwn.call(subject, property);\n}\n\n\n\n/**\n * Clears Object properties. This method only deletes overridden properties and\n *      will not fill \"undefined\" to non-owned properties from its prototype.\n * @name libcore.clear\n * @function\n * @param {Object} subject\n * @returns {Object} subject parameter.\n */\nfunction clear(subject) {\n    each(subject, applyClear, null, true);\n    return subject;\n}\n\n\n\nfunction applyClear() {\n    delete arguments[2][arguments[1]];\n}\n\n/**\n * Assign properties of source Object to target Object only if property do not\n *      exist or not overridden from the target Object.\n * @name libcore.fillin\n * @function\n * @param {Object} target - the target object\n * @param {Object} source - the source object containing properties\n *                          to be assigned to target object\n * @param {boolean} [hasown] - performs checking to only include\n *                          source object property that is overridden\n *                          (Object.protototype.hasOwnProperty() returns true)\n *                          when this parameter is set to true.\n * @returns {Object} subject parameter.\n */\nfunction fillin(target, source, hasown) {\n    each(source, applyFillin, target, hasown);\n    return target;\n}\n\nfunction applyFillin(value, name) {\n    /* jshint validthis:true */\n    var target = this;\n    if (!contains(target, name)) {\n        target[name] = value;\n    }\n    target = null;\n}\n\nfunction jsonFill(root, path, value, overwrite) {\n    var dimensions = STRING.jsonPath(path),\n        type = TYPE,\n        object = type.object,\n        array = type.array,\n        has = contains,\n        apply = assign,\n        numericRe = NUMERIC_RE,\n        parent = root,\n        name = path;\n    var numeric, item, c, l, property, temp, isArray;\n    \n    if (dimensions) {\n        name = dimensions[0];\n        dimensions.splice(0, 1);\n            \n        for (c = -1, l = dimensions.length; l--;) {\n            item = dimensions[++c];\n            numeric = numericRe.test(item);\n            \n            // replace name\n            //if (!name && array(parent)) {\n            //    name = parent.length.toString(10);\n            //}\n            \n            // finalize property\n            if (has(parent, name)) {\n                property = parent[name];\n                isArray = array(property);\n                \n                // replace property into object or array\n                if (!isArray && !object(property)) {\n                    if (numeric) {\n                        property = [property];\n                    }\n                    else {\n                        temp = property;\n                        property = {};\n                        property[\"\"] = temp;\n                    }\n                }\n                // change property to object to support \"named\" property\n                else if (isArray && !numeric) {\n                    property = apply({}, property);\n                    delete property.length;\n                }\n            }\n            else {\n                property = numeric ? [] : {};\n            }\n            \n            parent = parent[name] = property;\n            \n            // finalize name\n            if (!item) {\n                if (array(parent)) {\n                    item = parent.length;\n                }\n                else if (0 in parent) {\n                    item = '0';\n                }\n            }\n            name = item;\n        }\n\n    }\n\n    // if not overwrite, then fill-in value in array or object\n    if (overwrite !== true && has(parent, name)) {\n        property = parent[name];\n        \n        // append\n        if (array(property)) {\n            parent = property;\n            name = parent.length;\n        }\n        else {\n            parent = parent[name] = [property];\n            name = 1;\n        }\n    }\n    \n    parent[name] = value;\n    \n    parent = value = property = temp = null;\n    \n    return root;\n    \n}\n\n\n/**\n * Builds instance of \"Class\" parameter without executing its constructor.\n * @name libcore.instantiate\n * @function\n * @param {Function} Class\n * @param {Object} overrides\n * @returns {Object} Instance created from Class without executing\n *                      its constructor.\n */\nfunction buildInstance(Class, overrides) {\n    empty.prototype = Class.prototype;\n    \n    if (TYPE.object(overrides)) {\n        return assign(new empty(), overrides);\n    }\n    return new empty();\n}\n\n/**\n * Deep compares two scalar, array, object, regex and date objects\n * @name libcore.compare\n * @function\n * @param {*} object1\n * @param {*} object2\n * @returns {boolean} True if scalar, regex, date, object properties, or array\n *                      items of object1 is identical to object2.\n */\nfunction compare(object1, object2) {\n    return compareLookback(object1, object2, []);\n}\n\nfunction compareLookback(object1, object2, references) {\n    var T = TYPE,\n        isObject = T.object,\n        isArray = T.array,\n        isRegex = T.regex,\n        isDate = T.date,\n        me = compareLookback,\n        depth = references.length;\n    var name, len;\n    \n    switch (true) {\n        \n    // prioritize same object, same type comparison\n    case object1 === object2: return true;\n    \n    // native object comparison\n    case isObject(object1):\n        if (!isObject(object2)) {\n            return false;\n        }\n        \n        // check if object is in references\n        if (references.lastIndexOf(object1) !== -1 &&\n            references.lastIndexOf(object2) !== -1) {\n            return true;\n        }\n        \n        // proceed\n        references[depth] = object1;\n        references[depth + 1] = object2;\n        \n        // compare properties\n        for (name in object1) {\n            if (!(name in object2) ||\n                !me(object1[name], object2[name], references)) {\n                return false;\n            }\n        }\n        for (name in object2) {\n            if (!(name in object1) ||\n                !me(object1[name], object2[name], references)) {\n                return false;\n            }\n        }\n        \n        references.length = depth;\n        \n        return true;\n    \n    // array comparison\n    case isArray(object1):\n        if (!isArray(object2)) {\n            return false;\n        }\n        \n        // check references\n        if (references.lastIndexOf(object1) !== -1 &&\n            references.lastIndexOf(object2) !== -1) {\n            return true;\n        }\n        \n        len = object1.length;\n        \n        if (len !== object2.length) {\n            return false;\n        }\n        \n        // proceed\n        references[depth] = object1;\n        references[depth + 1] = object2;\n        \n        for (; len--;) {\n            if (!me(object1[len], object2[len], references)) {\n                return false;\n            }\n        }\n        \n        references.length = depth;\n        \n        return true;\n        \n    \n    // RegExp compare\n    case isRegex(object1):\n        return isRegex(object2) && object1.source === object2.source;\n    \n    // Date compare\n    case isDate(object1):\n        return isDate(object2) && object1.toString() === object2.toString();\n    }\n    \n    return false;\n}\n\n/**\n * Clones scalar, array, object, regex or date objects\n * @name libcore.clone\n * @function\n * @param {*} data - scalar, array, object, regex or date object to clone.\n * @param {boolean} [deep] - apply deep clone to object properties or\n *                          array items.\n * @returns {*} Cloned object based from data\n */\nfunction clone(data, deep) {\n    var T = TYPE,\n        isNative = T.nativeObject(data);\n    \n    deep = deep === true;\n    \n    if (isNative || T.array(data)) {\n        return deep ?\n                    \n                    (isNative ? cloneObject : cloneArray)(data, [], []) :\n                    \n                    (isNative ? assignAll({}, data) : data.slice(0));\n    }\n    \n    if (T.regex(data)) {\n        return new RegExp(data.source, data.flags);\n    }\n    else if (T.date(data)) {\n        return new Date(data.getFullYear(),\n                    data.getMonth(),\n                    data.getDate(),\n                    data.getHours(),\n                    data.getMinutes(),\n                    data.getSeconds(),\n                    data.getMilliseconds());\n    }\n    \n    return data;\n}\n\n\n\nfunction cloneObject(data, parents, cloned) {\n    var depth = parents.length,\n        T = TYPE,\n        isNativeObject = T.nativeObject,\n        isArray = T.array,\n        ca = cloneArray,\n        co = cloneObject,\n        recreated = {};\n    var name, value, index, isNative;\n    \n    parents[depth] = data;\n    cloned[depth] = recreated;\n    \n    /*jshint forin:false */\n    for (name in data) {\n    \n        value = data[name];\n        isNative = isNativeObject(value);\n        \n        if (isNative || isArray(value)) {\n            index = parents.lastIndexOf(value);\n            value = index === -1 ?\n                        (isNative ? co : ca)(value, parents, cloned) :\n                        cloned[index];\n        }\n        else {\n            value = clone(value, false);\n        }\n        recreated[name] = value;\n    }\n    \n    parents.length = cloned.length = depth;\n    \n    return recreated;\n}\n\nfunction cloneArray(data, parents, cloned) {\n    var depth = parents.length,\n        T = TYPE,\n        isNativeObject = T.nativeObject,\n        isArray = T.array,\n        ca = cloneArray,\n        co = cloneObject,\n        recreated = [],\n        c = 0,\n        l = data.length;\n        \n    var value, index, isNative;\n    \n    parents[depth] = data;\n    cloned[depth] = recreated;\n    \n    for (; l--; c++) {\n        value = data[c];\n        isNative = isNativeObject(value);\n        if (isNative || isArray(value)) {\n            index = parents.lastIndexOf(value);\n            value = index === -1 ?\n                        (isNative ? co : ca)(value, parents, cloned) :\n                        cloned[index];\n        }\n        else {\n            value = clone(value, false);\n        }\n        recreated[c] = value;\n    }\n    \n    parents.length = cloned.length = depth;\n    \n    return recreated;\n    \n}\n\n\nmodule.exports = {\n    each: each,\n    assign: assign,\n    rehash: assignProperties,\n    contains: contains,\n    instantiate: buildInstance,\n    clone: clone,\n    compare: compare,\n    fillin: fillin,\n    urlFill: jsonFill,\n    clear: clear\n};\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL29iamVjdC5qcz9kNjUyIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBOzs7QUFHQTtBQUNBO0FBQ0E7QUFDQSxXQUFXLE9BQU87QUFDbEIsV0FBVyxPQUFPO0FBQ2xCO0FBQ0EsV0FBVyxPQUFPO0FBQ2xCO0FBQ0E7QUFDQSxhQUFhLE9BQU87QUFDcEI7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVcsT0FBTztBQUNsQixXQUFXLE9BQU87QUFDbEI7QUFDQSxXQUFXLE9BQU87QUFDbEI7QUFDQTtBQUNBLG1EQUFtRCwyQkFBMkI7QUFDOUUsYUFBYSxPQUFPO0FBQ3BCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxXQUFXLE9BQU87QUFDbEIsV0FBVyxTQUFTO0FBQ3BCO0FBQ0EsV0FBVyxFQUFFO0FBQ2IsV0FBVyxRQUFRO0FBQ25CO0FBQ0E7QUFDQTtBQUNBLGFBQWEsT0FBTztBQUNwQjtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVcsT0FBTztBQUNsQixXQUFXLE9BQU87QUFDbEIsYUFBYSxRQUFRO0FBQ3JCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7OztBQUlBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxXQUFXLE9BQU87QUFDbEIsYUFBYSxPQUFPO0FBQ3BCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7QUFJQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVcsT0FBTztBQUNsQixXQUFXLE9BQU87QUFDbEI7QUFDQSxXQUFXLFFBQVE7QUFDbkI7QUFDQTtBQUNBO0FBQ0EsYUFBYSxPQUFPO0FBQ3BCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSwyQ0FBMkMsS0FBSztBQUNoRDtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsdUNBQXVDO0FBQ3ZDO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxXQUFXLFNBQVM7QUFDcEIsV0FBVyxPQUFPO0FBQ2xCLGFBQWEsT0FBTztBQUNwQjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsV0FBVyxFQUFFO0FBQ2IsV0FBVyxFQUFFO0FBQ2IsYUFBYSxRQUFRO0FBQ3JCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxjQUFjLE9BQU87QUFDckI7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7OztBQUdBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsV0FBVyxFQUFFO0FBQ2IsV0FBVyxRQUFRO0FBQ25CO0FBQ0EsYUFBYSxFQUFFO0FBQ2Y7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQSw0Q0FBNEM7QUFDNUM7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7Ozs7QUFJQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7O0FBRUEsVUFBVSxLQUFLO0FBQ2Y7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7O0FBRUE7OztBQUdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiIxLmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG4vKipcbiAqIEBleHRlcm5hbCBsaWJjb3JlXG4gKi9cblxudmFyIE8gPSBPYmplY3QucHJvdG90eXBlLFxuICAgIFRZUEUgPSByZXF1aXJlKFwiLi90eXBlLmpzXCIpLFxuICAgIFNUUklORyA9IHJlcXVpcmUoXCIuL3N0cmluZy5qc1wiKSxcbiAgICBPSGFzT3duID0gTy5oYXNPd25Qcm9wZXJ0eSxcbiAgICBOVU1FUklDX1JFID0gL15bMC05XSokLztcblxuZnVuY3Rpb24gZW1wdHkoKSB7XG4gICAgXG59XG5cblxuLyoqXG4gKiBBc3NpZ24gcHJvcGVydGllcyBvZiBzb3VyY2UgT2JqZWN0IHRvIHRhcmdldCBPYmplY3RcbiAqIEBhbGlhcyBtb2R1bGU6bGliY29yZS5hc3NpZ25cbiAqIEBwYXJhbSB7T2JqZWN0fSB0YXJnZXQgLSB0aGUgdGFyZ2V0IG9iamVjdFxuICogQHBhcmFtIHtPYmplY3R9IHNvdXJjZSAtIHRoZSBzb3VyY2Ugb2JqZWN0IGNvbnRhaW5pbmcgcHJvcGVydGllc1xuICogICAgICAgICAgICAgICAgICAgICAgICAgIHRvIGJlIGFzc2lnbmVkIHRvIHRhcmdldCBvYmplY3RcbiAqIEBwYXJhbSB7T2JqZWN0fSBbZGVmYXVsdHNdIC0gb2JqZWN0IGNvbnRhaW5pbmcgZGVmYXVsdCBwcm9wZXJ0aWVzXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgd2hpY2ggd2lsbCBiZSBhc3NpZ25lZCBmaXJzdCB0b1xuICogICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldCBiZWZvcmUgc291cmNlLlxuICogQHJldHVybnMge09iamVjdH0gdGFyZ2V0IG9iamVjdCBmcm9tIGZpcnN0IHBhcmFtZXRlclxuICovXG5mdW5jdGlvbiBhc3NpZ24odGFyZ2V0LCBzb3VyY2UsIGRlZmF1bHRzKSB7XG4gICAgdmFyIG9uQXNzaWduID0gYXBwbHksXG4gICAgICAgIGVhY2hQcm9wZXJ0eSA9IGVhY2g7XG4gICAgICAgIFxuICAgIGlmIChkZWZhdWx0cykge1xuICAgICAgICBlYWNoUHJvcGVydHkoZGVmYXVsdHMsIG9uQXNzaWduLCB0YXJnZXQpO1xuICAgIH1cbiAgICBcbiAgICBlYWNoUHJvcGVydHkoc291cmNlLCBvbkFzc2lnbiwgdGFyZ2V0KTtcbiAgICBcbiAgICByZXR1cm4gdGFyZ2V0O1xufVxuXG5mdW5jdGlvbiBhcHBseSh2YWx1ZSwgbmFtZSkge1xuICAgIC8qanNoaW50IHZhbGlkdGhpczp0cnVlICovXG4gICAgdGhpc1tuYW1lXSA9IHZhbHVlO1xufVxuXG4vKipcbiAqIFJlbG9jYXRlIGFuZCByZW5hbWUgcHJvcGVydGllcyBvZiBzb3VyY2UgT2JqZWN0IGludG8gdGFyZ2V0IE9iamVjdC5cbiAqIFxuICogQG5hbWUgbGliY29yZS5yZWhhc2hcbiAqIEBmdW5jdGlvblxuICogQHBhcmFtIHtPYmplY3R9IHRhcmdldCAtIHRoZSB0YXJnZXQgb2JqZWN0XG4gKiBAcGFyYW0ge09iamVjdH0gc291cmNlIC0gdGhlIHNvdXJjZSBvYmplY3QgY29udGFpbmluZyBwcm9wZXJ0aWVzIHRvIGJlXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgcmVsb2NhdGVkLlxuICogQHBhcmFtIHtPYmplY3R9IGFjY2VzcyAtIHRoZSByZW5hbWUgbWFwIG9iamVjdCBjb250YWluaW5nIFwicmVuYW1lZCBwcm9wZXJ0eVwiXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgYXMgbWFwIG9iamVjdCdzIHByb3BlcnR5IG5hbWUsIGFuZFxuICogICAgICAgICAgICAgICAgICAgICAgICAgIFwic291cmNlIHByb3BlcnR5IG5hbWVcIiBhcyBtYXAgb2JqZWN0J3NcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICBwcm9wZXJ0eSB2YWx1ZS4gKGUuZy4geyBcIm5ld25hbWVcIjogXCJmcm9tIHNvdXJjZVwiIH0pXG4gKiBAcmV0dXJucyB7T2JqZWN0fSB0YXJnZXQgb2JqZWN0IGZyb20gZmlyc3QgcGFyYW1ldGVyXG4gKi9cbmZ1bmN0aW9uIGFzc2lnblByb3BlcnRpZXModGFyZ2V0LCBzb3VyY2UsIGFjY2Vzcykge1xuICAgIHZhciBjb250ZXh0ID0gW3RhcmdldCwgc291cmNlXTtcbiAgICBlYWNoKGFjY2VzcywgYXBwbHlQcm9wZXJ0aWVzLCBjb250ZXh0KTtcbiAgICBjb250ZXh0ID0gY29udGV4dFswXSA9IGNvbnRleHRbMV0gPSAgbnVsbDtcbiAgICByZXR1cm4gdGFyZ2V0O1xufVxuXG5mdW5jdGlvbiBhcHBseVByb3BlcnRpZXModmFsdWUsIG5hbWUpIHtcbiAgICAvKmpzaGludCB2YWxpZHRoaXM6dHJ1ZSAqL1xuICAgIHZhciB0YXJnZXQgPSB0aGlzO1xuICAgIHRhcmdldFswXVtuYW1lXSA9IHRhcmdldFsxXVt2YWx1ZV07XG4gICAgdGFyZ2V0ID0gbnVsbDtcbn1cblxuZnVuY3Rpb24gYXNzaWduQWxsKHRhcmdldCwgc291cmNlLCBkZWZhdWx0cykge1xuICAgIHZhciBvbkFzc2lnbiA9IGFwcGx5LFxuICAgICAgICBlYWNoUHJvcGVydHkgPSBlYWNoO1xuICAgICAgICBcbiAgICBpZiAoZGVmYXVsdHMpIHtcbiAgICAgICAgZWFjaFByb3BlcnR5KGRlZmF1bHRzLCBvbkFzc2lnbiwgdGFyZ2V0LCBmYWxzZSk7XG4gICAgfVxuICAgIFxuICAgIGVhY2hQcm9wZXJ0eShzb3VyY2UsIG9uQXNzaWduLCB0YXJnZXQpO1xuICAgIFxuICAgIHJldHVybiB0YXJnZXQ7XG59XG5cblxuLyoqXG4gKiBJdGVyYXRlcyBhbGwgaXRlcmF0YWJsZSBwcm9wZXJ0eSBvZiBhbiBvYmplY3QgY2FsbGluZyBcImhhbmRsZXJcIiBwYXJhbWV0ZXIgb25cbiAqICAgICAgZWFjaCBpdGVyYXRpb24uXG4gKiBAbmFtZSBsaWJjb3JlLmVhY2hcbiAqIEBmdW5jdGlvblxuICogQHBhcmFtIHtPYmplY3R9IHN1YmplY3RcbiAqIEBwYXJhbSB7RnVuY3Rpb259IGhhbmRsZXIgLSB0aGUgY2FsbGJhY2sgb2YgZWFjaCBpdGVyYXRpb24gb2ZcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICBcInN1YmplY3RcIiBvYmplY3QncyBwcm9wZXJ0eS5cbiAqIEBwYXJhbSB7Kn0gW3Njb3BlXSAtIFwidGhpc1wiIG9iamVjdCB0byB1c2UgaW5zaWRlIHRoZSBcImhhbmRsZXJcIiBwYXJhbWV0ZXJcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gW2hhc293bl0gLSBwZXJmb3JtcyBjaGVja2luZyB0byBvbmx5IGluY2x1ZGVcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICBzb3VyY2Ugb2JqZWN0IHByb3BlcnR5IHRoYXQgaXMgb3ZlcnJpZGRlblxuICogICAgICAgICAgICAgICAgICAgICAgICAgIChPYmplY3QucHJvdG90b3R5cGUuaGFzT3duUHJvcGVydHkoKSByZXR1cm5zIHRydWUpXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiB0aGlzIHBhcmFtZXRlciBpcyBzZXQgdG8gdHJ1ZS5cbiAqIEByZXR1cm5zIHtPYmplY3R9IFRoZSBzdWJqZWN0IHBhcmFtZXRlclxuICovXG5mdW5jdGlvbiBlYWNoKHN1YmplY3QsIGhhbmRsZXIsIHNjb3BlLCBoYXNvd24pIHtcbiAgICB2YXIgaGFzT3duID0gT0hhc093bixcbiAgICAgICAgbm9DaGVja2luZyA9IGhhc293biA9PT0gZmFsc2U7XG4gICAgdmFyIG5hbWU7XG4gICAgXG4gICAgaWYgKHNjb3BlID09PSB2b2lkKDApKSB7XG4gICAgICAgIHNjb3BlID0gbnVsbDtcbiAgICB9XG4gICAgXG4gICAgZm9yIChuYW1lIGluIHN1YmplY3QpIHtcbiAgICAgICAgaWYgKG5vQ2hlY2tpbmcgfHwgaGFzT3duLmNhbGwoc3ViamVjdCwgbmFtZSkpIHtcbiAgICAgICAgICAgIGlmIChoYW5kbGVyLmNhbGwoc2NvcGUsIHN1YmplY3RbbmFtZV0sIG5hbWUsIHN1YmplY3QpID09PSBmYWxzZSkge1xuICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiBzdWJqZWN0O1xufVxuXG4vKipcbiAqIENoZWNrcyBpZiBcInN1YmplY3RcIiBPYmplY3QgY29udGFpbnMgb3ZlcnJpZGRlbiBwcm9wZXJ0eS5cbiAqICAgICAgVGhlIHNhbWUgc3ltYW50aWNzIG9mIE9iamVjdC5wcm90b3R5cGUuaGFzT3duUHJvcGVydHkuXG4gKiAgICAgIFxuICogQG5hbWUgbGliY29yZS5jb250YWluc1xuICogQGZ1bmN0aW9uXG4gKiBAcGFyYW0ge09iamVjdH0gc3ViamVjdFxuICogQHBhcmFtIHtTdHJpbmd9IHByb3BlcnR5IC0gUHJvcGVydHkgTmFtZSB0byBpbnNwZWN0XG4gKiBAcmV0dXJucyB7Ym9vbGVhbn0gVHJ1ZSBpZiBzdWJqZWN0IE9iamVjdCBjb250YWlucyBwcm9wZXJ0eSBhbmQgZGlydHkuXG4gKiAgICAgICAgICAgICAgICAgICAgICBGYWxzZSBpZiBzdWJqZWN0IE9iamVjdCdzIHByb3BlcnR5IGRvIG5vdCBleGlzdCBvciBub3RcbiAqICAgICAgICAgICAgICAgICAgICAgIGRpcnR5LlxuICovXG5mdW5jdGlvbiBjb250YWlucyhzdWJqZWN0LCBwcm9wZXJ0eSkge1xuICAgIHJldHVybiBPSGFzT3duLmNhbGwoc3ViamVjdCwgcHJvcGVydHkpO1xufVxuXG5cblxuLyoqXG4gKiBDbGVhcnMgT2JqZWN0IHByb3BlcnRpZXMuIFRoaXMgbWV0aG9kIG9ubHkgZGVsZXRlcyBvdmVycmlkZGVuIHByb3BlcnRpZXMgYW5kXG4gKiAgICAgIHdpbGwgbm90IGZpbGwgXCJ1bmRlZmluZWRcIiB0byBub24tb3duZWQgcHJvcGVydGllcyBmcm9tIGl0cyBwcm90b3R5cGUuXG4gKiBAbmFtZSBsaWJjb3JlLmNsZWFyXG4gKiBAZnVuY3Rpb25cbiAqIEBwYXJhbSB7T2JqZWN0fSBzdWJqZWN0XG4gKiBAcmV0dXJucyB7T2JqZWN0fSBzdWJqZWN0IHBhcmFtZXRlci5cbiAqL1xuZnVuY3Rpb24gY2xlYXIoc3ViamVjdCkge1xuICAgIGVhY2goc3ViamVjdCwgYXBwbHlDbGVhciwgbnVsbCwgdHJ1ZSk7XG4gICAgcmV0dXJuIHN1YmplY3Q7XG59XG5cblxuXG5mdW5jdGlvbiBhcHBseUNsZWFyKCkge1xuICAgIGRlbGV0ZSBhcmd1bWVudHNbMl1bYXJndW1lbnRzWzFdXTtcbn1cblxuLyoqXG4gKiBBc3NpZ24gcHJvcGVydGllcyBvZiBzb3VyY2UgT2JqZWN0IHRvIHRhcmdldCBPYmplY3Qgb25seSBpZiBwcm9wZXJ0eSBkbyBub3RcbiAqICAgICAgZXhpc3Qgb3Igbm90IG92ZXJyaWRkZW4gZnJvbSB0aGUgdGFyZ2V0IE9iamVjdC5cbiAqIEBuYW1lIGxpYmNvcmUuZmlsbGluXG4gKiBAZnVuY3Rpb25cbiAqIEBwYXJhbSB7T2JqZWN0fSB0YXJnZXQgLSB0aGUgdGFyZ2V0IG9iamVjdFxuICogQHBhcmFtIHtPYmplY3R9IHNvdXJjZSAtIHRoZSBzb3VyY2Ugb2JqZWN0IGNvbnRhaW5pbmcgcHJvcGVydGllc1xuICogICAgICAgICAgICAgICAgICAgICAgICAgIHRvIGJlIGFzc2lnbmVkIHRvIHRhcmdldCBvYmplY3RcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gW2hhc293bl0gLSBwZXJmb3JtcyBjaGVja2luZyB0byBvbmx5IGluY2x1ZGVcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICBzb3VyY2Ugb2JqZWN0IHByb3BlcnR5IHRoYXQgaXMgb3ZlcnJpZGRlblxuICogICAgICAgICAgICAgICAgICAgICAgICAgIChPYmplY3QucHJvdG90b3R5cGUuaGFzT3duUHJvcGVydHkoKSByZXR1cm5zIHRydWUpXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiB0aGlzIHBhcmFtZXRlciBpcyBzZXQgdG8gdHJ1ZS5cbiAqIEByZXR1cm5zIHtPYmplY3R9IHN1YmplY3QgcGFyYW1ldGVyLlxuICovXG5mdW5jdGlvbiBmaWxsaW4odGFyZ2V0LCBzb3VyY2UsIGhhc293bikge1xuICAgIGVhY2goc291cmNlLCBhcHBseUZpbGxpbiwgdGFyZ2V0LCBoYXNvd24pO1xuICAgIHJldHVybiB0YXJnZXQ7XG59XG5cbmZ1bmN0aW9uIGFwcGx5RmlsbGluKHZhbHVlLCBuYW1lKSB7XG4gICAgLyoganNoaW50IHZhbGlkdGhpczp0cnVlICovXG4gICAgdmFyIHRhcmdldCA9IHRoaXM7XG4gICAgaWYgKCFjb250YWlucyh0YXJnZXQsIG5hbWUpKSB7XG4gICAgICAgIHRhcmdldFtuYW1lXSA9IHZhbHVlO1xuICAgIH1cbiAgICB0YXJnZXQgPSBudWxsO1xufVxuXG5mdW5jdGlvbiBqc29uRmlsbChyb290LCBwYXRoLCB2YWx1ZSwgb3ZlcndyaXRlKSB7XG4gICAgdmFyIGRpbWVuc2lvbnMgPSBTVFJJTkcuanNvblBhdGgocGF0aCksXG4gICAgICAgIHR5cGUgPSBUWVBFLFxuICAgICAgICBvYmplY3QgPSB0eXBlLm9iamVjdCxcbiAgICAgICAgYXJyYXkgPSB0eXBlLmFycmF5LFxuICAgICAgICBoYXMgPSBjb250YWlucyxcbiAgICAgICAgYXBwbHkgPSBhc3NpZ24sXG4gICAgICAgIG51bWVyaWNSZSA9IE5VTUVSSUNfUkUsXG4gICAgICAgIHBhcmVudCA9IHJvb3QsXG4gICAgICAgIG5hbWUgPSBwYXRoO1xuICAgIHZhciBudW1lcmljLCBpdGVtLCBjLCBsLCBwcm9wZXJ0eSwgdGVtcCwgaXNBcnJheTtcbiAgICBcbiAgICBpZiAoZGltZW5zaW9ucykge1xuICAgICAgICBuYW1lID0gZGltZW5zaW9uc1swXTtcbiAgICAgICAgZGltZW5zaW9ucy5zcGxpY2UoMCwgMSk7XG4gICAgICAgICAgICBcbiAgICAgICAgZm9yIChjID0gLTEsIGwgPSBkaW1lbnNpb25zLmxlbmd0aDsgbC0tOykge1xuICAgICAgICAgICAgaXRlbSA9IGRpbWVuc2lvbnNbKytjXTtcbiAgICAgICAgICAgIG51bWVyaWMgPSBudW1lcmljUmUudGVzdChpdGVtKTtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgLy8gcmVwbGFjZSBuYW1lXG4gICAgICAgICAgICAvL2lmICghbmFtZSAmJiBhcnJheShwYXJlbnQpKSB7XG4gICAgICAgICAgICAvLyAgICBuYW1lID0gcGFyZW50Lmxlbmd0aC50b1N0cmluZygxMCk7XG4gICAgICAgICAgICAvL31cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgLy8gZmluYWxpemUgcHJvcGVydHlcbiAgICAgICAgICAgIGlmIChoYXMocGFyZW50LCBuYW1lKSkge1xuICAgICAgICAgICAgICAgIHByb3BlcnR5ID0gcGFyZW50W25hbWVdO1xuICAgICAgICAgICAgICAgIGlzQXJyYXkgPSBhcnJheShwcm9wZXJ0eSk7XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgLy8gcmVwbGFjZSBwcm9wZXJ0eSBpbnRvIG9iamVjdCBvciBhcnJheVxuICAgICAgICAgICAgICAgIGlmICghaXNBcnJheSAmJiAhb2JqZWN0KHByb3BlcnR5KSkge1xuICAgICAgICAgICAgICAgICAgICBpZiAobnVtZXJpYykge1xuICAgICAgICAgICAgICAgICAgICAgICAgcHJvcGVydHkgPSBbcHJvcGVydHldO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgdGVtcCA9IHByb3BlcnR5O1xuICAgICAgICAgICAgICAgICAgICAgICAgcHJvcGVydHkgPSB7fTtcbiAgICAgICAgICAgICAgICAgICAgICAgIHByb3BlcnR5W1wiXCJdID0gdGVtcDtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAvLyBjaGFuZ2UgcHJvcGVydHkgdG8gb2JqZWN0IHRvIHN1cHBvcnQgXCJuYW1lZFwiIHByb3BlcnR5XG4gICAgICAgICAgICAgICAgZWxzZSBpZiAoaXNBcnJheSAmJiAhbnVtZXJpYykge1xuICAgICAgICAgICAgICAgICAgICBwcm9wZXJ0eSA9IGFwcGx5KHt9LCBwcm9wZXJ0eSk7XG4gICAgICAgICAgICAgICAgICAgIGRlbGV0ZSBwcm9wZXJ0eS5sZW5ndGg7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgcHJvcGVydHkgPSBudW1lcmljID8gW10gOiB7fTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgcGFyZW50ID0gcGFyZW50W25hbWVdID0gcHJvcGVydHk7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIC8vIGZpbmFsaXplIG5hbWVcbiAgICAgICAgICAgIGlmICghaXRlbSkge1xuICAgICAgICAgICAgICAgIGlmIChhcnJheShwYXJlbnQpKSB7XG4gICAgICAgICAgICAgICAgICAgIGl0ZW0gPSBwYXJlbnQubGVuZ3RoO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBlbHNlIGlmICgwIGluIHBhcmVudCkge1xuICAgICAgICAgICAgICAgICAgICBpdGVtID0gJzAnO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIG5hbWUgPSBpdGVtO1xuICAgICAgICB9XG5cbiAgICB9XG5cbiAgICAvLyBpZiBub3Qgb3ZlcndyaXRlLCB0aGVuIGZpbGwtaW4gdmFsdWUgaW4gYXJyYXkgb3Igb2JqZWN0XG4gICAgaWYgKG92ZXJ3cml0ZSAhPT0gdHJ1ZSAmJiBoYXMocGFyZW50LCBuYW1lKSkge1xuICAgICAgICBwcm9wZXJ0eSA9IHBhcmVudFtuYW1lXTtcbiAgICAgICAgXG4gICAgICAgIC8vIGFwcGVuZFxuICAgICAgICBpZiAoYXJyYXkocHJvcGVydHkpKSB7XG4gICAgICAgICAgICBwYXJlbnQgPSBwcm9wZXJ0eTtcbiAgICAgICAgICAgIG5hbWUgPSBwYXJlbnQubGVuZ3RoO1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgcGFyZW50ID0gcGFyZW50W25hbWVdID0gW3Byb3BlcnR5XTtcbiAgICAgICAgICAgIG5hbWUgPSAxO1xuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHBhcmVudFtuYW1lXSA9IHZhbHVlO1xuICAgIFxuICAgIHBhcmVudCA9IHZhbHVlID0gcHJvcGVydHkgPSB0ZW1wID0gbnVsbDtcbiAgICBcbiAgICByZXR1cm4gcm9vdDtcbiAgICBcbn1cblxuXG4vKipcbiAqIEJ1aWxkcyBpbnN0YW5jZSBvZiBcIkNsYXNzXCIgcGFyYW1ldGVyIHdpdGhvdXQgZXhlY3V0aW5nIGl0cyBjb25zdHJ1Y3Rvci5cbiAqIEBuYW1lIGxpYmNvcmUuaW5zdGFudGlhdGVcbiAqIEBmdW5jdGlvblxuICogQHBhcmFtIHtGdW5jdGlvbn0gQ2xhc3NcbiAqIEBwYXJhbSB7T2JqZWN0fSBvdmVycmlkZXNcbiAqIEByZXR1cm5zIHtPYmplY3R9IEluc3RhbmNlIGNyZWF0ZWQgZnJvbSBDbGFzcyB3aXRob3V0IGV4ZWN1dGluZ1xuICogICAgICAgICAgICAgICAgICAgICAgaXRzIGNvbnN0cnVjdG9yLlxuICovXG5mdW5jdGlvbiBidWlsZEluc3RhbmNlKENsYXNzLCBvdmVycmlkZXMpIHtcbiAgICBlbXB0eS5wcm90b3R5cGUgPSBDbGFzcy5wcm90b3R5cGU7XG4gICAgXG4gICAgaWYgKFRZUEUub2JqZWN0KG92ZXJyaWRlcykpIHtcbiAgICAgICAgcmV0dXJuIGFzc2lnbihuZXcgZW1wdHkoKSwgb3ZlcnJpZGVzKTtcbiAgICB9XG4gICAgcmV0dXJuIG5ldyBlbXB0eSgpO1xufVxuXG4vKipcbiAqIERlZXAgY29tcGFyZXMgdHdvIHNjYWxhciwgYXJyYXksIG9iamVjdCwgcmVnZXggYW5kIGRhdGUgb2JqZWN0c1xuICogQG5hbWUgbGliY29yZS5jb21wYXJlXG4gKiBAZnVuY3Rpb25cbiAqIEBwYXJhbSB7Kn0gb2JqZWN0MVxuICogQHBhcmFtIHsqfSBvYmplY3QyXG4gKiBAcmV0dXJucyB7Ym9vbGVhbn0gVHJ1ZSBpZiBzY2FsYXIsIHJlZ2V4LCBkYXRlLCBvYmplY3QgcHJvcGVydGllcywgb3IgYXJyYXlcbiAqICAgICAgICAgICAgICAgICAgICAgIGl0ZW1zIG9mIG9iamVjdDEgaXMgaWRlbnRpY2FsIHRvIG9iamVjdDIuXG4gKi9cbmZ1bmN0aW9uIGNvbXBhcmUob2JqZWN0MSwgb2JqZWN0Mikge1xuICAgIHJldHVybiBjb21wYXJlTG9va2JhY2sob2JqZWN0MSwgb2JqZWN0MiwgW10pO1xufVxuXG5mdW5jdGlvbiBjb21wYXJlTG9va2JhY2sob2JqZWN0MSwgb2JqZWN0MiwgcmVmZXJlbmNlcykge1xuICAgIHZhciBUID0gVFlQRSxcbiAgICAgICAgaXNPYmplY3QgPSBULm9iamVjdCxcbiAgICAgICAgaXNBcnJheSA9IFQuYXJyYXksXG4gICAgICAgIGlzUmVnZXggPSBULnJlZ2V4LFxuICAgICAgICBpc0RhdGUgPSBULmRhdGUsXG4gICAgICAgIG1lID0gY29tcGFyZUxvb2tiYWNrLFxuICAgICAgICBkZXB0aCA9IHJlZmVyZW5jZXMubGVuZ3RoO1xuICAgIHZhciBuYW1lLCBsZW47XG4gICAgXG4gICAgc3dpdGNoICh0cnVlKSB7XG4gICAgICAgIFxuICAgIC8vIHByaW9yaXRpemUgc2FtZSBvYmplY3QsIHNhbWUgdHlwZSBjb21wYXJpc29uXG4gICAgY2FzZSBvYmplY3QxID09PSBvYmplY3QyOiByZXR1cm4gdHJ1ZTtcbiAgICBcbiAgICAvLyBuYXRpdmUgb2JqZWN0IGNvbXBhcmlzb25cbiAgICBjYXNlIGlzT2JqZWN0KG9iamVjdDEpOlxuICAgICAgICBpZiAoIWlzT2JqZWN0KG9iamVjdDIpKSB7XG4gICAgICAgICAgICByZXR1cm4gZmFsc2U7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIC8vIGNoZWNrIGlmIG9iamVjdCBpcyBpbiByZWZlcmVuY2VzXG4gICAgICAgIGlmIChyZWZlcmVuY2VzLmxhc3RJbmRleE9mKG9iamVjdDEpICE9PSAtMSAmJlxuICAgICAgICAgICAgcmVmZXJlbmNlcy5sYXN0SW5kZXhPZihvYmplY3QyKSAhPT0gLTEpIHtcbiAgICAgICAgICAgIHJldHVybiB0cnVlO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyBwcm9jZWVkXG4gICAgICAgIHJlZmVyZW5jZXNbZGVwdGhdID0gb2JqZWN0MTtcbiAgICAgICAgcmVmZXJlbmNlc1tkZXB0aCArIDFdID0gb2JqZWN0MjtcbiAgICAgICAgXG4gICAgICAgIC8vIGNvbXBhcmUgcHJvcGVydGllc1xuICAgICAgICBmb3IgKG5hbWUgaW4gb2JqZWN0MSkge1xuICAgICAgICAgICAgaWYgKCEobmFtZSBpbiBvYmplY3QyKSB8fFxuICAgICAgICAgICAgICAgICFtZShvYmplY3QxW25hbWVdLCBvYmplY3QyW25hbWVdLCByZWZlcmVuY2VzKSkge1xuICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBmb3IgKG5hbWUgaW4gb2JqZWN0Mikge1xuICAgICAgICAgICAgaWYgKCEobmFtZSBpbiBvYmplY3QxKSB8fFxuICAgICAgICAgICAgICAgICFtZShvYmplY3QxW25hbWVdLCBvYmplY3QyW25hbWVdLCByZWZlcmVuY2VzKSkge1xuICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmVmZXJlbmNlcy5sZW5ndGggPSBkZXB0aDtcbiAgICAgICAgXG4gICAgICAgIHJldHVybiB0cnVlO1xuICAgIFxuICAgIC8vIGFycmF5IGNvbXBhcmlzb25cbiAgICBjYXNlIGlzQXJyYXkob2JqZWN0MSk6XG4gICAgICAgIGlmICghaXNBcnJheShvYmplY3QyKSkge1xuICAgICAgICAgICAgcmV0dXJuIGZhbHNlO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyBjaGVjayByZWZlcmVuY2VzXG4gICAgICAgIGlmIChyZWZlcmVuY2VzLmxhc3RJbmRleE9mKG9iamVjdDEpICE9PSAtMSAmJlxuICAgICAgICAgICAgcmVmZXJlbmNlcy5sYXN0SW5kZXhPZihvYmplY3QyKSAhPT0gLTEpIHtcbiAgICAgICAgICAgIHJldHVybiB0cnVlO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBsZW4gPSBvYmplY3QxLmxlbmd0aDtcbiAgICAgICAgXG4gICAgICAgIGlmIChsZW4gIT09IG9iamVjdDIubGVuZ3RoKSB7XG4gICAgICAgICAgICByZXR1cm4gZmFsc2U7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIC8vIHByb2NlZWRcbiAgICAgICAgcmVmZXJlbmNlc1tkZXB0aF0gPSBvYmplY3QxO1xuICAgICAgICByZWZlcmVuY2VzW2RlcHRoICsgMV0gPSBvYmplY3QyO1xuICAgICAgICBcbiAgICAgICAgZm9yICg7IGxlbi0tOykge1xuICAgICAgICAgICAgaWYgKCFtZShvYmplY3QxW2xlbl0sIG9iamVjdDJbbGVuXSwgcmVmZXJlbmNlcykpIHtcbiAgICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIHJlZmVyZW5jZXMubGVuZ3RoID0gZGVwdGg7XG4gICAgICAgIFxuICAgICAgICByZXR1cm4gdHJ1ZTtcbiAgICAgICAgXG4gICAgXG4gICAgLy8gUmVnRXhwIGNvbXBhcmVcbiAgICBjYXNlIGlzUmVnZXgob2JqZWN0MSk6XG4gICAgICAgIHJldHVybiBpc1JlZ2V4KG9iamVjdDIpICYmIG9iamVjdDEuc291cmNlID09PSBvYmplY3QyLnNvdXJjZTtcbiAgICBcbiAgICAvLyBEYXRlIGNvbXBhcmVcbiAgICBjYXNlIGlzRGF0ZShvYmplY3QxKTpcbiAgICAgICAgcmV0dXJuIGlzRGF0ZShvYmplY3QyKSAmJiBvYmplY3QxLnRvU3RyaW5nKCkgPT09IG9iamVjdDIudG9TdHJpbmcoKTtcbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIGZhbHNlO1xufVxuXG4vKipcbiAqIENsb25lcyBzY2FsYXIsIGFycmF5LCBvYmplY3QsIHJlZ2V4IG9yIGRhdGUgb2JqZWN0c1xuICogQG5hbWUgbGliY29yZS5jbG9uZVxuICogQGZ1bmN0aW9uXG4gKiBAcGFyYW0geyp9IGRhdGEgLSBzY2FsYXIsIGFycmF5LCBvYmplY3QsIHJlZ2V4IG9yIGRhdGUgb2JqZWN0IHRvIGNsb25lLlxuICogQHBhcmFtIHtib29sZWFufSBbZGVlcF0gLSBhcHBseSBkZWVwIGNsb25lIHRvIG9iamVjdCBwcm9wZXJ0aWVzIG9yXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgYXJyYXkgaXRlbXMuXG4gKiBAcmV0dXJucyB7Kn0gQ2xvbmVkIG9iamVjdCBiYXNlZCBmcm9tIGRhdGFcbiAqL1xuZnVuY3Rpb24gY2xvbmUoZGF0YSwgZGVlcCkge1xuICAgIHZhciBUID0gVFlQRSxcbiAgICAgICAgaXNOYXRpdmUgPSBULm5hdGl2ZU9iamVjdChkYXRhKTtcbiAgICBcbiAgICBkZWVwID0gZGVlcCA9PT0gdHJ1ZTtcbiAgICBcbiAgICBpZiAoaXNOYXRpdmUgfHwgVC5hcnJheShkYXRhKSkge1xuICAgICAgICByZXR1cm4gZGVlcCA/XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAoaXNOYXRpdmUgPyBjbG9uZU9iamVjdCA6IGNsb25lQXJyYXkpKGRhdGEsIFtdLCBbXSkgOlxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgKGlzTmF0aXZlID8gYXNzaWduQWxsKHt9LCBkYXRhKSA6IGRhdGEuc2xpY2UoMCkpO1xuICAgIH1cbiAgICBcbiAgICBpZiAoVC5yZWdleChkYXRhKSkge1xuICAgICAgICByZXR1cm4gbmV3IFJlZ0V4cChkYXRhLnNvdXJjZSwgZGF0YS5mbGFncyk7XG4gICAgfVxuICAgIGVsc2UgaWYgKFQuZGF0ZShkYXRhKSkge1xuICAgICAgICByZXR1cm4gbmV3IERhdGUoZGF0YS5nZXRGdWxsWWVhcigpLFxuICAgICAgICAgICAgICAgICAgICBkYXRhLmdldE1vbnRoKCksXG4gICAgICAgICAgICAgICAgICAgIGRhdGEuZ2V0RGF0ZSgpLFxuICAgICAgICAgICAgICAgICAgICBkYXRhLmdldEhvdXJzKCksXG4gICAgICAgICAgICAgICAgICAgIGRhdGEuZ2V0TWludXRlcygpLFxuICAgICAgICAgICAgICAgICAgICBkYXRhLmdldFNlY29uZHMoKSxcbiAgICAgICAgICAgICAgICAgICAgZGF0YS5nZXRNaWxsaXNlY29uZHMoKSk7XG4gICAgfVxuICAgIFxuICAgIHJldHVybiBkYXRhO1xufVxuXG5cblxuZnVuY3Rpb24gY2xvbmVPYmplY3QoZGF0YSwgcGFyZW50cywgY2xvbmVkKSB7XG4gICAgdmFyIGRlcHRoID0gcGFyZW50cy5sZW5ndGgsXG4gICAgICAgIFQgPSBUWVBFLFxuICAgICAgICBpc05hdGl2ZU9iamVjdCA9IFQubmF0aXZlT2JqZWN0LFxuICAgICAgICBpc0FycmF5ID0gVC5hcnJheSxcbiAgICAgICAgY2EgPSBjbG9uZUFycmF5LFxuICAgICAgICBjbyA9IGNsb25lT2JqZWN0LFxuICAgICAgICByZWNyZWF0ZWQgPSB7fTtcbiAgICB2YXIgbmFtZSwgdmFsdWUsIGluZGV4LCBpc05hdGl2ZTtcbiAgICBcbiAgICBwYXJlbnRzW2RlcHRoXSA9IGRhdGE7XG4gICAgY2xvbmVkW2RlcHRoXSA9IHJlY3JlYXRlZDtcbiAgICBcbiAgICAvKmpzaGludCBmb3JpbjpmYWxzZSAqL1xuICAgIGZvciAobmFtZSBpbiBkYXRhKSB7XG4gICAgXG4gICAgICAgIHZhbHVlID0gZGF0YVtuYW1lXTtcbiAgICAgICAgaXNOYXRpdmUgPSBpc05hdGl2ZU9iamVjdCh2YWx1ZSk7XG4gICAgICAgIFxuICAgICAgICBpZiAoaXNOYXRpdmUgfHwgaXNBcnJheSh2YWx1ZSkpIHtcbiAgICAgICAgICAgIGluZGV4ID0gcGFyZW50cy5sYXN0SW5kZXhPZih2YWx1ZSk7XG4gICAgICAgICAgICB2YWx1ZSA9IGluZGV4ID09PSAtMSA/XG4gICAgICAgICAgICAgICAgICAgICAgICAoaXNOYXRpdmUgPyBjbyA6IGNhKSh2YWx1ZSwgcGFyZW50cywgY2xvbmVkKSA6XG4gICAgICAgICAgICAgICAgICAgICAgICBjbG9uZWRbaW5kZXhdO1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgdmFsdWUgPSBjbG9uZSh2YWx1ZSwgZmFsc2UpO1xuICAgICAgICB9XG4gICAgICAgIHJlY3JlYXRlZFtuYW1lXSA9IHZhbHVlO1xuICAgIH1cbiAgICBcbiAgICBwYXJlbnRzLmxlbmd0aCA9IGNsb25lZC5sZW5ndGggPSBkZXB0aDtcbiAgICBcbiAgICByZXR1cm4gcmVjcmVhdGVkO1xufVxuXG5mdW5jdGlvbiBjbG9uZUFycmF5KGRhdGEsIHBhcmVudHMsIGNsb25lZCkge1xuICAgIHZhciBkZXB0aCA9IHBhcmVudHMubGVuZ3RoLFxuICAgICAgICBUID0gVFlQRSxcbiAgICAgICAgaXNOYXRpdmVPYmplY3QgPSBULm5hdGl2ZU9iamVjdCxcbiAgICAgICAgaXNBcnJheSA9IFQuYXJyYXksXG4gICAgICAgIGNhID0gY2xvbmVBcnJheSxcbiAgICAgICAgY28gPSBjbG9uZU9iamVjdCxcbiAgICAgICAgcmVjcmVhdGVkID0gW10sXG4gICAgICAgIGMgPSAwLFxuICAgICAgICBsID0gZGF0YS5sZW5ndGg7XG4gICAgICAgIFxuICAgIHZhciB2YWx1ZSwgaW5kZXgsIGlzTmF0aXZlO1xuICAgIFxuICAgIHBhcmVudHNbZGVwdGhdID0gZGF0YTtcbiAgICBjbG9uZWRbZGVwdGhdID0gcmVjcmVhdGVkO1xuICAgIFxuICAgIGZvciAoOyBsLS07IGMrKykge1xuICAgICAgICB2YWx1ZSA9IGRhdGFbY107XG4gICAgICAgIGlzTmF0aXZlID0gaXNOYXRpdmVPYmplY3QodmFsdWUpO1xuICAgICAgICBpZiAoaXNOYXRpdmUgfHwgaXNBcnJheSh2YWx1ZSkpIHtcbiAgICAgICAgICAgIGluZGV4ID0gcGFyZW50cy5sYXN0SW5kZXhPZih2YWx1ZSk7XG4gICAgICAgICAgICB2YWx1ZSA9IGluZGV4ID09PSAtMSA/XG4gICAgICAgICAgICAgICAgICAgICAgICAoaXNOYXRpdmUgPyBjbyA6IGNhKSh2YWx1ZSwgcGFyZW50cywgY2xvbmVkKSA6XG4gICAgICAgICAgICAgICAgICAgICAgICBjbG9uZWRbaW5kZXhdO1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgdmFsdWUgPSBjbG9uZSh2YWx1ZSwgZmFsc2UpO1xuICAgICAgICB9XG4gICAgICAgIHJlY3JlYXRlZFtjXSA9IHZhbHVlO1xuICAgIH1cbiAgICBcbiAgICBwYXJlbnRzLmxlbmd0aCA9IGNsb25lZC5sZW5ndGggPSBkZXB0aDtcbiAgICBcbiAgICByZXR1cm4gcmVjcmVhdGVkO1xuICAgIFxufVxuXG5cbm1vZHVsZS5leHBvcnRzID0ge1xuICAgIGVhY2g6IGVhY2gsXG4gICAgYXNzaWduOiBhc3NpZ24sXG4gICAgcmVoYXNoOiBhc3NpZ25Qcm9wZXJ0aWVzLFxuICAgIGNvbnRhaW5zOiBjb250YWlucyxcbiAgICBpbnN0YW50aWF0ZTogYnVpbGRJbnN0YW5jZSxcbiAgICBjbG9uZTogY2xvbmUsXG4gICAgY29tcGFyZTogY29tcGFyZSxcbiAgICBmaWxsaW46IGZpbGxpbixcbiAgICB1cmxGaWxsOiBqc29uRmlsbCxcbiAgICBjbGVhcjogY2xlYXJcbn07XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL34vbGliY29yZS9zcmMvb2JqZWN0LmpzXG4vLyBtb2R1bGUgaWQgPSAxXG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+/**
+ * @external libcore
+ */
+
+var O = Object.prototype,
+    TYPE = __webpack_require__(0),
+    STRING = __webpack_require__(6),
+    OHasOwn = O.hasOwnProperty,
+    NUMERIC_RE = /^[0-9]*$/;
+
+function empty() {
+    
+}
+
+
+/**
+ * Assign properties of source Object to target Object
+ * @alias module:libcore.assign
+ * @param {Object} target - the target object
+ * @param {Object} source - the source object containing properties
+ *                          to be assigned to target object
+ * @param {Object} [defaults] - object containing default properties
+ *                          which will be assigned first to
+ *                          target before source.
+ * @returns {Object} target object from first parameter
+ */
+function assign(target, source, defaults) {
+    var onAssign = apply,
+        eachProperty = each;
+        
+    if (defaults) {
+        eachProperty(defaults, onAssign, target);
+    }
+    
+    eachProperty(source, onAssign, target);
+    
+    return target;
+}
+
+function apply(value, name) {
+    /*jshint validthis:true */
+    this[name] = value;
+}
+
+/**
+ * Relocate and rename properties of source Object into target Object.
+ * 
+ * @name libcore.rehash
+ * @function
+ * @param {Object} target - the target object
+ * @param {Object} source - the source object containing properties to be
+ *                          relocated.
+ * @param {Object} access - the rename map object containing "renamed property"
+ *                          as map object's property name, and
+ *                          "source property name" as map object's
+ *                          property value. (e.g. { "newname": "from source" })
+ * @returns {Object} target object from first parameter
+ */
+function assignProperties(target, source, access) {
+    var context = [target, source];
+    each(access, applyProperties, context);
+    context = context[0] = context[1] =  null;
+    return target;
+}
+
+function applyProperties(value, name) {
+    /*jshint validthis:true */
+    var target = this;
+    target[0][name] = target[1][value];
+    target = null;
+}
+
+function assignAll(target, source, defaults) {
+    var onAssign = apply,
+        eachProperty = each;
+        
+    if (defaults) {
+        eachProperty(defaults, onAssign, target, false);
+    }
+    
+    eachProperty(source, onAssign, target);
+    
+    return target;
+}
+
+
+/**
+ * Iterates all iteratable property of an object calling "handler" parameter on
+ *      each iteration.
+ * @name libcore.each
+ * @function
+ * @param {Object} subject
+ * @param {Function} handler - the callback of each iteration of
+ *                          "subject" object's property.
+ * @param {*} [scope] - "this" object to use inside the "handler" parameter
+ * @param {boolean} [hasown] - performs checking to only include
+ *                          source object property that is overridden
+ *                          (Object.protototype.hasOwnProperty() returns true)
+ *                          when this parameter is set to true.
+ * @returns {Object} The subject parameter
+ */
+function each(subject, handler, scope, hasown) {
+    var hasOwn = OHasOwn,
+        noChecking = hasown === false;
+    var name;
+    
+    if (scope === void(0)) {
+        scope = null;
+    }
+    
+    for (name in subject) {
+        if (noChecking || hasOwn.call(subject, name)) {
+            if (handler.call(scope, subject[name], name, subject) === false) {
+                break;
+            }
+        }
+    }
+    
+    return subject;
+}
+
+/**
+ * Checks if "subject" Object contains overridden property.
+ *      The same symantics of Object.prototype.hasOwnProperty.
+ *      
+ * @name libcore.contains
+ * @function
+ * @param {Object} subject
+ * @param {String} property - Property Name to inspect
+ * @returns {boolean} True if subject Object contains property and dirty.
+ *                      False if subject Object's property do not exist or not
+ *                      dirty.
+ */
+function contains(subject, property) {
+    return OHasOwn.call(subject, property);
+}
+
+
+
+/**
+ * Clears Object properties. This method only deletes overridden properties and
+ *      will not fill "undefined" to non-owned properties from its prototype.
+ * @name libcore.clear
+ * @function
+ * @param {Object} subject
+ * @returns {Object} subject parameter.
+ */
+function clear(subject) {
+    each(subject, applyClear, null, true);
+    return subject;
+}
+
+
+
+function applyClear() {
+    delete arguments[2][arguments[1]];
+}
+
+/**
+ * Assign properties of source Object to target Object only if property do not
+ *      exist or not overridden from the target Object.
+ * @name libcore.fillin
+ * @function
+ * @param {Object} target - the target object
+ * @param {Object} source - the source object containing properties
+ *                          to be assigned to target object
+ * @param {boolean} [hasown] - performs checking to only include
+ *                          source object property that is overridden
+ *                          (Object.protototype.hasOwnProperty() returns true)
+ *                          when this parameter is set to true.
+ * @returns {Object} subject parameter.
+ */
+function fillin(target, source, hasown) {
+    each(source, applyFillin, target, hasown);
+    return target;
+}
+
+function applyFillin(value, name) {
+    /* jshint validthis:true */
+    var target = this;
+    if (!contains(target, name)) {
+        target[name] = value;
+    }
+    target = null;
+}
+
+function jsonFill(root, path, value, overwrite) {
+    var dimensions = STRING.jsonPath(path),
+        type = TYPE,
+        object = type.object,
+        array = type.array,
+        has = contains,
+        apply = assign,
+        numericRe = NUMERIC_RE,
+        parent = root,
+        name = path;
+    var numeric, item, c, l, property, temp, isArray;
+    
+    if (dimensions) {
+        name = dimensions[0];
+        dimensions.splice(0, 1);
+            
+        for (c = -1, l = dimensions.length; l--;) {
+            item = dimensions[++c];
+            numeric = numericRe.test(item);
+            
+            // replace name
+            //if (!name && array(parent)) {
+            //    name = parent.length.toString(10);
+            //}
+            
+            // finalize property
+            if (has(parent, name)) {
+                property = parent[name];
+                isArray = array(property);
+                
+                // replace property into object or array
+                if (!isArray && !object(property)) {
+                    if (numeric) {
+                        property = [property];
+                    }
+                    else {
+                        temp = property;
+                        property = {};
+                        property[""] = temp;
+                    }
+                }
+                // change property to object to support "named" property
+                else if (isArray && !numeric) {
+                    property = apply({}, property);
+                    delete property.length;
+                }
+            }
+            else {
+                property = numeric ? [] : {};
+            }
+            
+            parent = parent[name] = property;
+            
+            // finalize name
+            if (!item) {
+                if (array(parent)) {
+                    item = parent.length;
+                }
+                else if (0 in parent) {
+                    item = '0';
+                }
+            }
+            name = item;
+        }
+
+    }
+
+    // if not overwrite, then fill-in value in array or object
+    if (overwrite !== true && has(parent, name)) {
+        property = parent[name];
+        
+        // append
+        if (array(property)) {
+            parent = property;
+            name = parent.length;
+        }
+        else {
+            parent = parent[name] = [property];
+            name = 1;
+        }
+    }
+    
+    parent[name] = value;
+    
+    parent = value = property = temp = null;
+    
+    return root;
+    
+}
+
+
+/**
+ * Builds instance of "Class" parameter without executing its constructor.
+ * @name libcore.instantiate
+ * @function
+ * @param {Function} Class
+ * @param {Object} overrides
+ * @returns {Object} Instance created from Class without executing
+ *                      its constructor.
+ */
+function buildInstance(Class, overrides) {
+    empty.prototype = Class.prototype;
+    
+    if (TYPE.object(overrides)) {
+        return assign(new empty(), overrides);
+    }
+    return new empty();
+}
+
+/**
+ * Deep compares two scalar, array, object, regex and date objects
+ * @name libcore.compare
+ * @function
+ * @param {*} object1
+ * @param {*} object2
+ * @returns {boolean} True if scalar, regex, date, object properties, or array
+ *                      items of object1 is identical to object2.
+ */
+function compare(object1, object2) {
+    return compareLookback(object1, object2, []);
+}
+
+function compareLookback(object1, object2, references) {
+    var T = TYPE,
+        isObject = T.object,
+        isArray = T.array,
+        isRegex = T.regex,
+        isDate = T.date,
+        me = compareLookback,
+        depth = references.length;
+    var name, len;
+    
+    switch (true) {
+        
+    // prioritize same object, same type comparison
+    case object1 === object2: return true;
+    
+    // native object comparison
+    case isObject(object1):
+        if (!isObject(object2)) {
+            return false;
+        }
+        
+        // check if object is in references
+        if (references.lastIndexOf(object1) !== -1 &&
+            references.lastIndexOf(object2) !== -1) {
+            return true;
+        }
+        
+        // proceed
+        references[depth] = object1;
+        references[depth + 1] = object2;
+        
+        // compare properties
+        for (name in object1) {
+            if (!(name in object2) ||
+                !me(object1[name], object2[name], references)) {
+                return false;
+            }
+        }
+        for (name in object2) {
+            if (!(name in object1) ||
+                !me(object1[name], object2[name], references)) {
+                return false;
+            }
+        }
+        
+        references.length = depth;
+        
+        return true;
+    
+    // array comparison
+    case isArray(object1):
+        if (!isArray(object2)) {
+            return false;
+        }
+        
+        // check references
+        if (references.lastIndexOf(object1) !== -1 &&
+            references.lastIndexOf(object2) !== -1) {
+            return true;
+        }
+        
+        len = object1.length;
+        
+        if (len !== object2.length) {
+            return false;
+        }
+        
+        // proceed
+        references[depth] = object1;
+        references[depth + 1] = object2;
+        
+        for (; len--;) {
+            if (!me(object1[len], object2[len], references)) {
+                return false;
+            }
+        }
+        
+        references.length = depth;
+        
+        return true;
+        
+    
+    // RegExp compare
+    case isRegex(object1):
+        return isRegex(object2) && object1.source === object2.source;
+    
+    // Date compare
+    case isDate(object1):
+        return isDate(object2) && object1.toString() === object2.toString();
+    }
+    
+    return false;
+}
+
+/**
+ * Clones scalar, array, object, regex or date objects
+ * @name libcore.clone
+ * @function
+ * @param {*} data - scalar, array, object, regex or date object to clone.
+ * @param {boolean} [deep] - apply deep clone to object properties or
+ *                          array items.
+ * @returns {*} Cloned object based from data
+ */
+function clone(data, deep) {
+    var T = TYPE,
+        isNative = T.nativeObject(data);
+    
+    deep = deep === true;
+    
+    if (isNative || T.array(data)) {
+        return deep ?
+                    
+                    (isNative ? cloneObject : cloneArray)(data, [], []) :
+                    
+                    (isNative ? assignAll({}, data) : data.slice(0));
+    }
+    
+    if (T.regex(data)) {
+        return new RegExp(data.source, data.flags);
+    }
+    else if (T.date(data)) {
+        return new Date(data.getFullYear(),
+                    data.getMonth(),
+                    data.getDate(),
+                    data.getHours(),
+                    data.getMinutes(),
+                    data.getSeconds(),
+                    data.getMilliseconds());
+    }
+    
+    return data;
+}
+
+
+
+function cloneObject(data, parents, cloned) {
+    var depth = parents.length,
+        T = TYPE,
+        isNativeObject = T.nativeObject,
+        isArray = T.array,
+        ca = cloneArray,
+        co = cloneObject,
+        recreated = {};
+    var name, value, index, isNative;
+    
+    parents[depth] = data;
+    cloned[depth] = recreated;
+    
+    /*jshint forin:false */
+    for (name in data) {
+    
+        value = data[name];
+        isNative = isNativeObject(value);
+        
+        if (isNative || isArray(value)) {
+            index = parents.lastIndexOf(value);
+            value = index === -1 ?
+                        (isNative ? co : ca)(value, parents, cloned) :
+                        cloned[index];
+        }
+        else {
+            value = clone(value, false);
+        }
+        recreated[name] = value;
+    }
+    
+    parents.length = cloned.length = depth;
+    
+    return recreated;
+}
+
+function cloneArray(data, parents, cloned) {
+    var depth = parents.length,
+        T = TYPE,
+        isNativeObject = T.nativeObject,
+        isArray = T.array,
+        ca = cloneArray,
+        co = cloneObject,
+        recreated = [],
+        c = 0,
+        l = data.length;
+        
+    var value, index, isNative;
+    
+    parents[depth] = data;
+    cloned[depth] = recreated;
+    
+    for (; l--; c++) {
+        value = data[c];
+        isNative = isNativeObject(value);
+        if (isNative || isArray(value)) {
+            index = parents.lastIndexOf(value);
+            value = index === -1 ?
+                        (isNative ? co : ca)(value, parents, cloned) :
+                        cloned[index];
+        }
+        else {
+            value = clone(value, false);
+        }
+        recreated[c] = value;
+    }
+    
+    parents.length = cloned.length = depth;
+    
+    return recreated;
+    
+}
+
+
+module.exports = {
+    each: each,
+    assign: assign,
+    rehash: assignProperties,
+    contains: contains,
+    instantiate: buildInstance,
+    clone: clone,
+    compare: compare,
+    fillin: fillin,
+    urlFill: jsonFill,
+    clear: clear
+};
+
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nmodule.exports = __webpack_require__(11);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvZGlzdC9pbmRleC5qcz9jZTEwIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBIiwiZmlsZSI6IjIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbm1vZHVsZS5leHBvcnRzID0gcmVxdWlyZShcIi4uL3NyYy9pbmRleC5qc1wiKTtcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vfi9saWJjb3JlL2Rpc3QvaW5kZXguanNcbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+module.exports = __webpack_require__(11);
+
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(global) {\n\nvar ROOT = global,\n    doc = ROOT.document,\n    win = ROOT.window,\n    toString = Object.prototype.toString,\n    objectSignature = '[object Object]',\n    BROWSER = !!doc && !!win &&\n                win.self === (doc.defaultView || doc.parentWindow),\n    NODEVERSIONS = BROWSER ? false :\n                    (function () {\n                        return ('process' in global &&\n                                global.process.versions) || false;\n                    })(),\n    CONSOLE = {},\n    CONSOLE_NAMES = [\n        'log',\n        'info',\n        'warn',\n        'error',\n        'assert'\n    ],\n    EXPORTS = {\n        browser: BROWSER,\n        nodejs: NODEVERSIONS && !!NODEVERSIONS.node,\n        userAgent: BROWSER ?\n                        ROOT.navigator.userAgent :\n                        NODEVERSIONS ?\n                            nodeUserAgent() : 'Unknown',\n                        \n        validSignature: toString.call(null) !== objectSignature ||\n                        toString.call(void(0)) !== objectSignature,\n                        \n        ajax: ROOT.XMLHttpRequest,\n        indexOfSupport: 'indexOf' in Array.prototype\n    };\n    \nvar c, l;\n\nfunction nodeUserAgent() {\n    var PROCESS = 'process' in global ? global.process : null,\n        VERSIONS = NODEVERSIONS,\n        str = ['Node ',\n                VERSIONS.node,\n                '(',\n                    PROCESS.platform,\n                    '; V8 ',\n                    VERSIONS.v8 || 'unknown',\n                    '; arch ',\n                    PROCESS.arch,\n                ')'];\n\n    return str.join('');\n}\n\nfunction empty() {\n    \n}\n\n// console polyfill so that IE 8 will not have fatal errors\n//      for not openning dev tool window\nif (!ROOT.console) {\n    for (c = 0, l = CONSOLE_NAMES.length; l--; c++) {\n        CONSOLE[CONSOLE_NAMES[c]] = empty;\n    }\n}\n\nmodule.exports = EXPORTS;\n\nROOT = win = doc = null;\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL2RldGVjdC5qcz81NGM0Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI4Q0FBQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EscUJBQXFCO0FBQ3JCLGdCQUFnQjtBQUNoQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esc0JBQXNCO0FBQ3RCO0FBQ0Esc0JBQXNCO0FBQ3RCO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSx5Q0FBeUMsS0FBSztBQUM5QztBQUNBO0FBQ0E7O0FBRUE7O0FBRUEiLCJmaWxlIjoiMy5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIFJPT1QgPSBnbG9iYWwsXG4gICAgZG9jID0gUk9PVC5kb2N1bWVudCxcbiAgICB3aW4gPSBST09ULndpbmRvdyxcbiAgICB0b1N0cmluZyA9IE9iamVjdC5wcm90b3R5cGUudG9TdHJpbmcsXG4gICAgb2JqZWN0U2lnbmF0dXJlID0gJ1tvYmplY3QgT2JqZWN0XScsXG4gICAgQlJPV1NFUiA9ICEhZG9jICYmICEhd2luICYmXG4gICAgICAgICAgICAgICAgd2luLnNlbGYgPT09IChkb2MuZGVmYXVsdFZpZXcgfHwgZG9jLnBhcmVudFdpbmRvdyksXG4gICAgTk9ERVZFUlNJT05TID0gQlJPV1NFUiA/IGZhbHNlIDpcbiAgICAgICAgICAgICAgICAgICAgKGZ1bmN0aW9uICgpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAoJ3Byb2Nlc3MnIGluIGdsb2JhbCAmJlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnbG9iYWwucHJvY2Vzcy52ZXJzaW9ucykgfHwgZmFsc2U7XG4gICAgICAgICAgICAgICAgICAgIH0pKCksXG4gICAgQ09OU09MRSA9IHt9LFxuICAgIENPTlNPTEVfTkFNRVMgPSBbXG4gICAgICAgICdsb2cnLFxuICAgICAgICAnaW5mbycsXG4gICAgICAgICd3YXJuJyxcbiAgICAgICAgJ2Vycm9yJyxcbiAgICAgICAgJ2Fzc2VydCdcbiAgICBdLFxuICAgIEVYUE9SVFMgPSB7XG4gICAgICAgIGJyb3dzZXI6IEJST1dTRVIsXG4gICAgICAgIG5vZGVqczogTk9ERVZFUlNJT05TICYmICEhTk9ERVZFUlNJT05TLm5vZGUsXG4gICAgICAgIHVzZXJBZ2VudDogQlJPV1NFUiA/XG4gICAgICAgICAgICAgICAgICAgICAgICBST09ULm5hdmlnYXRvci51c2VyQWdlbnQgOlxuICAgICAgICAgICAgICAgICAgICAgICAgTk9ERVZFUlNJT05TID9cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBub2RlVXNlckFnZW50KCkgOiAnVW5rbm93bicsXG4gICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgdmFsaWRTaWduYXR1cmU6IHRvU3RyaW5nLmNhbGwobnVsbCkgIT09IG9iamVjdFNpZ25hdHVyZSB8fFxuICAgICAgICAgICAgICAgICAgICAgICAgdG9TdHJpbmcuY2FsbCh2b2lkKDApKSAhPT0gb2JqZWN0U2lnbmF0dXJlLFxuICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgIGFqYXg6IFJPT1QuWE1MSHR0cFJlcXVlc3QsXG4gICAgICAgIGluZGV4T2ZTdXBwb3J0OiAnaW5kZXhPZicgaW4gQXJyYXkucHJvdG90eXBlXG4gICAgfTtcbiAgICBcbnZhciBjLCBsO1xuXG5mdW5jdGlvbiBub2RlVXNlckFnZW50KCkge1xuICAgIHZhciBQUk9DRVNTID0gJ3Byb2Nlc3MnIGluIGdsb2JhbCA/IGdsb2JhbC5wcm9jZXNzIDogbnVsbCxcbiAgICAgICAgVkVSU0lPTlMgPSBOT0RFVkVSU0lPTlMsXG4gICAgICAgIHN0ciA9IFsnTm9kZSAnLFxuICAgICAgICAgICAgICAgIFZFUlNJT05TLm5vZGUsXG4gICAgICAgICAgICAgICAgJygnLFxuICAgICAgICAgICAgICAgICAgICBQUk9DRVNTLnBsYXRmb3JtLFxuICAgICAgICAgICAgICAgICAgICAnOyBWOCAnLFxuICAgICAgICAgICAgICAgICAgICBWRVJTSU9OUy52OCB8fCAndW5rbm93bicsXG4gICAgICAgICAgICAgICAgICAgICc7IGFyY2ggJyxcbiAgICAgICAgICAgICAgICAgICAgUFJPQ0VTUy5hcmNoLFxuICAgICAgICAgICAgICAgICcpJ107XG5cbiAgICByZXR1cm4gc3RyLmpvaW4oJycpO1xufVxuXG5mdW5jdGlvbiBlbXB0eSgpIHtcbiAgICBcbn1cblxuLy8gY29uc29sZSBwb2x5ZmlsbCBzbyB0aGF0IElFIDggd2lsbCBub3QgaGF2ZSBmYXRhbCBlcnJvcnNcbi8vICAgICAgZm9yIG5vdCBvcGVubmluZyBkZXYgdG9vbCB3aW5kb3dcbmlmICghUk9PVC5jb25zb2xlKSB7XG4gICAgZm9yIChjID0gMCwgbCA9IENPTlNPTEVfTkFNRVMubGVuZ3RoOyBsLS07IGMrKykge1xuICAgICAgICBDT05TT0xFW0NPTlNPTEVfTkFNRVNbY11dID0gZW1wdHk7XG4gICAgfVxufVxuXG5tb2R1bGUuZXhwb3J0cyA9IEVYUE9SVFM7XG5cblJPT1QgPSB3aW4gPSBkb2MgPSBudWxsO1xuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9+L2xpYmNvcmUvc3JjL2RldGVjdC5qc1xuLy8gbW9kdWxlIGlkID0gM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJzb3VyY2VSb290IjoiIn0=");
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var ROOT = global,
+    doc = ROOT.document,
+    win = ROOT.window,
+    toString = Object.prototype.toString,
+    objectSignature = '[object Object]',
+    BROWSER = !!doc && !!win &&
+                win.self === (doc.defaultView || doc.parentWindow),
+    NODEVERSIONS = BROWSER ? false :
+                    (function () {
+                        return ('process' in global &&
+                                global.process.versions) || false;
+                    })(),
+    CONSOLE = {},
+    CONSOLE_NAMES = [
+        'log',
+        'info',
+        'warn',
+        'error',
+        'assert'
+    ],
+    EXPORTS = {
+        browser: BROWSER,
+        nodejs: NODEVERSIONS && !!NODEVERSIONS.node,
+        userAgent: BROWSER ?
+                        ROOT.navigator.userAgent :
+                        NODEVERSIONS ?
+                            nodeUserAgent() : 'Unknown',
+                        
+        validSignature: toString.call(null) !== objectSignature ||
+                        toString.call(void(0)) !== objectSignature,
+                        
+        ajax: ROOT.XMLHttpRequest,
+        indexOfSupport: 'indexOf' in Array.prototype
+    };
+    
+var c, l;
+
+function nodeUserAgent() {
+    var PROCESS = 'process' in global ? global.process : null,
+        VERSIONS = NODEVERSIONS,
+        str = ['Node ',
+                VERSIONS.node,
+                '(',
+                    PROCESS.platform,
+                    '; V8 ',
+                    VERSIONS.v8 || 'unknown',
+                    '; arch ',
+                    PROCESS.arch,
+                ')'];
+
+    return str.join('');
+}
+
+function empty() {
+    
+}
+
+// console polyfill so that IE 8 will not have fatal errors
+//      for not openning dev tool window
+if (!ROOT.console) {
+    for (c = 0, l = CONSOLE_NAMES.length; l--; c++) {
+        CONSOLE[CONSOLE_NAMES[c]] = empty;
+    }
+}
+
+module.exports = EXPORTS;
+
+ROOT = win = doc = null;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-eval("var g;\r\n\r\n// This works in non-strict mode\r\ng = (function() {\r\n\treturn this;\r\n})();\r\n\r\ntry {\r\n\t// This works if eval is allowed (see CSP)\r\n\tg = g || Function(\"return this\")() || (1,eval)(\"this\");\r\n} catch(e) {\r\n\t// This works if the window reference is available\r\n\tif(typeof window === \"object\")\r\n\t\tg = window;\r\n}\r\n\r\n// g can still be undefined, but nothing to do about it...\r\n// We return undefined, instead of nothing here, so it's\r\n// easier to handle this case. if(!global) { ...}\r\n\r\nmodule.exports = g;\r\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vKHdlYnBhY2spL2J1aWxkaW4vZ2xvYmFsLmpzPzM2OTgiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0EsQ0FBQzs7QUFFRDtBQUNBO0FBQ0E7QUFDQSxDQUFDO0FBQ0Q7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLDRDQUE0Qzs7QUFFNUMiLCJmaWxlIjoiNC5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBnO1xyXG5cclxuLy8gVGhpcyB3b3JrcyBpbiBub24tc3RyaWN0IG1vZGVcclxuZyA9IChmdW5jdGlvbigpIHtcclxuXHRyZXR1cm4gdGhpcztcclxufSkoKTtcclxuXHJcbnRyeSB7XHJcblx0Ly8gVGhpcyB3b3JrcyBpZiBldmFsIGlzIGFsbG93ZWQgKHNlZSBDU1ApXHJcblx0ZyA9IGcgfHwgRnVuY3Rpb24oXCJyZXR1cm4gdGhpc1wiKSgpIHx8ICgxLGV2YWwpKFwidGhpc1wiKTtcclxufSBjYXRjaChlKSB7XHJcblx0Ly8gVGhpcyB3b3JrcyBpZiB0aGUgd2luZG93IHJlZmVyZW5jZSBpcyBhdmFpbGFibGVcclxuXHRpZih0eXBlb2Ygd2luZG93ID09PSBcIm9iamVjdFwiKVxyXG5cdFx0ZyA9IHdpbmRvdztcclxufVxyXG5cclxuLy8gZyBjYW4gc3RpbGwgYmUgdW5kZWZpbmVkLCBidXQgbm90aGluZyB0byBkbyBhYm91dCBpdC4uLlxyXG4vLyBXZSByZXR1cm4gdW5kZWZpbmVkLCBpbnN0ZWFkIG9mIG5vdGhpbmcgaGVyZSwgc28gaXQnc1xyXG4vLyBlYXNpZXIgdG8gaGFuZGxlIHRoaXMgY2FzZS4gaWYoIWdsb2JhbCkgeyAuLi59XHJcblxyXG5tb2R1bGUuZXhwb3J0cyA9IGc7XHJcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vICh3ZWJwYWNrKS9idWlsZGluL2dsb2JhbC5qc1xuLy8gbW9kdWxlIGlkID0gNFxuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJzb3VyY2VSb290IjoiIn0=");
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(global) {\n\nvar TYPE = __webpack_require__(0),\n    //DETECT = require('./detect.js'),\n    G = global,\n    // 1 = namespace, 4 = position, 5 = item\n    NAME_RE = /^(([^\\.]+\\.)*)((before|after)\\:)?([a-zA-Z0-9\\_\\-\\.]+)$/,\n    POSITION_BEFORE = 1,\n    POSITION_AFTER = 2,\n    RUNNERS = {},\n    NAMESPACES = {},\n    NATIVE_SET_IMMEDIATE = !!G.setImmediate,\n    EXPORTS = {\n        register: set,\n        run: run,\n        middleware: middlewareNamespace,\n        setAsync: NATIVE_SET_IMMEDIATE ?\n                        nativeSetImmediate : timeoutAsync,\n        clearAsync: NATIVE_SET_IMMEDIATE ?\n                        nativeClearImmediate : clearTimeoutAsync\n    };\n    \n\n    \nfunction set(name, handler) {\n    var parsed = parseName(name),\n        list = RUNNERS;\n    var access, items;\n    \n    if (parsed && handler instanceof Function) {\n        name = parsed[1];\n        access = ':' + name;\n        if (!(access in list)) {\n            list[access] = {\n                name: name,\n                before: [],\n                after: []\n            };\n        }\n        \n        items = list[access][getPositionAccess(parsed[0])];\n        \n        items[items.length] = handler;\n    }\n    \n    return EXPORTS.chain;\n}\n\n\nfunction run(name, args, scope) {\n    var runners = get(name);\n    var c, l;\n\n    if (runners) {\n        if (typeof scope === 'undefined') {\n            scope = null;\n        }\n        if (!(args instanceof Array)) {\n            args = [];\n        }\n        \n        for (c = -1, l = runners.length; l--;) {\n            runners[++c].apply(scope, args);\n        }\n        \n    }\n    \n    return EXPORTS.chain;\n}\n\nfunction get(name) {\n    var list = RUNNERS,\n        parsed = parseName(name);\n    var access;\n    \n    if (parsed) {\n        access = ':' + parsed[1];\n        \n        if (access in list) {\n            return list[access][getPositionAccess(parsed[0])];\n            \n        }\n    }\n    \n    return void(0);\n}\n\nfunction getPositionAccess(input) {\n    return  input === POSITION_BEFORE ? 'before' : 'after';\n}\n\nfunction parseName(name) {\n    var match = TYPE.string(name) && name.match(NAME_RE);\n    var position, namespace;\n    \n    \n    \n    \n    if (match) {\n        namespace = match[1];\n        position = match[4] === 'before' ? POSITION_BEFORE : POSITION_AFTER;\n        //console.log('parsed ', name, ' = ', [position, (namespace || '') + match[5]]);\n        return [position, (namespace || '') + match[5]];\n        \n    }\n    \n    return void(0);\n    \n}\n\nfunction middlewareNamespace(name) {\n    var list = NAMESPACES;\n    var access, register, run;\n \n    if (TYPE.string(name)) {\n        access = name + '.';\n        if (!(access in list)) {\n            run = createRunInNamespace(access);\n            register = createRegisterInNamespace(access);\n            list[access] = register.chain = run.chain = {\n                                                        run: run,\n                                                        register: register\n                                                    };\n        }\n        return list[access];\n    }\n    return void(0);\n}\n\nfunction createRunInNamespace(ns) {\n    function nsRun(name, args, scope) {\n        run(ns + name, args, scope);\n        return nsRun.chain;\n    }\n    return nsRun;\n}\n\nfunction createRegisterInNamespace(ns) {\n    function nsRegister(name, handler) {\n        set(ns + name, handler);\n        return nsRegister.chain;\n    }\n    return nsRegister;\n}\n\n\nfunction timeoutAsync(handler) {\n    return G.setTimeout(handler, 1);\n}\n\nfunction clearTimeoutAsync(id) {\n    return G.clearTimeout(id);\n}\n\nfunction nativeSetImmediate (fn) {\n    return G.setImmediate(fn);\n}\n\nfunction nativeClearImmediate(id) {\n    return G.clearImmediate(id);\n}\n\n\nmodule.exports = EXPORTS.chain = EXPORTS;\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL3Byb2Nlc3Nvci5qcz9iMTJjIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI4Q0FBQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGdCQUFnQjtBQUNoQixtQkFBbUI7QUFDbkI7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Ozs7QUFJQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQSx3Q0FBd0MsS0FBSztBQUM3QztBQUNBOztBQUVBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOzs7OztBQUtBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7O0FBRUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0EiLCJmaWxlIjoiNS5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIFRZUEUgPSByZXF1aXJlKCcuL3R5cGUuanMnKSxcbiAgICAvL0RFVEVDVCA9IHJlcXVpcmUoJy4vZGV0ZWN0LmpzJyksXG4gICAgRyA9IGdsb2JhbCxcbiAgICAvLyAxID0gbmFtZXNwYWNlLCA0ID0gcG9zaXRpb24sIDUgPSBpdGVtXG4gICAgTkFNRV9SRSA9IC9eKChbXlxcLl0rXFwuKSopKChiZWZvcmV8YWZ0ZXIpXFw6KT8oW2EtekEtWjAtOVxcX1xcLVxcLl0rKSQvLFxuICAgIFBPU0lUSU9OX0JFRk9SRSA9IDEsXG4gICAgUE9TSVRJT05fQUZURVIgPSAyLFxuICAgIFJVTk5FUlMgPSB7fSxcbiAgICBOQU1FU1BBQ0VTID0ge30sXG4gICAgTkFUSVZFX1NFVF9JTU1FRElBVEUgPSAhIUcuc2V0SW1tZWRpYXRlLFxuICAgIEVYUE9SVFMgPSB7XG4gICAgICAgIHJlZ2lzdGVyOiBzZXQsXG4gICAgICAgIHJ1bjogcnVuLFxuICAgICAgICBtaWRkbGV3YXJlOiBtaWRkbGV3YXJlTmFtZXNwYWNlLFxuICAgICAgICBzZXRBc3luYzogTkFUSVZFX1NFVF9JTU1FRElBVEUgP1xuICAgICAgICAgICAgICAgICAgICAgICAgbmF0aXZlU2V0SW1tZWRpYXRlIDogdGltZW91dEFzeW5jLFxuICAgICAgICBjbGVhckFzeW5jOiBOQVRJVkVfU0VUX0lNTUVESUFURSA/XG4gICAgICAgICAgICAgICAgICAgICAgICBuYXRpdmVDbGVhckltbWVkaWF0ZSA6IGNsZWFyVGltZW91dEFzeW5jXG4gICAgfTtcbiAgICBcblxuICAgIFxuZnVuY3Rpb24gc2V0KG5hbWUsIGhhbmRsZXIpIHtcbiAgICB2YXIgcGFyc2VkID0gcGFyc2VOYW1lKG5hbWUpLFxuICAgICAgICBsaXN0ID0gUlVOTkVSUztcbiAgICB2YXIgYWNjZXNzLCBpdGVtcztcbiAgICBcbiAgICBpZiAocGFyc2VkICYmIGhhbmRsZXIgaW5zdGFuY2VvZiBGdW5jdGlvbikge1xuICAgICAgICBuYW1lID0gcGFyc2VkWzFdO1xuICAgICAgICBhY2Nlc3MgPSAnOicgKyBuYW1lO1xuICAgICAgICBpZiAoIShhY2Nlc3MgaW4gbGlzdCkpIHtcbiAgICAgICAgICAgIGxpc3RbYWNjZXNzXSA9IHtcbiAgICAgICAgICAgICAgICBuYW1lOiBuYW1lLFxuICAgICAgICAgICAgICAgIGJlZm9yZTogW10sXG4gICAgICAgICAgICAgICAgYWZ0ZXI6IFtdXG4gICAgICAgICAgICB9O1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBpdGVtcyA9IGxpc3RbYWNjZXNzXVtnZXRQb3NpdGlvbkFjY2VzcyhwYXJzZWRbMF0pXTtcbiAgICAgICAgXG4gICAgICAgIGl0ZW1zW2l0ZW1zLmxlbmd0aF0gPSBoYW5kbGVyO1xuICAgIH1cbiAgICBcbiAgICByZXR1cm4gRVhQT1JUUy5jaGFpbjtcbn1cblxuXG5mdW5jdGlvbiBydW4obmFtZSwgYXJncywgc2NvcGUpIHtcbiAgICB2YXIgcnVubmVycyA9IGdldChuYW1lKTtcbiAgICB2YXIgYywgbDtcblxuICAgIGlmIChydW5uZXJzKSB7XG4gICAgICAgIGlmICh0eXBlb2Ygc2NvcGUgPT09ICd1bmRlZmluZWQnKSB7XG4gICAgICAgICAgICBzY29wZSA9IG51bGw7XG4gICAgICAgIH1cbiAgICAgICAgaWYgKCEoYXJncyBpbnN0YW5jZW9mIEFycmF5KSkge1xuICAgICAgICAgICAgYXJncyA9IFtdO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBmb3IgKGMgPSAtMSwgbCA9IHJ1bm5lcnMubGVuZ3RoOyBsLS07KSB7XG4gICAgICAgICAgICBydW5uZXJzWysrY10uYXBwbHkoc2NvcGUsIGFyZ3MpO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgIH1cbiAgICBcbiAgICByZXR1cm4gRVhQT1JUUy5jaGFpbjtcbn1cblxuZnVuY3Rpb24gZ2V0KG5hbWUpIHtcbiAgICB2YXIgbGlzdCA9IFJVTk5FUlMsXG4gICAgICAgIHBhcnNlZCA9IHBhcnNlTmFtZShuYW1lKTtcbiAgICB2YXIgYWNjZXNzO1xuICAgIFxuICAgIGlmIChwYXJzZWQpIHtcbiAgICAgICAgYWNjZXNzID0gJzonICsgcGFyc2VkWzFdO1xuICAgICAgICBcbiAgICAgICAgaWYgKGFjY2VzcyBpbiBsaXN0KSB7XG4gICAgICAgICAgICByZXR1cm4gbGlzdFthY2Nlc3NdW2dldFBvc2l0aW9uQWNjZXNzKHBhcnNlZFswXSldO1xuICAgICAgICAgICAgXG4gICAgICAgIH1cbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIHZvaWQoMCk7XG59XG5cbmZ1bmN0aW9uIGdldFBvc2l0aW9uQWNjZXNzKGlucHV0KSB7XG4gICAgcmV0dXJuICBpbnB1dCA9PT0gUE9TSVRJT05fQkVGT1JFID8gJ2JlZm9yZScgOiAnYWZ0ZXInO1xufVxuXG5mdW5jdGlvbiBwYXJzZU5hbWUobmFtZSkge1xuICAgIHZhciBtYXRjaCA9IFRZUEUuc3RyaW5nKG5hbWUpICYmIG5hbWUubWF0Y2goTkFNRV9SRSk7XG4gICAgdmFyIHBvc2l0aW9uLCBuYW1lc3BhY2U7XG4gICAgXG4gICAgXG4gICAgXG4gICAgXG4gICAgaWYgKG1hdGNoKSB7XG4gICAgICAgIG5hbWVzcGFjZSA9IG1hdGNoWzFdO1xuICAgICAgICBwb3NpdGlvbiA9IG1hdGNoWzRdID09PSAnYmVmb3JlJyA/IFBPU0lUSU9OX0JFRk9SRSA6IFBPU0lUSU9OX0FGVEVSO1xuICAgICAgICAvL2NvbnNvbGUubG9nKCdwYXJzZWQgJywgbmFtZSwgJyA9ICcsIFtwb3NpdGlvbiwgKG5hbWVzcGFjZSB8fCAnJykgKyBtYXRjaFs1XV0pO1xuICAgICAgICByZXR1cm4gW3Bvc2l0aW9uLCAobmFtZXNwYWNlIHx8ICcnKSArIG1hdGNoWzVdXTtcbiAgICAgICAgXG4gICAgfVxuICAgIFxuICAgIHJldHVybiB2b2lkKDApO1xuICAgIFxufVxuXG5mdW5jdGlvbiBtaWRkbGV3YXJlTmFtZXNwYWNlKG5hbWUpIHtcbiAgICB2YXIgbGlzdCA9IE5BTUVTUEFDRVM7XG4gICAgdmFyIGFjY2VzcywgcmVnaXN0ZXIsIHJ1bjtcbiBcbiAgICBpZiAoVFlQRS5zdHJpbmcobmFtZSkpIHtcbiAgICAgICAgYWNjZXNzID0gbmFtZSArICcuJztcbiAgICAgICAgaWYgKCEoYWNjZXNzIGluIGxpc3QpKSB7XG4gICAgICAgICAgICBydW4gPSBjcmVhdGVSdW5Jbk5hbWVzcGFjZShhY2Nlc3MpO1xuICAgICAgICAgICAgcmVnaXN0ZXIgPSBjcmVhdGVSZWdpc3RlckluTmFtZXNwYWNlKGFjY2Vzcyk7XG4gICAgICAgICAgICBsaXN0W2FjY2Vzc10gPSByZWdpc3Rlci5jaGFpbiA9IHJ1bi5jaGFpbiA9IHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcnVuOiBydW4sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ2lzdGVyOiByZWdpc3RlclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH07XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuIGxpc3RbYWNjZXNzXTtcbiAgICB9XG4gICAgcmV0dXJuIHZvaWQoMCk7XG59XG5cbmZ1bmN0aW9uIGNyZWF0ZVJ1bkluTmFtZXNwYWNlKG5zKSB7XG4gICAgZnVuY3Rpb24gbnNSdW4obmFtZSwgYXJncywgc2NvcGUpIHtcbiAgICAgICAgcnVuKG5zICsgbmFtZSwgYXJncywgc2NvcGUpO1xuICAgICAgICByZXR1cm4gbnNSdW4uY2hhaW47XG4gICAgfVxuICAgIHJldHVybiBuc1J1bjtcbn1cblxuZnVuY3Rpb24gY3JlYXRlUmVnaXN0ZXJJbk5hbWVzcGFjZShucykge1xuICAgIGZ1bmN0aW9uIG5zUmVnaXN0ZXIobmFtZSwgaGFuZGxlcikge1xuICAgICAgICBzZXQobnMgKyBuYW1lLCBoYW5kbGVyKTtcbiAgICAgICAgcmV0dXJuIG5zUmVnaXN0ZXIuY2hhaW47XG4gICAgfVxuICAgIHJldHVybiBuc1JlZ2lzdGVyO1xufVxuXG5cbmZ1bmN0aW9uIHRpbWVvdXRBc3luYyhoYW5kbGVyKSB7XG4gICAgcmV0dXJuIEcuc2V0VGltZW91dChoYW5kbGVyLCAxKTtcbn1cblxuZnVuY3Rpb24gY2xlYXJUaW1lb3V0QXN5bmMoaWQpIHtcbiAgICByZXR1cm4gRy5jbGVhclRpbWVvdXQoaWQpO1xufVxuXG5mdW5jdGlvbiBuYXRpdmVTZXRJbW1lZGlhdGUgKGZuKSB7XG4gICAgcmV0dXJuIEcuc2V0SW1tZWRpYXRlKGZuKTtcbn1cblxuZnVuY3Rpb24gbmF0aXZlQ2xlYXJJbW1lZGlhdGUoaWQpIHtcbiAgICByZXR1cm4gRy5jbGVhckltbWVkaWF0ZShpZCk7XG59XG5cblxubW9kdWxlLmV4cG9ydHMgPSBFWFBPUlRTLmNoYWluID0gRVhQT1JUUztcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vfi9saWJjb3JlL3NyYy9wcm9jZXNzb3IuanNcbi8vIG1vZHVsZSBpZCA9IDVcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var TYPE = __webpack_require__(0),
+    //DETECT = require('./detect.js'),
+    G = global,
+    // 1 = namespace, 4 = position, 5 = item
+    NAME_RE = /^(([^\.]+\.)*)((before|after)\:)?([a-zA-Z0-9\_\-\.]+)$/,
+    POSITION_BEFORE = 1,
+    POSITION_AFTER = 2,
+    RUNNERS = {},
+    NAMESPACES = {},
+    NATIVE_SET_IMMEDIATE = !!G.setImmediate,
+    EXPORTS = {
+        register: set,
+        run: run,
+        middleware: middlewareNamespace,
+        setAsync: NATIVE_SET_IMMEDIATE ?
+                        nativeSetImmediate : timeoutAsync,
+        clearAsync: NATIVE_SET_IMMEDIATE ?
+                        nativeClearImmediate : clearTimeoutAsync
+    };
+    
+
+    
+function set(name, handler) {
+    var parsed = parseName(name),
+        list = RUNNERS;
+    var access, items;
+    
+    if (parsed && handler instanceof Function) {
+        name = parsed[1];
+        access = ':' + name;
+        if (!(access in list)) {
+            list[access] = {
+                name: name,
+                before: [],
+                after: []
+            };
+        }
+        
+        items = list[access][getPositionAccess(parsed[0])];
+        
+        items[items.length] = handler;
+    }
+    
+    return EXPORTS.chain;
+}
+
+
+function run(name, args, scope) {
+    var runners = get(name);
+    var c, l;
+
+    if (runners) {
+        if (typeof scope === 'undefined') {
+            scope = null;
+        }
+        if (!(args instanceof Array)) {
+            args = [];
+        }
+        
+        for (c = -1, l = runners.length; l--;) {
+            runners[++c].apply(scope, args);
+        }
+        
+    }
+    
+    return EXPORTS.chain;
+}
+
+function get(name) {
+    var list = RUNNERS,
+        parsed = parseName(name);
+    var access;
+    
+    if (parsed) {
+        access = ':' + parsed[1];
+        
+        if (access in list) {
+            return list[access][getPositionAccess(parsed[0])];
+            
+        }
+    }
+    
+    return void(0);
+}
+
+function getPositionAccess(input) {
+    return  input === POSITION_BEFORE ? 'before' : 'after';
+}
+
+function parseName(name) {
+    var match = TYPE.string(name) && name.match(NAME_RE);
+    var position, namespace;
+    
+    
+    
+    
+    if (match) {
+        namespace = match[1];
+        position = match[4] === 'before' ? POSITION_BEFORE : POSITION_AFTER;
+        //console.log('parsed ', name, ' = ', [position, (namespace || '') + match[5]]);
+        return [position, (namespace || '') + match[5]];
+        
+    }
+    
+    return void(0);
+    
+}
+
+function middlewareNamespace(name) {
+    var list = NAMESPACES;
+    var access, register, run;
+ 
+    if (TYPE.string(name)) {
+        access = name + '.';
+        if (!(access in list)) {
+            run = createRunInNamespace(access);
+            register = createRegisterInNamespace(access);
+            list[access] = register.chain = run.chain = {
+                                                        run: run,
+                                                        register: register
+                                                    };
+        }
+        return list[access];
+    }
+    return void(0);
+}
+
+function createRunInNamespace(ns) {
+    function nsRun(name, args, scope) {
+        run(ns + name, args, scope);
+        return nsRun.chain;
+    }
+    return nsRun;
+}
+
+function createRegisterInNamespace(ns) {
+    function nsRegister(name, handler) {
+        set(ns + name, handler);
+        return nsRegister.chain;
+    }
+    return nsRegister;
+}
+
+
+function timeoutAsync(handler) {
+    return G.setTimeout(handler, 1);
+}
+
+function clearTimeoutAsync(id) {
+    return G.clearTimeout(id);
+}
+
+function nativeSetImmediate (fn) {
+    return G.setImmediate(fn);
+}
+
+function nativeClearImmediate(id) {
+    return G.clearImmediate(id);
+}
+
+
+module.exports = EXPORTS.chain = EXPORTS;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar HALF_BYTE = 0x80,\n    SIX_BITS = 0x3f,\n    ONE_BYTE = 0xff,\n    fromCharCode = String.fromCharCode,\n    BASE64_MAP =\n        \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\",\n    BASE64_EXCESS_REMOVE_RE = /[^a-zA-Z0-9\\+\\/]/,\n    CAMEL_RE = /[^a-z]+[a-z]/ig,\n    UNCAMEL_RE = /\\-*[A-Z]/g;\n\nfunction base64Encode(str) {\n    var map = BASE64_MAP,\n        buffer = [],\n        bl = 0,\n        c = -1,\n        excess = false,\n        pad = map.charAt(64);\n    var l, total, code, flag, end, chr;\n    \n    // decode to ascii\n    str = utf16ToUtf8(str);\n    l = total = str.length;\n    \n    for (; l--;) {\n        code = str.charCodeAt(++c);\n        flag = c % 3;\n        \n        switch (flag) {\n        case 0:\n            chr = map.charAt((code & 0xfc) >> 2);\n            excess = (code & 0x03) << 4;\n            break;\n        case 1:\n            chr = map.charAt(excess | (code & 0xf0) >> 4);\n            excess = (code & 0x0f) << 2;\n            break;\n        case 2:\n            chr = map.charAt(excess | (code & 0xc0) >> 6);\n            excess = code & 0x3f;\n        }\n        buffer[bl++] = chr;\n        \n        end = !l;\n        if ((end || flag === 2)) {\n            buffer[bl++] = map.charAt(excess);\n        }\n        \n        \n        if (!l) {\n            l = bl % 4;\n            for (l = l && 4 - l; l--;) {\n                buffer[bl++] = pad;\n            }\n            break;\n        }\n    }\n    \n    return buffer.join('');\n    \n}\n\nfunction base64Decode(str) {\n    var map = BASE64_MAP,\n        oneByte = ONE_BYTE,\n        buffer = [],\n        bl = 0,\n        c = -1,\n        code2str = fromCharCode;\n    var l, code, excess, chr, flag;\n    \n    str = str.replace(BASE64_EXCESS_REMOVE_RE, '');\n    l = str.length;\n    \n    for (; l--;) {\n        code = map.indexOf(str.charAt(++c));\n        flag = c % 4;\n        \n        switch (flag) {\n        case 0:\n            chr = 0;\n            break;\n        case 1:\n            chr = ((excess << 2) | (code >> 4)) & oneByte;\n            break;\n        case 2:\n            chr = ((excess << 4) | (code >> 2)) & oneByte;\n            break;\n        case 3:\n            chr = ((excess << 6) | code) & oneByte;\n        }\n        \n        excess = code;\n        \n        if (!l && flag < 3 && chr < 64) {\n            break;\n        }\n\n        if (flag) {\n            buffer[bl++] = code2str(chr);\n        }\n    }\n    \n    return utf8ToUtf16(buffer.join(\"\"));\n    \n}\n\n\nfunction utf16ToUtf8(str) {\n    var half = HALF_BYTE,\n        sixBits = SIX_BITS,\n        code2char = fromCharCode,\n        utf8 = [],\n        ul = 0,\n        c = -1,\n        l = str.length;\n    var code;\n    \n    for (; l--;) {\n        code = str.charCodeAt(++c);\n        \n        if (code < half) {\n            utf8[ul++] = code2char(code);\n        }\n        else if (code < 0x800) {\n            utf8[ul++] = code2char(0xc0 | (code >> 6));\n            utf8[ul++] = code2char(half | (code & sixBits));\n        }\n        else if (code < 0xd800 || code > 0xdfff) {\n            utf8[ul++] = code2char(0xe0 | (code >> 12));\n            utf8[ul++] = code2char(half | ((code >> 6) & sixBits));\n            utf8[ul++] = code2char(half | (code  & sixBits));\n        }\n        else {\n            l--;\n            code = 0x10000 + (((code & 0x3ff)<<10)\n                      | (str.charCodeAt(++c) & 0x3ff));\n            \n            utf8[ul++] = code2char(0xf0 | (code >> 18));\n            utf8[ul++] = code2char(half | ((code >> 12) & sixBits));\n            utf8[ul++] = code2char(half | ((code >> 6) & sixBits));\n            utf8[ul++] = code2char(half | (code >> sixBits));\n            \n        }\n    }\n    \n    return utf8.join('');\n}\n\nfunction utf8ToUtf16(str) {\n    var half = HALF_BYTE,\n        sixBits = SIX_BITS,\n        code2char = fromCharCode,\n        utf16 = [],\n        M = Math,\n        min = M.min,\n        max = M.max,\n        ul = 0,\n        l = str.length,\n        c = -1;\n        \n    var code, whatsLeft;\n    \n    for (; l--;) {\n        code = str.charCodeAt(++c);\n        \n        if (code < half) {\n            utf16[ul++] = code2char(code);\n        }\n        else if (code > 0xbf && code < 0xe0) {\n            utf16[ul++] = code2char((code & 0x1f) << 6 |\n                                    str.charCodeAt(c + 1) & sixBits);\n            whatsLeft = max(min(l - 1, 1), 0);\n            c += whatsLeft;\n            l -= whatsLeft;\n            \n        }\n        else if (code > 0xdf && code < 0xf0) {\n            utf16[ul++] = code2char((code & 0x0f) << 12 |\n                                    (str.charCodeAt(c + 1) & sixBits) << 6 |\n                                    str.charCodeAt(c + 2) & sixBits);\n            \n            whatsLeft = max(min(l - 2, 2), 0);\n            c += whatsLeft;\n            l -= whatsLeft;\n            \n        }\n        else {\n            \n            code = ((code & 0x07) << 18 |\n                    (str.charCodeAt(c + 1) & sixBits) << 12 |\n                    (str.charCodeAt(c + 2) & sixBits) << 6 |\n                    str.charCodeAt(c + 3) & sixBits) - 0x010000;\n            \n            utf16[ul++] = code2char(code >> 10 | 0xd800,\n                                    code & 0x03ff | 0xdc00);\n            \n            whatsLeft = max(min(l - 3, 3), 0);\n            c += whatsLeft;\n            l -= whatsLeft;\n            \n        }\n    }\n    \n    return utf16.join('');\n}\n\nfunction parseJsonPath(path) {\n    var dimensions = [],\n        dl = 0,\n        buffer = [],\n        bl = dl,\n        TRUE = true,\n        FALSE = false,\n        started = FALSE,\n        merge = FALSE;\n        \n    var c, l, item, last;\n\n    for (c = -1, l = path.length; l--;) {\n        item = path.charAt(++c);\n        last = !l;\n        \n        if (item === '[') {\n            if (started) {\n                break;\n            }\n            started = TRUE;\n            // has first buffer\n            if (bl) {\n                merge = TRUE;\n            }\n        }\n        else if (item === ']') {\n            // failed! return failed\n            if (!started) {\n                break;\n            }\n            started = FALSE;\n            merge = TRUE;\n        }\n        else {\n            buffer[bl++] = item;\n            if (last) {\n                merge = TRUE;\n            }\n        }\n        \n        if (merge) {\n            dimensions[dl++] = buffer.join(\"\");\n            buffer.length = bl = 0;\n            merge = FALSE;\n        }\n        \n        // ended but parse failed\n        if (last) {\n            if (started || dl < 1) {\n                break;\n            }\n            return dimensions;\n        }\n    }\n    \n    return null;\n}\n\nfunction camelize(str) {\n    return str.replace(CAMEL_RE, applyCamelize);\n}\n\nfunction applyCamelize(all) {\n    return all.charAt(all.length - 1).toUpperCase();\n}\n\nfunction uncamelize(str) {\n    return str.replace(UNCAMEL_RE, applyUncamelize);\n}\n\nfunction applyUncamelize(all) {\n    return '-' + all.charAt(all.length -1).toLowerCase();\n}\n\nmodule.exports = {\n    \"encode64\": base64Encode,\n    \"decode64\": base64Decode,\n    \"utf2bin\": utf16ToUtf8,\n    \"bin2utf\": utf8ToUtf16,\n    \"jsonPath\": parseJsonPath,\n    \"camelize\": camelize,\n    \"uncamelize\": uncamelize\n};//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL3N0cmluZy5qcz9iYzU0Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxVQUFVLEtBQUs7QUFDZjtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQSxnQ0FBZ0MsS0FBSztBQUNyQztBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQSxVQUFVLEtBQUs7QUFDZjtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLFVBQVUsS0FBSztBQUNmOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBLFVBQVUsS0FBSztBQUNmOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUEsaUNBQWlDLEtBQUs7QUFDdEM7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiI2LmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG52YXIgSEFMRl9CWVRFID0gMHg4MCxcbiAgICBTSVhfQklUUyA9IDB4M2YsXG4gICAgT05FX0JZVEUgPSAweGZmLFxuICAgIGZyb21DaGFyQ29kZSA9IFN0cmluZy5mcm9tQ2hhckNvZGUsXG4gICAgQkFTRTY0X01BUCA9XG4gICAgICAgIFwiQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODkrLz1cIixcbiAgICBCQVNFNjRfRVhDRVNTX1JFTU9WRV9SRSA9IC9bXmEtekEtWjAtOVxcK1xcL10vLFxuICAgIENBTUVMX1JFID0gL1teYS16XStbYS16XS9pZyxcbiAgICBVTkNBTUVMX1JFID0gL1xcLSpbQS1aXS9nO1xuXG5mdW5jdGlvbiBiYXNlNjRFbmNvZGUoc3RyKSB7XG4gICAgdmFyIG1hcCA9IEJBU0U2NF9NQVAsXG4gICAgICAgIGJ1ZmZlciA9IFtdLFxuICAgICAgICBibCA9IDAsXG4gICAgICAgIGMgPSAtMSxcbiAgICAgICAgZXhjZXNzID0gZmFsc2UsXG4gICAgICAgIHBhZCA9IG1hcC5jaGFyQXQoNjQpO1xuICAgIHZhciBsLCB0b3RhbCwgY29kZSwgZmxhZywgZW5kLCBjaHI7XG4gICAgXG4gICAgLy8gZGVjb2RlIHRvIGFzY2lpXG4gICAgc3RyID0gdXRmMTZUb1V0Zjgoc3RyKTtcbiAgICBsID0gdG90YWwgPSBzdHIubGVuZ3RoO1xuICAgIFxuICAgIGZvciAoOyBsLS07KSB7XG4gICAgICAgIGNvZGUgPSBzdHIuY2hhckNvZGVBdCgrK2MpO1xuICAgICAgICBmbGFnID0gYyAlIDM7XG4gICAgICAgIFxuICAgICAgICBzd2l0Y2ggKGZsYWcpIHtcbiAgICAgICAgY2FzZSAwOlxuICAgICAgICAgICAgY2hyID0gbWFwLmNoYXJBdCgoY29kZSAmIDB4ZmMpID4+IDIpO1xuICAgICAgICAgICAgZXhjZXNzID0gKGNvZGUgJiAweDAzKSA8PCA0O1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIGNhc2UgMTpcbiAgICAgICAgICAgIGNociA9IG1hcC5jaGFyQXQoZXhjZXNzIHwgKGNvZGUgJiAweGYwKSA+PiA0KTtcbiAgICAgICAgICAgIGV4Y2VzcyA9IChjb2RlICYgMHgwZikgPDwgMjtcbiAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICBjYXNlIDI6XG4gICAgICAgICAgICBjaHIgPSBtYXAuY2hhckF0KGV4Y2VzcyB8IChjb2RlICYgMHhjMCkgPj4gNik7XG4gICAgICAgICAgICBleGNlc3MgPSBjb2RlICYgMHgzZjtcbiAgICAgICAgfVxuICAgICAgICBidWZmZXJbYmwrK10gPSBjaHI7XG4gICAgICAgIFxuICAgICAgICBlbmQgPSAhbDtcbiAgICAgICAgaWYgKChlbmQgfHwgZmxhZyA9PT0gMikpIHtcbiAgICAgICAgICAgIGJ1ZmZlcltibCsrXSA9IG1hcC5jaGFyQXQoZXhjZXNzKTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgXG4gICAgICAgIGlmICghbCkge1xuICAgICAgICAgICAgbCA9IGJsICUgNDtcbiAgICAgICAgICAgIGZvciAobCA9IGwgJiYgNCAtIGw7IGwtLTspIHtcbiAgICAgICAgICAgICAgICBidWZmZXJbYmwrK10gPSBwYWQ7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgfVxuICAgIH1cbiAgICBcbiAgICByZXR1cm4gYnVmZmVyLmpvaW4oJycpO1xuICAgIFxufVxuXG5mdW5jdGlvbiBiYXNlNjREZWNvZGUoc3RyKSB7XG4gICAgdmFyIG1hcCA9IEJBU0U2NF9NQVAsXG4gICAgICAgIG9uZUJ5dGUgPSBPTkVfQllURSxcbiAgICAgICAgYnVmZmVyID0gW10sXG4gICAgICAgIGJsID0gMCxcbiAgICAgICAgYyA9IC0xLFxuICAgICAgICBjb2RlMnN0ciA9IGZyb21DaGFyQ29kZTtcbiAgICB2YXIgbCwgY29kZSwgZXhjZXNzLCBjaHIsIGZsYWc7XG4gICAgXG4gICAgc3RyID0gc3RyLnJlcGxhY2UoQkFTRTY0X0VYQ0VTU19SRU1PVkVfUkUsICcnKTtcbiAgICBsID0gc3RyLmxlbmd0aDtcbiAgICBcbiAgICBmb3IgKDsgbC0tOykge1xuICAgICAgICBjb2RlID0gbWFwLmluZGV4T2Yoc3RyLmNoYXJBdCgrK2MpKTtcbiAgICAgICAgZmxhZyA9IGMgJSA0O1xuICAgICAgICBcbiAgICAgICAgc3dpdGNoIChmbGFnKSB7XG4gICAgICAgIGNhc2UgMDpcbiAgICAgICAgICAgIGNociA9IDA7XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSAxOlxuICAgICAgICAgICAgY2hyID0gKChleGNlc3MgPDwgMikgfCAoY29kZSA+PiA0KSkgJiBvbmVCeXRlO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIGNhc2UgMjpcbiAgICAgICAgICAgIGNociA9ICgoZXhjZXNzIDw8IDQpIHwgKGNvZGUgPj4gMikpICYgb25lQnl0ZTtcbiAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICBjYXNlIDM6XG4gICAgICAgICAgICBjaHIgPSAoKGV4Y2VzcyA8PCA2KSB8IGNvZGUpICYgb25lQnl0ZTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgZXhjZXNzID0gY29kZTtcbiAgICAgICAgXG4gICAgICAgIGlmICghbCAmJiBmbGFnIDwgMyAmJiBjaHIgPCA2NCkge1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIH1cblxuICAgICAgICBpZiAoZmxhZykge1xuICAgICAgICAgICAgYnVmZmVyW2JsKytdID0gY29kZTJzdHIoY2hyKTtcbiAgICAgICAgfVxuICAgIH1cbiAgICBcbiAgICByZXR1cm4gdXRmOFRvVXRmMTYoYnVmZmVyLmpvaW4oXCJcIikpO1xuICAgIFxufVxuXG5cbmZ1bmN0aW9uIHV0ZjE2VG9VdGY4KHN0cikge1xuICAgIHZhciBoYWxmID0gSEFMRl9CWVRFLFxuICAgICAgICBzaXhCaXRzID0gU0lYX0JJVFMsXG4gICAgICAgIGNvZGUyY2hhciA9IGZyb21DaGFyQ29kZSxcbiAgICAgICAgdXRmOCA9IFtdLFxuICAgICAgICB1bCA9IDAsXG4gICAgICAgIGMgPSAtMSxcbiAgICAgICAgbCA9IHN0ci5sZW5ndGg7XG4gICAgdmFyIGNvZGU7XG4gICAgXG4gICAgZm9yICg7IGwtLTspIHtcbiAgICAgICAgY29kZSA9IHN0ci5jaGFyQ29kZUF0KCsrYyk7XG4gICAgICAgIFxuICAgICAgICBpZiAoY29kZSA8IGhhbGYpIHtcbiAgICAgICAgICAgIHV0ZjhbdWwrK10gPSBjb2RlMmNoYXIoY29kZSk7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSBpZiAoY29kZSA8IDB4ODAwKSB7XG4gICAgICAgICAgICB1dGY4W3VsKytdID0gY29kZTJjaGFyKDB4YzAgfCAoY29kZSA+PiA2KSk7XG4gICAgICAgICAgICB1dGY4W3VsKytdID0gY29kZTJjaGFyKGhhbGYgfCAoY29kZSAmIHNpeEJpdHMpKTtcbiAgICAgICAgfVxuICAgICAgICBlbHNlIGlmIChjb2RlIDwgMHhkODAwIHx8IGNvZGUgPiAweGRmZmYpIHtcbiAgICAgICAgICAgIHV0ZjhbdWwrK10gPSBjb2RlMmNoYXIoMHhlMCB8IChjb2RlID4+IDEyKSk7XG4gICAgICAgICAgICB1dGY4W3VsKytdID0gY29kZTJjaGFyKGhhbGYgfCAoKGNvZGUgPj4gNikgJiBzaXhCaXRzKSk7XG4gICAgICAgICAgICB1dGY4W3VsKytdID0gY29kZTJjaGFyKGhhbGYgfCAoY29kZSAgJiBzaXhCaXRzKSk7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICBsLS07XG4gICAgICAgICAgICBjb2RlID0gMHgxMDAwMCArICgoKGNvZGUgJiAweDNmZik8PDEwKVxuICAgICAgICAgICAgICAgICAgICAgIHwgKHN0ci5jaGFyQ29kZUF0KCsrYykgJiAweDNmZikpO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICB1dGY4W3VsKytdID0gY29kZTJjaGFyKDB4ZjAgfCAoY29kZSA+PiAxOCkpO1xuICAgICAgICAgICAgdXRmOFt1bCsrXSA9IGNvZGUyY2hhcihoYWxmIHwgKChjb2RlID4+IDEyKSAmIHNpeEJpdHMpKTtcbiAgICAgICAgICAgIHV0ZjhbdWwrK10gPSBjb2RlMmNoYXIoaGFsZiB8ICgoY29kZSA+PiA2KSAmIHNpeEJpdHMpKTtcbiAgICAgICAgICAgIHV0ZjhbdWwrK10gPSBjb2RlMmNoYXIoaGFsZiB8IChjb2RlID4+IHNpeEJpdHMpKTtcbiAgICAgICAgICAgIFxuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiB1dGY4LmpvaW4oJycpO1xufVxuXG5mdW5jdGlvbiB1dGY4VG9VdGYxNihzdHIpIHtcbiAgICB2YXIgaGFsZiA9IEhBTEZfQllURSxcbiAgICAgICAgc2l4Qml0cyA9IFNJWF9CSVRTLFxuICAgICAgICBjb2RlMmNoYXIgPSBmcm9tQ2hhckNvZGUsXG4gICAgICAgIHV0ZjE2ID0gW10sXG4gICAgICAgIE0gPSBNYXRoLFxuICAgICAgICBtaW4gPSBNLm1pbixcbiAgICAgICAgbWF4ID0gTS5tYXgsXG4gICAgICAgIHVsID0gMCxcbiAgICAgICAgbCA9IHN0ci5sZW5ndGgsXG4gICAgICAgIGMgPSAtMTtcbiAgICAgICAgXG4gICAgdmFyIGNvZGUsIHdoYXRzTGVmdDtcbiAgICBcbiAgICBmb3IgKDsgbC0tOykge1xuICAgICAgICBjb2RlID0gc3RyLmNoYXJDb2RlQXQoKytjKTtcbiAgICAgICAgXG4gICAgICAgIGlmIChjb2RlIDwgaGFsZikge1xuICAgICAgICAgICAgdXRmMTZbdWwrK10gPSBjb2RlMmNoYXIoY29kZSk7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSBpZiAoY29kZSA+IDB4YmYgJiYgY29kZSA8IDB4ZTApIHtcbiAgICAgICAgICAgIHV0ZjE2W3VsKytdID0gY29kZTJjaGFyKChjb2RlICYgMHgxZikgPDwgNiB8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHIuY2hhckNvZGVBdChjICsgMSkgJiBzaXhCaXRzKTtcbiAgICAgICAgICAgIHdoYXRzTGVmdCA9IG1heChtaW4obCAtIDEsIDEpLCAwKTtcbiAgICAgICAgICAgIGMgKz0gd2hhdHNMZWZ0O1xuICAgICAgICAgICAgbCAtPSB3aGF0c0xlZnQ7XG4gICAgICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBlbHNlIGlmIChjb2RlID4gMHhkZiAmJiBjb2RlIDwgMHhmMCkge1xuICAgICAgICAgICAgdXRmMTZbdWwrK10gPSBjb2RlMmNoYXIoKGNvZGUgJiAweDBmKSA8PCAxMiB8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoc3RyLmNoYXJDb2RlQXQoYyArIDEpICYgc2l4Qml0cykgPDwgNiB8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHIuY2hhckNvZGVBdChjICsgMikgJiBzaXhCaXRzKTtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgd2hhdHNMZWZ0ID0gbWF4KG1pbihsIC0gMiwgMiksIDApO1xuICAgICAgICAgICAgYyArPSB3aGF0c0xlZnQ7XG4gICAgICAgICAgICBsIC09IHdoYXRzTGVmdDtcbiAgICAgICAgICAgIFxuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBjb2RlID0gKChjb2RlICYgMHgwNykgPDwgMTggfFxuICAgICAgICAgICAgICAgICAgICAoc3RyLmNoYXJDb2RlQXQoYyArIDEpICYgc2l4Qml0cykgPDwgMTIgfFxuICAgICAgICAgICAgICAgICAgICAoc3RyLmNoYXJDb2RlQXQoYyArIDIpICYgc2l4Qml0cykgPDwgNiB8XG4gICAgICAgICAgICAgICAgICAgIHN0ci5jaGFyQ29kZUF0KGMgKyAzKSAmIHNpeEJpdHMpIC0gMHgwMTAwMDA7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHV0ZjE2W3VsKytdID0gY29kZTJjaGFyKGNvZGUgPj4gMTAgfCAweGQ4MDAsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb2RlICYgMHgwM2ZmIHwgMHhkYzAwKTtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgd2hhdHNMZWZ0ID0gbWF4KG1pbihsIC0gMywgMyksIDApO1xuICAgICAgICAgICAgYyArPSB3aGF0c0xlZnQ7XG4gICAgICAgICAgICBsIC09IHdoYXRzTGVmdDtcbiAgICAgICAgICAgIFxuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiB1dGYxNi5qb2luKCcnKTtcbn1cblxuZnVuY3Rpb24gcGFyc2VKc29uUGF0aChwYXRoKSB7XG4gICAgdmFyIGRpbWVuc2lvbnMgPSBbXSxcbiAgICAgICAgZGwgPSAwLFxuICAgICAgICBidWZmZXIgPSBbXSxcbiAgICAgICAgYmwgPSBkbCxcbiAgICAgICAgVFJVRSA9IHRydWUsXG4gICAgICAgIEZBTFNFID0gZmFsc2UsXG4gICAgICAgIHN0YXJ0ZWQgPSBGQUxTRSxcbiAgICAgICAgbWVyZ2UgPSBGQUxTRTtcbiAgICAgICAgXG4gICAgdmFyIGMsIGwsIGl0ZW0sIGxhc3Q7XG5cbiAgICBmb3IgKGMgPSAtMSwgbCA9IHBhdGgubGVuZ3RoOyBsLS07KSB7XG4gICAgICAgIGl0ZW0gPSBwYXRoLmNoYXJBdCgrK2MpO1xuICAgICAgICBsYXN0ID0gIWw7XG4gICAgICAgIFxuICAgICAgICBpZiAoaXRlbSA9PT0gJ1snKSB7XG4gICAgICAgICAgICBpZiAoc3RhcnRlZCkge1xuICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgc3RhcnRlZCA9IFRSVUU7XG4gICAgICAgICAgICAvLyBoYXMgZmlyc3QgYnVmZmVyXG4gICAgICAgICAgICBpZiAoYmwpIHtcbiAgICAgICAgICAgICAgICBtZXJnZSA9IFRSVUU7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSBpZiAoaXRlbSA9PT0gJ10nKSB7XG4gICAgICAgICAgICAvLyBmYWlsZWQhIHJldHVybiBmYWlsZWRcbiAgICAgICAgICAgIGlmICghc3RhcnRlZCkge1xuICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgc3RhcnRlZCA9IEZBTFNFO1xuICAgICAgICAgICAgbWVyZ2UgPSBUUlVFO1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgYnVmZmVyW2JsKytdID0gaXRlbTtcbiAgICAgICAgICAgIGlmIChsYXN0KSB7XG4gICAgICAgICAgICAgICAgbWVyZ2UgPSBUUlVFO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBpZiAobWVyZ2UpIHtcbiAgICAgICAgICAgIGRpbWVuc2lvbnNbZGwrK10gPSBidWZmZXIuam9pbihcIlwiKTtcbiAgICAgICAgICAgIGJ1ZmZlci5sZW5ndGggPSBibCA9IDA7XG4gICAgICAgICAgICBtZXJnZSA9IEZBTFNFO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyBlbmRlZCBidXQgcGFyc2UgZmFpbGVkXG4gICAgICAgIGlmIChsYXN0KSB7XG4gICAgICAgICAgICBpZiAoc3RhcnRlZCB8fCBkbCA8IDEpIHtcbiAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIHJldHVybiBkaW1lbnNpb25zO1xuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiBudWxsO1xufVxuXG5mdW5jdGlvbiBjYW1lbGl6ZShzdHIpIHtcbiAgICByZXR1cm4gc3RyLnJlcGxhY2UoQ0FNRUxfUkUsIGFwcGx5Q2FtZWxpemUpO1xufVxuXG5mdW5jdGlvbiBhcHBseUNhbWVsaXplKGFsbCkge1xuICAgIHJldHVybiBhbGwuY2hhckF0KGFsbC5sZW5ndGggLSAxKS50b1VwcGVyQ2FzZSgpO1xufVxuXG5mdW5jdGlvbiB1bmNhbWVsaXplKHN0cikge1xuICAgIHJldHVybiBzdHIucmVwbGFjZShVTkNBTUVMX1JFLCBhcHBseVVuY2FtZWxpemUpO1xufVxuXG5mdW5jdGlvbiBhcHBseVVuY2FtZWxpemUoYWxsKSB7XG4gICAgcmV0dXJuICctJyArIGFsbC5jaGFyQXQoYWxsLmxlbmd0aCAtMSkudG9Mb3dlckNhc2UoKTtcbn1cblxubW9kdWxlLmV4cG9ydHMgPSB7XG4gICAgXCJlbmNvZGU2NFwiOiBiYXNlNjRFbmNvZGUsXG4gICAgXCJkZWNvZGU2NFwiOiBiYXNlNjREZWNvZGUsXG4gICAgXCJ1dGYyYmluXCI6IHV0ZjE2VG9VdGY4LFxuICAgIFwiYmluMnV0ZlwiOiB1dGY4VG9VdGYxNixcbiAgICBcImpzb25QYXRoXCI6IHBhcnNlSnNvblBhdGgsXG4gICAgXCJjYW1lbGl6ZVwiOiBjYW1lbGl6ZSxcbiAgICBcInVuY2FtZWxpemVcIjogdW5jYW1lbGl6ZVxufTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL34vbGliY29yZS9zcmMvc3RyaW5nLmpzXG4vLyBtb2R1bGUgaWQgPSA2XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+var HALF_BYTE = 0x80,
+    SIX_BITS = 0x3f,
+    ONE_BYTE = 0xff,
+    fromCharCode = String.fromCharCode,
+    BASE64_MAP =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+    BASE64_EXCESS_REMOVE_RE = /[^a-zA-Z0-9\+\/]/,
+    CAMEL_RE = /[^a-z]+[a-z]/ig,
+    UNCAMEL_RE = /\-*[A-Z]/g;
+
+function base64Encode(str) {
+    var map = BASE64_MAP,
+        buffer = [],
+        bl = 0,
+        c = -1,
+        excess = false,
+        pad = map.charAt(64);
+    var l, total, code, flag, end, chr;
+    
+    // decode to ascii
+    str = utf16ToUtf8(str);
+    l = total = str.length;
+    
+    for (; l--;) {
+        code = str.charCodeAt(++c);
+        flag = c % 3;
+        
+        switch (flag) {
+        case 0:
+            chr = map.charAt((code & 0xfc) >> 2);
+            excess = (code & 0x03) << 4;
+            break;
+        case 1:
+            chr = map.charAt(excess | (code & 0xf0) >> 4);
+            excess = (code & 0x0f) << 2;
+            break;
+        case 2:
+            chr = map.charAt(excess | (code & 0xc0) >> 6);
+            excess = code & 0x3f;
+        }
+        buffer[bl++] = chr;
+        
+        end = !l;
+        if ((end || flag === 2)) {
+            buffer[bl++] = map.charAt(excess);
+        }
+        
+        
+        if (!l) {
+            l = bl % 4;
+            for (l = l && 4 - l; l--;) {
+                buffer[bl++] = pad;
+            }
+            break;
+        }
+    }
+    
+    return buffer.join('');
+    
+}
+
+function base64Decode(str) {
+    var map = BASE64_MAP,
+        oneByte = ONE_BYTE,
+        buffer = [],
+        bl = 0,
+        c = -1,
+        code2str = fromCharCode;
+    var l, code, excess, chr, flag;
+    
+    str = str.replace(BASE64_EXCESS_REMOVE_RE, '');
+    l = str.length;
+    
+    for (; l--;) {
+        code = map.indexOf(str.charAt(++c));
+        flag = c % 4;
+        
+        switch (flag) {
+        case 0:
+            chr = 0;
+            break;
+        case 1:
+            chr = ((excess << 2) | (code >> 4)) & oneByte;
+            break;
+        case 2:
+            chr = ((excess << 4) | (code >> 2)) & oneByte;
+            break;
+        case 3:
+            chr = ((excess << 6) | code) & oneByte;
+        }
+        
+        excess = code;
+        
+        if (!l && flag < 3 && chr < 64) {
+            break;
+        }
+
+        if (flag) {
+            buffer[bl++] = code2str(chr);
+        }
+    }
+    
+    return utf8ToUtf16(buffer.join(""));
+    
+}
+
+
+function utf16ToUtf8(str) {
+    var half = HALF_BYTE,
+        sixBits = SIX_BITS,
+        code2char = fromCharCode,
+        utf8 = [],
+        ul = 0,
+        c = -1,
+        l = str.length;
+    var code;
+    
+    for (; l--;) {
+        code = str.charCodeAt(++c);
+        
+        if (code < half) {
+            utf8[ul++] = code2char(code);
+        }
+        else if (code < 0x800) {
+            utf8[ul++] = code2char(0xc0 | (code >> 6));
+            utf8[ul++] = code2char(half | (code & sixBits));
+        }
+        else if (code < 0xd800 || code > 0xdfff) {
+            utf8[ul++] = code2char(0xe0 | (code >> 12));
+            utf8[ul++] = code2char(half | ((code >> 6) & sixBits));
+            utf8[ul++] = code2char(half | (code  & sixBits));
+        }
+        else {
+            l--;
+            code = 0x10000 + (((code & 0x3ff)<<10)
+                      | (str.charCodeAt(++c) & 0x3ff));
+            
+            utf8[ul++] = code2char(0xf0 | (code >> 18));
+            utf8[ul++] = code2char(half | ((code >> 12) & sixBits));
+            utf8[ul++] = code2char(half | ((code >> 6) & sixBits));
+            utf8[ul++] = code2char(half | (code >> sixBits));
+            
+        }
+    }
+    
+    return utf8.join('');
+}
+
+function utf8ToUtf16(str) {
+    var half = HALF_BYTE,
+        sixBits = SIX_BITS,
+        code2char = fromCharCode,
+        utf16 = [],
+        M = Math,
+        min = M.min,
+        max = M.max,
+        ul = 0,
+        l = str.length,
+        c = -1;
+        
+    var code, whatsLeft;
+    
+    for (; l--;) {
+        code = str.charCodeAt(++c);
+        
+        if (code < half) {
+            utf16[ul++] = code2char(code);
+        }
+        else if (code > 0xbf && code < 0xe0) {
+            utf16[ul++] = code2char((code & 0x1f) << 6 |
+                                    str.charCodeAt(c + 1) & sixBits);
+            whatsLeft = max(min(l - 1, 1), 0);
+            c += whatsLeft;
+            l -= whatsLeft;
+            
+        }
+        else if (code > 0xdf && code < 0xf0) {
+            utf16[ul++] = code2char((code & 0x0f) << 12 |
+                                    (str.charCodeAt(c + 1) & sixBits) << 6 |
+                                    str.charCodeAt(c + 2) & sixBits);
+            
+            whatsLeft = max(min(l - 2, 2), 0);
+            c += whatsLeft;
+            l -= whatsLeft;
+            
+        }
+        else {
+            
+            code = ((code & 0x07) << 18 |
+                    (str.charCodeAt(c + 1) & sixBits) << 12 |
+                    (str.charCodeAt(c + 2) & sixBits) << 6 |
+                    str.charCodeAt(c + 3) & sixBits) - 0x010000;
+            
+            utf16[ul++] = code2char(code >> 10 | 0xd800,
+                                    code & 0x03ff | 0xdc00);
+            
+            whatsLeft = max(min(l - 3, 3), 0);
+            c += whatsLeft;
+            l -= whatsLeft;
+            
+        }
+    }
+    
+    return utf16.join('');
+}
+
+function parseJsonPath(path) {
+    var dimensions = [],
+        dl = 0,
+        buffer = [],
+        bl = dl,
+        TRUE = true,
+        FALSE = false,
+        started = FALSE,
+        merge = FALSE;
+        
+    var c, l, item, last;
+
+    for (c = -1, l = path.length; l--;) {
+        item = path.charAt(++c);
+        last = !l;
+        
+        if (item === '[') {
+            if (started) {
+                break;
+            }
+            started = TRUE;
+            // has first buffer
+            if (bl) {
+                merge = TRUE;
+            }
+        }
+        else if (item === ']') {
+            // failed! return failed
+            if (!started) {
+                break;
+            }
+            started = FALSE;
+            merge = TRUE;
+        }
+        else {
+            buffer[bl++] = item;
+            if (last) {
+                merge = TRUE;
+            }
+        }
+        
+        if (merge) {
+            dimensions[dl++] = buffer.join("");
+            buffer.length = bl = 0;
+            merge = FALSE;
+        }
+        
+        // ended but parse failed
+        if (last) {
+            if (started || dl < 1) {
+                break;
+            }
+            return dimensions;
+        }
+    }
+    
+    return null;
+}
+
+function camelize(str) {
+    return str.replace(CAMEL_RE, applyCamelize);
+}
+
+function applyCamelize(all) {
+    return all.charAt(all.length - 1).toUpperCase();
+}
+
+function uncamelize(str) {
+    return str.replace(UNCAMEL_RE, applyUncamelize);
+}
+
+function applyUncamelize(all) {
+    return '-' + all.charAt(all.length -1).toLowerCase();
+}
+
+module.exports = {
+    "encode64": base64Encode,
+    "decode64": base64Decode,
+    "utf2bin": utf16ToUtf8,
+    "bin2utf": utf8ToUtf16,
+    "jsonPath": parseJsonPath,
+    "camelize": camelize,
+    "uncamelize": uncamelize
+};
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nfunction empty() {}\n\nmodule.exports = {\n    clone: function (instance) {\n        empty.prototype = instance;\n        return new empty();\n    }\n};//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvaGVscGVyLmpzPzE0OWYiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6IjcuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbmZ1bmN0aW9uIGVtcHR5KCkge31cblxubW9kdWxlLmV4cG9ydHMgPSB7XG4gICAgY2xvbmU6IGZ1bmN0aW9uIChpbnN0YW5jZSkge1xuICAgICAgICBlbXB0eS5wcm90b3R5cGUgPSBpbnN0YW5jZTtcbiAgICAgICAgcmV0dXJuIG5ldyBlbXB0eSgpO1xuICAgIH1cbn07XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvcmVnZXgvaGVscGVyLmpzXG4vLyBtb2R1bGUgaWQgPSA3XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+function empty() {}
+
+module.exports = {
+    clone: function (instance) {
+        empty.prototype = instance;
+        return new empty();
+    }
+};
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar libcore = __webpack_require__(2);\n\nfunction StateMap(start) {\n    var states = {};\n    \n    start = typeof start === 'string' ?\n                            start : 'start';\n    states[start] = {\n        not: []\n    };\n    \n    this.stateGenId = 0;\n    this.start = start;\n    this.states = states;\n    this.ends = {};\n}\n\nStateMap.prototype = {\n    constructor: StateMap,\n    \n    generateState: function (id) {\n        if (libcore.string(id)) {\n            return id;\n        }\n        return 's' + (++this.stateGenId);\n    },\n    \n    finalizeFragments: function (name, fragment, endStates) {\n        var states = this.states,\n            ends = this.ends,\n            processed = {},\n            idmap = {},\n            pending = [fragment],\n            pl = 1;\n        var state, stateObject, item, pointer, chr, to, list, l, id,\n            not, tl, targets, total, notIndex;\n        \n        idmap[fragment.state.id] = this.start;\n        \n        for (; pl--;) {\n            item = pending[0];\n            pending.splice(0, 1);\n            \n            state = idmap[item.state.id];\n            if (!(state in states)) {\n                states[state] = {\n                    not: []\n                };\n            }\n            stateObject = states[state];\n            \n            \n            for (pointer = item.pointer; pointer; pointer = pointer.next) {\n                chr = pointer.chr;\n                to = pointer.to;\n                id = to.id;\n                \n                if (!(id in processed)) {\n                    processed[id] = true;\n                    pending[pl++] = to;\n                }\n                \n                // finalize state\n                state = to.state.id;\n                if (!(state in idmap)) {\n                    idmap[state] = this.generateState();\n                }\n                state = idmap[state];\n                \n                // negative\n                if (pointer.negative) {\n                    targets = stateObject.not;\n                    tl = total = targets.length;\n                    \n                    not = null;\n                    for (; tl--;) {\n                        not = targets[tl];\n                        if (not[0] === state) {\n                            break;\n                        }\n                        not = null;\n                    }\n                    \n                    if (!not) {\n                        not = targets[total++] = [state, {}];\n                    }\n                    \n                    notIndex = not[1];\n                    \n                    if (!(chr in notIndex)) {\n                        notIndex[chr] = 1;\n                    }\n                    \n                }\n                // positive\n                else {\n\n                    if (!(chr in stateObject)) {\n                        stateObject[chr] = [];\n                    }\n                    list = stateObject[chr];\n                    if (list.indexOf(state) === -1) {\n                        list[list.length] = state;\n                    }\n                    \n                }\n            }\n            \n        }\n        \n        // create end states\n        for (l = endStates.length; l--;) {\n            ends[idmap[endStates[l]]] = name;\n        }\n\n        \n    },\n    \n    importDefinition: function (json) {\n        var lib = libcore,\n            object = lib.object,\n            string = lib.string;\n        var item;\n        \n        if (string(json)) {\n            try {\n                json = JSON.parse(json);\n            }\n            catch (e) {\n                console.warn(e);\n                throw new Error(\"Invalid JSON string parameter.\");\n            }\n        }\n        \n        if (!object(json)) {\n            throw new Error(\"Invalid JSON object parameter.\");\n        }\n        \n        // verify state gen id\n        item = json.stateGenId;\n        if (!lib.number(item) || item < 0) {\n            throw new Error(\"Invalid state generator\");\n        }\n        this.stateGenId = item;\n        \n        item = json.start;\n        if (!lib.string(item)) {\n            throw new Error(\"Invalid start state name\");\n        }\n        this.start = item;\n        \n        item = json.states;\n        if (!object(item)) {\n            throw new Error(\"Invalid state map object\");\n        }\n        this.states = item;\n        \n        item = json.ends;\n        if (!object(item)) {\n            throw new Error(\"Invalid end states object\");\n        }\n        this.ends = item;\n        \n        return this;\n    },\n    \n    exportDefinition: function () {\n        return JSON.stringify({\n            stateGenId: this.stateGenId,\n            start: this.start,\n            states: this.states,\n            ends: this.ends\n        });\n    }\n};\n\n\nmodule.exports = StateMap;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvc3RhdGUtbWFwLmpzP2NmZGUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQSwwQkFBMEI7QUFDMUIsc0JBQXNCO0FBQ3RCO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBLGNBQWMsTUFBTTtBQUNwQjtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7QUFHQSx3Q0FBd0MsU0FBUztBQUNqRDtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EsMEJBQTBCLE1BQU07QUFDaEM7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EsMkRBQTJEO0FBQzNEOztBQUVBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQTtBQUNBLGtDQUFrQyxLQUFLO0FBQ3ZDO0FBQ0E7OztBQUdBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsU0FBUztBQUNUO0FBQ0E7OztBQUdBIiwiZmlsZSI6IjguanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbnZhciBsaWJjb3JlID0gcmVxdWlyZShcImxpYmNvcmVcIik7XG5cbmZ1bmN0aW9uIFN0YXRlTWFwKHN0YXJ0KSB7XG4gICAgdmFyIHN0YXRlcyA9IHt9O1xuICAgIFxuICAgIHN0YXJ0ID0gdHlwZW9mIHN0YXJ0ID09PSAnc3RyaW5nJyA/XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RhcnQgOiAnc3RhcnQnO1xuICAgIHN0YXRlc1tzdGFydF0gPSB7XG4gICAgICAgIG5vdDogW11cbiAgICB9O1xuICAgIFxuICAgIHRoaXMuc3RhdGVHZW5JZCA9IDA7XG4gICAgdGhpcy5zdGFydCA9IHN0YXJ0O1xuICAgIHRoaXMuc3RhdGVzID0gc3RhdGVzO1xuICAgIHRoaXMuZW5kcyA9IHt9O1xufVxuXG5TdGF0ZU1hcC5wcm90b3R5cGUgPSB7XG4gICAgY29uc3RydWN0b3I6IFN0YXRlTWFwLFxuICAgIFxuICAgIGdlbmVyYXRlU3RhdGU6IGZ1bmN0aW9uIChpZCkge1xuICAgICAgICBpZiAobGliY29yZS5zdHJpbmcoaWQpKSB7XG4gICAgICAgICAgICByZXR1cm4gaWQ7XG4gICAgICAgIH1cbiAgICAgICAgcmV0dXJuICdzJyArICgrK3RoaXMuc3RhdGVHZW5JZCk7XG4gICAgfSxcbiAgICBcbiAgICBmaW5hbGl6ZUZyYWdtZW50czogZnVuY3Rpb24gKG5hbWUsIGZyYWdtZW50LCBlbmRTdGF0ZXMpIHtcbiAgICAgICAgdmFyIHN0YXRlcyA9IHRoaXMuc3RhdGVzLFxuICAgICAgICAgICAgZW5kcyA9IHRoaXMuZW5kcyxcbiAgICAgICAgICAgIHByb2Nlc3NlZCA9IHt9LFxuICAgICAgICAgICAgaWRtYXAgPSB7fSxcbiAgICAgICAgICAgIHBlbmRpbmcgPSBbZnJhZ21lbnRdLFxuICAgICAgICAgICAgcGwgPSAxO1xuICAgICAgICB2YXIgc3RhdGUsIHN0YXRlT2JqZWN0LCBpdGVtLCBwb2ludGVyLCBjaHIsIHRvLCBsaXN0LCBsLCBpZCxcbiAgICAgICAgICAgIG5vdCwgdGwsIHRhcmdldHMsIHRvdGFsLCBub3RJbmRleDtcbiAgICAgICAgXG4gICAgICAgIGlkbWFwW2ZyYWdtZW50LnN0YXRlLmlkXSA9IHRoaXMuc3RhcnQ7XG4gICAgICAgIFxuICAgICAgICBmb3IgKDsgcGwtLTspIHtcbiAgICAgICAgICAgIGl0ZW0gPSBwZW5kaW5nWzBdO1xuICAgICAgICAgICAgcGVuZGluZy5zcGxpY2UoMCwgMSk7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHN0YXRlID0gaWRtYXBbaXRlbS5zdGF0ZS5pZF07XG4gICAgICAgICAgICBpZiAoIShzdGF0ZSBpbiBzdGF0ZXMpKSB7XG4gICAgICAgICAgICAgICAgc3RhdGVzW3N0YXRlXSA9IHtcbiAgICAgICAgICAgICAgICAgICAgbm90OiBbXVxuICAgICAgICAgICAgICAgIH07XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBzdGF0ZU9iamVjdCA9IHN0YXRlc1tzdGF0ZV07XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgZm9yIChwb2ludGVyID0gaXRlbS5wb2ludGVyOyBwb2ludGVyOyBwb2ludGVyID0gcG9pbnRlci5uZXh0KSB7XG4gICAgICAgICAgICAgICAgY2hyID0gcG9pbnRlci5jaHI7XG4gICAgICAgICAgICAgICAgdG8gPSBwb2ludGVyLnRvO1xuICAgICAgICAgICAgICAgIGlkID0gdG8uaWQ7XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgaWYgKCEoaWQgaW4gcHJvY2Vzc2VkKSkge1xuICAgICAgICAgICAgICAgICAgICBwcm9jZXNzZWRbaWRdID0gdHJ1ZTtcbiAgICAgICAgICAgICAgICAgICAgcGVuZGluZ1twbCsrXSA9IHRvO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAvLyBmaW5hbGl6ZSBzdGF0ZVxuICAgICAgICAgICAgICAgIHN0YXRlID0gdG8uc3RhdGUuaWQ7XG4gICAgICAgICAgICAgICAgaWYgKCEoc3RhdGUgaW4gaWRtYXApKSB7XG4gICAgICAgICAgICAgICAgICAgIGlkbWFwW3N0YXRlXSA9IHRoaXMuZ2VuZXJhdGVTdGF0ZSgpO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBzdGF0ZSA9IGlkbWFwW3N0YXRlXTtcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAvLyBuZWdhdGl2ZVxuICAgICAgICAgICAgICAgIGlmIChwb2ludGVyLm5lZ2F0aXZlKSB7XG4gICAgICAgICAgICAgICAgICAgIHRhcmdldHMgPSBzdGF0ZU9iamVjdC5ub3Q7XG4gICAgICAgICAgICAgICAgICAgIHRsID0gdG90YWwgPSB0YXJnZXRzLmxlbmd0aDtcbiAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgIG5vdCA9IG51bGw7XG4gICAgICAgICAgICAgICAgICAgIGZvciAoOyB0bC0tOykge1xuICAgICAgICAgICAgICAgICAgICAgICAgbm90ID0gdGFyZ2V0c1t0bF07XG4gICAgICAgICAgICAgICAgICAgICAgICBpZiAobm90WzBdID09PSBzdGF0ZSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgbm90ID0gbnVsbDtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgaWYgKCFub3QpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIG5vdCA9IHRhcmdldHNbdG90YWwrK10gPSBbc3RhdGUsIHt9XTtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgbm90SW5kZXggPSBub3RbMV07XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBpZiAoIShjaHIgaW4gbm90SW5kZXgpKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBub3RJbmRleFtjaHJdID0gMTtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgLy8gcG9zaXRpdmVcbiAgICAgICAgICAgICAgICBlbHNlIHtcblxuICAgICAgICAgICAgICAgICAgICBpZiAoIShjaHIgaW4gc3RhdGVPYmplY3QpKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBzdGF0ZU9iamVjdFtjaHJdID0gW107XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgbGlzdCA9IHN0YXRlT2JqZWN0W2Nocl07XG4gICAgICAgICAgICAgICAgICAgIGlmIChsaXN0LmluZGV4T2Yoc3RhdGUpID09PSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgbGlzdFtsaXN0Lmxlbmd0aF0gPSBzdGF0ZTtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgLy8gY3JlYXRlIGVuZCBzdGF0ZXNcbiAgICAgICAgZm9yIChsID0gZW5kU3RhdGVzLmxlbmd0aDsgbC0tOykge1xuICAgICAgICAgICAgZW5kc1tpZG1hcFtlbmRTdGF0ZXNbbF1dXSA9IG5hbWU7XG4gICAgICAgIH1cblxuICAgICAgICBcbiAgICB9LFxuICAgIFxuICAgIGltcG9ydERlZmluaXRpb246IGZ1bmN0aW9uIChqc29uKSB7XG4gICAgICAgIHZhciBsaWIgPSBsaWJjb3JlLFxuICAgICAgICAgICAgb2JqZWN0ID0gbGliLm9iamVjdCxcbiAgICAgICAgICAgIHN0cmluZyA9IGxpYi5zdHJpbmc7XG4gICAgICAgIHZhciBpdGVtO1xuICAgICAgICBcbiAgICAgICAgaWYgKHN0cmluZyhqc29uKSkge1xuICAgICAgICAgICAgdHJ5IHtcbiAgICAgICAgICAgICAgICBqc29uID0gSlNPTi5wYXJzZShqc29uKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIGNhdGNoIChlKSB7XG4gICAgICAgICAgICAgICAgY29uc29sZS53YXJuKGUpO1xuICAgICAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIkludmFsaWQgSlNPTiBzdHJpbmcgcGFyYW1ldGVyLlwiKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgaWYgKCFvYmplY3QoanNvbikpIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIkludmFsaWQgSlNPTiBvYmplY3QgcGFyYW1ldGVyLlwiKTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgLy8gdmVyaWZ5IHN0YXRlIGdlbiBpZFxuICAgICAgICBpdGVtID0ganNvbi5zdGF0ZUdlbklkO1xuICAgICAgICBpZiAoIWxpYi5udW1iZXIoaXRlbSkgfHwgaXRlbSA8IDApIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIkludmFsaWQgc3RhdGUgZ2VuZXJhdG9yXCIpO1xuICAgICAgICB9XG4gICAgICAgIHRoaXMuc3RhdGVHZW5JZCA9IGl0ZW07XG4gICAgICAgIFxuICAgICAgICBpdGVtID0ganNvbi5zdGFydDtcbiAgICAgICAgaWYgKCFsaWIuc3RyaW5nKGl0ZW0pKSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJJbnZhbGlkIHN0YXJ0IHN0YXRlIG5hbWVcIik7XG4gICAgICAgIH1cbiAgICAgICAgdGhpcy5zdGFydCA9IGl0ZW07XG4gICAgICAgIFxuICAgICAgICBpdGVtID0ganNvbi5zdGF0ZXM7XG4gICAgICAgIGlmICghb2JqZWN0KGl0ZW0pKSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJJbnZhbGlkIHN0YXRlIG1hcCBvYmplY3RcIik7XG4gICAgICAgIH1cbiAgICAgICAgdGhpcy5zdGF0ZXMgPSBpdGVtO1xuICAgICAgICBcbiAgICAgICAgaXRlbSA9IGpzb24uZW5kcztcbiAgICAgICAgaWYgKCFvYmplY3QoaXRlbSkpIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIkludmFsaWQgZW5kIHN0YXRlcyBvYmplY3RcIik7XG4gICAgICAgIH1cbiAgICAgICAgdGhpcy5lbmRzID0gaXRlbTtcbiAgICAgICAgXG4gICAgICAgIHJldHVybiB0aGlzO1xuICAgIH0sXG4gICAgXG4gICAgZXhwb3J0RGVmaW5pdGlvbjogZnVuY3Rpb24gKCkge1xuICAgICAgICByZXR1cm4gSlNPTi5zdHJpbmdpZnkoe1xuICAgICAgICAgICAgc3RhdGVHZW5JZDogdGhpcy5zdGF0ZUdlbklkLFxuICAgICAgICAgICAgc3RhcnQ6IHRoaXMuc3RhcnQsXG4gICAgICAgICAgICBzdGF0ZXM6IHRoaXMuc3RhdGVzLFxuICAgICAgICAgICAgZW5kczogdGhpcy5lbmRzXG4gICAgICAgIH0pO1xuICAgIH1cbn07XG5cblxubW9kdWxlLmV4cG9ydHMgPSBTdGF0ZU1hcDtcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL3JlZ2V4L3N0YXRlLW1hcC5qc1xuLy8gbW9kdWxlIGlkID0gOFxuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJzb3VyY2VSb290IjoiIn0=");
+
+
+var libcore = __webpack_require__(2);
+
+function StateMap(start) {
+    var states = {};
+    
+    start = typeof start === 'string' ?
+                            start : 'start';
+    states[start] = {
+        not: []
+    };
+    
+    this.stateGenId = 0;
+    this.start = start;
+    this.states = states;
+    this.ends = {};
+}
+
+StateMap.prototype = {
+    constructor: StateMap,
+    
+    generateState: function (id) {
+        if (libcore.string(id)) {
+            return id;
+        }
+        return 's' + (++this.stateGenId);
+    },
+    
+    finalizeFragments: function (name, fragment, endStates) {
+        var states = this.states,
+            ends = this.ends,
+            processed = {},
+            idmap = {},
+            pending = [fragment],
+            pl = 1;
+        var state, stateObject, item, pointer, chr, to, list, l, id,
+            not, tl, targets, total, notIndex;
+        
+        idmap[fragment.state.id] = this.start;
+        
+        for (; pl--;) {
+            item = pending[0];
+            pending.splice(0, 1);
+            
+            state = idmap[item.state.id];
+            if (!(state in states)) {
+                states[state] = {
+                    not: []
+                };
+            }
+            stateObject = states[state];
+            
+            
+            for (pointer = item.pointer; pointer; pointer = pointer.next) {
+                chr = pointer.chr;
+                to = pointer.to;
+                id = to.id;
+                
+                if (!(id in processed)) {
+                    processed[id] = true;
+                    pending[pl++] = to;
+                }
+                
+                // finalize state
+                state = to.state.id;
+                if (!(state in idmap)) {
+                    idmap[state] = this.generateState();
+                }
+                state = idmap[state];
+                
+                // negative
+                if (pointer.negative) {
+                    targets = stateObject.not;
+                    tl = total = targets.length;
+                    
+                    not = null;
+                    for (; tl--;) {
+                        not = targets[tl];
+                        if (not[0] === state) {
+                            break;
+                        }
+                        not = null;
+                    }
+                    
+                    if (!not) {
+                        not = targets[total++] = [state, {}];
+                    }
+                    
+                    notIndex = not[1];
+                    
+                    if (!(chr in notIndex)) {
+                        notIndex[chr] = 1;
+                    }
+                    
+                }
+                // positive
+                else {
+
+                    if (!(chr in stateObject)) {
+                        stateObject[chr] = [];
+                    }
+                    list = stateObject[chr];
+                    if (list.indexOf(state) === -1) {
+                        list[list.length] = state;
+                    }
+                    
+                }
+            }
+            
+        }
+        
+        // create end states
+        for (l = endStates.length; l--;) {
+            ends[idmap[endStates[l]]] = name;
+        }
+
+        
+    },
+    
+    importDefinition: function (json) {
+        var lib = libcore,
+            object = lib.object,
+            string = lib.string;
+        var item;
+        
+        if (string(json)) {
+            try {
+                json = JSON.parse(json);
+            }
+            catch (e) {
+                console.warn(e);
+                throw new Error("Invalid JSON string parameter.");
+            }
+        }
+        
+        if (!object(json)) {
+            throw new Error("Invalid JSON object parameter.");
+        }
+        
+        // verify state gen id
+        item = json.stateGenId;
+        if (!lib.number(item) || item < 0) {
+            throw new Error("Invalid state generator");
+        }
+        this.stateGenId = item;
+        
+        item = json.start;
+        if (!lib.string(item)) {
+            throw new Error("Invalid start state name");
+        }
+        this.start = item;
+        
+        item = json.states;
+        if (!object(item)) {
+            throw new Error("Invalid state map object");
+        }
+        this.states = item;
+        
+        item = json.ends;
+        if (!object(item)) {
+            throw new Error("Invalid end states object");
+        }
+        this.ends = item;
+        
+        return this;
+    },
+    
+    exportDefinition: function () {
+        return JSON.stringify({
+            stateGenId: this.stateGenId,
+            start: this.start,
+            states: this.states,
+            ends: this.ends
+        });
+    }
+};
+
+
+module.exports = StateMap;
+
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nmodule.exports = __webpack_require__(20);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvaW5kZXguanM/OTU1MiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7QUFFQSIsImZpbGUiOiI5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG5tb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCIuL3Rva2VuaXplci5qc1wiKTtcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2luZGV4LmpzXG4vLyBtb2R1bGUgaWQgPSA5XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+module.exports = __webpack_require__(20);
+
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar DETECT = __webpack_require__(3),\n    OBJECT = __webpack_require__(1),\n    A = Array.prototype;\n\nfunction indexOf(subject) {\n    /*jshint validthis:true */\n    var array = this,\n        l = array.length,\n        c = -1;\n    \n    for (; l--;) {\n        if (subject === array[++c]) {\n            array = null;\n            return c;\n        }\n    }\n    \n    return -1;\n}\n\nfunction lastIndexOf(subject) {\n    /*jshint validthis:true */\n    var array = this,\n        l = array.length;\n        \n    for (; l--;) {\n        if (subject === array[l]) {\n            array = null;\n            return l;\n        }\n    }\n    \n    return -1;\n}\n\n/**\n * Creates a union of two arrays\n * @name libcore.unionList\n * @function\n * @param {Array} array1 - source array\n * @param {Array} array2 - array to merge\n * @param {boolean} [clone] - Filters array1 parameter with union of array2\n *                          if this parameter is false. It returns a new set\n *                          of array containing union of array1 and array2\n *                          otherwise.\n * @returns {Array} union of first two array parameters\n */\nfunction union(array1, array2, clone) {\n    var subject, l, len, total;\n    \n    array1 = clone !== false ? array1 : array1.slice(0);\n    \n    // apply\n    array1.push.apply(array1, array2);\n    total = array1.length;\n    \n    // apply unique\n    found: for (l = total; l--;) {\n        subject = array1[l];\n        \n        // remove if not unique\n        for (len = total; len--;) {\n            if (l !== len && subject === array1[len]) {\n                total--;\n                array1.splice(l, 1);\n                continue found;\n            }\n        }\n    }\n    \n    return array1;\n}\n\n/**\n * Creates an intersection of two arrays\n * @name libcore.intersect\n * @function\n * @param {Array} array1 - source array \n * @param {Array} array2 - array to intersect\n * @param {boolean} [clone] - Filters array1 parameter with intersection of\n *                          array2 if this parameter is false. It returns a\n *                          new set of array containing intersection of\n *                          array1 and array2 otherwise.\n * @returns {Array} intersection of first two array parameters\n */\nfunction intersect(array1, array2, clone) {\n    var total1 = array1.length,\n        total2 = array2.length;\n    var subject, l1, l2;\n        \n    // create a copy\n    array1 = clone !== false ? array1 : array1.slice(0);\n    \n    found: for (l1 = total1; l1--;) {\n        subject = array1[l1];\n        foundSame: for (l2 = total2; l2--;) {\n            if (subject === array2[l2]) {\n                // intersect must be unique\n                for (l2 = total1; l2--;) {\n                    if (l2 !== l1 && subject === array1[l2]) {\n                        break foundSame;\n                    }\n                }\n                continue found;\n            }\n        }\n        array1.splice(l1, 1);\n        total1--;\n    }\n    \n    return array1;\n}\n\n\n/**\n * Creates a difference of two arrays\n * @name libcore.differenceList\n * @function\n * @param {Array} array1 - source array \n * @param {Array} array2 - array to be applied as difference of array1\n * @param {boolean} [clone] - Filters array1 parameter with difference of array2\n *                          if this parameter is false. It returns a new set\n *                          of array containing difference of\n *                          array1 and array2 otherwise.\n * @returns {Array} difference of first two array parameters\n */\nfunction difference(array1, array2, clone) {\n     var total1 = array1.length,\n        total2 = array2.length;\n    var subject, l1, l2;\n        \n    // create a copy\n    array1 = clone !== false ? array1 : array1.slice(0);\n    \n    found: for (l1 = total1; l1--;) {\n        subject = array1[l1];\n        \n        // remove if found\n        for (l2 = total2; l2--;) {\n            if (subject === array2[l2]) {\n                array1.splice(l1, 1);\n                total1--;\n                continue found;\n            }\n        }\n        \n        // diff must be unique\n        for (l2 = total1; l2--;) {\n            if (l2 !== l1 && subject === array1[l2]) {\n                array1.splice(l1, 1);\n                total1--;\n                continue found;\n            }\n        }\n    }\n    \n    return array1;\n}\n\n\n\n\n\n// apply polyfill\nif (!DETECT.indexOfSupport) {\n    OBJECT.assign(A, {\n        indexOf: indexOf,\n        lastIndexOf: lastIndexOf\n    });\n}\n\nmodule.exports = {\n    unionList: union,\n    intersectList: intersect,\n    differenceList: difference\n};\n\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL2FycmF5LmpzP2NmMjQiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUEsVUFBVSxLQUFLO0FBQ2Y7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLFVBQVUsS0FBSztBQUNmO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVcsTUFBTTtBQUNqQixXQUFXLE1BQU07QUFDakIsV0FBVyxRQUFRO0FBQ25CO0FBQ0E7QUFDQTtBQUNBLGFBQWEsTUFBTTtBQUNuQjtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0EsMEJBQTBCLEtBQUs7QUFDL0I7O0FBRUE7QUFDQSx5QkFBeUIsT0FBTztBQUNoQztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsV0FBVyxNQUFNO0FBQ2pCLFdBQVcsTUFBTTtBQUNqQixXQUFXLFFBQVE7QUFDbkI7QUFDQTtBQUNBO0FBQ0EsYUFBYSxNQUFNO0FBQ25CO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQSw0QkFBNEIsTUFBTTtBQUNsQztBQUNBLG9DQUFvQyxNQUFNO0FBQzFDO0FBQ0E7QUFDQSxpQ0FBaUMsTUFBTTtBQUN2QztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOzs7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVcsTUFBTTtBQUNqQixXQUFXLE1BQU07QUFDakIsV0FBVyxRQUFRO0FBQ25CO0FBQ0E7QUFDQTtBQUNBLGFBQWEsTUFBTTtBQUNuQjtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUEsNEJBQTRCLE1BQU07QUFDbEM7O0FBRUE7QUFDQSx5QkFBeUIsTUFBTTtBQUMvQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSx5QkFBeUIsTUFBTTtBQUMvQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOzs7Ozs7QUFNQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiMTAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbnZhciBERVRFQ1QgPSByZXF1aXJlKCcuL2RldGVjdC5qcycpLFxuICAgIE9CSkVDVCA9IHJlcXVpcmUoJy4vb2JqZWN0LmpzJyksXG4gICAgQSA9IEFycmF5LnByb3RvdHlwZTtcblxuZnVuY3Rpb24gaW5kZXhPZihzdWJqZWN0KSB7XG4gICAgLypqc2hpbnQgdmFsaWR0aGlzOnRydWUgKi9cbiAgICB2YXIgYXJyYXkgPSB0aGlzLFxuICAgICAgICBsID0gYXJyYXkubGVuZ3RoLFxuICAgICAgICBjID0gLTE7XG4gICAgXG4gICAgZm9yICg7IGwtLTspIHtcbiAgICAgICAgaWYgKHN1YmplY3QgPT09IGFycmF5WysrY10pIHtcbiAgICAgICAgICAgIGFycmF5ID0gbnVsbDtcbiAgICAgICAgICAgIHJldHVybiBjO1xuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiAtMTtcbn1cblxuZnVuY3Rpb24gbGFzdEluZGV4T2Yoc3ViamVjdCkge1xuICAgIC8qanNoaW50IHZhbGlkdGhpczp0cnVlICovXG4gICAgdmFyIGFycmF5ID0gdGhpcyxcbiAgICAgICAgbCA9IGFycmF5Lmxlbmd0aDtcbiAgICAgICAgXG4gICAgZm9yICg7IGwtLTspIHtcbiAgICAgICAgaWYgKHN1YmplY3QgPT09IGFycmF5W2xdKSB7XG4gICAgICAgICAgICBhcnJheSA9IG51bGw7XG4gICAgICAgICAgICByZXR1cm4gbDtcbiAgICAgICAgfVxuICAgIH1cbiAgICBcbiAgICByZXR1cm4gLTE7XG59XG5cbi8qKlxuICogQ3JlYXRlcyBhIHVuaW9uIG9mIHR3byBhcnJheXNcbiAqIEBuYW1lIGxpYmNvcmUudW5pb25MaXN0XG4gKiBAZnVuY3Rpb25cbiAqIEBwYXJhbSB7QXJyYXl9IGFycmF5MSAtIHNvdXJjZSBhcnJheVxuICogQHBhcmFtIHtBcnJheX0gYXJyYXkyIC0gYXJyYXkgdG8gbWVyZ2VcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gW2Nsb25lXSAtIEZpbHRlcnMgYXJyYXkxIHBhcmFtZXRlciB3aXRoIHVuaW9uIG9mIGFycmF5MlxuICogICAgICAgICAgICAgICAgICAgICAgICAgIGlmIHRoaXMgcGFyYW1ldGVyIGlzIGZhbHNlLiBJdCByZXR1cm5zIGEgbmV3IHNldFxuICogICAgICAgICAgICAgICAgICAgICAgICAgIG9mIGFycmF5IGNvbnRhaW5pbmcgdW5pb24gb2YgYXJyYXkxIGFuZCBhcnJheTJcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICBvdGhlcndpc2UuXG4gKiBAcmV0dXJucyB7QXJyYXl9IHVuaW9uIG9mIGZpcnN0IHR3byBhcnJheSBwYXJhbWV0ZXJzXG4gKi9cbmZ1bmN0aW9uIHVuaW9uKGFycmF5MSwgYXJyYXkyLCBjbG9uZSkge1xuICAgIHZhciBzdWJqZWN0LCBsLCBsZW4sIHRvdGFsO1xuICAgIFxuICAgIGFycmF5MSA9IGNsb25lICE9PSBmYWxzZSA/IGFycmF5MSA6IGFycmF5MS5zbGljZSgwKTtcbiAgICBcbiAgICAvLyBhcHBseVxuICAgIGFycmF5MS5wdXNoLmFwcGx5KGFycmF5MSwgYXJyYXkyKTtcbiAgICB0b3RhbCA9IGFycmF5MS5sZW5ndGg7XG4gICAgXG4gICAgLy8gYXBwbHkgdW5pcXVlXG4gICAgZm91bmQ6IGZvciAobCA9IHRvdGFsOyBsLS07KSB7XG4gICAgICAgIHN1YmplY3QgPSBhcnJheTFbbF07XG4gICAgICAgIFxuICAgICAgICAvLyByZW1vdmUgaWYgbm90IHVuaXF1ZVxuICAgICAgICBmb3IgKGxlbiA9IHRvdGFsOyBsZW4tLTspIHtcbiAgICAgICAgICAgIGlmIChsICE9PSBsZW4gJiYgc3ViamVjdCA9PT0gYXJyYXkxW2xlbl0pIHtcbiAgICAgICAgICAgICAgICB0b3RhbC0tO1xuICAgICAgICAgICAgICAgIGFycmF5MS5zcGxpY2UobCwgMSk7XG4gICAgICAgICAgICAgICAgY29udGludWUgZm91bmQ7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIGFycmF5MTtcbn1cblxuLyoqXG4gKiBDcmVhdGVzIGFuIGludGVyc2VjdGlvbiBvZiB0d28gYXJyYXlzXG4gKiBAbmFtZSBsaWJjb3JlLmludGVyc2VjdFxuICogQGZ1bmN0aW9uXG4gKiBAcGFyYW0ge0FycmF5fSBhcnJheTEgLSBzb3VyY2UgYXJyYXkgXG4gKiBAcGFyYW0ge0FycmF5fSBhcnJheTIgLSBhcnJheSB0byBpbnRlcnNlY3RcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gW2Nsb25lXSAtIEZpbHRlcnMgYXJyYXkxIHBhcmFtZXRlciB3aXRoIGludGVyc2VjdGlvbiBvZlxuICogICAgICAgICAgICAgICAgICAgICAgICAgIGFycmF5MiBpZiB0aGlzIHBhcmFtZXRlciBpcyBmYWxzZS4gSXQgcmV0dXJucyBhXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgbmV3IHNldCBvZiBhcnJheSBjb250YWluaW5nIGludGVyc2VjdGlvbiBvZlxuICogICAgICAgICAgICAgICAgICAgICAgICAgIGFycmF5MSBhbmQgYXJyYXkyIG90aGVyd2lzZS5cbiAqIEByZXR1cm5zIHtBcnJheX0gaW50ZXJzZWN0aW9uIG9mIGZpcnN0IHR3byBhcnJheSBwYXJhbWV0ZXJzXG4gKi9cbmZ1bmN0aW9uIGludGVyc2VjdChhcnJheTEsIGFycmF5MiwgY2xvbmUpIHtcbiAgICB2YXIgdG90YWwxID0gYXJyYXkxLmxlbmd0aCxcbiAgICAgICAgdG90YWwyID0gYXJyYXkyLmxlbmd0aDtcbiAgICB2YXIgc3ViamVjdCwgbDEsIGwyO1xuICAgICAgICBcbiAgICAvLyBjcmVhdGUgYSBjb3B5XG4gICAgYXJyYXkxID0gY2xvbmUgIT09IGZhbHNlID8gYXJyYXkxIDogYXJyYXkxLnNsaWNlKDApO1xuICAgIFxuICAgIGZvdW5kOiBmb3IgKGwxID0gdG90YWwxOyBsMS0tOykge1xuICAgICAgICBzdWJqZWN0ID0gYXJyYXkxW2wxXTtcbiAgICAgICAgZm91bmRTYW1lOiBmb3IgKGwyID0gdG90YWwyOyBsMi0tOykge1xuICAgICAgICAgICAgaWYgKHN1YmplY3QgPT09IGFycmF5MltsMl0pIHtcbiAgICAgICAgICAgICAgICAvLyBpbnRlcnNlY3QgbXVzdCBiZSB1bmlxdWVcbiAgICAgICAgICAgICAgICBmb3IgKGwyID0gdG90YWwxOyBsMi0tOykge1xuICAgICAgICAgICAgICAgICAgICBpZiAobDIgIT09IGwxICYmIHN1YmplY3QgPT09IGFycmF5MVtsMl0pIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrIGZvdW5kU2FtZTtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBjb250aW51ZSBmb3VuZDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBhcnJheTEuc3BsaWNlKGwxLCAxKTtcbiAgICAgICAgdG90YWwxLS07XG4gICAgfVxuICAgIFxuICAgIHJldHVybiBhcnJheTE7XG59XG5cblxuLyoqXG4gKiBDcmVhdGVzIGEgZGlmZmVyZW5jZSBvZiB0d28gYXJyYXlzXG4gKiBAbmFtZSBsaWJjb3JlLmRpZmZlcmVuY2VMaXN0XG4gKiBAZnVuY3Rpb25cbiAqIEBwYXJhbSB7QXJyYXl9IGFycmF5MSAtIHNvdXJjZSBhcnJheSBcbiAqIEBwYXJhbSB7QXJyYXl9IGFycmF5MiAtIGFycmF5IHRvIGJlIGFwcGxpZWQgYXMgZGlmZmVyZW5jZSBvZiBhcnJheTFcbiAqIEBwYXJhbSB7Ym9vbGVhbn0gW2Nsb25lXSAtIEZpbHRlcnMgYXJyYXkxIHBhcmFtZXRlciB3aXRoIGRpZmZlcmVuY2Ugb2YgYXJyYXkyXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgdGhpcyBwYXJhbWV0ZXIgaXMgZmFsc2UuIEl0IHJldHVybnMgYSBuZXcgc2V0XG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgb2YgYXJyYXkgY29udGFpbmluZyBkaWZmZXJlbmNlIG9mXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgYXJyYXkxIGFuZCBhcnJheTIgb3RoZXJ3aXNlLlxuICogQHJldHVybnMge0FycmF5fSBkaWZmZXJlbmNlIG9mIGZpcnN0IHR3byBhcnJheSBwYXJhbWV0ZXJzXG4gKi9cbmZ1bmN0aW9uIGRpZmZlcmVuY2UoYXJyYXkxLCBhcnJheTIsIGNsb25lKSB7XG4gICAgIHZhciB0b3RhbDEgPSBhcnJheTEubGVuZ3RoLFxuICAgICAgICB0b3RhbDIgPSBhcnJheTIubGVuZ3RoO1xuICAgIHZhciBzdWJqZWN0LCBsMSwgbDI7XG4gICAgICAgIFxuICAgIC8vIGNyZWF0ZSBhIGNvcHlcbiAgICBhcnJheTEgPSBjbG9uZSAhPT0gZmFsc2UgPyBhcnJheTEgOiBhcnJheTEuc2xpY2UoMCk7XG4gICAgXG4gICAgZm91bmQ6IGZvciAobDEgPSB0b3RhbDE7IGwxLS07KSB7XG4gICAgICAgIHN1YmplY3QgPSBhcnJheTFbbDFdO1xuICAgICAgICBcbiAgICAgICAgLy8gcmVtb3ZlIGlmIGZvdW5kXG4gICAgICAgIGZvciAobDIgPSB0b3RhbDI7IGwyLS07KSB7XG4gICAgICAgICAgICBpZiAoc3ViamVjdCA9PT0gYXJyYXkyW2wyXSkge1xuICAgICAgICAgICAgICAgIGFycmF5MS5zcGxpY2UobDEsIDEpO1xuICAgICAgICAgICAgICAgIHRvdGFsMS0tO1xuICAgICAgICAgICAgICAgIGNvbnRpbnVlIGZvdW5kO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyBkaWZmIG11c3QgYmUgdW5pcXVlXG4gICAgICAgIGZvciAobDIgPSB0b3RhbDE7IGwyLS07KSB7XG4gICAgICAgICAgICBpZiAobDIgIT09IGwxICYmIHN1YmplY3QgPT09IGFycmF5MVtsMl0pIHtcbiAgICAgICAgICAgICAgICBhcnJheTEuc3BsaWNlKGwxLCAxKTtcbiAgICAgICAgICAgICAgICB0b3RhbDEtLTtcbiAgICAgICAgICAgICAgICBjb250aW51ZSBmb3VuZDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgIH1cbiAgICBcbiAgICByZXR1cm4gYXJyYXkxO1xufVxuXG5cblxuXG5cbi8vIGFwcGx5IHBvbHlmaWxsXG5pZiAoIURFVEVDVC5pbmRleE9mU3VwcG9ydCkge1xuICAgIE9CSkVDVC5hc3NpZ24oQSwge1xuICAgICAgICBpbmRleE9mOiBpbmRleE9mLFxuICAgICAgICBsYXN0SW5kZXhPZjogbGFzdEluZGV4T2ZcbiAgICB9KTtcbn1cblxubW9kdWxlLmV4cG9ydHMgPSB7XG4gICAgdW5pb25MaXN0OiB1bmlvbixcbiAgICBpbnRlcnNlY3RMaXN0OiBpbnRlcnNlY3QsXG4gICAgZGlmZmVyZW5jZUxpc3Q6IGRpZmZlcmVuY2Vcbn07XG5cblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vfi9saWJjb3JlL3NyYy9hcnJheS5qc1xuLy8gbW9kdWxlIGlkID0gMTBcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var DETECT = __webpack_require__(3),
+    OBJECT = __webpack_require__(1),
+    A = Array.prototype;
+
+function indexOf(subject) {
+    /*jshint validthis:true */
+    var array = this,
+        l = array.length,
+        c = -1;
+    
+    for (; l--;) {
+        if (subject === array[++c]) {
+            array = null;
+            return c;
+        }
+    }
+    
+    return -1;
+}
+
+function lastIndexOf(subject) {
+    /*jshint validthis:true */
+    var array = this,
+        l = array.length;
+        
+    for (; l--;) {
+        if (subject === array[l]) {
+            array = null;
+            return l;
+        }
+    }
+    
+    return -1;
+}
+
+/**
+ * Creates a union of two arrays
+ * @name libcore.unionList
+ * @function
+ * @param {Array} array1 - source array
+ * @param {Array} array2 - array to merge
+ * @param {boolean} [clone] - Filters array1 parameter with union of array2
+ *                          if this parameter is false. It returns a new set
+ *                          of array containing union of array1 and array2
+ *                          otherwise.
+ * @returns {Array} union of first two array parameters
+ */
+function union(array1, array2, clone) {
+    var subject, l, len, total;
+    
+    array1 = clone !== false ? array1 : array1.slice(0);
+    
+    // apply
+    array1.push.apply(array1, array2);
+    total = array1.length;
+    
+    // apply unique
+    found: for (l = total; l--;) {
+        subject = array1[l];
+        
+        // remove if not unique
+        for (len = total; len--;) {
+            if (l !== len && subject === array1[len]) {
+                total--;
+                array1.splice(l, 1);
+                continue found;
+            }
+        }
+    }
+    
+    return array1;
+}
+
+/**
+ * Creates an intersection of two arrays
+ * @name libcore.intersect
+ * @function
+ * @param {Array} array1 - source array 
+ * @param {Array} array2 - array to intersect
+ * @param {boolean} [clone] - Filters array1 parameter with intersection of
+ *                          array2 if this parameter is false. It returns a
+ *                          new set of array containing intersection of
+ *                          array1 and array2 otherwise.
+ * @returns {Array} intersection of first two array parameters
+ */
+function intersect(array1, array2, clone) {
+    var total1 = array1.length,
+        total2 = array2.length;
+    var subject, l1, l2;
+        
+    // create a copy
+    array1 = clone !== false ? array1 : array1.slice(0);
+    
+    found: for (l1 = total1; l1--;) {
+        subject = array1[l1];
+        foundSame: for (l2 = total2; l2--;) {
+            if (subject === array2[l2]) {
+                // intersect must be unique
+                for (l2 = total1; l2--;) {
+                    if (l2 !== l1 && subject === array1[l2]) {
+                        break foundSame;
+                    }
+                }
+                continue found;
+            }
+        }
+        array1.splice(l1, 1);
+        total1--;
+    }
+    
+    return array1;
+}
+
+
+/**
+ * Creates a difference of two arrays
+ * @name libcore.differenceList
+ * @function
+ * @param {Array} array1 - source array 
+ * @param {Array} array2 - array to be applied as difference of array1
+ * @param {boolean} [clone] - Filters array1 parameter with difference of array2
+ *                          if this parameter is false. It returns a new set
+ *                          of array containing difference of
+ *                          array1 and array2 otherwise.
+ * @returns {Array} difference of first two array parameters
+ */
+function difference(array1, array2, clone) {
+     var total1 = array1.length,
+        total2 = array2.length;
+    var subject, l1, l2;
+        
+    // create a copy
+    array1 = clone !== false ? array1 : array1.slice(0);
+    
+    found: for (l1 = total1; l1--;) {
+        subject = array1[l1];
+        
+        // remove if found
+        for (l2 = total2; l2--;) {
+            if (subject === array2[l2]) {
+                array1.splice(l1, 1);
+                total1--;
+                continue found;
+            }
+        }
+        
+        // diff must be unique
+        for (l2 = total1; l2--;) {
+            if (l2 !== l1 && subject === array1[l2]) {
+                array1.splice(l1, 1);
+                total1--;
+                continue found;
+            }
+        }
+    }
+    
+    return array1;
+}
+
+
+
+
+
+// apply polyfill
+if (!DETECT.indexOfSupport) {
+    OBJECT.assign(A, {
+        indexOf: indexOf,
+        lastIndexOf: lastIndexOf
+    });
+}
+
+module.exports = {
+    unionList: union,
+    intersectList: intersect,
+    differenceList: difference
+};
+
+
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar DETECT = __webpack_require__(3),\n    OBJECT = __webpack_require__(1),\n    PROCESSOR = __webpack_require__(5),\n    EXPORTS = {\n        env: DETECT\n    };\n\nOBJECT.assign(EXPORTS, __webpack_require__(0));\nOBJECT.assign(EXPORTS, OBJECT);\nOBJECT.assign(EXPORTS, __webpack_require__(10));\nOBJECT.assign(EXPORTS, __webpack_require__(6));\nOBJECT.assign(EXPORTS, PROCESSOR);\nOBJECT.assign(EXPORTS, __webpack_require__(14));\nOBJECT.assign(EXPORTS, __webpack_require__(12));\n\nPROCESSOR.chain = EXPORTS;\n\n// promise polyfill\nEXPORTS.Promise = __webpack_require__(13);\nEXPORTS['default'] = EXPORTS;\n\nmodule.exports = EXPORTS;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL2luZGV4LmpzP2Q1ZjciXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSIsImZpbGUiOiIxMS5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIERFVEVDVCA9IHJlcXVpcmUoJy4vZGV0ZWN0LmpzJyksXG4gICAgT0JKRUNUID0gcmVxdWlyZSgnLi9vYmplY3QuanMnKSxcbiAgICBQUk9DRVNTT1IgPSByZXF1aXJlKCcuL3Byb2Nlc3Nvci5qcycpLFxuICAgIEVYUE9SVFMgPSB7XG4gICAgICAgIGVudjogREVURUNUXG4gICAgfTtcblxuT0JKRUNULmFzc2lnbihFWFBPUlRTLCByZXF1aXJlKCcuL3R5cGUuanMnKSk7XG5PQkpFQ1QuYXNzaWduKEVYUE9SVFMsIE9CSkVDVCk7XG5PQkpFQ1QuYXNzaWduKEVYUE9SVFMsIHJlcXVpcmUoJy4vYXJyYXkuanMnKSk7XG5PQkpFQ1QuYXNzaWduKEVYUE9SVFMsIHJlcXVpcmUoJy4vc3RyaW5nLmpzJykpO1xuT0JKRUNULmFzc2lnbihFWFBPUlRTLCBQUk9DRVNTT1IpO1xuT0JKRUNULmFzc2lnbihFWFBPUlRTLCByZXF1aXJlKCcuL3JlZ2lzdHJ5LmpzJykpO1xuT0JKRUNULmFzc2lnbihFWFBPUlRTLCByZXF1aXJlKCcuL2pzb24tcGF0aC5qcycpKTtcblxuUFJPQ0VTU09SLmNoYWluID0gRVhQT1JUUztcblxuLy8gcHJvbWlzZSBwb2x5ZmlsbFxuRVhQT1JUUy5Qcm9taXNlID0gcmVxdWlyZShcIi4vcHJvbWlzZS5qc1wiKTtcbkVYUE9SVFNbJ2RlZmF1bHQnXSA9IEVYUE9SVFM7XG5cbm1vZHVsZS5leHBvcnRzID0gRVhQT1JUUztcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vfi9saWJjb3JlL3NyYy9pbmRleC5qc1xuLy8gbW9kdWxlIGlkID0gMTFcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var DETECT = __webpack_require__(3),
+    OBJECT = __webpack_require__(1),
+    PROCESSOR = __webpack_require__(5),
+    EXPORTS = {
+        env: DETECT
+    };
+
+OBJECT.assign(EXPORTS, __webpack_require__(0));
+OBJECT.assign(EXPORTS, OBJECT);
+OBJECT.assign(EXPORTS, __webpack_require__(10));
+OBJECT.assign(EXPORTS, __webpack_require__(6));
+OBJECT.assign(EXPORTS, PROCESSOR);
+OBJECT.assign(EXPORTS, __webpack_require__(14));
+OBJECT.assign(EXPORTS, __webpack_require__(12));
+
+PROCESSOR.chain = EXPORTS;
+
+// promise polyfill
+EXPORTS.Promise = __webpack_require__(13);
+EXPORTS['default'] = EXPORTS;
+
+module.exports = EXPORTS;
+
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar TYPE = __webpack_require__(0),\n    OBJECT = __webpack_require__(1),\n    NUMERIC_RE = /^([1-9][0-9]*|0)$/;\n\n\nfunction eachPath(path, callback, arg1, arg2, arg3, arg4) {\n    var escape = \"\\\\\",\n        dot = \".\",\n        buffer = [],\n        bl = 0;\n    var c, l, chr, apply, last;\n    \n    for (c = -1, l = path.length; l--;) {\n        chr = path.charAt(++c);\n        apply = false;\n        last = !l;\n        switch (chr) {\n        case escape:\n            chr = \"\";\n            if (l) {\n                chr = path.charAt(++c);\n                l--;\n            }\n            break;\n        case dot:\n            chr = \"\";\n            apply = true;\n            break;\n        }\n        \n        if (chr) {\n            buffer[bl++] = chr;\n        }\n        \n        if (last || apply) {\n            if (bl) {\n                if (callback(buffer.join(\"\"),\n                            last,\n                            arg1,\n                            arg2,\n                            arg3,\n                            arg4) === false) {\n                    return;\n                }\n                buffer.length = bl = 0;\n            }\n        }\n    }\n}\n\nfunction isAccessible(subject, item) {\n    var type = TYPE;\n    switch (true) {\n    case type.object(subject):\n    case type.array(subject) &&\n        (!NUMERIC_RE.test(item) || item !== 'length'):\n        \n        if (!OBJECT.contains(subject, item)) {\n            return false;\n        }\n    }\n    return true;\n}\n\nfunction findCallback(item, last, operation) {\n    var subject = operation[1];\n    \n    if (!isAccessible(subject, item)) {\n        operation[0] = void(0);\n        return false;\n    }\n    \n    operation[last ? 0 : 1] = subject[item];\n    return true;\n}\n\n\nfunction find(path, object) {\n    var operation = [void(0), object];\n    eachPath(path, findCallback, operation);\n    operation[1] = null;\n    return operation[0];\n}\n\nfunction clone(path, object, deep) {\n    return OBJECT.clone(find(path, object), deep);\n}\n\n\nfunction getItemsCallback(item, last, operation) {\n    operation[operation.length] = item;\n}\n\nfunction assign(path, subject, value, overwrite) {\n    var type = TYPE,\n        has = OBJECT.contains,\n        array = type.array,\n        object = type.object,\n        apply = type.assign,\n        parent = subject,\n        numericRe = NUMERIC_RE;\n    var items, c, l, item, name, numeric, property, isArray, temp;\n    \n    if (object(parent) || array(parent)) {\n        eachPath(path, getItemsCallback, items = []);\n        \n        if (items.length) {\n            name = items[0];\n            items.splice(0, 1);\n            \n            for (c = -1, l = items.length; l--;) {\n                item = items[++c];\n                numeric = numericRe.test(item);\n                \n                // finalize\n                if (has(parent, name)) {\n                    property = parent[name];\n                    isArray = array(property);\n                    \n                    // replace property into object or array\n                    if (!isArray && !object(property)) {\n                        if (numeric) {\n                            property = [property];\n                        }\n                        else {\n                            temp = property;\n                            property = {};\n                            property[\"\"] = temp;\n                        }\n                    }\n                    // change property to object to support \"named\" property\n                    else if (isArray && !numeric) {\n                        property = apply({}, property);\n                        delete property.length;\n                    }\n                    \n                }\n                else {\n                    property = numeric ? [] : {};\n                }\n                \n                parent = parent[name] = property;\n                name = item;\n                \n            }\n            \n            if (overwrite !== true && has(parent, name)) {\n                property = parent[name];\n                \n                // append\n                if (array(property)) {\n                    parent = property;\n                    name = parent.length;\n                }\n                else {\n                    parent = parent[name] = [property];\n                    name = 1;\n                }\n            }\n            \n            parent[name] = value;\n    \n            parent = value = property = temp = null;\n            \n            return true;\n        \n        }\n        \n        \n    }\n    return false;\n}\n\n\nfunction removeCallback(item, last, operation) {\n    var subject = operation[0];\n    var isLength;\n    \n    if (!isAccessible(subject, item)) {\n        return false;\n    }\n    \n    // set\n    if (last) {\n        if (TYPE.array(subject)) {\n            isLength = item === 'length';\n            subject.splice(isLength ?\n                                0 : item.toString(10),\n                            isLength ?\n                                subject.length : 1);\n        }\n        else {\n            delete subject[item];\n        }\n        \n        operation[1] = true;\n    }\n    else {\n        operation[0] = subject[item];\n    }\n    \n}\n\nfunction remove(path, object) {\n    var operation = [object, false];\n    eachPath(path, removeCallback, operation);\n    operation[0] = null;\n    return operation[1];\n}\n\nfunction compare(path, object1, object2) {\n    return OBJECT.compare(find(path, object1), object1, object2);\n}\n\nmodule.exports = {\n    jsonFind: find,\n    jsonCompare: compare,\n    jsonClone: clone,\n    jsonEach: eachPath,\n    jsonSet: assign,\n    jsonUnset: remove\n};//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL2pzb24tcGF0aC5qcz9kOGJiIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLGlDQUFpQyxLQUFLO0FBQ3RDO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSwwQ0FBMEMsS0FBSztBQUMvQztBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsMkNBQTJDO0FBQzNDO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBOztBQUVBOztBQUVBOzs7QUFHQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6IjEyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG52YXIgVFlQRSA9IHJlcXVpcmUoXCIuL3R5cGUuanNcIiksXG4gICAgT0JKRUNUID0gcmVxdWlyZShcIi4vb2JqZWN0LmpzXCIpLFxuICAgIE5VTUVSSUNfUkUgPSAvXihbMS05XVswLTldKnwwKSQvO1xuXG5cbmZ1bmN0aW9uIGVhY2hQYXRoKHBhdGgsIGNhbGxiYWNrLCBhcmcxLCBhcmcyLCBhcmczLCBhcmc0KSB7XG4gICAgdmFyIGVzY2FwZSA9IFwiXFxcXFwiLFxuICAgICAgICBkb3QgPSBcIi5cIixcbiAgICAgICAgYnVmZmVyID0gW10sXG4gICAgICAgIGJsID0gMDtcbiAgICB2YXIgYywgbCwgY2hyLCBhcHBseSwgbGFzdDtcbiAgICBcbiAgICBmb3IgKGMgPSAtMSwgbCA9IHBhdGgubGVuZ3RoOyBsLS07KSB7XG4gICAgICAgIGNociA9IHBhdGguY2hhckF0KCsrYyk7XG4gICAgICAgIGFwcGx5ID0gZmFsc2U7XG4gICAgICAgIGxhc3QgPSAhbDtcbiAgICAgICAgc3dpdGNoIChjaHIpIHtcbiAgICAgICAgY2FzZSBlc2NhcGU6XG4gICAgICAgICAgICBjaHIgPSBcIlwiO1xuICAgICAgICAgICAgaWYgKGwpIHtcbiAgICAgICAgICAgICAgICBjaHIgPSBwYXRoLmNoYXJBdCgrK2MpO1xuICAgICAgICAgICAgICAgIGwtLTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICBjYXNlIGRvdDpcbiAgICAgICAgICAgIGNociA9IFwiXCI7XG4gICAgICAgICAgICBhcHBseSA9IHRydWU7XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgaWYgKGNocikge1xuICAgICAgICAgICAgYnVmZmVyW2JsKytdID0gY2hyO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBpZiAobGFzdCB8fCBhcHBseSkge1xuICAgICAgICAgICAgaWYgKGJsKSB7XG4gICAgICAgICAgICAgICAgaWYgKGNhbGxiYWNrKGJ1ZmZlci5qb2luKFwiXCIpLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxhc3QsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJnMSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmcyLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFyZzMsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYXJnNCkgPT09IGZhbHNlKSB7XG4gICAgICAgICAgICAgICAgICAgIHJldHVybjtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgYnVmZmVyLmxlbmd0aCA9IGJsID0gMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgIH1cbn1cblxuZnVuY3Rpb24gaXNBY2Nlc3NpYmxlKHN1YmplY3QsIGl0ZW0pIHtcbiAgICB2YXIgdHlwZSA9IFRZUEU7XG4gICAgc3dpdGNoICh0cnVlKSB7XG4gICAgY2FzZSB0eXBlLm9iamVjdChzdWJqZWN0KTpcbiAgICBjYXNlIHR5cGUuYXJyYXkoc3ViamVjdCkgJiZcbiAgICAgICAgKCFOVU1FUklDX1JFLnRlc3QoaXRlbSkgfHwgaXRlbSAhPT0gJ2xlbmd0aCcpOlxuICAgICAgICBcbiAgICAgICAgaWYgKCFPQkpFQ1QuY29udGFpbnMoc3ViamVjdCwgaXRlbSkpIHtcbiAgICAgICAgICAgIHJldHVybiBmYWxzZTtcbiAgICAgICAgfVxuICAgIH1cbiAgICByZXR1cm4gdHJ1ZTtcbn1cblxuZnVuY3Rpb24gZmluZENhbGxiYWNrKGl0ZW0sIGxhc3QsIG9wZXJhdGlvbikge1xuICAgIHZhciBzdWJqZWN0ID0gb3BlcmF0aW9uWzFdO1xuICAgIFxuICAgIGlmICghaXNBY2Nlc3NpYmxlKHN1YmplY3QsIGl0ZW0pKSB7XG4gICAgICAgIG9wZXJhdGlvblswXSA9IHZvaWQoMCk7XG4gICAgICAgIHJldHVybiBmYWxzZTtcbiAgICB9XG4gICAgXG4gICAgb3BlcmF0aW9uW2xhc3QgPyAwIDogMV0gPSBzdWJqZWN0W2l0ZW1dO1xuICAgIHJldHVybiB0cnVlO1xufVxuXG5cbmZ1bmN0aW9uIGZpbmQocGF0aCwgb2JqZWN0KSB7XG4gICAgdmFyIG9wZXJhdGlvbiA9IFt2b2lkKDApLCBvYmplY3RdO1xuICAgIGVhY2hQYXRoKHBhdGgsIGZpbmRDYWxsYmFjaywgb3BlcmF0aW9uKTtcbiAgICBvcGVyYXRpb25bMV0gPSBudWxsO1xuICAgIHJldHVybiBvcGVyYXRpb25bMF07XG59XG5cbmZ1bmN0aW9uIGNsb25lKHBhdGgsIG9iamVjdCwgZGVlcCkge1xuICAgIHJldHVybiBPQkpFQ1QuY2xvbmUoZmluZChwYXRoLCBvYmplY3QpLCBkZWVwKTtcbn1cblxuXG5mdW5jdGlvbiBnZXRJdGVtc0NhbGxiYWNrKGl0ZW0sIGxhc3QsIG9wZXJhdGlvbikge1xuICAgIG9wZXJhdGlvbltvcGVyYXRpb24ubGVuZ3RoXSA9IGl0ZW07XG59XG5cbmZ1bmN0aW9uIGFzc2lnbihwYXRoLCBzdWJqZWN0LCB2YWx1ZSwgb3ZlcndyaXRlKSB7XG4gICAgdmFyIHR5cGUgPSBUWVBFLFxuICAgICAgICBoYXMgPSBPQkpFQ1QuY29udGFpbnMsXG4gICAgICAgIGFycmF5ID0gdHlwZS5hcnJheSxcbiAgICAgICAgb2JqZWN0ID0gdHlwZS5vYmplY3QsXG4gICAgICAgIGFwcGx5ID0gdHlwZS5hc3NpZ24sXG4gICAgICAgIHBhcmVudCA9IHN1YmplY3QsXG4gICAgICAgIG51bWVyaWNSZSA9IE5VTUVSSUNfUkU7XG4gICAgdmFyIGl0ZW1zLCBjLCBsLCBpdGVtLCBuYW1lLCBudW1lcmljLCBwcm9wZXJ0eSwgaXNBcnJheSwgdGVtcDtcbiAgICBcbiAgICBpZiAob2JqZWN0KHBhcmVudCkgfHwgYXJyYXkocGFyZW50KSkge1xuICAgICAgICBlYWNoUGF0aChwYXRoLCBnZXRJdGVtc0NhbGxiYWNrLCBpdGVtcyA9IFtdKTtcbiAgICAgICAgXG4gICAgICAgIGlmIChpdGVtcy5sZW5ndGgpIHtcbiAgICAgICAgICAgIG5hbWUgPSBpdGVtc1swXTtcbiAgICAgICAgICAgIGl0ZW1zLnNwbGljZSgwLCAxKTtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgZm9yIChjID0gLTEsIGwgPSBpdGVtcy5sZW5ndGg7IGwtLTspIHtcbiAgICAgICAgICAgICAgICBpdGVtID0gaXRlbXNbKytjXTtcbiAgICAgICAgICAgICAgICBudW1lcmljID0gbnVtZXJpY1JlLnRlc3QoaXRlbSk7XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgLy8gZmluYWxpemVcbiAgICAgICAgICAgICAgICBpZiAoaGFzKHBhcmVudCwgbmFtZSkpIHtcbiAgICAgICAgICAgICAgICAgICAgcHJvcGVydHkgPSBwYXJlbnRbbmFtZV07XG4gICAgICAgICAgICAgICAgICAgIGlzQXJyYXkgPSBhcnJheShwcm9wZXJ0eSk7XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAvLyByZXBsYWNlIHByb3BlcnR5IGludG8gb2JqZWN0IG9yIGFycmF5XG4gICAgICAgICAgICAgICAgICAgIGlmICghaXNBcnJheSAmJiAhb2JqZWN0KHByb3BlcnR5KSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKG51bWVyaWMpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBwcm9wZXJ0eSA9IFtwcm9wZXJ0eV07XG4gICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZW1wID0gcHJvcGVydHk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcHJvcGVydHkgPSB7fTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBwcm9wZXJ0eVtcIlwiXSA9IHRlbXA7XG4gICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgLy8gY2hhbmdlIHByb3BlcnR5IHRvIG9iamVjdCB0byBzdXBwb3J0IFwibmFtZWRcIiBwcm9wZXJ0eVxuICAgICAgICAgICAgICAgICAgICBlbHNlIGlmIChpc0FycmF5ICYmICFudW1lcmljKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBwcm9wZXJ0eSA9IGFwcGx5KHt9LCBwcm9wZXJ0eSk7XG4gICAgICAgICAgICAgICAgICAgICAgICBkZWxldGUgcHJvcGVydHkubGVuZ3RoO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgcHJvcGVydHkgPSBudW1lcmljID8gW10gOiB7fTtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgcGFyZW50ID0gcGFyZW50W25hbWVdID0gcHJvcGVydHk7XG4gICAgICAgICAgICAgICAgbmFtZSA9IGl0ZW07XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIGlmIChvdmVyd3JpdGUgIT09IHRydWUgJiYgaGFzKHBhcmVudCwgbmFtZSkpIHtcbiAgICAgICAgICAgICAgICBwcm9wZXJ0eSA9IHBhcmVudFtuYW1lXTtcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAvLyBhcHBlbmRcbiAgICAgICAgICAgICAgICBpZiAoYXJyYXkocHJvcGVydHkpKSB7XG4gICAgICAgICAgICAgICAgICAgIHBhcmVudCA9IHByb3BlcnR5O1xuICAgICAgICAgICAgICAgICAgICBuYW1lID0gcGFyZW50Lmxlbmd0aDtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgIHBhcmVudCA9IHBhcmVudFtuYW1lXSA9IFtwcm9wZXJ0eV07XG4gICAgICAgICAgICAgICAgICAgIG5hbWUgPSAxO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgcGFyZW50W25hbWVdID0gdmFsdWU7XG4gICAgXG4gICAgICAgICAgICBwYXJlbnQgPSB2YWx1ZSA9IHByb3BlcnR5ID0gdGVtcCA9IG51bGw7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHJldHVybiB0cnVlO1xuICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgXG4gICAgfVxuICAgIHJldHVybiBmYWxzZTtcbn1cblxuXG5mdW5jdGlvbiByZW1vdmVDYWxsYmFjayhpdGVtLCBsYXN0LCBvcGVyYXRpb24pIHtcbiAgICB2YXIgc3ViamVjdCA9IG9wZXJhdGlvblswXTtcbiAgICB2YXIgaXNMZW5ndGg7XG4gICAgXG4gICAgaWYgKCFpc0FjY2Vzc2libGUoc3ViamVjdCwgaXRlbSkpIHtcbiAgICAgICAgcmV0dXJuIGZhbHNlO1xuICAgIH1cbiAgICBcbiAgICAvLyBzZXRcbiAgICBpZiAobGFzdCkge1xuICAgICAgICBpZiAoVFlQRS5hcnJheShzdWJqZWN0KSkge1xuICAgICAgICAgICAgaXNMZW5ndGggPSBpdGVtID09PSAnbGVuZ3RoJztcbiAgICAgICAgICAgIHN1YmplY3Quc3BsaWNlKGlzTGVuZ3RoID9cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMCA6IGl0ZW0udG9TdHJpbmcoMTApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzTGVuZ3RoID9cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3ViamVjdC5sZW5ndGggOiAxKTtcbiAgICAgICAgfVxuICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgIGRlbGV0ZSBzdWJqZWN0W2l0ZW1dO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBvcGVyYXRpb25bMV0gPSB0cnVlO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgICAgb3BlcmF0aW9uWzBdID0gc3ViamVjdFtpdGVtXTtcbiAgICB9XG4gICAgXG59XG5cbmZ1bmN0aW9uIHJlbW92ZShwYXRoLCBvYmplY3QpIHtcbiAgICB2YXIgb3BlcmF0aW9uID0gW29iamVjdCwgZmFsc2VdO1xuICAgIGVhY2hQYXRoKHBhdGgsIHJlbW92ZUNhbGxiYWNrLCBvcGVyYXRpb24pO1xuICAgIG9wZXJhdGlvblswXSA9IG51bGw7XG4gICAgcmV0dXJuIG9wZXJhdGlvblsxXTtcbn1cblxuZnVuY3Rpb24gY29tcGFyZShwYXRoLCBvYmplY3QxLCBvYmplY3QyKSB7XG4gICAgcmV0dXJuIE9CSkVDVC5jb21wYXJlKGZpbmQocGF0aCwgb2JqZWN0MSksIG9iamVjdDEsIG9iamVjdDIpO1xufVxuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgICBqc29uRmluZDogZmluZCxcbiAgICBqc29uQ29tcGFyZTogY29tcGFyZSxcbiAgICBqc29uQ2xvbmU6IGNsb25lLFxuICAgIGpzb25FYWNoOiBlYWNoUGF0aCxcbiAgICBqc29uU2V0OiBhc3NpZ24sXG4gICAganNvblVuc2V0OiByZW1vdmVcbn07XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9+L2xpYmNvcmUvc3JjL2pzb24tcGF0aC5qc1xuLy8gbW9kdWxlIGlkID0gMTJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var TYPE = __webpack_require__(0),
+    OBJECT = __webpack_require__(1),
+    NUMERIC_RE = /^([1-9][0-9]*|0)$/;
+
+
+function eachPath(path, callback, arg1, arg2, arg3, arg4) {
+    var escape = "\\",
+        dot = ".",
+        buffer = [],
+        bl = 0;
+    var c, l, chr, apply, last;
+    
+    for (c = -1, l = path.length; l--;) {
+        chr = path.charAt(++c);
+        apply = false;
+        last = !l;
+        switch (chr) {
+        case escape:
+            chr = "";
+            if (l) {
+                chr = path.charAt(++c);
+                l--;
+            }
+            break;
+        case dot:
+            chr = "";
+            apply = true;
+            break;
+        }
+        
+        if (chr) {
+            buffer[bl++] = chr;
+        }
+        
+        if (last || apply) {
+            if (bl) {
+                if (callback(buffer.join(""),
+                            last,
+                            arg1,
+                            arg2,
+                            arg3,
+                            arg4) === false) {
+                    return;
+                }
+                buffer.length = bl = 0;
+            }
+        }
+    }
+}
+
+function isAccessible(subject, item) {
+    var type = TYPE;
+    switch (true) {
+    case type.object(subject):
+    case type.array(subject) &&
+        (!NUMERIC_RE.test(item) || item !== 'length'):
+        
+        if (!OBJECT.contains(subject, item)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function findCallback(item, last, operation) {
+    var subject = operation[1];
+    
+    if (!isAccessible(subject, item)) {
+        operation[0] = void(0);
+        return false;
+    }
+    
+    operation[last ? 0 : 1] = subject[item];
+    return true;
+}
+
+
+function find(path, object) {
+    var operation = [void(0), object];
+    eachPath(path, findCallback, operation);
+    operation[1] = null;
+    return operation[0];
+}
+
+function clone(path, object, deep) {
+    return OBJECT.clone(find(path, object), deep);
+}
+
+
+function getItemsCallback(item, last, operation) {
+    operation[operation.length] = item;
+}
+
+function assign(path, subject, value, overwrite) {
+    var type = TYPE,
+        has = OBJECT.contains,
+        array = type.array,
+        object = type.object,
+        apply = type.assign,
+        parent = subject,
+        numericRe = NUMERIC_RE;
+    var items, c, l, item, name, numeric, property, isArray, temp;
+    
+    if (object(parent) || array(parent)) {
+        eachPath(path, getItemsCallback, items = []);
+        
+        if (items.length) {
+            name = items[0];
+            items.splice(0, 1);
+            
+            for (c = -1, l = items.length; l--;) {
+                item = items[++c];
+                numeric = numericRe.test(item);
+                
+                // finalize
+                if (has(parent, name)) {
+                    property = parent[name];
+                    isArray = array(property);
+                    
+                    // replace property into object or array
+                    if (!isArray && !object(property)) {
+                        if (numeric) {
+                            property = [property];
+                        }
+                        else {
+                            temp = property;
+                            property = {};
+                            property[""] = temp;
+                        }
+                    }
+                    // change property to object to support "named" property
+                    else if (isArray && !numeric) {
+                        property = apply({}, property);
+                        delete property.length;
+                    }
+                    
+                }
+                else {
+                    property = numeric ? [] : {};
+                }
+                
+                parent = parent[name] = property;
+                name = item;
+                
+            }
+            
+            if (overwrite !== true && has(parent, name)) {
+                property = parent[name];
+                
+                // append
+                if (array(property)) {
+                    parent = property;
+                    name = parent.length;
+                }
+                else {
+                    parent = parent[name] = [property];
+                    name = 1;
+                }
+            }
+            
+            parent[name] = value;
+    
+            parent = value = property = temp = null;
+            
+            return true;
+        
+        }
+        
+        
+    }
+    return false;
+}
+
+
+function removeCallback(item, last, operation) {
+    var subject = operation[0];
+    var isLength;
+    
+    if (!isAccessible(subject, item)) {
+        return false;
+    }
+    
+    // set
+    if (last) {
+        if (TYPE.array(subject)) {
+            isLength = item === 'length';
+            subject.splice(isLength ?
+                                0 : item.toString(10),
+                            isLength ?
+                                subject.length : 1);
+        }
+        else {
+            delete subject[item];
+        }
+        
+        operation[1] = true;
+    }
+    else {
+        operation[0] = subject[item];
+    }
+    
+}
+
+function remove(path, object) {
+    var operation = [object, false];
+    eachPath(path, removeCallback, operation);
+    operation[0] = null;
+    return operation[1];
+}
+
+function compare(path, object1, object2) {
+    return OBJECT.compare(find(path, object1), object1, object2);
+}
+
+module.exports = {
+    jsonFind: find,
+    jsonCompare: compare,
+    jsonClone: clone,
+    jsonEach: eachPath,
+    jsonSet: assign,
+    jsonUnset: remove
+};
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(global) {\n\nvar TYPE = __webpack_require__(0),\n    OBJECT = __webpack_require__(1),\n    PROCESSOR = __webpack_require__(5),\n    slice = Array.prototype.slice,\n    G = global,\n    INDEX_STATUS = 0,\n    INDEX_DATA = 1,\n    INDEX_PENDING = 2;\n\nfunction isPromise(object) {\n    var T = TYPE;\n    return T.object(object) &&\n            'then' in object &&\n            T.method(object.then);\n}\n\nfunction createPromise(instance) {\n    var Class = Promise;\n    if (!(instance instanceof Class)) {\n        instance = OBJECT.instantiate(Class);\n    }\n    \n    instance.__state = [null,\n                        void(0),\n                        [],\n                        null,\n                        null];\n    return instance;\n}\n\nfunction resolveValue(data, callback) {\n    function resolve(data) {\n        try {\n            callback(true, data);\n        }\n        catch (error) {\n            callback(false, error);\n        }\n    }\n    if (isPromise(data)) {\n        data.then(resolve, function (error) {\n                                callback(false, error);\n                            });\n    }\n    else {\n        resolve(data);\n    }\n}\n\nfunction finalizeValue(promise, success, data) {\n    var state = promise.__state,\n        list = state[INDEX_PENDING];\n        \n    state[INDEX_STATUS] = success;\n    state[INDEX_DATA] = data;\n    \n    // notify callbacks\n    for (; list.length; ) {\n        list[0](success, data);\n        list.splice(0, 1);\n    }\n}\n\nfunction Promise(tryout) {\n    var instance = createPromise(this),\n        finalized = false;\n    \n    function onFinalize(success, data) {\n        finalizeValue(instance, success, data);\n    }\n    \n    function resolve(data) {\n        if (!finalized) {\n            finalized = true;\n            resolveValue(data, onFinalize);\n        }\n    }\n    \n    function reject(error) {\n        if (!finalized) {\n            finalized = true;\n            onFinalize(false, error);\n        }\n    }\n    \n    try {\n        tryout(resolve, reject);\n    }\n    catch (error) {\n        reject(error);\n    }\n    \n    return instance;\n}\n\nfunction resolve(data) {\n    return new Promise(function (resolve) {\n        resolve(data);\n    });\n}\n\nfunction reject(reason) {\n    return new Promise(function () {\n        arguments[1](reason);\n    });\n}\n\nfunction all(promises) {\n    var total;\n    promises = slice.call(promises, 0);\n    total = promises.length;\n    if (!total) {\n        return resolve([]);\n    }\n    return new Promise(function (resolve, reject) {\n                var list = promises,\n                    remaining = total,\n                    stopped = false,\n                    l = remaining,\n                    c = 0,\n                    result = [];\n\n                function process(index, item) {\n                    function finalize(success, data) {\n                        var found = result;\n                        \n                        if (stopped) { return; }\n                        \n                        if (!success) {\n                            reject(data);\n                            stopped = true;\n                            return;\n                        }\n                        \n                        found[index] = data;\n                        \n                        if (!--remaining) {\n                            resolve(found);\n                        }\n                    }\n                    resolveValue(item, finalize);\n                }\n                \n                for (result.length = l; l--; c++) {\n                    process(c, list[c]);\n                }\n            });\n}\n\nfunction race(promises) {\n    promises = slice.call(promises, 0);\n    return new Promise(function (resolve, reject) {\n        var stopped = false,\n            tryResolve = resolveValue,\n            list = promises,\n            c = -1,\n            l = list.length;\n        \n        function onFulfill(success, data) {\n            if (!stopped) {\n                stopped = true;\n                (success ? resolve : reject)(data);\n            }\n        }\n        \n        for (; l--;) {\n            tryResolve(list[++c], onFulfill);\n        }\n    });\n}\n\nPromise.prototype = {\n    constructor: Promise,\n    then: function (onFulfill, onReject) {\n        var me = this,\n            state = me.__state,\n            success = state[INDEX_STATUS],\n            list = state[INDEX_PENDING],\n            instance = createPromise();\n            \n        function run(success, data) {\n            var handle = success ? onFulfill : onReject;\n            if (TYPE.method(handle)) {\n                try {\n                    data = handle(data);\n                    resolveValue(\n                        data,\n                        function (success, data) {\n                            finalizeValue(instance, success, data);\n                        });\n                    return;\n                }\n                catch (error) {\n                    data = error;\n                    success = false;\n                }\n            }\n            finalizeValue(instance, success, data);\n        }\n        \n        if (success === null) {\n            list[list.length] = run;\n        }\n        else {\n            PROCESSOR.setAsync(function () {\n                run(success, state[INDEX_DATA]);\n            });\n        }\n        \n        return instance;\n    },\n    \n    \"catch\": function (onReject) {\n        return this.then(null, onReject);\n    }\n};\n\n// static methods\nOBJECT.assign(Promise, {\n    all: all,\n    race: race,\n    reject: reject,\n    resolve: resolve\n});\n\n// Polyfill if no promise\nif (!TYPE.method(G.Promise)) {\n    G.Promise = Promise;\n}\n\nmodule.exports = Promise;\nG = null;\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL3Byb21pc2UuanM/MTRjOSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOENBQUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSw2QkFBNkI7QUFDN0I7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBLFVBQVUsYUFBYTtBQUN2QjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMOztBQUVBO0FBQ0E7QUFDQTtBQUNBLEtBQUs7QUFDTDs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxzQ0FBc0MsUUFBUTs7QUFFOUM7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUEsdUNBQXVDLEtBQUs7QUFDNUM7QUFDQTtBQUNBLGFBQWE7QUFDYjs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQSxjQUFjLEtBQUs7QUFDbkI7QUFDQTtBQUNBLEtBQUs7QUFDTDs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLHlCQUF5QjtBQUN6QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsYUFBYTtBQUNiOztBQUVBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxDQUFDOztBQUVEO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EiLCJmaWxlIjoiMTMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbnZhciBUWVBFID0gcmVxdWlyZShcIi4vdHlwZS5qc1wiKSxcbiAgICBPQkpFQ1QgPSByZXF1aXJlKFwiLi9vYmplY3QuanNcIiksXG4gICAgUFJPQ0VTU09SID0gcmVxdWlyZShcIi4vcHJvY2Vzc29yLmpzXCIpLFxuICAgIHNsaWNlID0gQXJyYXkucHJvdG90eXBlLnNsaWNlLFxuICAgIEcgPSBnbG9iYWwsXG4gICAgSU5ERVhfU1RBVFVTID0gMCxcbiAgICBJTkRFWF9EQVRBID0gMSxcbiAgICBJTkRFWF9QRU5ESU5HID0gMjtcblxuZnVuY3Rpb24gaXNQcm9taXNlKG9iamVjdCkge1xuICAgIHZhciBUID0gVFlQRTtcbiAgICByZXR1cm4gVC5vYmplY3Qob2JqZWN0KSAmJlxuICAgICAgICAgICAgJ3RoZW4nIGluIG9iamVjdCAmJlxuICAgICAgICAgICAgVC5tZXRob2Qob2JqZWN0LnRoZW4pO1xufVxuXG5mdW5jdGlvbiBjcmVhdGVQcm9taXNlKGluc3RhbmNlKSB7XG4gICAgdmFyIENsYXNzID0gUHJvbWlzZTtcbiAgICBpZiAoIShpbnN0YW5jZSBpbnN0YW5jZW9mIENsYXNzKSkge1xuICAgICAgICBpbnN0YW5jZSA9IE9CSkVDVC5pbnN0YW50aWF0ZShDbGFzcyk7XG4gICAgfVxuICAgIFxuICAgIGluc3RhbmNlLl9fc3RhdGUgPSBbbnVsbCxcbiAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQoMCksXG4gICAgICAgICAgICAgICAgICAgICAgICBbXSxcbiAgICAgICAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICAgICAgICBudWxsXTtcbiAgICByZXR1cm4gaW5zdGFuY2U7XG59XG5cbmZ1bmN0aW9uIHJlc29sdmVWYWx1ZShkYXRhLCBjYWxsYmFjaykge1xuICAgIGZ1bmN0aW9uIHJlc29sdmUoZGF0YSkge1xuICAgICAgICB0cnkge1xuICAgICAgICAgICAgY2FsbGJhY2sodHJ1ZSwgZGF0YSk7XG4gICAgICAgIH1cbiAgICAgICAgY2F0Y2ggKGVycm9yKSB7XG4gICAgICAgICAgICBjYWxsYmFjayhmYWxzZSwgZXJyb3IpO1xuICAgICAgICB9XG4gICAgfVxuICAgIGlmIChpc1Byb21pc2UoZGF0YSkpIHtcbiAgICAgICAgZGF0YS50aGVuKHJlc29sdmUsIGZ1bmN0aW9uIChlcnJvcikge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjYWxsYmFjayhmYWxzZSwgZXJyb3IpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0pO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgICAgcmVzb2x2ZShkYXRhKTtcbiAgICB9XG59XG5cbmZ1bmN0aW9uIGZpbmFsaXplVmFsdWUocHJvbWlzZSwgc3VjY2VzcywgZGF0YSkge1xuICAgIHZhciBzdGF0ZSA9IHByb21pc2UuX19zdGF0ZSxcbiAgICAgICAgbGlzdCA9IHN0YXRlW0lOREVYX1BFTkRJTkddO1xuICAgICAgICBcbiAgICBzdGF0ZVtJTkRFWF9TVEFUVVNdID0gc3VjY2VzcztcbiAgICBzdGF0ZVtJTkRFWF9EQVRBXSA9IGRhdGE7XG4gICAgXG4gICAgLy8gbm90aWZ5IGNhbGxiYWNrc1xuICAgIGZvciAoOyBsaXN0Lmxlbmd0aDsgKSB7XG4gICAgICAgIGxpc3RbMF0oc3VjY2VzcywgZGF0YSk7XG4gICAgICAgIGxpc3Quc3BsaWNlKDAsIDEpO1xuICAgIH1cbn1cblxuZnVuY3Rpb24gUHJvbWlzZSh0cnlvdXQpIHtcbiAgICB2YXIgaW5zdGFuY2UgPSBjcmVhdGVQcm9taXNlKHRoaXMpLFxuICAgICAgICBmaW5hbGl6ZWQgPSBmYWxzZTtcbiAgICBcbiAgICBmdW5jdGlvbiBvbkZpbmFsaXplKHN1Y2Nlc3MsIGRhdGEpIHtcbiAgICAgICAgZmluYWxpemVWYWx1ZShpbnN0YW5jZSwgc3VjY2VzcywgZGF0YSk7XG4gICAgfVxuICAgIFxuICAgIGZ1bmN0aW9uIHJlc29sdmUoZGF0YSkge1xuICAgICAgICBpZiAoIWZpbmFsaXplZCkge1xuICAgICAgICAgICAgZmluYWxpemVkID0gdHJ1ZTtcbiAgICAgICAgICAgIHJlc29sdmVWYWx1ZShkYXRhLCBvbkZpbmFsaXplKTtcbiAgICAgICAgfVxuICAgIH1cbiAgICBcbiAgICBmdW5jdGlvbiByZWplY3QoZXJyb3IpIHtcbiAgICAgICAgaWYgKCFmaW5hbGl6ZWQpIHtcbiAgICAgICAgICAgIGZpbmFsaXplZCA9IHRydWU7XG4gICAgICAgICAgICBvbkZpbmFsaXplKGZhbHNlLCBlcnJvcik7XG4gICAgICAgIH1cbiAgICB9XG4gICAgXG4gICAgdHJ5IHtcbiAgICAgICAgdHJ5b3V0KHJlc29sdmUsIHJlamVjdCk7XG4gICAgfVxuICAgIGNhdGNoIChlcnJvcikge1xuICAgICAgICByZWplY3QoZXJyb3IpO1xuICAgIH1cbiAgICBcbiAgICByZXR1cm4gaW5zdGFuY2U7XG59XG5cbmZ1bmN0aW9uIHJlc29sdmUoZGF0YSkge1xuICAgIHJldHVybiBuZXcgUHJvbWlzZShmdW5jdGlvbiAocmVzb2x2ZSkge1xuICAgICAgICByZXNvbHZlKGRhdGEpO1xuICAgIH0pO1xufVxuXG5mdW5jdGlvbiByZWplY3QocmVhc29uKSB7XG4gICAgcmV0dXJuIG5ldyBQcm9taXNlKGZ1bmN0aW9uICgpIHtcbiAgICAgICAgYXJndW1lbnRzWzFdKHJlYXNvbik7XG4gICAgfSk7XG59XG5cbmZ1bmN0aW9uIGFsbChwcm9taXNlcykge1xuICAgIHZhciB0b3RhbDtcbiAgICBwcm9taXNlcyA9IHNsaWNlLmNhbGwocHJvbWlzZXMsIDApO1xuICAgIHRvdGFsID0gcHJvbWlzZXMubGVuZ3RoO1xuICAgIGlmICghdG90YWwpIHtcbiAgICAgICAgcmV0dXJuIHJlc29sdmUoW10pO1xuICAgIH1cbiAgICByZXR1cm4gbmV3IFByb21pc2UoZnVuY3Rpb24gKHJlc29sdmUsIHJlamVjdCkge1xuICAgICAgICAgICAgICAgIHZhciBsaXN0ID0gcHJvbWlzZXMsXG4gICAgICAgICAgICAgICAgICAgIHJlbWFpbmluZyA9IHRvdGFsLFxuICAgICAgICAgICAgICAgICAgICBzdG9wcGVkID0gZmFsc2UsXG4gICAgICAgICAgICAgICAgICAgIGwgPSByZW1haW5pbmcsXG4gICAgICAgICAgICAgICAgICAgIGMgPSAwLFxuICAgICAgICAgICAgICAgICAgICByZXN1bHQgPSBbXTtcblxuICAgICAgICAgICAgICAgIGZ1bmN0aW9uIHByb2Nlc3MoaW5kZXgsIGl0ZW0pIHtcbiAgICAgICAgICAgICAgICAgICAgZnVuY3Rpb24gZmluYWxpemUoc3VjY2VzcywgZGF0YSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgdmFyIGZvdW5kID0gcmVzdWx0O1xuICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICBpZiAoc3RvcHBlZCkgeyByZXR1cm47IH1cbiAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKCFzdWNjZXNzKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVqZWN0KGRhdGEpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0b3BwZWQgPSB0cnVlO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjtcbiAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgZm91bmRbaW5kZXhdID0gZGF0YTtcbiAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKCEtLXJlbWFpbmluZykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlc29sdmUoZm91bmQpO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIHJlc29sdmVWYWx1ZShpdGVtLCBmaW5hbGl6ZSk7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIGZvciAocmVzdWx0Lmxlbmd0aCA9IGw7IGwtLTsgYysrKSB7XG4gICAgICAgICAgICAgICAgICAgIHByb2Nlc3MoYywgbGlzdFtjXSk7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfSk7XG59XG5cbmZ1bmN0aW9uIHJhY2UocHJvbWlzZXMpIHtcbiAgICBwcm9taXNlcyA9IHNsaWNlLmNhbGwocHJvbWlzZXMsIDApO1xuICAgIHJldHVybiBuZXcgUHJvbWlzZShmdW5jdGlvbiAocmVzb2x2ZSwgcmVqZWN0KSB7XG4gICAgICAgIHZhciBzdG9wcGVkID0gZmFsc2UsXG4gICAgICAgICAgICB0cnlSZXNvbHZlID0gcmVzb2x2ZVZhbHVlLFxuICAgICAgICAgICAgbGlzdCA9IHByb21pc2VzLFxuICAgICAgICAgICAgYyA9IC0xLFxuICAgICAgICAgICAgbCA9IGxpc3QubGVuZ3RoO1xuICAgICAgICBcbiAgICAgICAgZnVuY3Rpb24gb25GdWxmaWxsKHN1Y2Nlc3MsIGRhdGEpIHtcbiAgICAgICAgICAgIGlmICghc3RvcHBlZCkge1xuICAgICAgICAgICAgICAgIHN0b3BwZWQgPSB0cnVlO1xuICAgICAgICAgICAgICAgIChzdWNjZXNzID8gcmVzb2x2ZSA6IHJlamVjdCkoZGF0YSk7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGZvciAoOyBsLS07KSB7XG4gICAgICAgICAgICB0cnlSZXNvbHZlKGxpc3RbKytjXSwgb25GdWxmaWxsKTtcbiAgICAgICAgfVxuICAgIH0pO1xufVxuXG5Qcm9taXNlLnByb3RvdHlwZSA9IHtcbiAgICBjb25zdHJ1Y3RvcjogUHJvbWlzZSxcbiAgICB0aGVuOiBmdW5jdGlvbiAob25GdWxmaWxsLCBvblJlamVjdCkge1xuICAgICAgICB2YXIgbWUgPSB0aGlzLFxuICAgICAgICAgICAgc3RhdGUgPSBtZS5fX3N0YXRlLFxuICAgICAgICAgICAgc3VjY2VzcyA9IHN0YXRlW0lOREVYX1NUQVRVU10sXG4gICAgICAgICAgICBsaXN0ID0gc3RhdGVbSU5ERVhfUEVORElOR10sXG4gICAgICAgICAgICBpbnN0YW5jZSA9IGNyZWF0ZVByb21pc2UoKTtcbiAgICAgICAgICAgIFxuICAgICAgICBmdW5jdGlvbiBydW4oc3VjY2VzcywgZGF0YSkge1xuICAgICAgICAgICAgdmFyIGhhbmRsZSA9IHN1Y2Nlc3MgPyBvbkZ1bGZpbGwgOiBvblJlamVjdDtcbiAgICAgICAgICAgIGlmIChUWVBFLm1ldGhvZChoYW5kbGUpKSB7XG4gICAgICAgICAgICAgICAgdHJ5IHtcbiAgICAgICAgICAgICAgICAgICAgZGF0YSA9IGhhbmRsZShkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgcmVzb2x2ZVZhbHVlKFxuICAgICAgICAgICAgICAgICAgICAgICAgZGF0YSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGZ1bmN0aW9uIChzdWNjZXNzLCBkYXRhKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZmluYWxpemVWYWx1ZShpbnN0YW5jZSwgc3VjY2VzcywgZGF0YSk7XG4gICAgICAgICAgICAgICAgICAgICAgICB9KTtcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBjYXRjaCAoZXJyb3IpIHtcbiAgICAgICAgICAgICAgICAgICAgZGF0YSA9IGVycm9yO1xuICAgICAgICAgICAgICAgICAgICBzdWNjZXNzID0gZmFsc2U7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgZmluYWxpemVWYWx1ZShpbnN0YW5jZSwgc3VjY2VzcywgZGF0YSk7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGlmIChzdWNjZXNzID09PSBudWxsKSB7XG4gICAgICAgICAgICBsaXN0W2xpc3QubGVuZ3RoXSA9IHJ1bjtcbiAgICAgICAgfVxuICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgIFBST0NFU1NPUi5zZXRBc3luYyhmdW5jdGlvbiAoKSB7XG4gICAgICAgICAgICAgICAgcnVuKHN1Y2Nlc3MsIHN0YXRlW0lOREVYX0RBVEFdKTtcbiAgICAgICAgICAgIH0pO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICByZXR1cm4gaW5zdGFuY2U7XG4gICAgfSxcbiAgICBcbiAgICBcImNhdGNoXCI6IGZ1bmN0aW9uIChvblJlamVjdCkge1xuICAgICAgICByZXR1cm4gdGhpcy50aGVuKG51bGwsIG9uUmVqZWN0KTtcbiAgICB9XG59O1xuXG4vLyBzdGF0aWMgbWV0aG9kc1xuT0JKRUNULmFzc2lnbihQcm9taXNlLCB7XG4gICAgYWxsOiBhbGwsXG4gICAgcmFjZTogcmFjZSxcbiAgICByZWplY3Q6IHJlamVjdCxcbiAgICByZXNvbHZlOiByZXNvbHZlXG59KTtcblxuLy8gUG9seWZpbGwgaWYgbm8gcHJvbWlzZVxuaWYgKCFUWVBFLm1ldGhvZChHLlByb21pc2UpKSB7XG4gICAgRy5Qcm9taXNlID0gUHJvbWlzZTtcbn1cblxubW9kdWxlLmV4cG9ydHMgPSBQcm9taXNlO1xuRyA9IG51bGw7XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL34vbGliY29yZS9zcmMvcHJvbWlzZS5qc1xuLy8gbW9kdWxlIGlkID0gMTNcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+/* WEBPACK VAR INJECTION */(function(global) {
+
+var TYPE = __webpack_require__(0),
+    OBJECT = __webpack_require__(1),
+    PROCESSOR = __webpack_require__(5),
+    slice = Array.prototype.slice,
+    G = global,
+    INDEX_STATUS = 0,
+    INDEX_DATA = 1,
+    INDEX_PENDING = 2;
+
+function isPromise(object) {
+    var T = TYPE;
+    return T.object(object) &&
+            'then' in object &&
+            T.method(object.then);
+}
+
+function createPromise(instance) {
+    var Class = Promise;
+    if (!(instance instanceof Class)) {
+        instance = OBJECT.instantiate(Class);
+    }
+    
+    instance.__state = [null,
+                        void(0),
+                        [],
+                        null,
+                        null];
+    return instance;
+}
+
+function resolveValue(data, callback) {
+    function resolve(data) {
+        try {
+            callback(true, data);
+        }
+        catch (error) {
+            callback(false, error);
+        }
+    }
+    if (isPromise(data)) {
+        data.then(resolve, function (error) {
+                                callback(false, error);
+                            });
+    }
+    else {
+        resolve(data);
+    }
+}
+
+function finalizeValue(promise, success, data) {
+    var state = promise.__state,
+        list = state[INDEX_PENDING];
+        
+    state[INDEX_STATUS] = success;
+    state[INDEX_DATA] = data;
+    
+    // notify callbacks
+    for (; list.length; ) {
+        list[0](success, data);
+        list.splice(0, 1);
+    }
+}
+
+function Promise(tryout) {
+    var instance = createPromise(this),
+        finalized = false;
+    
+    function onFinalize(success, data) {
+        finalizeValue(instance, success, data);
+    }
+    
+    function resolve(data) {
+        if (!finalized) {
+            finalized = true;
+            resolveValue(data, onFinalize);
+        }
+    }
+    
+    function reject(error) {
+        if (!finalized) {
+            finalized = true;
+            onFinalize(false, error);
+        }
+    }
+    
+    try {
+        tryout(resolve, reject);
+    }
+    catch (error) {
+        reject(error);
+    }
+    
+    return instance;
+}
+
+function resolve(data) {
+    return new Promise(function (resolve) {
+        resolve(data);
+    });
+}
+
+function reject(reason) {
+    return new Promise(function () {
+        arguments[1](reason);
+    });
+}
+
+function all(promises) {
+    var total;
+    promises = slice.call(promises, 0);
+    total = promises.length;
+    if (!total) {
+        return resolve([]);
+    }
+    return new Promise(function (resolve, reject) {
+                var list = promises,
+                    remaining = total,
+                    stopped = false,
+                    l = remaining,
+                    c = 0,
+                    result = [];
+
+                function process(index, item) {
+                    function finalize(success, data) {
+                        var found = result;
+                        
+                        if (stopped) { return; }
+                        
+                        if (!success) {
+                            reject(data);
+                            stopped = true;
+                            return;
+                        }
+                        
+                        found[index] = data;
+                        
+                        if (!--remaining) {
+                            resolve(found);
+                        }
+                    }
+                    resolveValue(item, finalize);
+                }
+                
+                for (result.length = l; l--; c++) {
+                    process(c, list[c]);
+                }
+            });
+}
+
+function race(promises) {
+    promises = slice.call(promises, 0);
+    return new Promise(function (resolve, reject) {
+        var stopped = false,
+            tryResolve = resolveValue,
+            list = promises,
+            c = -1,
+            l = list.length;
+        
+        function onFulfill(success, data) {
+            if (!stopped) {
+                stopped = true;
+                (success ? resolve : reject)(data);
+            }
+        }
+        
+        for (; l--;) {
+            tryResolve(list[++c], onFulfill);
+        }
+    });
+}
+
+Promise.prototype = {
+    constructor: Promise,
+    then: function (onFulfill, onReject) {
+        var me = this,
+            state = me.__state,
+            success = state[INDEX_STATUS],
+            list = state[INDEX_PENDING],
+            instance = createPromise();
+            
+        function run(success, data) {
+            var handle = success ? onFulfill : onReject;
+            if (TYPE.method(handle)) {
+                try {
+                    data = handle(data);
+                    resolveValue(
+                        data,
+                        function (success, data) {
+                            finalizeValue(instance, success, data);
+                        });
+                    return;
+                }
+                catch (error) {
+                    data = error;
+                    success = false;
+                }
+            }
+            finalizeValue(instance, success, data);
+        }
+        
+        if (success === null) {
+            list[list.length] = run;
+        }
+        else {
+            PROCESSOR.setAsync(function () {
+                run(success, state[INDEX_DATA]);
+            });
+        }
+        
+        return instance;
+    },
+    
+    "catch": function (onReject) {
+        return this.then(null, onReject);
+    }
+};
+
+// static methods
+OBJECT.assign(Promise, {
+    all: all,
+    race: race,
+    reject: reject,
+    resolve: resolve
+});
+
+// Polyfill if no promise
+if (!TYPE.method(G.Promise)) {
+    G.Promise = Promise;
+}
+
+module.exports = Promise;
+G = null;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar TYPE = __webpack_require__(0),\n    OBJECT = __webpack_require__(1);\n\nfunction create() {\n    return new Registry();\n}\n\nfunction Registry() {\n    this.data = {};\n}\n\nRegistry.prototype = {\n    constructor: Registry,\n    get: function (name) {\n        var list = this.data;\n        \n        if (OBJECT.contains(list, name)) {\n            return list[name];\n        }\n        \n        return void(0);\n    },\n    \n    set: function (name, value) {\n        var list = this.data;\n        \n        if (TYPE.string(name) || TYPE.number(name)) {\n            list[name] = value;\n        }\n        \n        return this;\n    },\n    \n    unset: function (name) {\n        var list = this.data;\n        \n        if (OBJECT.contains(list, name)) {\n            delete list[name];\n        }\n        \n        return this;\n    },\n    \n    exists: function (name) {\n        return OBJECT.contains(this.data, name);\n    },\n    \n    clear: function () {\n        OBJECT.clear(this.data);\n        return this;\n    },\n    \n    clone: function () {\n        var list = this.data;\n        return OBJECT.clone(list, true);\n    }\n};\n\nmodule.exports = {\n    createRegistry: create\n};\n\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2xpYmNvcmUvc3JjL3JlZ2lzdHJ5LmpzPzM3MTYiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSxLQUFLOztBQUVMO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQSxLQUFLOztBQUVMO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBIiwiZmlsZSI6IjE0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG52YXIgVFlQRSA9IHJlcXVpcmUoXCIuL3R5cGUuanNcIiksXG4gICAgT0JKRUNUID0gcmVxdWlyZShcIi4vb2JqZWN0LmpzXCIpO1xuXG5mdW5jdGlvbiBjcmVhdGUoKSB7XG4gICAgcmV0dXJuIG5ldyBSZWdpc3RyeSgpO1xufVxuXG5mdW5jdGlvbiBSZWdpc3RyeSgpIHtcbiAgICB0aGlzLmRhdGEgPSB7fTtcbn1cblxuUmVnaXN0cnkucHJvdG90eXBlID0ge1xuICAgIGNvbnN0cnVjdG9yOiBSZWdpc3RyeSxcbiAgICBnZXQ6IGZ1bmN0aW9uIChuYW1lKSB7XG4gICAgICAgIHZhciBsaXN0ID0gdGhpcy5kYXRhO1xuICAgICAgICBcbiAgICAgICAgaWYgKE9CSkVDVC5jb250YWlucyhsaXN0LCBuYW1lKSkge1xuICAgICAgICAgICAgcmV0dXJuIGxpc3RbbmFtZV07XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIHJldHVybiB2b2lkKDApO1xuICAgIH0sXG4gICAgXG4gICAgc2V0OiBmdW5jdGlvbiAobmFtZSwgdmFsdWUpIHtcbiAgICAgICAgdmFyIGxpc3QgPSB0aGlzLmRhdGE7XG4gICAgICAgIFxuICAgICAgICBpZiAoVFlQRS5zdHJpbmcobmFtZSkgfHwgVFlQRS5udW1iZXIobmFtZSkpIHtcbiAgICAgICAgICAgIGxpc3RbbmFtZV0gPSB2YWx1ZTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfSxcbiAgICBcbiAgICB1bnNldDogZnVuY3Rpb24gKG5hbWUpIHtcbiAgICAgICAgdmFyIGxpc3QgPSB0aGlzLmRhdGE7XG4gICAgICAgIFxuICAgICAgICBpZiAoT0JKRUNULmNvbnRhaW5zKGxpc3QsIG5hbWUpKSB7XG4gICAgICAgICAgICBkZWxldGUgbGlzdFtuYW1lXTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfSxcbiAgICBcbiAgICBleGlzdHM6IGZ1bmN0aW9uIChuYW1lKSB7XG4gICAgICAgIHJldHVybiBPQkpFQ1QuY29udGFpbnModGhpcy5kYXRhLCBuYW1lKTtcbiAgICB9LFxuICAgIFxuICAgIGNsZWFyOiBmdW5jdGlvbiAoKSB7XG4gICAgICAgIE9CSkVDVC5jbGVhcih0aGlzLmRhdGEpO1xuICAgICAgICByZXR1cm4gdGhpcztcbiAgICB9LFxuICAgIFxuICAgIGNsb25lOiBmdW5jdGlvbiAoKSB7XG4gICAgICAgIHZhciBsaXN0ID0gdGhpcy5kYXRhO1xuICAgICAgICByZXR1cm4gT0JKRUNULmNsb25lKGxpc3QsIHRydWUpO1xuICAgIH1cbn07XG5cbm1vZHVsZS5leHBvcnRzID0ge1xuICAgIGNyZWF0ZVJlZ2lzdHJ5OiBjcmVhdGVcbn07XG5cblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vfi9saWJjb3JlL3NyYy9yZWdpc3RyeS5qc1xuLy8gbW9kdWxlIGlkID0gMTRcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var TYPE = __webpack_require__(0),
+    OBJECT = __webpack_require__(1);
+
+function create() {
+    return new Registry();
+}
+
+function Registry() {
+    this.data = {};
+}
+
+Registry.prototype = {
+    constructor: Registry,
+    get: function (name) {
+        var list = this.data;
+        
+        if (OBJECT.contains(list, name)) {
+            return list[name];
+        }
+        
+        return void(0);
+    },
+    
+    set: function (name, value) {
+        var list = this.data;
+        
+        if (TYPE.string(name) || TYPE.number(name)) {
+            list[name] = value;
+        }
+        
+        return this;
+    },
+    
+    unset: function (name) {
+        var list = this.data;
+        
+        if (OBJECT.contains(list, name)) {
+            delete list[name];
+        }
+        
+        return this;
+    },
+    
+    exists: function (name) {
+        return OBJECT.contains(this.data, name);
+    },
+    
+    clear: function () {
+        OBJECT.clear(this.data);
+        return this;
+    },
+    
+    clone: function () {
+        var list = this.data;
+        return OBJECT.clone(list, true);
+    }
+};
+
+module.exports = {
+    createRegistry: create
+};
+
+
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar helper = __webpack_require__(7);\n\nfunction Fragment(builder, pointer) {\n    this.id = 'f' + (++builder.fgen);\n    this.state = { id: null };\n    this.builder = builder;\n    \n    if (pointer) {\n        \n        this.pointer = pointer;\n        \n        for (; pointer.next; pointer = pointer.next) {}\n        this.lastPointer = pointer;\n        \n        // create outgoing\n        this.outgoing = this.lastOutgoing = {\n            fragment: this,\n            next: null\n        };\n        \n    }\n    \n    \n}\n\nFragment.prototype = {\n    constructor: Fragment,\n    id: null,\n    state: null,\n    base: null,\n    map: null,\n    splitted: null,\n    repeated: null,\n    pointer: null,\n    lastPointer: null,\n    outgoing: null,\n    lastOutgoing: null,\n    \n    link: function (operand2) {\n        var operand1 = this,\n            outgoing = operand1.outgoing,\n            split = operand1.splitted,\n            repeat = operand1.repeated;\n        var clone, last, fragment, pointer;\n        \n        operand2.applyState();\n        \n        for (; outgoing; outgoing = outgoing.next) {\n            outgoing.fragment.pointer.point(operand2);\n        }\n        \n        // repeat\n        if (repeat) {\n            last = operand2.lastPointer;\n            \n            for (; repeat; repeat = repeat.next) {\n                clone = repeat.fragment.pointer.clone();\n                if (!last) {\n                    operand2.pointer = clone[0];\n                    operand2.lastPointer = last = clone[1];\n                }\n                else {\n                    last.next = clone[0];\n                    last = clone[1];\n                }\n                \n            }\n            \n            operand2.lastPointer = last;\n        }\n        \n        // split and not end state\n        pointer = operand2.pointer;\n        if (split && pointer) {\n            \n            // not end state\n            for (; split; split = split.next) {\n                fragment = split.fragment;\n                clone = pointer.clone();\n                last = fragment.lastPointer.last();\n                last.next = clone[0];\n                fragment.lastPointer = clone[1];\n            }\n            \n        }\n        \n        fragment = operand1.clone();\n        fragment.splitted = operand2.splitted;\n        fragment.repeated = operand2.repeated;\n        \n        fragment.outgoing = operand2.outgoing;\n        fragment.lastOutgoing = operand2.lastOutgoing;\n        \n        return fragment;\n    },\n    \n    clone: function () {\n        var base = this.base,\n            clone = helper.clone(this);\n        \n        if (!base) {\n            clone.base = this;\n        }\n        \n        clone.id = 'f' + (++this.builder.fgen);\n        return clone;\n    },\n    \n    split: function (repeat) {\n        var me = this,\n            current = me.splitted,\n            split = {\n                fragment: me,\n                next: null\n            },\n            fragment = repeat ?\n                            me.repeat() : me.clone();\n        \n        if (current) {\n            fragment.splitted = current;\n            for (; current.next; current = current.next) { }\n            current.next = split;\n        }\n        else {\n            fragment.splitted = split;\n        }\n        \n        return fragment;\n        \n    },\n    \n    repeat: function () {\n        var fragment = this.clone(),\n            current = fragment.repeated,\n            repeat = {\n                fragment: this,\n                next: null\n            };\n            \n        if (current) {\n            for (; current.next; current = current.next) { }\n            current.next = repeat;\n        }\n        else {\n            fragment.repeated = repeat;\n        }\n        \n        return fragment;\n    },\n    \n    fill: function (operand2) {\n        var operand1 = this,\n            fragment = operand1.clone(),\n            range = operand1.pointer.range(operand2.pointer);\n        \n        // set 2nd operand state id\n        operand2.state = operand1.state;\n        \n        // connect pointers\n        if (range) {\n            range[1].next = operand2.pointer;\n        }\n        else {\n            range = [operand2.pointer];\n        }\n        \n        operand1.lastPointer.next = range[0];\n        \n        \n        fragment.lastPointer = operand2.lastPointer;\n        \n        // merge outgoing\n        fragment.outgoing.next = operand2.outgoing;\n        fragment.lastOutgoing = operand2.lastOutgoing;\n\n        return fragment;\n    },\n    \n    merge: function (operand2) {\n        var operand1 = this,\n            fragment = operand1.clone();\n        var last, first, item;\n        \n        // apply state if operand1 has state\n        \n        // merge state\n        operand2.state = operand1.state;\n        \n        operand1.lastPointer.next = operand2.pointer;\n        operand1.lastOutgoing.next = operand2.outgoing;\n        \n        fragment.lastPointer = operand2.lastPointer;\n        fragment.lastOutgoing = operand2.lastOutgoing;\n        \n        // create split\n        first = operand1.splitted;\n        last = operand2.splitted;\n        fragment.splitted = first || last;\n        \n        if (first && last) {\n            for (item = first; item.next; item = item.next) { }\n            item.next = last;\n        }\n        \n        // create repeat\n        first = operand1.repeated;\n        last = operand2.repeated;\n        fragment.repeated = first || last;\n        \n        if (first && last) {\n            for (item = first; item.next; item = item.next) { }\n            item.next = last;\n        }\n        \n        \n        \n        return fragment;\n    },\n    \n    applyState: function () {\n        var state = this.state;\n        \n        if (!state.id) {\n            state.id = 's' + (++this.builder.gen);\n        }\n        \n        return state;\n    }\n    \n};\n\nmodule.exports = Fragment;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvZnJhZ21lbnQuanM/MDgxMyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0Esa0JBQWtCO0FBQ2xCOztBQUVBOztBQUVBOztBQUVBLGNBQWMsY0FBYztBQUM1Qjs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOzs7QUFHQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBLGNBQWMsVUFBVTtBQUN4QjtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxrQkFBa0IsUUFBUTtBQUMxQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSxrQkFBa0IsT0FBTztBQUN6QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQSxLQUFLOztBQUVMO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsYUFBYTtBQUNiO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLGtCQUFrQixjQUFjLDBCQUEwQjtBQUMxRDtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSxrQkFBa0IsY0FBYywwQkFBMEI7QUFDMUQ7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7O0FBR0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLDhCQUE4QixXQUFXLG9CQUFvQjtBQUM3RDtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EsOEJBQThCLFdBQVcsb0JBQW9CO0FBQzdEO0FBQ0E7Ozs7QUFJQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQSIsImZpbGUiOiIxNS5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIGhlbHBlciA9IHJlcXVpcmUoXCIuL2hlbHBlci5qc1wiKTtcblxuZnVuY3Rpb24gRnJhZ21lbnQoYnVpbGRlciwgcG9pbnRlcikge1xuICAgIHRoaXMuaWQgPSAnZicgKyAoKytidWlsZGVyLmZnZW4pO1xuICAgIHRoaXMuc3RhdGUgPSB7IGlkOiBudWxsIH07XG4gICAgdGhpcy5idWlsZGVyID0gYnVpbGRlcjtcbiAgICBcbiAgICBpZiAocG9pbnRlcikge1xuICAgICAgICBcbiAgICAgICAgdGhpcy5wb2ludGVyID0gcG9pbnRlcjtcbiAgICAgICAgXG4gICAgICAgIGZvciAoOyBwb2ludGVyLm5leHQ7IHBvaW50ZXIgPSBwb2ludGVyLm5leHQpIHt9XG4gICAgICAgIHRoaXMubGFzdFBvaW50ZXIgPSBwb2ludGVyO1xuICAgICAgICBcbiAgICAgICAgLy8gY3JlYXRlIG91dGdvaW5nXG4gICAgICAgIHRoaXMub3V0Z29pbmcgPSB0aGlzLmxhc3RPdXRnb2luZyA9IHtcbiAgICAgICAgICAgIGZyYWdtZW50OiB0aGlzLFxuICAgICAgICAgICAgbmV4dDogbnVsbFxuICAgICAgICB9O1xuICAgICAgICBcbiAgICB9XG4gICAgXG4gICAgXG59XG5cbkZyYWdtZW50LnByb3RvdHlwZSA9IHtcbiAgICBjb25zdHJ1Y3RvcjogRnJhZ21lbnQsXG4gICAgaWQ6IG51bGwsXG4gICAgc3RhdGU6IG51bGwsXG4gICAgYmFzZTogbnVsbCxcbiAgICBtYXA6IG51bGwsXG4gICAgc3BsaXR0ZWQ6IG51bGwsXG4gICAgcmVwZWF0ZWQ6IG51bGwsXG4gICAgcG9pbnRlcjogbnVsbCxcbiAgICBsYXN0UG9pbnRlcjogbnVsbCxcbiAgICBvdXRnb2luZzogbnVsbCxcbiAgICBsYXN0T3V0Z29pbmc6IG51bGwsXG4gICAgXG4gICAgbGluazogZnVuY3Rpb24gKG9wZXJhbmQyKSB7XG4gICAgICAgIHZhciBvcGVyYW5kMSA9IHRoaXMsXG4gICAgICAgICAgICBvdXRnb2luZyA9IG9wZXJhbmQxLm91dGdvaW5nLFxuICAgICAgICAgICAgc3BsaXQgPSBvcGVyYW5kMS5zcGxpdHRlZCxcbiAgICAgICAgICAgIHJlcGVhdCA9IG9wZXJhbmQxLnJlcGVhdGVkO1xuICAgICAgICB2YXIgY2xvbmUsIGxhc3QsIGZyYWdtZW50LCBwb2ludGVyO1xuICAgICAgICBcbiAgICAgICAgb3BlcmFuZDIuYXBwbHlTdGF0ZSgpO1xuICAgICAgICBcbiAgICAgICAgZm9yICg7IG91dGdvaW5nOyBvdXRnb2luZyA9IG91dGdvaW5nLm5leHQpIHtcbiAgICAgICAgICAgIG91dGdvaW5nLmZyYWdtZW50LnBvaW50ZXIucG9pbnQob3BlcmFuZDIpO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyByZXBlYXRcbiAgICAgICAgaWYgKHJlcGVhdCkge1xuICAgICAgICAgICAgbGFzdCA9IG9wZXJhbmQyLmxhc3RQb2ludGVyO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBmb3IgKDsgcmVwZWF0OyByZXBlYXQgPSByZXBlYXQubmV4dCkge1xuICAgICAgICAgICAgICAgIGNsb25lID0gcmVwZWF0LmZyYWdtZW50LnBvaW50ZXIuY2xvbmUoKTtcbiAgICAgICAgICAgICAgICBpZiAoIWxhc3QpIHtcbiAgICAgICAgICAgICAgICAgICAgb3BlcmFuZDIucG9pbnRlciA9IGNsb25lWzBdO1xuICAgICAgICAgICAgICAgICAgICBvcGVyYW5kMi5sYXN0UG9pbnRlciA9IGxhc3QgPSBjbG9uZVsxXTtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgIGxhc3QubmV4dCA9IGNsb25lWzBdO1xuICAgICAgICAgICAgICAgICAgICBsYXN0ID0gY2xvbmVbMV07XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICBvcGVyYW5kMi5sYXN0UG9pbnRlciA9IGxhc3Q7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIC8vIHNwbGl0IGFuZCBub3QgZW5kIHN0YXRlXG4gICAgICAgIHBvaW50ZXIgPSBvcGVyYW5kMi5wb2ludGVyO1xuICAgICAgICBpZiAoc3BsaXQgJiYgcG9pbnRlcikge1xuICAgICAgICAgICAgXG4gICAgICAgICAgICAvLyBub3QgZW5kIHN0YXRlXG4gICAgICAgICAgICBmb3IgKDsgc3BsaXQ7IHNwbGl0ID0gc3BsaXQubmV4dCkge1xuICAgICAgICAgICAgICAgIGZyYWdtZW50ID0gc3BsaXQuZnJhZ21lbnQ7XG4gICAgICAgICAgICAgICAgY2xvbmUgPSBwb2ludGVyLmNsb25lKCk7XG4gICAgICAgICAgICAgICAgbGFzdCA9IGZyYWdtZW50Lmxhc3RQb2ludGVyLmxhc3QoKTtcbiAgICAgICAgICAgICAgICBsYXN0Lm5leHQgPSBjbG9uZVswXTtcbiAgICAgICAgICAgICAgICBmcmFnbWVudC5sYXN0UG9pbnRlciA9IGNsb25lWzFdO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGZyYWdtZW50ID0gb3BlcmFuZDEuY2xvbmUoKTtcbiAgICAgICAgZnJhZ21lbnQuc3BsaXR0ZWQgPSBvcGVyYW5kMi5zcGxpdHRlZDtcbiAgICAgICAgZnJhZ21lbnQucmVwZWF0ZWQgPSBvcGVyYW5kMi5yZXBlYXRlZDtcbiAgICAgICAgXG4gICAgICAgIGZyYWdtZW50Lm91dGdvaW5nID0gb3BlcmFuZDIub3V0Z29pbmc7XG4gICAgICAgIGZyYWdtZW50Lmxhc3RPdXRnb2luZyA9IG9wZXJhbmQyLmxhc3RPdXRnb2luZztcbiAgICAgICAgXG4gICAgICAgIHJldHVybiBmcmFnbWVudDtcbiAgICB9LFxuICAgIFxuICAgIGNsb25lOiBmdW5jdGlvbiAoKSB7XG4gICAgICAgIHZhciBiYXNlID0gdGhpcy5iYXNlLFxuICAgICAgICAgICAgY2xvbmUgPSBoZWxwZXIuY2xvbmUodGhpcyk7XG4gICAgICAgIFxuICAgICAgICBpZiAoIWJhc2UpIHtcbiAgICAgICAgICAgIGNsb25lLmJhc2UgPSB0aGlzO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBjbG9uZS5pZCA9ICdmJyArICgrK3RoaXMuYnVpbGRlci5mZ2VuKTtcbiAgICAgICAgcmV0dXJuIGNsb25lO1xuICAgIH0sXG4gICAgXG4gICAgc3BsaXQ6IGZ1bmN0aW9uIChyZXBlYXQpIHtcbiAgICAgICAgdmFyIG1lID0gdGhpcyxcbiAgICAgICAgICAgIGN1cnJlbnQgPSBtZS5zcGxpdHRlZCxcbiAgICAgICAgICAgIHNwbGl0ID0ge1xuICAgICAgICAgICAgICAgIGZyYWdtZW50OiBtZSxcbiAgICAgICAgICAgICAgICBuZXh0OiBudWxsXG4gICAgICAgICAgICB9LFxuICAgICAgICAgICAgZnJhZ21lbnQgPSByZXBlYXQgP1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lLnJlcGVhdCgpIDogbWUuY2xvbmUoKTtcbiAgICAgICAgXG4gICAgICAgIGlmIChjdXJyZW50KSB7XG4gICAgICAgICAgICBmcmFnbWVudC5zcGxpdHRlZCA9IGN1cnJlbnQ7XG4gICAgICAgICAgICBmb3IgKDsgY3VycmVudC5uZXh0OyBjdXJyZW50ID0gY3VycmVudC5uZXh0KSB7IH1cbiAgICAgICAgICAgIGN1cnJlbnQubmV4dCA9IHNwbGl0O1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgZnJhZ21lbnQuc3BsaXR0ZWQgPSBzcGxpdDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIGZyYWdtZW50O1xuICAgICAgICBcbiAgICB9LFxuICAgIFxuICAgIHJlcGVhdDogZnVuY3Rpb24gKCkge1xuICAgICAgICB2YXIgZnJhZ21lbnQgPSB0aGlzLmNsb25lKCksXG4gICAgICAgICAgICBjdXJyZW50ID0gZnJhZ21lbnQucmVwZWF0ZWQsXG4gICAgICAgICAgICByZXBlYXQgPSB7XG4gICAgICAgICAgICAgICAgZnJhZ21lbnQ6IHRoaXMsXG4gICAgICAgICAgICAgICAgbmV4dDogbnVsbFxuICAgICAgICAgICAgfTtcbiAgICAgICAgICAgIFxuICAgICAgICBpZiAoY3VycmVudCkge1xuICAgICAgICAgICAgZm9yICg7IGN1cnJlbnQubmV4dDsgY3VycmVudCA9IGN1cnJlbnQubmV4dCkgeyB9XG4gICAgICAgICAgICBjdXJyZW50Lm5leHQgPSByZXBlYXQ7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICBmcmFnbWVudC5yZXBlYXRlZCA9IHJlcGVhdDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIGZyYWdtZW50O1xuICAgIH0sXG4gICAgXG4gICAgZmlsbDogZnVuY3Rpb24gKG9wZXJhbmQyKSB7XG4gICAgICAgIHZhciBvcGVyYW5kMSA9IHRoaXMsXG4gICAgICAgICAgICBmcmFnbWVudCA9IG9wZXJhbmQxLmNsb25lKCksXG4gICAgICAgICAgICByYW5nZSA9IG9wZXJhbmQxLnBvaW50ZXIucmFuZ2Uob3BlcmFuZDIucG9pbnRlcik7XG4gICAgICAgIFxuICAgICAgICAvLyBzZXQgMm5kIG9wZXJhbmQgc3RhdGUgaWRcbiAgICAgICAgb3BlcmFuZDIuc3RhdGUgPSBvcGVyYW5kMS5zdGF0ZTtcbiAgICAgICAgXG4gICAgICAgIC8vIGNvbm5lY3QgcG9pbnRlcnNcbiAgICAgICAgaWYgKHJhbmdlKSB7XG4gICAgICAgICAgICByYW5nZVsxXS5uZXh0ID0gb3BlcmFuZDIucG9pbnRlcjtcbiAgICAgICAgfVxuICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgIHJhbmdlID0gW29wZXJhbmQyLnBvaW50ZXJdO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBvcGVyYW5kMS5sYXN0UG9pbnRlci5uZXh0ID0gcmFuZ2VbMF07XG4gICAgICAgIFxuICAgICAgICBcbiAgICAgICAgZnJhZ21lbnQubGFzdFBvaW50ZXIgPSBvcGVyYW5kMi5sYXN0UG9pbnRlcjtcbiAgICAgICAgXG4gICAgICAgIC8vIG1lcmdlIG91dGdvaW5nXG4gICAgICAgIGZyYWdtZW50Lm91dGdvaW5nLm5leHQgPSBvcGVyYW5kMi5vdXRnb2luZztcbiAgICAgICAgZnJhZ21lbnQubGFzdE91dGdvaW5nID0gb3BlcmFuZDIubGFzdE91dGdvaW5nO1xuXG4gICAgICAgIHJldHVybiBmcmFnbWVudDtcbiAgICB9LFxuICAgIFxuICAgIG1lcmdlOiBmdW5jdGlvbiAob3BlcmFuZDIpIHtcbiAgICAgICAgdmFyIG9wZXJhbmQxID0gdGhpcyxcbiAgICAgICAgICAgIGZyYWdtZW50ID0gb3BlcmFuZDEuY2xvbmUoKTtcbiAgICAgICAgdmFyIGxhc3QsIGZpcnN0LCBpdGVtO1xuICAgICAgICBcbiAgICAgICAgLy8gYXBwbHkgc3RhdGUgaWYgb3BlcmFuZDEgaGFzIHN0YXRlXG4gICAgICAgIFxuICAgICAgICAvLyBtZXJnZSBzdGF0ZVxuICAgICAgICBvcGVyYW5kMi5zdGF0ZSA9IG9wZXJhbmQxLnN0YXRlO1xuICAgICAgICBcbiAgICAgICAgb3BlcmFuZDEubGFzdFBvaW50ZXIubmV4dCA9IG9wZXJhbmQyLnBvaW50ZXI7XG4gICAgICAgIG9wZXJhbmQxLmxhc3RPdXRnb2luZy5uZXh0ID0gb3BlcmFuZDIub3V0Z29pbmc7XG4gICAgICAgIFxuICAgICAgICBmcmFnbWVudC5sYXN0UG9pbnRlciA9IG9wZXJhbmQyLmxhc3RQb2ludGVyO1xuICAgICAgICBmcmFnbWVudC5sYXN0T3V0Z29pbmcgPSBvcGVyYW5kMi5sYXN0T3V0Z29pbmc7XG4gICAgICAgIFxuICAgICAgICAvLyBjcmVhdGUgc3BsaXRcbiAgICAgICAgZmlyc3QgPSBvcGVyYW5kMS5zcGxpdHRlZDtcbiAgICAgICAgbGFzdCA9IG9wZXJhbmQyLnNwbGl0dGVkO1xuICAgICAgICBmcmFnbWVudC5zcGxpdHRlZCA9IGZpcnN0IHx8IGxhc3Q7XG4gICAgICAgIFxuICAgICAgICBpZiAoZmlyc3QgJiYgbGFzdCkge1xuICAgICAgICAgICAgZm9yIChpdGVtID0gZmlyc3Q7IGl0ZW0ubmV4dDsgaXRlbSA9IGl0ZW0ubmV4dCkgeyB9XG4gICAgICAgICAgICBpdGVtLm5leHQgPSBsYXN0O1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICAvLyBjcmVhdGUgcmVwZWF0XG4gICAgICAgIGZpcnN0ID0gb3BlcmFuZDEucmVwZWF0ZWQ7XG4gICAgICAgIGxhc3QgPSBvcGVyYW5kMi5yZXBlYXRlZDtcbiAgICAgICAgZnJhZ21lbnQucmVwZWF0ZWQgPSBmaXJzdCB8fCBsYXN0O1xuICAgICAgICBcbiAgICAgICAgaWYgKGZpcnN0ICYmIGxhc3QpIHtcbiAgICAgICAgICAgIGZvciAoaXRlbSA9IGZpcnN0OyBpdGVtLm5leHQ7IGl0ZW0gPSBpdGVtLm5leHQpIHsgfVxuICAgICAgICAgICAgaXRlbS5uZXh0ID0gbGFzdDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgXG4gICAgICAgIFxuICAgICAgICByZXR1cm4gZnJhZ21lbnQ7XG4gICAgfSxcbiAgICBcbiAgICBhcHBseVN0YXRlOiBmdW5jdGlvbiAoKSB7XG4gICAgICAgIHZhciBzdGF0ZSA9IHRoaXMuc3RhdGU7XG4gICAgICAgIFxuICAgICAgICBpZiAoIXN0YXRlLmlkKSB7XG4gICAgICAgICAgICBzdGF0ZS5pZCA9ICdzJyArICgrK3RoaXMuYnVpbGRlci5nZW4pO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICByZXR1cm4gc3RhdGU7XG4gICAgfVxuICAgIFxufTtcblxubW9kdWxlLmV4cG9ydHMgPSBGcmFnbWVudDtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9yZWdleC9mcmFnbWVudC5qc1xuLy8gbW9kdWxlIGlkID0gMTVcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var helper = __webpack_require__(7);
+
+function Fragment(builder, pointer) {
+    this.id = 'f' + (++builder.fgen);
+    this.state = { id: null };
+    this.builder = builder;
+    
+    if (pointer) {
+        
+        this.pointer = pointer;
+        
+        for (; pointer.next; pointer = pointer.next) {}
+        this.lastPointer = pointer;
+        
+        // create outgoing
+        this.outgoing = this.lastOutgoing = {
+            fragment: this,
+            next: null
+        };
+        
+    }
+    
+    
+}
+
+Fragment.prototype = {
+    constructor: Fragment,
+    id: null,
+    state: null,
+    base: null,
+    map: null,
+    splitted: null,
+    repeated: null,
+    pointer: null,
+    lastPointer: null,
+    outgoing: null,
+    lastOutgoing: null,
+    
+    link: function (operand2) {
+        var operand1 = this,
+            outgoing = operand1.outgoing,
+            split = operand1.splitted,
+            repeat = operand1.repeated;
+        var clone, last, fragment, pointer;
+        
+        operand2.applyState();
+        
+        for (; outgoing; outgoing = outgoing.next) {
+            outgoing.fragment.pointer.point(operand2);
+        }
+        
+        // repeat
+        if (repeat) {
+            last = operand2.lastPointer;
+            
+            for (; repeat; repeat = repeat.next) {
+                clone = repeat.fragment.pointer.clone();
+                if (!last) {
+                    operand2.pointer = clone[0];
+                    operand2.lastPointer = last = clone[1];
+                }
+                else {
+                    last.next = clone[0];
+                    last = clone[1];
+                }
+                
+            }
+            
+            operand2.lastPointer = last;
+        }
+        
+        // split and not end state
+        pointer = operand2.pointer;
+        if (split && pointer) {
+            
+            // not end state
+            for (; split; split = split.next) {
+                fragment = split.fragment;
+                clone = pointer.clone();
+                last = fragment.lastPointer.last();
+                last.next = clone[0];
+                fragment.lastPointer = clone[1];
+            }
+            
+        }
+        
+        fragment = operand1.clone();
+        fragment.splitted = operand2.splitted;
+        fragment.repeated = operand2.repeated;
+        
+        fragment.outgoing = operand2.outgoing;
+        fragment.lastOutgoing = operand2.lastOutgoing;
+        
+        return fragment;
+    },
+    
+    clone: function () {
+        var base = this.base,
+            clone = helper.clone(this);
+        
+        if (!base) {
+            clone.base = this;
+        }
+        
+        clone.id = 'f' + (++this.builder.fgen);
+        return clone;
+    },
+    
+    split: function (repeat) {
+        var me = this,
+            current = me.splitted,
+            split = {
+                fragment: me,
+                next: null
+            },
+            fragment = repeat ?
+                            me.repeat() : me.clone();
+        
+        if (current) {
+            fragment.splitted = current;
+            for (; current.next; current = current.next) { }
+            current.next = split;
+        }
+        else {
+            fragment.splitted = split;
+        }
+        
+        return fragment;
+        
+    },
+    
+    repeat: function () {
+        var fragment = this.clone(),
+            current = fragment.repeated,
+            repeat = {
+                fragment: this,
+                next: null
+            };
+            
+        if (current) {
+            for (; current.next; current = current.next) { }
+            current.next = repeat;
+        }
+        else {
+            fragment.repeated = repeat;
+        }
+        
+        return fragment;
+    },
+    
+    fill: function (operand2) {
+        var operand1 = this,
+            fragment = operand1.clone(),
+            range = operand1.pointer.range(operand2.pointer);
+        
+        // set 2nd operand state id
+        operand2.state = operand1.state;
+        
+        // connect pointers
+        if (range) {
+            range[1].next = operand2.pointer;
+        }
+        else {
+            range = [operand2.pointer];
+        }
+        
+        operand1.lastPointer.next = range[0];
+        
+        
+        fragment.lastPointer = operand2.lastPointer;
+        
+        // merge outgoing
+        fragment.outgoing.next = operand2.outgoing;
+        fragment.lastOutgoing = operand2.lastOutgoing;
+
+        return fragment;
+    },
+    
+    merge: function (operand2) {
+        var operand1 = this,
+            fragment = operand1.clone();
+        var last, first, item;
+        
+        // apply state if operand1 has state
+        
+        // merge state
+        operand2.state = operand1.state;
+        
+        operand1.lastPointer.next = operand2.pointer;
+        operand1.lastOutgoing.next = operand2.outgoing;
+        
+        fragment.lastPointer = operand2.lastPointer;
+        fragment.lastOutgoing = operand2.lastOutgoing;
+        
+        // create split
+        first = operand1.splitted;
+        last = operand2.splitted;
+        fragment.splitted = first || last;
+        
+        if (first && last) {
+            for (item = first; item.next; item = item.next) { }
+            item.next = last;
+        }
+        
+        // create repeat
+        first = operand1.repeated;
+        last = operand2.repeated;
+        fragment.repeated = first || last;
+        
+        if (first && last) {
+            for (item = first; item.next; item = item.next) { }
+            item.next = last;
+        }
+        
+        
+        
+        return fragment;
+    },
+    
+    applyState: function () {
+        var state = this.state;
+        
+        if (!state.id) {
+            state.id = 's' + (++this.builder.gen);
+        }
+        
+        return state;
+    }
+    
+};
+
+module.exports = Fragment;
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n/**\n * SEQUENCE         -> UNIT\n *                  -> REPEATED\n *                  -> SEQUENCE UNIT\n *                  -> SEQUENCE REPEATED\n *\n * REPEATED         -> UNIT '+'\n *                  -> UNIT '?'\n *                  -> UNIT '*'\n *\n * UNIT             -> 'char'\n *                  -> CLASS\n *                  -> '(' SEQUENCE ')'\n *\n * CLASS            -> '[' CLASS_CHAR ']'\n *\n * CLASS_CHAR       -> CLASS_CHAR CLASS_RANGE\n *                  -> CLASS_RANGE\n *\n * CLASS_RANGE      -> 'char' '-' 'char'\n *                  -> 'char'\n */\n\n\nvar TOKENIZE = __webpack_require__(19),\n    //libcore = require(\"libcore\"),\n    //object = libcore.object,\n    \n    ENCLOSED_START = 2,\n    ENCLOSED_END = 3,\n    BINARY = 4,\n    POSTFIX = 5,\n    FINAL = 6,\n    OPERATOR = {\n        \"[\": [ENCLOSED_START, 15, \"]\"],\n        \"[^\": [ENCLOSED_START, 15, \"]^\"],\n        \"]\": [ENCLOSED_END, 1, \"[]\"],\n        \"]^\": [ENCLOSED_END, 1, \"[^]\"],\n        \"(\": [ENCLOSED_START, 15, \")\"],\n        \")\": [ENCLOSED_END, 1, \"()\"],\n        \"?\": [POSTFIX, 10],\n        \"+\": [POSTFIX, 10],\n        \"*\": [POSTFIX, 10],\n        \"range\": [POSTFIX, 10],\n        \"-\": [BINARY, 7],\n        \"^-\": [BINARY, 7],\n        \"^,\": [BINARY, 5],\n        \",\": [BINARY, 5],\n        \".\": [BINARY, 5],\n        \"|\": [BINARY, 3],\n        \"$$\": [FINAL, 1]\n    };\n\n\nfunction parse(str) {\n    var tokenize = TOKENIZE,\n        operator = OPERATOR,\n        enclosed_start = ENCLOSED_START,\n        enclosed_end = ENCLOSED_END,\n        binary = BINARY,\n        postfix = POSTFIX,\n        end = FINAL,\n        index = 0,\n        start = 0,\n        stack = null,\n        queue = [],\n        ql = 0,\n        lastToken = null,\n        enclosure = null,\n        buffer = [],\n        bl = 0,\n        bc = 0;\n        \n    var token, chr, item, l, op, stackOp, fill, precedence, opName, from,\n        currentEnclosure;\n    \n        \n    for (item = tokenize(index, str); item; item = tokenize(index, str))  {\n        index = item[2];\n        chr = item[1];\n        token = item[0];\n        fill = false;\n        \n        // finalize and fill-in concat operator\n        if (token in operator) {\n            switch (token) {\n            case '(':\n            case '[':\n            case '[^':\n                fill = !!lastToken;\n            }\n        }\n        else {\n            switch (lastToken) {\n            case 'char':\n            case ']':\n            case ']^':\n            case ')':\n            case '+':\n            case '?':\n            case '*':\n            case 'range':\n                fill = true;\n            }\n        }\n        \n        currentEnclosure = enclosure && enclosure[1];\n        \n        if (fill) {\n            buffer[bl++] = [currentEnclosure === '[' ?\n                                ',' :\n                                currentEnclosure === '[^' ?\n                                    '^,' :\n                                    '.',\n                            null,\n                            2,\n                            start,\n                            0];\n        }\n        \n        if (currentEnclosure === '[^') {\n            switch (token) {\n            case '-':\n                token = '^-';\n                break;\n            \n            case ']':\n                token = ']^';\n                break;\n            \n            case 'char':\n                token = 'negative_char';\n            }\n        }\n        \n        \n        buffer[bl++] = [token, chr, 0, start, index - start];\n        start = index;\n        lastToken = token;\n        \n        // parse buffer\n        l = bl - bc;\n        for (; l--; bc++) {\n            item = buffer[bc];\n            token = item[0];\n            chr = item[1];\n            \n            if (token in operator) {\n                op = operator[token];\n                opName = op[0];\n                precedence = op[1];\n                \n                switch (opName) {\n                case end:\n                case postfix:\n                case binary:\n                    \n                    item[2] = opName === binary ? 2 : 1;\n                    \n                    binaryCompare: for (; stack; stack = stack[0]) {\n                        stackOp = stack[1];\n                        switch (stackOp[0]) {\n                        case postfix:\n                        case binary:\n                            if (precedence <= stackOp[1]) {\n                                queue[ql++] = stack[2];\n                                continue binaryCompare;\n                            }\n                        \n                        }\n                        break;\n                    }\n                    \n                    if (opName !== end) {\n                        stack = [stack, op, item];\n                    }\n                    else {\n                        queue[ql++] = item;\n                    }\n                    break;\n                    \n                case enclosed_start:\n                    stack = [stack, op, item];\n                    enclosure = [enclosure, token];\n                    break;\n                \n                case enclosed_end:\n                    \n                    for (; stack; stack = stack[0]) {\n                        stackOp = stack[1];\n                        \n                        if (stackOp[0] === enclosed_start) {\n                            if (stackOp[2] !== token) {\n                                throw new Error(\"Unmatched token found \" + chr);\n                            }\n                            from = stack[2][3];\n                            queue[ql++] = [op[2],\n                                           null,\n                                           1,\n                                           from,\n                                           item[3] - from + 1];\n                            if (enclosure) {\n                                enclosure = enclosure[0];\n                            }\n                            stack = stack[0];\n                            break;\n                        }\n                        \n                        queue[ql++] = stack[2];\n                    }\n                }\n            }\n            else {\n                queue[ql++] = item;\n            }\n        }\n    }\n\n    // there are unmatched or invalid token pending from stack\n    if (stack) {\n        throw new Error(\"Invalid token found \" + stack[2][1]);\n    }\n    \n    return queue;\n\n}\n\nmodule.exports = parse;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvcGFyc2VyLmpzP2Q0NGYiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOzs7QUFHQSxxQ0FBcUMsTUFBTTtBQUMzQztBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOzs7QUFHQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLGNBQWMsS0FBSztBQUNuQjtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUEseUNBQXlDLE9BQU87QUFDaEQ7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUEsMEJBQTBCLE9BQU87QUFDakM7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBOztBQUVBIiwiZmlsZSI6IjE2LmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG4vKipcbiAqIFNFUVVFTkNFICAgICAgICAgLT4gVU5JVFxuICogICAgICAgICAgICAgICAgICAtPiBSRVBFQVRFRFxuICogICAgICAgICAgICAgICAgICAtPiBTRVFVRU5DRSBVTklUXG4gKiAgICAgICAgICAgICAgICAgIC0+IFNFUVVFTkNFIFJFUEVBVEVEXG4gKlxuICogUkVQRUFURUQgICAgICAgICAtPiBVTklUICcrJ1xuICogICAgICAgICAgICAgICAgICAtPiBVTklUICc/J1xuICogICAgICAgICAgICAgICAgICAtPiBVTklUICcqJ1xuICpcbiAqIFVOSVQgICAgICAgICAgICAgLT4gJ2NoYXInXG4gKiAgICAgICAgICAgICAgICAgIC0+IENMQVNTXG4gKiAgICAgICAgICAgICAgICAgIC0+ICcoJyBTRVFVRU5DRSAnKSdcbiAqXG4gKiBDTEFTUyAgICAgICAgICAgIC0+ICdbJyBDTEFTU19DSEFSICddJ1xuICpcbiAqIENMQVNTX0NIQVIgICAgICAgLT4gQ0xBU1NfQ0hBUiBDTEFTU19SQU5HRVxuICogICAgICAgICAgICAgICAgICAtPiBDTEFTU19SQU5HRVxuICpcbiAqIENMQVNTX1JBTkdFICAgICAgLT4gJ2NoYXInICctJyAnY2hhcidcbiAqICAgICAgICAgICAgICAgICAgLT4gJ2NoYXInXG4gKi9cblxuXG52YXIgVE9LRU5JWkUgPSByZXF1aXJlKFwiLi90b2tlbml6ZXIuanNcIiksXG4gICAgLy9saWJjb3JlID0gcmVxdWlyZShcImxpYmNvcmVcIiksXG4gICAgLy9vYmplY3QgPSBsaWJjb3JlLm9iamVjdCxcbiAgICBcbiAgICBFTkNMT1NFRF9TVEFSVCA9IDIsXG4gICAgRU5DTE9TRURfRU5EID0gMyxcbiAgICBCSU5BUlkgPSA0LFxuICAgIFBPU1RGSVggPSA1LFxuICAgIEZJTkFMID0gNixcbiAgICBPUEVSQVRPUiA9IHtcbiAgICAgICAgXCJbXCI6IFtFTkNMT1NFRF9TVEFSVCwgMTUsIFwiXVwiXSxcbiAgICAgICAgXCJbXlwiOiBbRU5DTE9TRURfU1RBUlQsIDE1LCBcIl1eXCJdLFxuICAgICAgICBcIl1cIjogW0VOQ0xPU0VEX0VORCwgMSwgXCJbXVwiXSxcbiAgICAgICAgXCJdXlwiOiBbRU5DTE9TRURfRU5ELCAxLCBcIlteXVwiXSxcbiAgICAgICAgXCIoXCI6IFtFTkNMT1NFRF9TVEFSVCwgMTUsIFwiKVwiXSxcbiAgICAgICAgXCIpXCI6IFtFTkNMT1NFRF9FTkQsIDEsIFwiKClcIl0sXG4gICAgICAgIFwiP1wiOiBbUE9TVEZJWCwgMTBdLFxuICAgICAgICBcIitcIjogW1BPU1RGSVgsIDEwXSxcbiAgICAgICAgXCIqXCI6IFtQT1NURklYLCAxMF0sXG4gICAgICAgIFwicmFuZ2VcIjogW1BPU1RGSVgsIDEwXSxcbiAgICAgICAgXCItXCI6IFtCSU5BUlksIDddLFxuICAgICAgICBcIl4tXCI6IFtCSU5BUlksIDddLFxuICAgICAgICBcIl4sXCI6IFtCSU5BUlksIDVdLFxuICAgICAgICBcIixcIjogW0JJTkFSWSwgNV0sXG4gICAgICAgIFwiLlwiOiBbQklOQVJZLCA1XSxcbiAgICAgICAgXCJ8XCI6IFtCSU5BUlksIDNdLFxuICAgICAgICBcIiQkXCI6IFtGSU5BTCwgMV1cbiAgICB9O1xuXG5cbmZ1bmN0aW9uIHBhcnNlKHN0cikge1xuICAgIHZhciB0b2tlbml6ZSA9IFRPS0VOSVpFLFxuICAgICAgICBvcGVyYXRvciA9IE9QRVJBVE9SLFxuICAgICAgICBlbmNsb3NlZF9zdGFydCA9IEVOQ0xPU0VEX1NUQVJULFxuICAgICAgICBlbmNsb3NlZF9lbmQgPSBFTkNMT1NFRF9FTkQsXG4gICAgICAgIGJpbmFyeSA9IEJJTkFSWSxcbiAgICAgICAgcG9zdGZpeCA9IFBPU1RGSVgsXG4gICAgICAgIGVuZCA9IEZJTkFMLFxuICAgICAgICBpbmRleCA9IDAsXG4gICAgICAgIHN0YXJ0ID0gMCxcbiAgICAgICAgc3RhY2sgPSBudWxsLFxuICAgICAgICBxdWV1ZSA9IFtdLFxuICAgICAgICBxbCA9IDAsXG4gICAgICAgIGxhc3RUb2tlbiA9IG51bGwsXG4gICAgICAgIGVuY2xvc3VyZSA9IG51bGwsXG4gICAgICAgIGJ1ZmZlciA9IFtdLFxuICAgICAgICBibCA9IDAsXG4gICAgICAgIGJjID0gMDtcbiAgICAgICAgXG4gICAgdmFyIHRva2VuLCBjaHIsIGl0ZW0sIGwsIG9wLCBzdGFja09wLCBmaWxsLCBwcmVjZWRlbmNlLCBvcE5hbWUsIGZyb20sXG4gICAgICAgIGN1cnJlbnRFbmNsb3N1cmU7XG4gICAgXG4gICAgICAgIFxuICAgIGZvciAoaXRlbSA9IHRva2VuaXplKGluZGV4LCBzdHIpOyBpdGVtOyBpdGVtID0gdG9rZW5pemUoaW5kZXgsIHN0cikpICB7XG4gICAgICAgIGluZGV4ID0gaXRlbVsyXTtcbiAgICAgICAgY2hyID0gaXRlbVsxXTtcbiAgICAgICAgdG9rZW4gPSBpdGVtWzBdO1xuICAgICAgICBmaWxsID0gZmFsc2U7XG4gICAgICAgIFxuICAgICAgICAvLyBmaW5hbGl6ZSBhbmQgZmlsbC1pbiBjb25jYXQgb3BlcmF0b3JcbiAgICAgICAgaWYgKHRva2VuIGluIG9wZXJhdG9yKSB7XG4gICAgICAgICAgICBzd2l0Y2ggKHRva2VuKSB7XG4gICAgICAgICAgICBjYXNlICcoJzpcbiAgICAgICAgICAgIGNhc2UgJ1snOlxuICAgICAgICAgICAgY2FzZSAnW14nOlxuICAgICAgICAgICAgICAgIGZpbGwgPSAhIWxhc3RUb2tlbjtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgIHN3aXRjaCAobGFzdFRva2VuKSB7XG4gICAgICAgICAgICBjYXNlICdjaGFyJzpcbiAgICAgICAgICAgIGNhc2UgJ10nOlxuICAgICAgICAgICAgY2FzZSAnXV4nOlxuICAgICAgICAgICAgY2FzZSAnKSc6XG4gICAgICAgICAgICBjYXNlICcrJzpcbiAgICAgICAgICAgIGNhc2UgJz8nOlxuICAgICAgICAgICAgY2FzZSAnKic6XG4gICAgICAgICAgICBjYXNlICdyYW5nZSc6XG4gICAgICAgICAgICAgICAgZmlsbCA9IHRydWU7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGN1cnJlbnRFbmNsb3N1cmUgPSBlbmNsb3N1cmUgJiYgZW5jbG9zdXJlWzFdO1xuICAgICAgICBcbiAgICAgICAgaWYgKGZpbGwpIHtcbiAgICAgICAgICAgIGJ1ZmZlcltibCsrXSA9IFtjdXJyZW50RW5jbG9zdXJlID09PSAnWycgP1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnLCcgOlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjdXJyZW50RW5jbG9zdXJlID09PSAnW14nID9cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdeLCcgOlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJy4nLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgMixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdGFydCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAwXTtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgaWYgKGN1cnJlbnRFbmNsb3N1cmUgPT09ICdbXicpIHtcbiAgICAgICAgICAgIHN3aXRjaCAodG9rZW4pIHtcbiAgICAgICAgICAgIGNhc2UgJy0nOlxuICAgICAgICAgICAgICAgIHRva2VuID0gJ14tJztcbiAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgY2FzZSAnXSc6XG4gICAgICAgICAgICAgICAgdG9rZW4gPSAnXV4nO1xuICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBjYXNlICdjaGFyJzpcbiAgICAgICAgICAgICAgICB0b2tlbiA9ICduZWdhdGl2ZV9jaGFyJztcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgXG4gICAgICAgIGJ1ZmZlcltibCsrXSA9IFt0b2tlbiwgY2hyLCAwLCBzdGFydCwgaW5kZXggLSBzdGFydF07XG4gICAgICAgIHN0YXJ0ID0gaW5kZXg7XG4gICAgICAgIGxhc3RUb2tlbiA9IHRva2VuO1xuICAgICAgICBcbiAgICAgICAgLy8gcGFyc2UgYnVmZmVyXG4gICAgICAgIGwgPSBibCAtIGJjO1xuICAgICAgICBmb3IgKDsgbC0tOyBiYysrKSB7XG4gICAgICAgICAgICBpdGVtID0gYnVmZmVyW2JjXTtcbiAgICAgICAgICAgIHRva2VuID0gaXRlbVswXTtcbiAgICAgICAgICAgIGNociA9IGl0ZW1bMV07XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIGlmICh0b2tlbiBpbiBvcGVyYXRvcikge1xuICAgICAgICAgICAgICAgIG9wID0gb3BlcmF0b3JbdG9rZW5dO1xuICAgICAgICAgICAgICAgIG9wTmFtZSA9IG9wWzBdO1xuICAgICAgICAgICAgICAgIHByZWNlZGVuY2UgPSBvcFsxXTtcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBzd2l0Y2ggKG9wTmFtZSkge1xuICAgICAgICAgICAgICAgIGNhc2UgZW5kOlxuICAgICAgICAgICAgICAgIGNhc2UgcG9zdGZpeDpcbiAgICAgICAgICAgICAgICBjYXNlIGJpbmFyeTpcbiAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgIGl0ZW1bMl0gPSBvcE5hbWUgPT09IGJpbmFyeSA/IDIgOiAxO1xuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgYmluYXJ5Q29tcGFyZTogZm9yICg7IHN0YWNrOyBzdGFjayA9IHN0YWNrWzBdKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBzdGFja09wID0gc3RhY2tbMV07XG4gICAgICAgICAgICAgICAgICAgICAgICBzd2l0Y2ggKHN0YWNrT3BbMF0pIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGNhc2UgcG9zdGZpeDpcbiAgICAgICAgICAgICAgICAgICAgICAgIGNhc2UgYmluYXJ5OlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChwcmVjZWRlbmNlIDw9IHN0YWNrT3BbMV0pIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcXVldWVbcWwrK10gPSBzdGFja1syXTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udGludWUgYmluYXJ5Q29tcGFyZTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBpZiAob3BOYW1lICE9PSBlbmQpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrLCBvcCwgaXRlbV07XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBxdWV1ZVtxbCsrXSA9IGl0ZW07XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIGNhc2UgZW5jbG9zZWRfc3RhcnQ6XG4gICAgICAgICAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrLCBvcCwgaXRlbV07XG4gICAgICAgICAgICAgICAgICAgIGVuY2xvc3VyZSA9IFtlbmNsb3N1cmUsIHRva2VuXTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgY2FzZSBlbmNsb3NlZF9lbmQ6XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBmb3IgKDsgc3RhY2s7IHN0YWNrID0gc3RhY2tbMF0pIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIHN0YWNrT3AgPSBzdGFja1sxXTtcbiAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHN0YWNrT3BbMF0gPT09IGVuY2xvc2VkX3N0YXJ0KSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHN0YWNrT3BbMl0gIT09IHRva2VuKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIlVubWF0Y2hlZCB0b2tlbiBmb3VuZCBcIiArIGNocik7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZyb20gPSBzdGFja1syXVszXTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBxdWV1ZVtxbCsrXSA9IFtvcFsyXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZnJvbSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpdGVtWzNdIC0gZnJvbSArIDFdO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChlbmNsb3N1cmUpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZW5jbG9zdXJlID0gZW5jbG9zdXJlWzBdO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdGFjayA9IHN0YWNrWzBdO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICBxdWV1ZVtxbCsrXSA9IHN0YWNrWzJdO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgcXVldWVbcWwrK10gPSBpdGVtO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxuXG4gICAgLy8gdGhlcmUgYXJlIHVubWF0Y2hlZCBvciBpbnZhbGlkIHRva2VuIHBlbmRpbmcgZnJvbSBzdGFja1xuICAgIGlmIChzdGFjaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJJbnZhbGlkIHRva2VuIGZvdW5kIFwiICsgc3RhY2tbMl1bMV0pO1xuICAgIH1cbiAgICBcbiAgICByZXR1cm4gcXVldWU7XG5cbn1cblxubW9kdWxlLmV4cG9ydHMgPSBwYXJzZTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9yZWdleC9wYXJzZXIuanNcbi8vIG1vZHVsZSBpZCA9IDE2XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+/**
+ * SEQUENCE         -> UNIT
+ *                  -> REPEATED
+ *                  -> SEQUENCE UNIT
+ *                  -> SEQUENCE REPEATED
+ *
+ * REPEATED         -> UNIT '+'
+ *                  -> UNIT '?'
+ *                  -> UNIT '*'
+ *
+ * UNIT             -> 'char'
+ *                  -> CLASS
+ *                  -> '(' SEQUENCE ')'
+ *
+ * CLASS            -> '[' CLASS_CHAR ']'
+ *
+ * CLASS_CHAR       -> CLASS_CHAR CLASS_RANGE
+ *                  -> CLASS_RANGE
+ *
+ * CLASS_RANGE      -> 'char' '-' 'char'
+ *                  -> 'char'
+ */
+
+
+var TOKENIZE = __webpack_require__(19),
+    //libcore = require("libcore"),
+    //object = libcore.object,
+    
+    ENCLOSED_START = 2,
+    ENCLOSED_END = 3,
+    BINARY = 4,
+    POSTFIX = 5,
+    FINAL = 6,
+    OPERATOR = {
+        "[": [ENCLOSED_START, 15, "]"],
+        "[^": [ENCLOSED_START, 15, "]^"],
+        "]": [ENCLOSED_END, 1, "[]"],
+        "]^": [ENCLOSED_END, 1, "[^]"],
+        "(": [ENCLOSED_START, 15, ")"],
+        ")": [ENCLOSED_END, 1, "()"],
+        "?": [POSTFIX, 10],
+        "+": [POSTFIX, 10],
+        "*": [POSTFIX, 10],
+        "range": [POSTFIX, 10],
+        "-": [BINARY, 7],
+        "^-": [BINARY, 7],
+        "^,": [BINARY, 5],
+        ",": [BINARY, 5],
+        ".": [BINARY, 5],
+        "|": [BINARY, 3],
+        "$$": [FINAL, 1]
+    };
+
+
+function parse(str) {
+    var tokenize = TOKENIZE,
+        operator = OPERATOR,
+        enclosed_start = ENCLOSED_START,
+        enclosed_end = ENCLOSED_END,
+        binary = BINARY,
+        postfix = POSTFIX,
+        end = FINAL,
+        index = 0,
+        start = 0,
+        stack = null,
+        queue = [],
+        ql = 0,
+        lastToken = null,
+        enclosure = null,
+        buffer = [],
+        bl = 0,
+        bc = 0;
+        
+    var token, chr, item, l, op, stackOp, fill, precedence, opName, from,
+        currentEnclosure;
+    
+        
+    for (item = tokenize(index, str); item; item = tokenize(index, str))  {
+        index = item[2];
+        chr = item[1];
+        token = item[0];
+        fill = false;
+        
+        // finalize and fill-in concat operator
+        if (token in operator) {
+            switch (token) {
+            case '(':
+            case '[':
+            case '[^':
+                fill = !!lastToken;
+            }
+        }
+        else {
+            switch (lastToken) {
+            case 'char':
+            case ']':
+            case ']^':
+            case ')':
+            case '+':
+            case '?':
+            case '*':
+            case 'range':
+                fill = true;
+            }
+        }
+        
+        currentEnclosure = enclosure && enclosure[1];
+        
+        if (fill) {
+            buffer[bl++] = [currentEnclosure === '[' ?
+                                ',' :
+                                currentEnclosure === '[^' ?
+                                    '^,' :
+                                    '.',
+                            null,
+                            2,
+                            start,
+                            0];
+        }
+        
+        if (currentEnclosure === '[^') {
+            switch (token) {
+            case '-':
+                token = '^-';
+                break;
+            
+            case ']':
+                token = ']^';
+                break;
+            
+            case 'char':
+                token = 'negative_char';
+            }
+        }
+        
+        
+        buffer[bl++] = [token, chr, 0, start, index - start];
+        start = index;
+        lastToken = token;
+        
+        // parse buffer
+        l = bl - bc;
+        for (; l--; bc++) {
+            item = buffer[bc];
+            token = item[0];
+            chr = item[1];
+            
+            if (token in operator) {
+                op = operator[token];
+                opName = op[0];
+                precedence = op[1];
+                
+                switch (opName) {
+                case end:
+                case postfix:
+                case binary:
+                    
+                    item[2] = opName === binary ? 2 : 1;
+                    
+                    binaryCompare: for (; stack; stack = stack[0]) {
+                        stackOp = stack[1];
+                        switch (stackOp[0]) {
+                        case postfix:
+                        case binary:
+                            if (precedence <= stackOp[1]) {
+                                queue[ql++] = stack[2];
+                                continue binaryCompare;
+                            }
+                        
+                        }
+                        break;
+                    }
+                    
+                    if (opName !== end) {
+                        stack = [stack, op, item];
+                    }
+                    else {
+                        queue[ql++] = item;
+                    }
+                    break;
+                    
+                case enclosed_start:
+                    stack = [stack, op, item];
+                    enclosure = [enclosure, token];
+                    break;
+                
+                case enclosed_end:
+                    
+                    for (; stack; stack = stack[0]) {
+                        stackOp = stack[1];
+                        
+                        if (stackOp[0] === enclosed_start) {
+                            if (stackOp[2] !== token) {
+                                throw new Error("Unmatched token found " + chr);
+                            }
+                            from = stack[2][3];
+                            queue[ql++] = [op[2],
+                                           null,
+                                           1,
+                                           from,
+                                           item[3] - from + 1];
+                            if (enclosure) {
+                                enclosure = enclosure[0];
+                            }
+                            stack = stack[0];
+                            break;
+                        }
+                        
+                        queue[ql++] = stack[2];
+                    }
+                }
+            }
+            else {
+                queue[ql++] = item;
+            }
+        }
+    }
+
+    // there are unmatched or invalid token pending from stack
+    if (stack) {
+        throw new Error("Invalid token found " + stack[2][1]);
+    }
+    
+    return queue;
+
+}
+
+module.exports = parse;
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar helper = __webpack_require__(7),\n    libcore = __webpack_require__(2);\n\nfunction Pointer(chr, negative) {\n    if (chr) {\n        this.chr = chr;\n    }\n    \n    this.negative = negative === true;\n}\n\nPointer.prototype = {\n    constructor: Pointer,\n    negative: false,\n    chr: '',\n    to: null,\n    next: null,\n    \n    clone: function (overrides) {\n        var pointer = this,\n            from = null,\n            dupe = helper.clone,\n            assign = libcore.assign;\n        var created, last;\n        \n        if (!overrides) {\n            overrides = null;\n        }\n        \n        for (; pointer; pointer = pointer.next) {\n            created = dupe(pointer);\n            if (overrides) {\n                assign(created, overrides);\n            }\n            \n            if (from) {\n                last.next = created;\n            }\n            else {\n                from = created;\n            }\n            \n            last = created;\n        }\n        \n        last.next = null;\n        \n        return [from, last];\n        \n    },\n    \n    point: function (fragment) {\n        var pointer = this;\n        \n        for (; pointer; pointer = pointer.next) {\n            if (!pointer.to) {\n                pointer.to = fragment;\n            }\n        }\n        \n        return this;\n    },\n    \n    last: function () {\n        var pointer = this;\n        \n        for (; pointer.next; pointer = pointer.next) {}\n        \n        return pointer;\n    },\n    \n    range: function (to) {\n        var chr = this.chr,\n            Class = Pointer,\n            S = String,\n            start = null,\n            end = null,\n            negative = this.negative;\n        var from, len, created;\n        \n        from = chr.charCodeAt(0);\n        chr = to.chr;\n        to = chr.charCodeAt(0);\n        len = to - from - 1;\n        \n        for (; len--;) {\n            created = new Class(S.fromCharCode(++from), negative);\n            if (start) {\n                end.next = created;\n            }\n            else {\n                start = created;\n            }\n            end = created;\n        }\n        \n        return start && [start, end];\n    }\n    \n};\n\nmodule.exports = Pointer;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvcG9pbnRlci5qcz80NTE5Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxjQUFjLFNBQVM7QUFDdkI7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7O0FBRUE7O0FBRUEsS0FBSzs7QUFFTDtBQUNBOztBQUVBLGNBQWMsU0FBUztBQUN2QjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTs7QUFFQSxjQUFjLGNBQWM7O0FBRTVCO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLGNBQWMsT0FBTztBQUNyQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQSIsImZpbGUiOiIxNy5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIGhlbHBlciA9IHJlcXVpcmUoXCIuL2hlbHBlci5qc1wiKSxcbiAgICBsaWJjb3JlID0gcmVxdWlyZShcImxpYmNvcmVcIik7XG5cbmZ1bmN0aW9uIFBvaW50ZXIoY2hyLCBuZWdhdGl2ZSkge1xuICAgIGlmIChjaHIpIHtcbiAgICAgICAgdGhpcy5jaHIgPSBjaHI7XG4gICAgfVxuICAgIFxuICAgIHRoaXMubmVnYXRpdmUgPSBuZWdhdGl2ZSA9PT0gdHJ1ZTtcbn1cblxuUG9pbnRlci5wcm90b3R5cGUgPSB7XG4gICAgY29uc3RydWN0b3I6IFBvaW50ZXIsXG4gICAgbmVnYXRpdmU6IGZhbHNlLFxuICAgIGNocjogJycsXG4gICAgdG86IG51bGwsXG4gICAgbmV4dDogbnVsbCxcbiAgICBcbiAgICBjbG9uZTogZnVuY3Rpb24gKG92ZXJyaWRlcykge1xuICAgICAgICB2YXIgcG9pbnRlciA9IHRoaXMsXG4gICAgICAgICAgICBmcm9tID0gbnVsbCxcbiAgICAgICAgICAgIGR1cGUgPSBoZWxwZXIuY2xvbmUsXG4gICAgICAgICAgICBhc3NpZ24gPSBsaWJjb3JlLmFzc2lnbjtcbiAgICAgICAgdmFyIGNyZWF0ZWQsIGxhc3Q7XG4gICAgICAgIFxuICAgICAgICBpZiAoIW92ZXJyaWRlcykge1xuICAgICAgICAgICAgb3ZlcnJpZGVzID0gbnVsbDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgZm9yICg7IHBvaW50ZXI7IHBvaW50ZXIgPSBwb2ludGVyLm5leHQpIHtcbiAgICAgICAgICAgIGNyZWF0ZWQgPSBkdXBlKHBvaW50ZXIpO1xuICAgICAgICAgICAgaWYgKG92ZXJyaWRlcykge1xuICAgICAgICAgICAgICAgIGFzc2lnbihjcmVhdGVkLCBvdmVycmlkZXMpO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICBpZiAoZnJvbSkge1xuICAgICAgICAgICAgICAgIGxhc3QubmV4dCA9IGNyZWF0ZWQ7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBlbHNlIHtcbiAgICAgICAgICAgICAgICBmcm9tID0gY3JlYXRlZDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgbGFzdCA9IGNyZWF0ZWQ7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGxhc3QubmV4dCA9IG51bGw7XG4gICAgICAgIFxuICAgICAgICByZXR1cm4gW2Zyb20sIGxhc3RdO1xuICAgICAgICBcbiAgICB9LFxuICAgIFxuICAgIHBvaW50OiBmdW5jdGlvbiAoZnJhZ21lbnQpIHtcbiAgICAgICAgdmFyIHBvaW50ZXIgPSB0aGlzO1xuICAgICAgICBcbiAgICAgICAgZm9yICg7IHBvaW50ZXI7IHBvaW50ZXIgPSBwb2ludGVyLm5leHQpIHtcbiAgICAgICAgICAgIGlmICghcG9pbnRlci50bykge1xuICAgICAgICAgICAgICAgIHBvaW50ZXIudG8gPSBmcmFnbWVudDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfSxcbiAgICBcbiAgICBsYXN0OiBmdW5jdGlvbiAoKSB7XG4gICAgICAgIHZhciBwb2ludGVyID0gdGhpcztcbiAgICAgICAgXG4gICAgICAgIGZvciAoOyBwb2ludGVyLm5leHQ7IHBvaW50ZXIgPSBwb2ludGVyLm5leHQpIHt9XG4gICAgICAgIFxuICAgICAgICByZXR1cm4gcG9pbnRlcjtcbiAgICB9LFxuICAgIFxuICAgIHJhbmdlOiBmdW5jdGlvbiAodG8pIHtcbiAgICAgICAgdmFyIGNociA9IHRoaXMuY2hyLFxuICAgICAgICAgICAgQ2xhc3MgPSBQb2ludGVyLFxuICAgICAgICAgICAgUyA9IFN0cmluZyxcbiAgICAgICAgICAgIHN0YXJ0ID0gbnVsbCxcbiAgICAgICAgICAgIGVuZCA9IG51bGwsXG4gICAgICAgICAgICBuZWdhdGl2ZSA9IHRoaXMubmVnYXRpdmU7XG4gICAgICAgIHZhciBmcm9tLCBsZW4sIGNyZWF0ZWQ7XG4gICAgICAgIFxuICAgICAgICBmcm9tID0gY2hyLmNoYXJDb2RlQXQoMCk7XG4gICAgICAgIGNociA9IHRvLmNocjtcbiAgICAgICAgdG8gPSBjaHIuY2hhckNvZGVBdCgwKTtcbiAgICAgICAgbGVuID0gdG8gLSBmcm9tIC0gMTtcbiAgICAgICAgXG4gICAgICAgIGZvciAoOyBsZW4tLTspIHtcbiAgICAgICAgICAgIGNyZWF0ZWQgPSBuZXcgQ2xhc3MoUy5mcm9tQ2hhckNvZGUoKytmcm9tKSwgbmVnYXRpdmUpO1xuICAgICAgICAgICAgaWYgKHN0YXJ0KSB7XG4gICAgICAgICAgICAgICAgZW5kLm5leHQgPSBjcmVhdGVkO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICAgICAgc3RhcnQgPSBjcmVhdGVkO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgZW5kID0gY3JlYXRlZDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIHN0YXJ0ICYmIFtzdGFydCwgZW5kXTtcbiAgICB9XG4gICAgXG59O1xuXG5tb2R1bGUuZXhwb3J0cyA9IFBvaW50ZXI7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvcmVnZXgvcG9pbnRlci5qc1xuLy8gbW9kdWxlIGlkID0gMTdcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var helper = __webpack_require__(7),
+    libcore = __webpack_require__(2);
+
+function Pointer(chr, negative) {
+    if (chr) {
+        this.chr = chr;
+    }
+    
+    this.negative = negative === true;
+}
+
+Pointer.prototype = {
+    constructor: Pointer,
+    negative: false,
+    chr: '',
+    to: null,
+    next: null,
+    
+    clone: function (overrides) {
+        var pointer = this,
+            from = null,
+            dupe = helper.clone,
+            assign = libcore.assign;
+        var created, last;
+        
+        if (!overrides) {
+            overrides = null;
+        }
+        
+        for (; pointer; pointer = pointer.next) {
+            created = dupe(pointer);
+            if (overrides) {
+                assign(created, overrides);
+            }
+            
+            if (from) {
+                last.next = created;
+            }
+            else {
+                from = created;
+            }
+            
+            last = created;
+        }
+        
+        last.next = null;
+        
+        return [from, last];
+        
+    },
+    
+    point: function (fragment) {
+        var pointer = this;
+        
+        for (; pointer; pointer = pointer.next) {
+            if (!pointer.to) {
+                pointer.to = fragment;
+            }
+        }
+        
+        return this;
+    },
+    
+    last: function () {
+        var pointer = this;
+        
+        for (; pointer.next; pointer = pointer.next) {}
+        
+        return pointer;
+    },
+    
+    range: function (to) {
+        var chr = this.chr,
+            Class = Pointer,
+            S = String,
+            start = null,
+            end = null,
+            negative = this.negative;
+        var from, len, created;
+        
+        from = chr.charCodeAt(0);
+        chr = to.chr;
+        to = chr.charCodeAt(0);
+        len = to - from - 1;
+        
+        for (; len--;) {
+            created = new Class(S.fromCharCode(++from), negative);
+            if (start) {
+                end.next = created;
+            }
+            else {
+                start = created;
+            }
+            end = created;
+        }
+        
+        return start && [start, end];
+    }
+    
+};
+
+module.exports = Pointer;
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n\nvar parse = __webpack_require__(16),\n    StateMap = __webpack_require__(8),\n    Fragment = __webpack_require__(15),\n    Pointer = __webpack_require__(17);\n\nfunction build(name, regex, stateObject) {\n    \n    var F = Fragment,\n        P = Pointer,\n        rpn = parse(regex),\n        c = -1,\n        l = rpn.length,\n        stack = null,\n        startState = null,\n        el = 0,\n        endStates = [],\n        builder = {\n            gen: 0,\n            fgen: 0\n        };\n        \n    var item, token, split,\n        operand1, operand2;\n        \n    if (!(stateObject instanceof StateMap)) {\n        stateObject = new StateMap();\n    }\n    \n    for (; l--;) {\n        item = rpn[++c];\n        token = item[0];\n        \n        switch (token) {\n        // concat\n        case '.':\n            stack = [stack[0][0],\n                        stack[0][1].link(stack[1])];\n            break;\n        \n        // one or none\n        case '?':\n            stack = [stack[0],\n                        stack[1].split()];\n            break;\n        \n        // repeat one or more\n        case '+':\n            stack = [stack[0],\n                        stack[1].repeat()];\n            break;\n        \n        // repeat none or more (kleen star)\n        case '*':\n            stack = [stack[0],\n                        stack[1].split(true)];\n            break;\n        \n        // character class concat\n        case '^,':\n        case ',':\n        case '|': // also applicable to alternative\n            stack = [stack[0][0],\n                        stack[0][1].merge(stack[1],\n                                          token === '^,')];\n            break;\n        \n        // character class range\n        case '^-':\n        case '-':\n            stack = [stack[0][0],\n                        stack[0][1].fill(stack[1],\n                                         token === '^-')];\n            break;\n        \n        case '$$':\n            if (!stack || stack[0] !== null) {\n                console.log(stack);\n                throw new Error(\"Invalid end of expression.\");\n            }\n            \n            operand1 = stack[1];\n            operand2 = new F(builder, null);\n            operand1.link(operand2);\n            \n            endStates[el++] = operand2.state.id;\n            \n            // end split fragments\n            split = operand1.splitted;\n            for (; split; split = split.next) {\n                endStates[el++] = split.fragment.state.id;\n            }\n            break;\n        \n        case '^':\n        case '$':\n        case 'char':\n        case 'negative_char':\n            operand1 = new F(builder,\n                             new P(item[1], token === 'negative_char'));\n            \n            if (!startState) {\n                startState = operand1.applyState();\n            }\n\n            stack = [stack, operand1];\n            \n            \n\n        }\n        \n    }\n    \n    \n    if (el) {\n        stateObject.finalizeFragments(name, stack[1], endStates);\n    }\n    \n    builder = stack = split = operand1 = operand2 = null;\n    \n    return stateObject;\n    \n}\n\n\n\n\nmodule.exports = build;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvc3RhdGUtYnVpbGRlci5qcz8wNjY2Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7QUFHQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQSxVQUFVLEtBQUs7QUFDZjtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQSxrQkFBa0IsT0FBTztBQUN6QjtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTs7OztBQUlBOztBQUVBOzs7QUFHQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7O0FBRUE7Ozs7O0FBS0EiLCJmaWxlIjoiMTguanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cblxudmFyIHBhcnNlID0gcmVxdWlyZShcIi4vcGFyc2VyLmpzXCIpLFxuICAgIFN0YXRlTWFwID0gcmVxdWlyZShcIi4vc3RhdGUtbWFwLmpzXCIpLFxuICAgIEZyYWdtZW50ID0gcmVxdWlyZShcIi4vZnJhZ21lbnQuanNcIiksXG4gICAgUG9pbnRlciA9IHJlcXVpcmUoXCIuL3BvaW50ZXIuanNcIik7XG5cbmZ1bmN0aW9uIGJ1aWxkKG5hbWUsIHJlZ2V4LCBzdGF0ZU9iamVjdCkge1xuICAgIFxuICAgIHZhciBGID0gRnJhZ21lbnQsXG4gICAgICAgIFAgPSBQb2ludGVyLFxuICAgICAgICBycG4gPSBwYXJzZShyZWdleCksXG4gICAgICAgIGMgPSAtMSxcbiAgICAgICAgbCA9IHJwbi5sZW5ndGgsXG4gICAgICAgIHN0YWNrID0gbnVsbCxcbiAgICAgICAgc3RhcnRTdGF0ZSA9IG51bGwsXG4gICAgICAgIGVsID0gMCxcbiAgICAgICAgZW5kU3RhdGVzID0gW10sXG4gICAgICAgIGJ1aWxkZXIgPSB7XG4gICAgICAgICAgICBnZW46IDAsXG4gICAgICAgICAgICBmZ2VuOiAwXG4gICAgICAgIH07XG4gICAgICAgIFxuICAgIHZhciBpdGVtLCB0b2tlbiwgc3BsaXQsXG4gICAgICAgIG9wZXJhbmQxLCBvcGVyYW5kMjtcbiAgICAgICAgXG4gICAgaWYgKCEoc3RhdGVPYmplY3QgaW5zdGFuY2VvZiBTdGF0ZU1hcCkpIHtcbiAgICAgICAgc3RhdGVPYmplY3QgPSBuZXcgU3RhdGVNYXAoKTtcbiAgICB9XG4gICAgXG4gICAgZm9yICg7IGwtLTspIHtcbiAgICAgICAgaXRlbSA9IHJwblsrK2NdO1xuICAgICAgICB0b2tlbiA9IGl0ZW1bMF07XG4gICAgICAgIFxuICAgICAgICBzd2l0Y2ggKHRva2VuKSB7XG4gICAgICAgIC8vIGNvbmNhdFxuICAgICAgICBjYXNlICcuJzpcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMF1bMV0ubGluayhzdGFja1sxXSldO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIFxuICAgICAgICAvLyBvbmUgb3Igbm9uZVxuICAgICAgICBjYXNlICc/JzpcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMV0uc3BsaXQoKV07XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgXG4gICAgICAgIC8vIHJlcGVhdCBvbmUgb3IgbW9yZVxuICAgICAgICBjYXNlICcrJzpcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMV0ucmVwZWF0KCldO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIFxuICAgICAgICAvLyByZXBlYXQgbm9uZSBvciBtb3JlIChrbGVlbiBzdGFyKVxuICAgICAgICBjYXNlICcqJzpcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMV0uc3BsaXQodHJ1ZSldO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIFxuICAgICAgICAvLyBjaGFyYWN0ZXIgY2xhc3MgY29uY2F0XG4gICAgICAgIGNhc2UgJ14sJzpcbiAgICAgICAgY2FzZSAnLCc6XG4gICAgICAgIGNhc2UgJ3wnOiAvLyBhbHNvIGFwcGxpY2FibGUgdG8gYWx0ZXJuYXRpdmVcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMF1bMV0ubWVyZ2Uoc3RhY2tbMV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0b2tlbiA9PT0gJ14sJyldO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIFxuICAgICAgICAvLyBjaGFyYWN0ZXIgY2xhc3MgcmFuZ2VcbiAgICAgICAgY2FzZSAnXi0nOlxuICAgICAgICBjYXNlICctJzpcbiAgICAgICAgICAgIHN0YWNrID0gW3N0YWNrWzBdWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RhY2tbMF1bMV0uZmlsbChzdGFja1sxXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdG9rZW4gPT09ICdeLScpXTtcbiAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICBcbiAgICAgICAgY2FzZSAnJCQnOlxuICAgICAgICAgICAgaWYgKCFzdGFjayB8fCBzdGFja1swXSAhPT0gbnVsbCkge1xuICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKHN0YWNrKTtcbiAgICAgICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJJbnZhbGlkIGVuZCBvZiBleHByZXNzaW9uLlwiKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgb3BlcmFuZDEgPSBzdGFja1sxXTtcbiAgICAgICAgICAgIG9wZXJhbmQyID0gbmV3IEYoYnVpbGRlciwgbnVsbCk7XG4gICAgICAgICAgICBvcGVyYW5kMS5saW5rKG9wZXJhbmQyKTtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgZW5kU3RhdGVzW2VsKytdID0gb3BlcmFuZDIuc3RhdGUuaWQ7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIC8vIGVuZCBzcGxpdCBmcmFnbWVudHNcbiAgICAgICAgICAgIHNwbGl0ID0gb3BlcmFuZDEuc3BsaXR0ZWQ7XG4gICAgICAgICAgICBmb3IgKDsgc3BsaXQ7IHNwbGl0ID0gc3BsaXQubmV4dCkge1xuICAgICAgICAgICAgICAgIGVuZFN0YXRlc1tlbCsrXSA9IHNwbGl0LmZyYWdtZW50LnN0YXRlLmlkO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIFxuICAgICAgICBjYXNlICdeJzpcbiAgICAgICAgY2FzZSAnJCc6XG4gICAgICAgIGNhc2UgJ2NoYXInOlxuICAgICAgICBjYXNlICduZWdhdGl2ZV9jaGFyJzpcbiAgICAgICAgICAgIG9wZXJhbmQxID0gbmV3IEYoYnVpbGRlcixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmV3IFAoaXRlbVsxXSwgdG9rZW4gPT09ICduZWdhdGl2ZV9jaGFyJykpO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBpZiAoIXN0YXJ0U3RhdGUpIHtcbiAgICAgICAgICAgICAgICBzdGFydFN0YXRlID0gb3BlcmFuZDEuYXBwbHlTdGF0ZSgpO1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICBzdGFjayA9IFtzdGFjaywgb3BlcmFuZDFdO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBcblxuICAgICAgICB9XG4gICAgICAgIFxuICAgIH1cbiAgICBcbiAgICBcbiAgICBpZiAoZWwpIHtcbiAgICAgICAgc3RhdGVPYmplY3QuZmluYWxpemVGcmFnbWVudHMobmFtZSwgc3RhY2tbMV0sIGVuZFN0YXRlcyk7XG4gICAgfVxuICAgIFxuICAgIGJ1aWxkZXIgPSBzdGFjayA9IHNwbGl0ID0gb3BlcmFuZDEgPSBvcGVyYW5kMiA9IG51bGw7XG4gICAgXG4gICAgcmV0dXJuIHN0YXRlT2JqZWN0O1xuICAgIFxufVxuXG5cblxuXG5tb2R1bGUuZXhwb3J0cyA9IGJ1aWxkO1xuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL3JlZ2V4L3N0YXRlLWJ1aWxkZXIuanNcbi8vIG1vZHVsZSBpZCA9IDE4XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sInNvdXJjZVJvb3QiOiIifQ==");
+
+
+
+var parse = __webpack_require__(16),
+    StateMap = __webpack_require__(8),
+    Fragment = __webpack_require__(15),
+    Pointer = __webpack_require__(17);
+
+function build(name, regex, stateObject) {
+    
+    var F = Fragment,
+        P = Pointer,
+        rpn = parse(regex),
+        c = -1,
+        l = rpn.length,
+        stack = null,
+        startState = null,
+        el = 0,
+        endStates = [],
+        builder = {
+            gen: 0,
+            fgen: 0
+        };
+        
+    var item, token, split,
+        operand1, operand2;
+        
+    if (!(stateObject instanceof StateMap)) {
+        stateObject = new StateMap();
+    }
+    
+    for (; l--;) {
+        item = rpn[++c];
+        token = item[0];
+        
+        switch (token) {
+        // concat
+        case '.':
+            stack = [stack[0][0],
+                        stack[0][1].link(stack[1])];
+            break;
+        
+        // one or none
+        case '?':
+            stack = [stack[0],
+                        stack[1].split()];
+            break;
+        
+        // repeat one or more
+        case '+':
+            stack = [stack[0],
+                        stack[1].repeat()];
+            break;
+        
+        // repeat none or more (kleen star)
+        case '*':
+            stack = [stack[0],
+                        stack[1].split(true)];
+            break;
+        
+        // character class concat
+        case '^,':
+        case ',':
+        case '|': // also applicable to alternative
+            stack = [stack[0][0],
+                        stack[0][1].merge(stack[1],
+                                          token === '^,')];
+            break;
+        
+        // character class range
+        case '^-':
+        case '-':
+            stack = [stack[0][0],
+                        stack[0][1].fill(stack[1],
+                                         token === '^-')];
+            break;
+        
+        case '$$':
+            if (!stack || stack[0] !== null) {
+                console.log(stack);
+                throw new Error("Invalid end of expression.");
+            }
+            
+            operand1 = stack[1];
+            operand2 = new F(builder, null);
+            operand1.link(operand2);
+            
+            endStates[el++] = operand2.state.id;
+            
+            // end split fragments
+            split = operand1.splitted;
+            for (; split; split = split.next) {
+                endStates[el++] = split.fragment.state.id;
+            }
+            break;
+        
+        case '^':
+        case '$':
+        case 'char':
+        case 'negative_char':
+            operand1 = new F(builder,
+                             new P(item[1], token === 'negative_char'));
+            
+            if (!startState) {
+                startState = operand1.applyState();
+            }
+
+            stack = [stack, operand1];
+            
+            
+
+        }
+        
+    }
+    
+    
+    if (el) {
+        stateObject.finalizeFragments(name, stack[1], endStates);
+    }
+    
+    builder = stack = split = operand1 = operand2 = null;
+    
+    return stateObject;
+    
+}
+
+
+
+
+module.exports = build;
 
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar HEX_RE = /^[a-fA-F0-9]{2}$/,\n    UTF8_RE = /^[a-fA-F0-9]{4}$/,\n    RANGE_RE = /^([0-9]+|[0-9]+\\,[0-9]*|[0-9]*\\,[0-9]+)$/,\n    SPECIAL_CHAR = {\n        \"b\": \"\\b\",\n        \"f\": \"\\f\",\n        \"n\": \"\\n\",\n        \"r\": \"\\r\",\n        \"t\": \"\\t\",\n        \"v\": \"\\x0B\",\n        \"\\\\\": \"\\\\\",\n        \"B\": \"\\\\\"\n    };\n\nfunction escape(index, regexString) {\n    var c = index + 1,\n        len = c + 1,\n        special = SPECIAL_CHAR,\n        chr = regexString.substring(c, len);\n    var match, l;\n    \n    switch (chr) {\n    case \"x\":\n        l = c + 2;\n        match = regexString.substring(++c, l + 1).match(HEX_RE);\n        \n        return match ?\n                    \n                    [String.\n                        fromCharCode(parseInt(match[0],\n                                                  16)),\n                     l] :\n                    \n                    [\"x\",\n                     len];\n    case \"u\":\n        l = c + 4;\n        match = regexString.substring(++c, l + 1).match(UTF8_RE);\n        \n        return match ?\n                    \n                    [String.\n                        fromCharCode(parseInt(match[0],\n                                                  16)),\n                     l] :\n                    \n                    [\"x\",\n                     len];\n    default:\n        return [chr in special ?\n                    special[chr] : chr,\n                len];\n    }\n}\n\nfunction range(index, regexString) {\n    var c = index,\n        l = regexString.length;\n    var chr;\n    \n    for (; l--;) {\n        chr = regexString.charAt(++c);\n        if (chr === '}') {\n            chr = regexString.substring(index + 1, c);\n            if (RANGE_RE.test(chr)) {\n                return [chr, c + 1];\n            }\n        }\n    }\n    \n    return null;\n    \n}\n\n\nfunction tokenize(index, regexString) {\n    var M = Math,\n        len = regexString.length;\n    var chr, next, token;\n    \n    index = M.max(0, index);\n    \n    if (index > len) {\n        return null;\n    }\n    else if (index === len) {\n        return ['$$', null, len + 1];\n    }\n    \n    next = index + 1;\n    chr = regexString.charAt(index);\n    token =  'char';\n    \n    switch (chr) {\n    case \"\\\\\":\n        chr = escape(index, regexString);\n        next = chr[1];\n        chr = chr[0];\n        token = 'char';\n        break;\n    \n    case \"{\":\n        chr = range(index, regexString);\n        if (chr) {\n            next = chr[1];\n            chr = chr[0];\n            token = 'range';\n        }\n        else {\n            throw new Error(\"Invalid token near \" +\n                        regexString.substring(index,\n                                              M.min(len, index + 10)));\n        }\n        break;\n    \n    case \"[\":\n        if (next < len && regexString.charAt(next) === '^') {\n            token = '[^';\n            next++;\n            break;\n        }\n        \n    /* falls through */\n    case \"]\":\n    case \"(\":\n    case \")\":\n    case \"|\":\n    case \"?\":\n    case \"+\":\n    case \"*\":\n    case \"-\":\n    case \"^\":\n    case \"$\":\n        token = chr;\n        break;\n    }\n    \n    return token ?\n                [token, chr, next] : null;\n}\n\n\nmodule.exports = tokenize;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvcmVnZXgvdG9rZW5pemVyLmpzPzMxYmUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUEsMkJBQTJCLEVBQUU7QUFDN0IsNEJBQTRCLEVBQUU7QUFDOUI7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLFVBQVUsS0FBSztBQUNmO0FBQ0Esc0JBQXNCO0FBQ3RCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7O0FBR0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQSxXQUFXO0FBQ1g7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0EiLCJmaWxlIjoiMTkuanMiLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbnZhciBIRVhfUkUgPSAvXlthLWZBLUYwLTldezJ9JC8sXG4gICAgVVRGOF9SRSA9IC9eW2EtZkEtRjAtOV17NH0kLyxcbiAgICBSQU5HRV9SRSA9IC9eKFswLTldK3xbMC05XStcXCxbMC05XSp8WzAtOV0qXFwsWzAtOV0rKSQvLFxuICAgIFNQRUNJQUxfQ0hBUiA9IHtcbiAgICAgICAgXCJiXCI6IFwiXFxiXCIsXG4gICAgICAgIFwiZlwiOiBcIlxcZlwiLFxuICAgICAgICBcIm5cIjogXCJcXG5cIixcbiAgICAgICAgXCJyXCI6IFwiXFxyXCIsXG4gICAgICAgIFwidFwiOiBcIlxcdFwiLFxuICAgICAgICBcInZcIjogXCJcXHgwQlwiLFxuICAgICAgICBcIlxcXFxcIjogXCJcXFxcXCIsXG4gICAgICAgIFwiQlwiOiBcIlxcXFxcIlxuICAgIH07XG5cbmZ1bmN0aW9uIGVzY2FwZShpbmRleCwgcmVnZXhTdHJpbmcpIHtcbiAgICB2YXIgYyA9IGluZGV4ICsgMSxcbiAgICAgICAgbGVuID0gYyArIDEsXG4gICAgICAgIHNwZWNpYWwgPSBTUEVDSUFMX0NIQVIsXG4gICAgICAgIGNociA9IHJlZ2V4U3RyaW5nLnN1YnN0cmluZyhjLCBsZW4pO1xuICAgIHZhciBtYXRjaCwgbDtcbiAgICBcbiAgICBzd2l0Y2ggKGNocikge1xuICAgIGNhc2UgXCJ4XCI6XG4gICAgICAgIGwgPSBjICsgMjtcbiAgICAgICAgbWF0Y2ggPSByZWdleFN0cmluZy5zdWJzdHJpbmcoKytjLCBsICsgMSkubWF0Y2goSEVYX1JFKTtcbiAgICAgICAgXG4gICAgICAgIHJldHVybiBtYXRjaCA/XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBbU3RyaW5nLlxuICAgICAgICAgICAgICAgICAgICAgICAgZnJvbUNoYXJDb2RlKHBhcnNlSW50KG1hdGNoWzBdLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxNikpLFxuICAgICAgICAgICAgICAgICAgICAgbF0gOlxuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgW1wieFwiLFxuICAgICAgICAgICAgICAgICAgICAgbGVuXTtcbiAgICBjYXNlIFwidVwiOlxuICAgICAgICBsID0gYyArIDQ7XG4gICAgICAgIG1hdGNoID0gcmVnZXhTdHJpbmcuc3Vic3RyaW5nKCsrYywgbCArIDEpLm1hdGNoKFVURjhfUkUpO1xuICAgICAgICBcbiAgICAgICAgcmV0dXJuIG1hdGNoID9cbiAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgIFtTdHJpbmcuXG4gICAgICAgICAgICAgICAgICAgICAgICBmcm9tQ2hhckNvZGUocGFyc2VJbnQobWF0Y2hbMF0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE2KSksXG4gICAgICAgICAgICAgICAgICAgICBsXSA6XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBbXCJ4XCIsXG4gICAgICAgICAgICAgICAgICAgICBsZW5dO1xuICAgIGRlZmF1bHQ6XG4gICAgICAgIHJldHVybiBbY2hyIGluIHNwZWNpYWwgP1xuICAgICAgICAgICAgICAgICAgICBzcGVjaWFsW2Nocl0gOiBjaHIsXG4gICAgICAgICAgICAgICAgbGVuXTtcbiAgICB9XG59XG5cbmZ1bmN0aW9uIHJhbmdlKGluZGV4LCByZWdleFN0cmluZykge1xuICAgIHZhciBjID0gaW5kZXgsXG4gICAgICAgIGwgPSByZWdleFN0cmluZy5sZW5ndGg7XG4gICAgdmFyIGNocjtcbiAgICBcbiAgICBmb3IgKDsgbC0tOykge1xuICAgICAgICBjaHIgPSByZWdleFN0cmluZy5jaGFyQXQoKytjKTtcbiAgICAgICAgaWYgKGNociA9PT0gJ30nKSB7XG4gICAgICAgICAgICBjaHIgPSByZWdleFN0cmluZy5zdWJzdHJpbmcoaW5kZXggKyAxLCBjKTtcbiAgICAgICAgICAgIGlmIChSQU5HRV9SRS50ZXN0KGNocikpIHtcbiAgICAgICAgICAgICAgICByZXR1cm4gW2NociwgYyArIDFdO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxuICAgIFxuICAgIHJldHVybiBudWxsO1xuICAgIFxufVxuXG5cbmZ1bmN0aW9uIHRva2VuaXplKGluZGV4LCByZWdleFN0cmluZykge1xuICAgIHZhciBNID0gTWF0aCxcbiAgICAgICAgbGVuID0gcmVnZXhTdHJpbmcubGVuZ3RoO1xuICAgIHZhciBjaHIsIG5leHQsIHRva2VuO1xuICAgIFxuICAgIGluZGV4ID0gTS5tYXgoMCwgaW5kZXgpO1xuICAgIFxuICAgIGlmIChpbmRleCA+IGxlbikge1xuICAgICAgICByZXR1cm4gbnVsbDtcbiAgICB9XG4gICAgZWxzZSBpZiAoaW5kZXggPT09IGxlbikge1xuICAgICAgICByZXR1cm4gWyckJCcsIG51bGwsIGxlbiArIDFdO1xuICAgIH1cbiAgICBcbiAgICBuZXh0ID0gaW5kZXggKyAxO1xuICAgIGNociA9IHJlZ2V4U3RyaW5nLmNoYXJBdChpbmRleCk7XG4gICAgdG9rZW4gPSAgJ2NoYXInO1xuICAgIFxuICAgIHN3aXRjaCAoY2hyKSB7XG4gICAgY2FzZSBcIlxcXFxcIjpcbiAgICAgICAgY2hyID0gZXNjYXBlKGluZGV4LCByZWdleFN0cmluZyk7XG4gICAgICAgIG5leHQgPSBjaHJbMV07XG4gICAgICAgIGNociA9IGNoclswXTtcbiAgICAgICAgdG9rZW4gPSAnY2hhcic7XG4gICAgICAgIGJyZWFrO1xuICAgIFxuICAgIGNhc2UgXCJ7XCI6XG4gICAgICAgIGNociA9IHJhbmdlKGluZGV4LCByZWdleFN0cmluZyk7XG4gICAgICAgIGlmIChjaHIpIHtcbiAgICAgICAgICAgIG5leHQgPSBjaHJbMV07XG4gICAgICAgICAgICBjaHIgPSBjaHJbMF07XG4gICAgICAgICAgICB0b2tlbiA9ICdyYW5nZSc7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJJbnZhbGlkIHRva2VuIG5lYXIgXCIgK1xuICAgICAgICAgICAgICAgICAgICAgICAgcmVnZXhTdHJpbmcuc3Vic3RyaW5nKGluZGV4LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE0ubWluKGxlbiwgaW5kZXggKyAxMCkpKTtcbiAgICAgICAgfVxuICAgICAgICBicmVhaztcbiAgICBcbiAgICBjYXNlIFwiW1wiOlxuICAgICAgICBpZiAobmV4dCA8IGxlbiAmJiByZWdleFN0cmluZy5jaGFyQXQobmV4dCkgPT09ICdeJykge1xuICAgICAgICAgICAgdG9rZW4gPSAnW14nO1xuICAgICAgICAgICAgbmV4dCsrO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgLyogZmFsbHMgdGhyb3VnaCAqL1xuICAgIGNhc2UgXCJdXCI6XG4gICAgY2FzZSBcIihcIjpcbiAgICBjYXNlIFwiKVwiOlxuICAgIGNhc2UgXCJ8XCI6XG4gICAgY2FzZSBcIj9cIjpcbiAgICBjYXNlIFwiK1wiOlxuICAgIGNhc2UgXCIqXCI6XG4gICAgY2FzZSBcIi1cIjpcbiAgICBjYXNlIFwiXlwiOlxuICAgIGNhc2UgXCIkXCI6XG4gICAgICAgIHRva2VuID0gY2hyO1xuICAgICAgICBicmVhaztcbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIHRva2VuID9cbiAgICAgICAgICAgICAgICBbdG9rZW4sIGNociwgbmV4dF0gOiBudWxsO1xufVxuXG5cbm1vZHVsZS5leHBvcnRzID0gdG9rZW5pemU7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvcmVnZXgvdG9rZW5pemVyLmpzXG4vLyBtb2R1bGUgaWQgPSAxOVxuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJzb3VyY2VSb290IjoiIn0=");
+
+
+var HEX_RE = /^[a-fA-F0-9]{2}$/,
+    UTF8_RE = /^[a-fA-F0-9]{4}$/,
+    RANGE_RE = /^([0-9]+|[0-9]+\,[0-9]*|[0-9]*\,[0-9]+)$/,
+    SPECIAL_CHAR = {
+        "b": "\b",
+        "f": "\f",
+        "n": "\n",
+        "r": "\r",
+        "t": "\t",
+        "v": "\x0B",
+        "\\": "\\",
+        "B": "\\"
+    };
+
+function escape(index, regexString) {
+    var c = index + 1,
+        len = c + 1,
+        special = SPECIAL_CHAR,
+        chr = regexString.substring(c, len);
+    var match, l;
+    
+    switch (chr) {
+    case "x":
+        l = c + 2;
+        match = regexString.substring(++c, l + 1).match(HEX_RE);
+        
+        return match ?
+                    
+                    [String.
+                        fromCharCode(parseInt(match[0],
+                                                  16)),
+                     l] :
+                    
+                    ["x",
+                     len];
+    case "u":
+        l = c + 4;
+        match = regexString.substring(++c, l + 1).match(UTF8_RE);
+        
+        return match ?
+                    
+                    [String.
+                        fromCharCode(parseInt(match[0],
+                                                  16)),
+                     l] :
+                    
+                    ["x",
+                     len];
+    default:
+        return [chr in special ?
+                    special[chr] : chr,
+                len];
+    }
+}
+
+function range(index, regexString) {
+    var c = index,
+        l = regexString.length;
+    var chr;
+    
+    for (; l--;) {
+        chr = regexString.charAt(++c);
+        if (chr === '}') {
+            chr = regexString.substring(index + 1, c);
+            if (RANGE_RE.test(chr)) {
+                return [chr, c + 1];
+            }
+        }
+    }
+    
+    return null;
+    
+}
+
+
+function tokenize(index, regexString) {
+    var M = Math,
+        len = regexString.length;
+    var chr, next, token;
+    
+    index = M.max(0, index);
+    
+    if (index > len) {
+        return null;
+    }
+    else if (index === len) {
+        return ['$$', null, len + 1];
+    }
+    
+    next = index + 1;
+    chr = regexString.charAt(index);
+    token =  'char';
+    
+    switch (chr) {
+    case "\\":
+        chr = escape(index, regexString);
+        next = chr[1];
+        chr = chr[0];
+        token = 'char';
+        break;
+    
+    case "{":
+        chr = range(index, regexString);
+        if (chr) {
+            next = chr[1];
+            chr = chr[0];
+            token = 'range';
+        }
+        else {
+            throw new Error("Invalid token near " +
+                        regexString.substring(index,
+                                              M.min(len, index + 10)));
+        }
+        break;
+    
+    case "[":
+        if (next < len && regexString.charAt(next) === '^') {
+            token = '[^';
+            next++;
+            break;
+        }
+        
+    /* falls through */
+    case "]":
+    case "(":
+    case ")":
+    case "|":
+    case "?":
+    case "+":
+    case "*":
+    case "-":
+    case "^":
+    case "$":
+        token = chr;
+        break;
+    }
+    
+    return token ?
+                [token, chr, next] : null;
+}
+
+
+module.exports = tokenize;
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar libcore = __webpack_require__(2),\n    StateMap = __webpack_require__(8),\n    builder = __webpack_require__(18);\n\n\n\nfunction Tokenizer() {\n    this.map = new StateMap();\n}\n\nTokenizer.prototype = {\n    map: null,\n    constructor: Tokenizer,\n    \n    define: function (definitions) {\n        var lib = libcore,\n            string = lib.string,\n            regex = lib.regex,\n            map = this.map,\n            build = builder,\n            name = null;\n        var item, c, len;\n        \n        if (!lib.array(definitions)) {\n            throw new Error(\"Invalid definitions parameter.\");\n        }\n        \n        c = -1;\n        len = definitions.length;\n        \n        for (; len--;) {\n            item = definitions[++c];\n            \n            if (string(item)) {\n                name = item;\n                \n            }\n            else if (regex(item)) {\n                item = item.source;\n                if (!name) {\n                    throw new Error(\"Token is not named \" + item);\n                }\n                \n                build(name, item, map);\n                \n            }\n            \n        }\n        \n        return this;\n    },\n    \n    fromJSON: function (data) {\n        this.map.importDefinition(data);\n        return this;\n    },\n    \n    toJSON: function () {\n        return this.map.exportDefinition();\n    },\n    \n    tokenize: function (from, str) {\n        var map = this.map,\n            ends = map.ends,\n            states = map.states,\n            cursor = [map.start, null],\n            len = str.length,\n            limit = len - from,\n            index = from - 1,\n            found = null;\n        var chr, c, l, next, list, state, pointer, target, not, nmap;\n        \n        if (limit === 0) {\n            return ['$', '', len + 1];\n        }\n        else if (limit < 1) {\n            return null;\n        }\n        \n        for (; limit--;) {\n            chr = str.charAt(++index);\n            next = null;\n            for (; cursor; cursor = cursor[1]) {\n                state = cursor[0];\n                pointer = states[state];\n                \n                if (state in ends) {\n                    found = [ends[state], index];\n                }\n                \n                // apply positive match\n                if (chr in pointer) {\n                    list = pointer[chr];\n                    \n                    for (c = -1, l = list.length; l--;) {\n                        target = list[++c];\n                        next = [target, next];\n                        \n                        // found token\n                        if (target in ends) {\n                            found = [ends[target], index + 1];\n                        }\n                    }\n                }\n                \n                // find negative match\n                not = pointer.not;\n                for (c = -1, l = not.length; l--;) {\n                    target = not[++c];\n                    nmap = target[1];\n                    \n                    if (!(chr in nmap)) {\n                        target = target[0];\n                        next = [target, next];\n                        \n                                                \n                        // found token\n                        if (target in ends) {\n                            found = [ends[target], index + 1];\n                        }\n                    }\n                }\n\n            }\n            \n            if (next) {\n                cursor = next;\n            }\n            else {\n                break;\n            }\n            \n        }\n        \n        if (found) {\n            found[2] = found[1];\n            found[1] = str.substring(from, found[1]);\n        }\n        \n        return found;\n        \n    }\n};\n\n\nmodule.exports = Tokenizer;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvdG9rZW5pemVyLmpzPzg2NTkiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBOzs7O0FBSUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBLGNBQWMsT0FBTztBQUNyQjs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTtBQUNBLEtBQUs7O0FBRUw7QUFDQTtBQUNBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0EsS0FBSzs7QUFFTDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUEsY0FBYyxTQUFTO0FBQ3ZCO0FBQ0E7QUFDQSxrQkFBa0IsUUFBUTtBQUMxQjtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUEsaURBQWlELEtBQUs7QUFDdEQ7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLDRDQUE0QyxLQUFLO0FBQ2pEO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOzs7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7OztBQUdBIiwiZmlsZSI6IjIwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG52YXIgbGliY29yZSA9IHJlcXVpcmUoJ2xpYmNvcmUnKSxcbiAgICBTdGF0ZU1hcCA9IHJlcXVpcmUoXCIuL3JlZ2V4L3N0YXRlLW1hcC5qc1wiKSxcbiAgICBidWlsZGVyID0gcmVxdWlyZShcIi4vcmVnZXgvc3RhdGUtYnVpbGRlci5qc1wiKTtcblxuXG5cbmZ1bmN0aW9uIFRva2VuaXplcigpIHtcbiAgICB0aGlzLm1hcCA9IG5ldyBTdGF0ZU1hcCgpO1xufVxuXG5Ub2tlbml6ZXIucHJvdG90eXBlID0ge1xuICAgIG1hcDogbnVsbCxcbiAgICBjb25zdHJ1Y3RvcjogVG9rZW5pemVyLFxuICAgIFxuICAgIGRlZmluZTogZnVuY3Rpb24gKGRlZmluaXRpb25zKSB7XG4gICAgICAgIHZhciBsaWIgPSBsaWJjb3JlLFxuICAgICAgICAgICAgc3RyaW5nID0gbGliLnN0cmluZyxcbiAgICAgICAgICAgIHJlZ2V4ID0gbGliLnJlZ2V4LFxuICAgICAgICAgICAgbWFwID0gdGhpcy5tYXAsXG4gICAgICAgICAgICBidWlsZCA9IGJ1aWxkZXIsXG4gICAgICAgICAgICBuYW1lID0gbnVsbDtcbiAgICAgICAgdmFyIGl0ZW0sIGMsIGxlbjtcbiAgICAgICAgXG4gICAgICAgIGlmICghbGliLmFycmF5KGRlZmluaXRpb25zKSkge1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKFwiSW52YWxpZCBkZWZpbml0aW9ucyBwYXJhbWV0ZXIuXCIpO1xuICAgICAgICB9XG4gICAgICAgIFxuICAgICAgICBjID0gLTE7XG4gICAgICAgIGxlbiA9IGRlZmluaXRpb25zLmxlbmd0aDtcbiAgICAgICAgXG4gICAgICAgIGZvciAoOyBsZW4tLTspIHtcbiAgICAgICAgICAgIGl0ZW0gPSBkZWZpbml0aW9uc1srK2NdO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICBpZiAoc3RyaW5nKGl0ZW0pKSB7XG4gICAgICAgICAgICAgICAgbmFtZSA9IGl0ZW07XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBlbHNlIGlmIChyZWdleChpdGVtKSkge1xuICAgICAgICAgICAgICAgIGl0ZW0gPSBpdGVtLnNvdXJjZTtcbiAgICAgICAgICAgICAgICBpZiAoIW5hbWUpIHtcbiAgICAgICAgICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKFwiVG9rZW4gaXMgbm90IG5hbWVkIFwiICsgaXRlbSk7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIGJ1aWxkKG5hbWUsIGl0ZW0sIG1hcCk7XG4gICAgICAgICAgICAgICAgXG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfSxcbiAgICBcbiAgICBmcm9tSlNPTjogZnVuY3Rpb24gKGRhdGEpIHtcbiAgICAgICAgdGhpcy5tYXAuaW1wb3J0RGVmaW5pdGlvbihkYXRhKTtcbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfSxcbiAgICBcbiAgICB0b0pTT046IGZ1bmN0aW9uICgpIHtcbiAgICAgICAgcmV0dXJuIHRoaXMubWFwLmV4cG9ydERlZmluaXRpb24oKTtcbiAgICB9LFxuICAgIFxuICAgIHRva2VuaXplOiBmdW5jdGlvbiAoZnJvbSwgc3RyKSB7XG4gICAgICAgIHZhciBtYXAgPSB0aGlzLm1hcCxcbiAgICAgICAgICAgIGVuZHMgPSBtYXAuZW5kcyxcbiAgICAgICAgICAgIHN0YXRlcyA9IG1hcC5zdGF0ZXMsXG4gICAgICAgICAgICBjdXJzb3IgPSBbbWFwLnN0YXJ0LCBudWxsXSxcbiAgICAgICAgICAgIGxlbiA9IHN0ci5sZW5ndGgsXG4gICAgICAgICAgICBsaW1pdCA9IGxlbiAtIGZyb20sXG4gICAgICAgICAgICBpbmRleCA9IGZyb20gLSAxLFxuICAgICAgICAgICAgZm91bmQgPSBudWxsO1xuICAgICAgICB2YXIgY2hyLCBjLCBsLCBuZXh0LCBsaXN0LCBzdGF0ZSwgcG9pbnRlciwgdGFyZ2V0LCBub3QsIG5tYXA7XG4gICAgICAgIFxuICAgICAgICBpZiAobGltaXQgPT09IDApIHtcbiAgICAgICAgICAgIHJldHVybiBbJyQnLCAnJywgbGVuICsgMV07XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSBpZiAobGltaXQgPCAxKSB7XG4gICAgICAgICAgICByZXR1cm4gbnVsbDtcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgICAgZm9yICg7IGxpbWl0LS07KSB7XG4gICAgICAgICAgICBjaHIgPSBzdHIuY2hhckF0KCsraW5kZXgpO1xuICAgICAgICAgICAgbmV4dCA9IG51bGw7XG4gICAgICAgICAgICBmb3IgKDsgY3Vyc29yOyBjdXJzb3IgPSBjdXJzb3JbMV0pIHtcbiAgICAgICAgICAgICAgICBzdGF0ZSA9IGN1cnNvclswXTtcbiAgICAgICAgICAgICAgICBwb2ludGVyID0gc3RhdGVzW3N0YXRlXTtcbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBpZiAoc3RhdGUgaW4gZW5kcykge1xuICAgICAgICAgICAgICAgICAgICBmb3VuZCA9IFtlbmRzW3N0YXRlXSwgaW5kZXhdO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAvLyBhcHBseSBwb3NpdGl2ZSBtYXRjaFxuICAgICAgICAgICAgICAgIGlmIChjaHIgaW4gcG9pbnRlcikge1xuICAgICAgICAgICAgICAgICAgICBsaXN0ID0gcG9pbnRlcltjaHJdO1xuICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgZm9yIChjID0gLTEsIGwgPSBsaXN0Lmxlbmd0aDsgbC0tOykge1xuICAgICAgICAgICAgICAgICAgICAgICAgdGFyZ2V0ID0gbGlzdFsrK2NdO1xuICAgICAgICAgICAgICAgICAgICAgICAgbmV4dCA9IFt0YXJnZXQsIG5leHRdO1xuICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAvLyBmb3VuZCB0b2tlblxuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRhcmdldCBpbiBlbmRzKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZm91bmQgPSBbZW5kc1t0YXJnZXRdLCBpbmRleCArIDFdO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgIC8vIGZpbmQgbmVnYXRpdmUgbWF0Y2hcbiAgICAgICAgICAgICAgICBub3QgPSBwb2ludGVyLm5vdDtcbiAgICAgICAgICAgICAgICBmb3IgKGMgPSAtMSwgbCA9IG5vdC5sZW5ndGg7IGwtLTspIHtcbiAgICAgICAgICAgICAgICAgICAgdGFyZ2V0ID0gbm90WysrY107XG4gICAgICAgICAgICAgICAgICAgIG5tYXAgPSB0YXJnZXRbMV07XG4gICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICBpZiAoIShjaHIgaW4gbm1hcCkpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldCA9IHRhcmdldFswXTtcbiAgICAgICAgICAgICAgICAgICAgICAgIG5leHQgPSBbdGFyZ2V0LCBuZXh0XTtcbiAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAvLyBmb3VuZCB0b2tlblxuICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRhcmdldCBpbiBlbmRzKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZm91bmQgPSBbZW5kc1t0YXJnZXRdLCBpbmRleCArIDFdO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIGlmIChuZXh0KSB7XG4gICAgICAgICAgICAgICAgY3Vyc29yID0gbmV4dDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIGlmIChmb3VuZCkge1xuICAgICAgICAgICAgZm91bmRbMl0gPSBmb3VuZFsxXTtcbiAgICAgICAgICAgIGZvdW5kWzFdID0gc3RyLnN1YnN0cmluZyhmcm9tLCBmb3VuZFsxXSk7XG4gICAgICAgIH1cbiAgICAgICAgXG4gICAgICAgIHJldHVybiBmb3VuZDtcbiAgICAgICAgXG4gICAgfVxufTtcblxuXG5tb2R1bGUuZXhwb3J0cyA9IFRva2VuaXplcjtcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL3Rva2VuaXplci5qc1xuLy8gbW9kdWxlIGlkID0gMjBcbi8vIG1vZHVsZSBjaHVua3MgPSAwIDEiXSwic291cmNlUm9vdCI6IiJ9");
+
+
+var libcore = __webpack_require__(2),
+    StateMap = __webpack_require__(8),
+    builder = __webpack_require__(18);
+
+
+
+function Tokenizer() {
+    this.map = new StateMap();
+}
+
+Tokenizer.prototype = {
+    map: null,
+    constructor: Tokenizer,
+    
+    define: function (definitions) {
+        var lib = libcore,
+            string = lib.string,
+            regex = lib.regex,
+            map = this.map,
+            build = builder,
+            name = null;
+        var item, c, len;
+        
+        if (!lib.array(definitions)) {
+            throw new Error("Invalid definitions parameter.");
+        }
+        
+        c = -1;
+        len = definitions.length;
+        
+        for (; len--;) {
+            item = definitions[++c];
+            
+            if (string(item)) {
+                name = item;
+                
+            }
+            else if (regex(item)) {
+                item = item.source;
+                if (!name) {
+                    throw new Error("Token is not named " + item);
+                }
+                
+                build(name, item, map);
+                
+            }
+            
+        }
+        
+        return this;
+    },
+    
+    fromJSON: function (data) {
+        this.map.importDefinition(data);
+        return this;
+    },
+    
+    toJSON: function () {
+        return this.map.exportDefinition();
+    },
+    
+    tokenize: function (from, str) {
+        var map = this.map,
+            ends = map.ends,
+            states = map.states,
+            cursor = [map.start, null],
+            len = str.length,
+            limit = len - from,
+            index = from - 1,
+            found = null;
+        var chr, c, l, next, list, state, pointer, target, not, nmap;
+        
+        if (limit === 0) {
+            return ['$', '', len + 1];
+        }
+        else if (limit < 1) {
+            return null;
+        }
+        
+        for (; limit--;) {
+            chr = str.charAt(++index);
+            next = null;
+            for (; cursor; cursor = cursor[1]) {
+                state = cursor[0];
+                pointer = states[state];
+                
+                if (state in ends) {
+                    found = [ends[state], index];
+                }
+                
+                // apply positive match
+                if (chr in pointer) {
+                    list = pointer[chr];
+                    
+                    for (c = -1, l = list.length; l--;) {
+                        target = list[++c];
+                        next = [target, next];
+                        
+                        // found token
+                        if (target in ends) {
+                            found = [ends[target], index + 1];
+                        }
+                    }
+                }
+                
+                // find negative match
+                not = pointer.not;
+                for (c = -1, l = not.length; l--;) {
+                    target = not[++c];
+                    nmap = target[1];
+                    
+                    if (!(chr in nmap)) {
+                        target = target[0];
+                        next = [target, next];
+                        
+                                                
+                        // found token
+                        if (target in ends) {
+                            found = [ends[target], index + 1];
+                        }
+                    }
+                }
+
+            }
+            
+            if (next) {
+                cursor = next;
+            }
+            else {
+                break;
+            }
+            
+        }
+        
+        if (found) {
+            found[2] = found[1];
+            found[1] = str.substring(from, found[1]);
+        }
+        
+        return found;
+        
+    }
+};
+
+
+module.exports = Tokenizer;
+
 
 /***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(9);
