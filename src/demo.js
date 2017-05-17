@@ -72,10 +72,41 @@ function test4() {
     testTokenizer(tokenizer, '\na b cccd');
 }
 
-test4();
-test3();
-test2();
-test1();
+function test5() {
+    var tokenizer = new Tokenizer(),
+        subject = '0912diko+2dikoVersion3';
+        //subject = '0912diko+2dikoVersion3';
+        
+    tokenizer.define([
+                "dikofied", /diko(Version[0-9]+)?t?/,
+                "number", /[\+|\-]?[0-9]+/
+            ]);
+    
+    testTokenizer(tokenizer, subject);
+    
+    console.log(tokenizer);
+}
+
+function test6() {
+    var tokenizer = new Tokenizer(),
+        subject = '0912diko+2dikoxx3t9';
+        
+    tokenizer.define([
+                "dikofied", /diko(xx[0-9]+)*t*/,
+                "multi_sign_number", /[\+|\-]?[0-9]+/
+            ]);
+    
+    testTokenizer(tokenizer, subject);
+    
+    console.log(tokenizer);
+}
+
+test6();
+//test5();
+//test4();
+//test3();
+//test2();
+//test1();
 
 
 

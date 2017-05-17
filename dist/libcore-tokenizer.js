@@ -2355,6 +2355,7 @@ Fragment.prototype = {
         var operand1 = this,
             outgoing = operand1.outgoing,
             split = operand1.splitted,
+            newSplit = operand2.splitted,
             repeat = operand1.repeated;
         var clone, last, fragment, pointer;
         
@@ -2397,16 +2398,35 @@ Fragment.prototype = {
                 fragment.lastPointer = clone[1];
             }
             
+            // concatenate split
+            if (newSplit) {
+                
+                operand1.lastSplit().next = newSplit;
+                
+            }
+            
+            newSplit = operand1.splitted;
+
         }
         
         fragment = operand1.clone();
-        fragment.splitted = operand2.splitted;
+        fragment.splitted = newSplit;
         fragment.repeated = operand2.repeated;
         
         fragment.outgoing = operand2.outgoing;
         fragment.lastOutgoing = operand2.lastOutgoing;
         
         return fragment;
+    },
+    
+    lastSplit: function () {
+        var split = this.splitted;
+        if (split) {
+            for (; split.next; split = split.next) {}
+            return split;
+        }
+        return null;
+        
     },
     
     clone: function () {
@@ -2431,12 +2451,12 @@ Fragment.prototype = {
             fragment = repeat ?
                             me.repeat() : me.clone();
         
-        if (current) {
-            fragment.splitted = current;
-            for (; current.next; current = current.next) { }
-            current.next = split;
-        }
-        else {
+        if (!current) {
+        //    fragment.splitted = current;
+        //    for (; current.next; current = current.next) { }
+        //    current.next = split;
+        //}
+        //else {
             fragment.splitted = split;
         }
         
@@ -2988,6 +3008,7 @@ function build(name, regex, stateObject) {
             
             // end split fragments
             split = operand1.splitted;
+            
             for (; split; split = split.next) {
                 endStates[el++] = split.fragment.state.id;
             }
@@ -3301,7 +3322,6 @@ Tokenizer.prototype = {
                         target = target[0];
                         next = [target, next];
                         
-                                                
                         // found token
                         if (target in ends) {
                             found = [ends[target], index + 1];

@@ -42,6 +42,7 @@ Fragment.prototype = {
         var operand1 = this,
             outgoing = operand1.outgoing,
             split = operand1.splitted,
+            newSplit = operand2.splitted,
             repeat = operand1.repeated;
         var clone, last, fragment, pointer;
         
@@ -57,7 +58,9 @@ Fragment.prototype = {
             
             for (; repeat; repeat = repeat.next) {
                 clone = repeat.fragment.pointer.clone();
+                
                 if (!last) {
+                    console.log("cloned! ", repeat.fragment, clone, ' to: ', clone.to);
                     operand2.pointer = clone[0];
                     operand2.lastPointer = last = clone[1];
                 }
@@ -84,16 +87,35 @@ Fragment.prototype = {
                 fragment.lastPointer = clone[1];
             }
             
+            // concatenate split
+            if (newSplit) {
+                
+                operand1.lastSplit().next = newSplit;
+                
+            }
+            
+            newSplit = operand1.splitted;
+
         }
         
         fragment = operand1.clone();
-        fragment.splitted = operand2.splitted;
+        fragment.splitted = newSplit;
         fragment.repeated = operand2.repeated;
         
         fragment.outgoing = operand2.outgoing;
         fragment.lastOutgoing = operand2.lastOutgoing;
         
         return fragment;
+    },
+    
+    lastSplit: function () {
+        var split = this.splitted;
+        if (split) {
+            for (; split.next; split = split.next) {}
+            return split;
+        }
+        return null;
+        
     },
     
     clone: function () {
@@ -118,13 +140,17 @@ Fragment.prototype = {
             fragment = repeat ?
                             me.repeat() : me.clone();
         
-        if (current) {
-            fragment.splitted = current;
-            for (; current.next; current = current.next) { }
-            current.next = split;
-        }
-        else {
+        if (!current) {
+        //    fragment.splitted = current;
+        //    for (; current.next; current = current.next) { }
+        //    current.next = split;
+        //}
+        //else {
             fragment.splitted = split;
+        }
+        
+        if (repeat) {
+            console.log('split repeat! ', fragment);
         }
         
         return fragment;
@@ -139,11 +165,11 @@ Fragment.prototype = {
                 next: null
             };
             
-        if (current) {
-            for (; current.next; current = current.next) { }
-            current.next = repeat;
-        }
-        else {
+        if (!current) {
+        //    for (; current.next; current = current.next) { }
+        //    current.next = repeat;
+        //}
+        //else {
             fragment.repeated = repeat;
         }
         

@@ -94,9 +94,12 @@ Tokenizer.prototype = {
                 if (chr in pointer) {
                     list = pointer[chr];
                     
+                    
                     for (c = -1, l = list.length; l--;) {
                         target = list[++c];
                         next = [target, next];
+                        
+                        console.log(state,':', chr, '->', target);
                         
                         // found token
                         if (target in ends) {
@@ -114,8 +117,8 @@ Tokenizer.prototype = {
                     if (!(chr in nmap)) {
                         target = target[0];
                         next = [target, next];
+                        console.log(state,':', chr, '->', target);
                         
-                                                
                         // found token
                         if (target in ends) {
                             found = [ends[target], index + 1];

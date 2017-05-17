@@ -19,4 +19,8 @@ describe("Test Tokenizer API",
 describe("Test Supported Regular Expression operators",
     function () {
         require("./regex/alternative.js");
+        require("./regex/character-class.js");
+        require("./regex/optional.js");
+        require("./regex/repeat-none-or-more.js");
+        require("./regex/repeat-one-or-more.js");
     });

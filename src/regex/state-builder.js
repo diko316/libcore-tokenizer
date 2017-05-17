@@ -75,6 +75,10 @@ function build(name, regex, stateObject) {
                                          token === '^-')];
             break;
         
+        case '()':
+            console.log("enclosed ", stack[1]);
+            break;
+        
         case '$$':
             if (!stack || stack[0] !== null) {
                 console.log(stack);
@@ -89,6 +93,7 @@ function build(name, regex, stateObject) {
             
             // end split fragments
             split = operand1.splitted;
+            
             for (; split; split = split.next) {
                 endStates[el++] = split.fragment.state.id;
             }

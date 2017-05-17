@@ -14,6 +14,7 @@ function Pointer(chr, negative) {
 Pointer.prototype = {
     constructor: Pointer,
     negative: false,
+    repeated: false,
     chr: '',
     to: null,
     next: null,

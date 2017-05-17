@@ -18,12 +18,18 @@ case "compressed":
 /* falls through */
 default:
     if (dev) {
+        console.log("applying development build");
         require("./config/dev.js")(CONFIG);
     }
     
     if (hot) {
+        console.log("running hot module replacement");
         CONFIG.plugins = [new webpack.HotModuleReplacementPlugin()];
         CONFIG.entry[LIB_NAME].
+            splice(0,0,
+                'webpack-hot-middleware/client?reload=true&overlay=false');
+            
+        CONFIG.entry.demo.
             splice(0,0,
                 'webpack-hot-middleware/client?reload=true&overlay=false');
     }

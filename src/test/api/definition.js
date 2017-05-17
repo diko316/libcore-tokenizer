@@ -20,35 +20,24 @@ describe("Tokenizer instance \"define([definitions...])\" API",
         it('2. Should not define tokens with define(non-array) parameters',
             function () {
                 
-                var tokenizer = global.createTokenizer(),
-                    error = null;
-                
-                try {
+                var tokenizer = global.createTokenizer();
+
+                function defineNull() {
                     tokenizer.define(null);
                 }
-                catch (e) {
-                    error = e;
-                }
                 
-                expect(error).not.toBe(null);
-                
-                try {
+                function defineString() {
                     tokenizer.define('string');
                 }
-                catch (e) {
-                    error = e;
-                }
                 
-                expect(error).not.toBe(null);
-                
-                try {
+                function defineNumber() {
                     tokenizer.define(100);
                 }
-                catch (e) {
-                    error = e;
-                }
                 
-                expect(error).not.toBe(null);
+                expect(defineNull).toThrow();
+                expect(defineString).toThrow();
+                expect(defineNumber).toThrow();
+                
                 
             });
         
