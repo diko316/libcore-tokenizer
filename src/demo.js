@@ -98,10 +98,24 @@ function test6() {
     
     testTokenizer(tokenizer, subject);
     
+}
+    
+function test7() {
+    var tokenizer = new Tokenizer(),
+        subject = 'axdcdd';
+        
+    tokenizer.define([
+                "dikofied", /a(xd+)*c*/,
+                "dd", /dd/
+            ]);
+    
+    testTokenizer(tokenizer, subject);
+    
     console.log(tokenizer);
 }
 
-test6();
+test7();
+//test6();
 //test5();
 //test4();
 //test3();

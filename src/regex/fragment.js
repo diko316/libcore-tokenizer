@@ -60,7 +60,6 @@ Fragment.prototype = {
                 clone = repeat.fragment.pointer.clone();
                 
                 if (!last) {
-                    console.log("cloned! ", repeat.fragment, clone, ' to: ', clone.to);
                     operand2.pointer = clone[0];
                     operand2.lastPointer = last = clone[1];
                 }
@@ -68,6 +67,8 @@ Fragment.prototype = {
                     last.next = clone[0];
                     last = clone[1];
                 }
+                
+                //console.log("cloned! ", repeat.fragment, clone[0].chr, ' to: ', clone[0].to);
                 
             }
             
@@ -97,6 +98,8 @@ Fragment.prototype = {
             newSplit = operand1.splitted;
 
         }
+        
+        // apply repeat to all splits?
         
         fragment = operand1.clone();
         fragment.splitted = newSplit;
@@ -165,7 +168,7 @@ Fragment.prototype = {
                 next: null
             };
             
-        if (!current) {
+        if (current) {
         //    for (; current.next; current = current.next) { }
         //    current.next = repeat;
         //}
