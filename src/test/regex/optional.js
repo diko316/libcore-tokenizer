@@ -38,6 +38,9 @@ describe('Regular Expression Optional "?" operator.',
                     
                 expect(tokenizer.tokenize(23, subject)).
                     toEqual(["number", "9", 24]);
+                    
+                expect(tokenizer.tokenize(24, subject)).
+                    toEqual(["$", "", 25]);
                 
             });
         

@@ -84,3 +84,12 @@ tokenizer.fromJSON(exportedJSON());
 ```
 
 
+## Supported Regex Operators for Regular Expression patterns
+
+* Alternation `|` operator
+* Optional `?` operator
+* Repeat `+` operator
+* Kleen Star `*` operator
+* Character Class `[]` operator and `0-9a-z` character ranges.
+* Grouping `()` operator *(Capture is not yet implemented)*
+

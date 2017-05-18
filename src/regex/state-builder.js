@@ -22,8 +22,7 @@ function build(name, regex, stateObject) {
             fgen: 0
         };
         
-    var item, token, split,
-        operand1, operand2;
+    var item, token, split, operand1, operand2, id, sid;
         
     if (!(stateObject instanceof StateMap)) {
         stateObject = new StateMap();
@@ -75,13 +74,9 @@ function build(name, regex, stateObject) {
                                          token === '^-')];
             break;
         
-        case '()':
-            console.log("enclosed ", stack[1]);
-            break;
-        
         case '$$':
             if (!stack || stack[0] !== null) {
-                console.log(stack);
+                console.warn(stack);
                 throw new Error("Invalid end of expression.");
             }
             
@@ -89,13 +84,22 @@ function build(name, regex, stateObject) {
             operand2 = new F(builder, null);
             operand1.link(operand2);
             
-            endStates[el++] = operand2.state.id;
+            sid = startState.id;
+            id = operand2.state.id;
+            //console.log(id, ' !== ', startState.id);
+            if (id !== sid) {
+                endStates[el++] = id;
+            }
             
             // end split fragments
             split = operand1.splitted;
             
             for (; split; split = split.next) {
-                endStates[el++] = split.fragment.state.id;
+                id = split.fragment.state.id;
+                //console.log(id, ' !== ', sid);
+                if (id !== sid) {
+                    endStates[el++] = id;
+                }
             }
             break;
         

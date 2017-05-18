@@ -34,10 +34,13 @@ describe('Regular Expression Kleene Star "*" operator.',
                     toEqual(["multi_sign_number", "+2", 10]);
                     
                 expect(tokenizer.tokenize(10, subject)).
-                    toEqual(["dikofied", "dikoxx3ttttttt", 24]);
+                    toEqual(["dikofied", "dikoxx3tttttt", 23]);
+                    
+                expect(tokenizer.tokenize(23, subject)).
+                    toEqual(["multi_sign_number", "9", 24]);
                     
                 expect(tokenizer.tokenize(24, subject)).
-                    toEqual(["multi_sign_number", "9", 25]);
+                    toEqual(["$", "", 25]);
                 
             });
         

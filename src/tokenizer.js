@@ -99,7 +99,7 @@ Tokenizer.prototype = {
                         target = list[++c];
                         next = [target, next];
                         
-                        console.log(state,':', chr, '->', target);
+                        //console.log(state,':', chr, '->', target);
                         
                         // found token
                         if (target in ends) {
@@ -117,7 +117,7 @@ Tokenizer.prototype = {
                     if (!(chr in nmap)) {
                         target = target[0];
                         next = [target, next];
-                        console.log(state,':', chr, '->', target);
+                        //console.log(state,':', chr, '->', target);
                         
                         // found token
                         if (target in ends) {

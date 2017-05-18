@@ -67,6 +67,9 @@ describe("Regular Expression alternation \"|\" operator",
                 
                 expect(tokenizer.tokenize(33, subject)).
                     toEqual(["period", ".", 34]);
+                    
+                expect(tokenizer.tokenize(34, subject)).
+                    toEqual(["$", "", 35]);
             });
         
     });

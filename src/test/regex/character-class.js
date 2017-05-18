@@ -43,6 +43,9 @@ describe('Regular Expression Character Class "[]" and character range inside.',
                     
                 expect(tokenizer.tokenize(11, subject)).
                     toEqual(["decimal", "023.01", 17]);
+                    
+                expect(tokenizer.tokenize(17, subject)).
+                    toEqual(["$", "", 18]);
             });
         
         

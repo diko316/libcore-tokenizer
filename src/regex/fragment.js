@@ -57,16 +57,16 @@ Fragment.prototype = {
             last = operand2.lastPointer;
             
             for (; repeat; repeat = repeat.next) {
-                clone = repeat.fragment.pointer.clone();
+                clone = repeat.pointer;
                 
                 if (!last) {
-                    operand2.pointer = clone[0];
-                    operand2.lastPointer = last = clone[1];
+                    operand2.pointer = clone;
                 }
                 else {
-                    last.next = clone[0];
-                    last = clone[1];
+                    last.next = clone;
                 }
+                
+                last = clone;
                 
                 //console.log("cloned! ", repeat.fragment, clone[0].chr, ' to: ', clone[0].to);
                 
@@ -140,20 +140,14 @@ Fragment.prototype = {
                 fragment: me,
                 next: null
             },
-            fragment = repeat ?
-                            me.repeat() : me.clone();
-        
-        if (!current) {
-        //    fragment.splitted = current;
-        //    for (; current.next; current = current.next) { }
-        //    current.next = split;
-        //}
-        //else {
-            fragment.splitted = split;
+            fragment = me.clone();
+            
+        if (repeat) {
+            fragment.repeat();
         }
         
-        if (repeat) {
-            console.log('split repeat! ', fragment);
+        if (!current) {
+            fragment.splitted = split;
         }
         
         return fragment;
@@ -161,19 +155,17 @@ Fragment.prototype = {
     },
     
     repeat: function () {
-        var fragment = this.clone(),
-            current = fragment.repeated,
-            repeat = {
-                fragment: this,
+        var fragment = this,
+            pointer = fragment.pointer,
+            current = fragment.repeated;
+            
+        if (!current && pointer) {
+            pointer = pointer.clone();
+            
+            fragment.repeated = {
+                pointer: pointer[0],
                 next: null
             };
-            
-        if (current) {
-        //    for (; current.next; current = current.next) { }
-        //    current.next = repeat;
-        //}
-        //else {
-            fragment.repeated = repeat;
         }
         
         return fragment;

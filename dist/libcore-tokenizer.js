@@ -2370,15 +2370,18 @@ Fragment.prototype = {
             last = operand2.lastPointer;
             
             for (; repeat; repeat = repeat.next) {
-                clone = repeat.fragment.pointer.clone();
+                clone = repeat.pointer;
+                
                 if (!last) {
-                    operand2.pointer = clone[0];
-                    operand2.lastPointer = last = clone[1];
+                    operand2.pointer = clone;
                 }
                 else {
-                    last.next = clone[0];
-                    last = clone[1];
+                    last.next = clone;
                 }
+                
+                last = clone;
+                
+                //console.log("cloned! ", repeat.fragment, clone[0].chr, ' to: ', clone[0].to);
                 
             }
             
@@ -2408,6 +2411,8 @@ Fragment.prototype = {
             newSplit = operand1.splitted;
 
         }
+        
+        // apply repeat to all splits?
         
         fragment = operand1.clone();
         fragment.splitted = newSplit;
@@ -2448,15 +2453,13 @@ Fragment.prototype = {
                 fragment: me,
                 next: null
             },
-            fragment = repeat ?
-                            me.repeat() : me.clone();
+            fragment = me.clone();
+            
+        if (repeat) {
+            fragment.repeat();
+        }
         
         if (!current) {
-        //    fragment.splitted = current;
-        //    for (; current.next; current = current.next) { }
-        //    current.next = split;
-        //}
-        //else {
             fragment.splitted = split;
         }
         
@@ -2465,19 +2468,17 @@ Fragment.prototype = {
     },
     
     repeat: function () {
-        var fragment = this.clone(),
-            current = fragment.repeated,
-            repeat = {
-                fragment: this,
+        var fragment = this,
+            pointer = fragment.pointer,
+            current = fragment.repeated;
+            
+        if (!current && pointer) {
+            pointer = pointer.clone();
+            
+            fragment.repeated = {
+                pointer: pointer[0],
                 next: null
             };
-            
-        if (current) {
-            for (; current.next; current = current.next) { }
-            current.next = repeat;
-        }
-        else {
-            fragment.repeated = repeat;
         }
         
         return fragment;
@@ -2823,6 +2824,7 @@ function Pointer(chr, negative) {
 Pointer.prototype = {
     constructor: Pointer,
     negative: false,
+    repeated: false,
     chr: '',
     to: null,
     next: null,
@@ -2831,7 +2833,8 @@ Pointer.prototype = {
         var pointer = this,
             from = null,
             dupe = helper.clone,
-            assign = libcore.assign;
+            assign = libcore.assign,
+            includeNext = overrides !== false;
         var created, last;
         
         if (!overrides) {
@@ -2852,6 +2855,9 @@ Pointer.prototype = {
             }
             
             last = created;
+            if (!includeNext) {
+                break;
+            }
         }
         
         last.next = null;
@@ -2941,8 +2947,7 @@ function build(name, regex, stateObject) {
             fgen: 0
         };
         
-    var item, token, split,
-        operand1, operand2;
+    var item, token, split, operand1, operand2, id, sid;
         
     if (!(stateObject instanceof StateMap)) {
         stateObject = new StateMap();
@@ -2996,7 +3001,7 @@ function build(name, regex, stateObject) {
         
         case '$$':
             if (!stack || stack[0] !== null) {
-                console.log(stack);
+                console.warn(stack);
                 throw new Error("Invalid end of expression.");
             }
             
@@ -3004,13 +3009,22 @@ function build(name, regex, stateObject) {
             operand2 = new F(builder, null);
             operand1.link(operand2);
             
-            endStates[el++] = operand2.state.id;
+            sid = startState.id;
+            id = operand2.state.id;
+            //console.log(id, ' !== ', startState.id);
+            if (id !== sid) {
+                endStates[el++] = id;
+            }
             
             // end split fragments
             split = operand1.splitted;
             
             for (; split; split = split.next) {
-                endStates[el++] = split.fragment.state.id;
+                id = split.fragment.state.id;
+                //console.log(id, ' !== ', sid);
+                if (id !== sid) {
+                    endStates[el++] = id;
+                }
             }
             break;
         
@@ -3301,9 +3315,12 @@ Tokenizer.prototype = {
                 if (chr in pointer) {
                     list = pointer[chr];
                     
+                    
                     for (c = -1, l = list.length; l--;) {
                         target = list[++c];
                         next = [target, next];
+                        
+                        //console.log(state,':', chr, '->', target);
                         
                         // found token
                         if (target in ends) {
@@ -3321,6 +3338,7 @@ Tokenizer.prototype = {
                     if (!(chr in nmap)) {
                         target = target[0];
                         next = [target, next];
+                        //console.log(state,':', chr, '->', target);
                         
                         // found token
                         if (target in ends) {

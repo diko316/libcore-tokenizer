@@ -3,11 +3,16 @@
 var Tokenizer = require("./index.js");
 
 function testTokenizer(tokenizer, subject) {
-    var token = tokenizer.tokenize(0, subject);
-    var next;
+    var next = 0,
+        token = tokenizer.tokenize(next, subject);
     
-    console.log('------------------------- tokenizing ', subject);
+    console.log('------------------------- tokenizing ', subject, next);
     for (; token; token = tokenizer.tokenize(next, subject)) {
+        console.log('current: ', next, ' next: ', token[2]);
+        if (next === token[2]) {
+            console.log("same next item!", next, token);
+            break;
+        }
         next = token[2];
         console.log(token);
     }
@@ -31,7 +36,7 @@ function test1() {
     
     testTokenizer(tokenizer, subject);
     
-    console.log('2nd tokenizer');
+    console.log('2nd tokenizer', tokenizer);
     tokenizer2.fromJSON(tokenizer.toJSON());
     
     
@@ -114,7 +119,22 @@ function test7() {
     console.log(tokenizer);
 }
 
-test7();
+function test8() {
+    var tokenizer = new Tokenizer(),
+        subject = '0912dikoxx5t+2dikoxx3xx4t9';
+        
+    tokenizer.define([
+            "dikofied", /diko(xx[0-9])+t+/,
+            "multi_sign_number", /[\+|\-]*[0-9]+/
+        ]);
+    
+    testTokenizer(tokenizer, subject);
+    
+    console.log(tokenizer);
+}
+
+test8();
+//test7();
 //test6();
 //test5();
 //test4();

@@ -23,7 +23,8 @@ Pointer.prototype = {
         var pointer = this,
             from = null,
             dupe = helper.clone,
-            assign = libcore.assign;
+            assign = libcore.assign,
+            includeNext = overrides !== false;
         var created, last;
         
         if (!overrides) {
@@ -44,6 +45,9 @@ Pointer.prototype = {
             }
             
             last = created;
+            if (!includeNext) {
+                break;
+            }
         }
         
         last.next = null;
