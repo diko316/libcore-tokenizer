@@ -13,9 +13,6 @@ require("./api/import.js");
 require("./api/export.js");
 require("./api/sample.js");
 
-
-
-
 require("./regex/alternative.js");
 require("./regex/character-class.js");
 require("./regex/optional.js");

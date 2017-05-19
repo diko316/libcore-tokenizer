@@ -13,7 +13,15 @@ npm install -y -d --save-dev \
     url-loader \
     jshint \
     jshint-loader \
-    extract-text-webpack-plugin
+    extract-text-webpack-plugin \
+    jasmine-core \
+    karma \
+    karma-firefox-launcher \
+    karma-jasmine \
+    karma-mocha-reporter \
+    karma-webpack \
+    uglify-js \
+    uglifyjs-webpack-plugin
 
 npm install -y -d --save \
     libcore \

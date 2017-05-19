@@ -167,12 +167,12 @@ StateMap.prototype = {
     },
     
     exportDefinition: function () {
-        return JSON.stringify({
+        return {
             stateGenId: this.stateGenId,
             start: this.start,
             states: this.states,
             ends: this.ends
-        });
+        };
     }
 };
 

@@ -58,6 +58,10 @@ Tokenizer.prototype = {
     },
     
     toJSON: function () {
+        return JSON.stringify(this.toObject());
+    },
+    
+    toObject: function () {
         return this.map.exportDefinition();
     },
     

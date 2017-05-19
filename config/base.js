@@ -22,6 +22,14 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
+    externals: {
+        "libcore": {
+            commonjs: "libcore",
+            commonjs2: "libcore",
+            amd: "libcore",
+            root: "libcore"
+        }
+    },
     module: {
         rules: [{
             test: /\.css$/,
