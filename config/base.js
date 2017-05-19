@@ -1,10 +1,15 @@
 'use strict';
 
 var PATH = require('path'),
+    CustomVarLibraryNamePlugin = require('webpack-custom-var-library-name-plugin'),
     ROOT_PATH = PATH.resolve(__dirname, '..'),
     SOURCE_PATH = PATH.join(ROOT_PATH, 'src'),
     DEFINITION = require(PATH.join(ROOT_PATH, 'package.json')),
     LIB_NAME = DEFINITION.name,
+    VAR_NAME = LIB_NAME.replace(/[^a-zA-Z0-9]+([a-z])/g,
+                    function () {
+                        return arguments[1].toUpperCase();
+                    }),
     entry = {};
 
 // entry
@@ -22,14 +27,11 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
-    externals: {
-        "libcore": {
-            commonjs: "libcore",
-            commonjs2: "libcore",
-            amd: "libcore",
-            root: "libcore"
-        }
-    },
+    plugins: [
+        new CustomVarLibraryNamePlugin({
+            name: VAR_NAME
+        })
+    ],
     module: {
         rules: [{
             test: /\.css$/,
