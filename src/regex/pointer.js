@@ -88,20 +88,26 @@ Pointer.prototype = {
         from = chr.charCodeAt(0);
         chr = to.chr;
         to = chr.charCodeAt(0);
-        len = to - from - 1;
+        len = Math.max(to - from - 1, 0);
         
-        for (; len--;) {
-            created = new Class(S.fromCharCode(++from), negative);
-            if (start) {
-                end.next = created;
+        if (len) {
+            for (; len--;) {
+                created = new Class(S.fromCharCode(++from), negative);
+                if (start) {
+                    end.next = created;
+                }
+                else {
+                    start = created;
+                }
+                end = created;
             }
-            else {
-                start = created;
-            }
-            end = created;
+            
+            return start && [start, end];
+        
         }
         
-        return start && [start, end];
+        return null;
+        
     }
     
 };

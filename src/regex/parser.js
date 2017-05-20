@@ -51,6 +51,24 @@ var TOKENIZE = require("./tokenizer.js"),
         ".": [BINARY, 5],
         "|": [BINARY, 3],
         "$$": [FINAL, 1]
+    },
+    ENCLOSED_CLASS_REPLACE = {
+        "[": 'char',
+        "[^": 'char',
+        "?": 'char',
+        "+": 'char',
+        "*": 'char',
+        ",": 'char',
+        "|": 'char',
+        "(": 'char',
+        ")": 'char'
+    },
+    ENCLOSED_REPLACE = {
+        "[": ENCLOSED_CLASS_REPLACE,
+        "[^": ENCLOSED_CLASS_REPLACE,
+        "(": {
+            "-": 'char'
+        }
     };
 
 
@@ -68,13 +86,14 @@ function parse(str) {
         queue = [],
         ql = 0,
         lastToken = null,
-        enclosure = null,
+        enclosure = [null, '('],
+        enclosedReplacements = ENCLOSED_REPLACE,
         buffer = [],
         bl = 0,
         bc = 0;
         
     var token, chr, item, l, op, stackOp, fill, precedence, opName, from,
-        currentEnclosure;
+        currentEnclosure, replacements;
     
         
     for (item = tokenize(index, str); item; item = tokenize(index, str))  {
@@ -82,6 +101,16 @@ function parse(str) {
         chr = item[1];
         token = item[0];
         fill = false;
+        currentEnclosure = enclosure && enclosure[1];
+        
+        // replace token based on replacement by enclosure
+        if (currentEnclosure) {
+            replacements = enclosedReplacements[currentEnclosure];
+            if (token in replacements) {
+                token = replacements[token];
+                
+            }
+        }
         
         // finalize and fill-in concat operator
         if (token in operator) {
@@ -106,8 +135,6 @@ function parse(str) {
             }
         }
         
-        currentEnclosure = enclosure && enclosure[1];
-        
         if (fill) {
             buffer[bl++] = [currentEnclosure === '[' ?
                                 ',' :
@@ -119,7 +146,6 @@ function parse(str) {
                             start,
                             0];
         }
-        
         if (currentEnclosure === '[^') {
             switch (token) {
             case '-':
@@ -134,7 +160,6 @@ function parse(str) {
                 token = 'negative_char';
             }
         }
-        
         
         buffer[bl++] = [token, chr, 0, start, index - start];
         start = index;

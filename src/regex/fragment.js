@@ -44,7 +44,7 @@ Fragment.prototype = {
             split = operand1.splitted,
             newSplit = operand2.splitted,
             repeat = operand1.repeated;
-        var clone, last, fragment, pointer;
+        var clone, last, fragment, pointer, startSplit, endSplit, created;
         
         operand2.applyState();
         
@@ -68,8 +68,6 @@ Fragment.prototype = {
                 
                 last = clone;
                 
-                //console.log("cloned! ", repeat.fragment, clone[0].chr, ' to: ', clone[0].to);
-                
             }
             
             operand2.lastPointer = last;
@@ -79,6 +77,8 @@ Fragment.prototype = {
         pointer = operand2.pointer;
         if (split && pointer) {
             
+            startSplit = endSplit = null;
+            
             // not end state
             for (; split; split = split.next) {
                 fragment = split.fragment;
@@ -86,16 +86,30 @@ Fragment.prototype = {
                 last = fragment.lastPointer.last();
                 last.next = clone[0];
                 fragment.lastPointer = clone[1];
+                
+                // include split to next
+                if (fragment.pointer !== operand1.pointer) {
+                    created = {
+                        fragment: fragment,
+                        next: null
+                    };
+                    
+                    if (!startSplit) {
+                        startSplit = created;
+                    }
+                    else {
+                        endSplit.next = created;
+                    }
+                    
+                    endSplit = created;
+                }
             }
             
             // concatenate split
-            if (newSplit) {
-                
-                operand1.lastSplit().next = newSplit;
-                
+            if (endSplit) {
+                endSplit.next = newSplit;
+                newSplit = startSplit;
             }
-            
-            newSplit = operand1.splitted;
 
         }
         
@@ -173,30 +187,36 @@ Fragment.prototype = {
     
     fill: function (operand2) {
         var operand1 = this,
-            fragment = operand1.clone(),
             range = operand1.pointer.range(operand2.pointer);
-        
-        // set 2nd operand state id
-        operand2.state = operand1.state;
-        
-        // connect pointers
+        var fragment;
+            
         if (range) {
-            range[1].next = operand2.pointer;
+            
+            // set 2nd operand state id
+            operand2.state = operand1.state;
+            
+            // connect pointers
+            if (range) {
+                range[1].next = operand2.pointer;
+            }
+            else {
+                range = [operand2.pointer];
+            }
+            
+            operand1.lastPointer.next = range[0];
+            
+            fragment = operand1.clone();
+            fragment.lastPointer = operand2.lastPointer;
+            
+            // merge outgoing
+            fragment.outgoing.next = operand2.outgoing;
+            fragment.lastOutgoing = operand2.lastOutgoing;
+            
+            return fragment;
         }
-        else {
-            range = [operand2.pointer];
-        }
         
-        operand1.lastPointer.next = range[0];
-        
-        
-        fragment.lastPointer = operand2.lastPointer;
-        
-        // merge outgoing
-        fragment.outgoing.next = operand2.outgoing;
-        fragment.lastOutgoing = operand2.lastOutgoing;
-
-        return fragment;
+        // merge
+        return this.merge(operand2);
     },
     
     merge: function (operand2) {

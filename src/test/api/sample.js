@@ -12,7 +12,7 @@ describe("Tokenizer Basic usage: tokenize(from:Number, subject:String)",
                 tokenizer.define([
                     "number",       /[0-9]+/,
                         
-                    "sequence",     /a-c]+/,
+                    "sequence",     /[a-c]+/,
                                     /[d-z]+/,
                                     /[A-Z]+/
                 ]);

@@ -86,20 +86,29 @@ function build(name, regex, stateObject) {
             
             sid = startState.id;
             id = operand2.state.id;
-            //console.log(id, ' !== ', startState.id);
-            if (id !== sid) {
-                endStates[el++] = id;
+            
+            if (id === sid) {
+                throw new Error(
+                        'Patterns resulting to empty token is not allowed');
             }
+            
+            endStates[el++] = id;
             
             // end split fragments
             split = operand1.splitted;
             
             for (; split; split = split.next) {
                 id = split.fragment.state.id;
-                //console.log(id, ' !== ', sid);
-                if (id !== sid) {
-                    endStates[el++] = id;
+                if (id === sid) {
+                    console.log(regex.source);
+                    throw new Error(
+                        'Patterns resulting to empty token is not allowed');
                 }
+                endStates[el++] = id;
+                //if (id !== sid) {
+                //    console.log(regex);
+                //    endStates[el++] = id;
+                //}
             }
             break;
         

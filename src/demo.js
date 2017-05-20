@@ -107,12 +107,18 @@ function test6() {
     
 function test7() {
     var tokenizer = new Tokenizer(),
-        subject = 'axdcdd';
+        subject = '0912diko+2dikoVersion3t9';
+        //subject = 'axdcdd';
         
+    //tokenizer.define([
+    //            "dikofied", /a(xd+)*c*/,
+    //            "dd", /dd/
+    //        ]);
+    
     tokenizer.define([
-                "dikofied", /a(xd+)*c*/,
-                "dd", /dd/
-            ]);
+        "dikofied", /diko(Version[0-9]+)?t?/,
+                "number", /[\+|\-]?[0-9]+/
+    ]);
     
     testTokenizer(tokenizer, subject);
     
@@ -133,6 +139,19 @@ function test8() {
     console.log(tokenizer);
 }
 
+function test9() {
+    var tokenizer = new Tokenizer();
+        
+    tokenizer.define([
+            "test", /[a-z0-9\+]*/
+        ]);
+    
+    //testTokenizer(tokenizer, subject);
+    
+    console.log(tokenizer);
+}
+
+//test9();
 test8();
 //test7();
 //test6();
