@@ -102,7 +102,6 @@ function build(name, regex, stateObject) {
             for (; split; split = split.next) {
                 id = split.fragment.state.id;
                 if (id === sid) {
-                    console.log(regex.source);
                     throw new Error(
                         'Patterns resulting to empty token is not allowed. ' +
                         errorName);

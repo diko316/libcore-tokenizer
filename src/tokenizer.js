@@ -147,8 +147,6 @@ Tokenizer.prototype = {
             
             index = found[1];
             
-            console.log('what? ', found, ' index ', index, ' from: ', from);
-            
             // nothing was parsed
             if (from === index) {
                 found = null;
