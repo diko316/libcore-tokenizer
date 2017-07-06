@@ -17,6 +17,7 @@ function build(name, regex, stateObject) {
         startState = null,
         el = 0,
         endStates = [],
+        errorName = name + ' = /' + regex + '/',
         builder = {
             gen: 0,
             fgen: 0
@@ -77,7 +78,7 @@ function build(name, regex, stateObject) {
         case '$$':
             if (!stack || stack[0] !== null) {
                 console.warn(stack);
-                throw new Error("Invalid end of expression.");
+                throw new Error("Invalid end of expression. " + errorName);
             }
             
             operand1 = stack[1];
@@ -89,7 +90,8 @@ function build(name, regex, stateObject) {
             
             if (id === sid) {
                 throw new Error(
-                        'Patterns resulting to empty token is not allowed');
+                        'Patterns resulting to empty token is not allowed. ' +
+                        errorName);
             }
             
             endStates[el++] = id;
@@ -102,7 +104,8 @@ function build(name, regex, stateObject) {
                 if (id === sid) {
                     console.log(regex.source);
                     throw new Error(
-                        'Patterns resulting to empty token is not allowed');
+                        'Patterns resulting to empty token is not allowed. ' +
+                        errorName);
                 }
                 endStates[el++] = id;
                 //if (id !== sid) {

@@ -151,8 +151,22 @@ function test9() {
     console.log(tokenizer);
 }
 
+function test10() {
+    var tokenizer = new Tokenizer();
+        
+    tokenizer.define([
+            "test", /ab?a/,
+            "another", /b/
+        ]);
+    
+    testTokenizer(tokenizer, "aba");
+    
+    console.log(tokenizer);
+}
+
+test10();
 //test9();
-test8();
+//test8();
 //test7();
 //test6();
 //test5();

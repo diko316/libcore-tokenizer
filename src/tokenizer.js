@@ -141,9 +141,22 @@ Tokenizer.prototype = {
             
         }
         
+        
+        
         if (found) {
-            found[2] = found[1];
-            found[1] = str.substring(from, found[1]);
+            
+            index = found[1];
+            
+            console.log('what? ', found, ' index ', index, ' from: ', from);
+            
+            // nothing was parsed
+            if (from === index) {
+                found = null;
+            }
+            else {
+                found[2] = index;
+                found[1] = str.substring(from, index);
+            }
         }
         
         return found;
