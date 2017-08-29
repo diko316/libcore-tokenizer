@@ -1,10 +1,14 @@
 'use strict';
 
+import parse from "./parser.js";
 
-var parse = require("./parser.js"),
-    StateMap = require("./state-map.js"),
-    Fragment = require("./fragment.js"),
-    Pointer = require("./pointer.js");
+import StateMap from "./state-map.js";
+
+import Fragment from "./fragment.js";
+
+import Pointer from "./pointer.js";
+
+var PATTERN_ERROR = 'Patterns resulting to empty token is not allowed. ';
 
 function build(name, regex, stateObject) {
     
@@ -89,9 +93,7 @@ function build(name, regex, stateObject) {
             id = operand2.state.id;
             
             if (id === sid) {
-                throw new Error(
-                        'Patterns resulting to empty token is not allowed. ' +
-                        errorName);
+                throw new Error(PATTERN_ERROR + errorName);
             }
             
             endStates[el++] = id;
@@ -102,9 +104,7 @@ function build(name, regex, stateObject) {
             for (; split; split = split.next) {
                 id = split.fragment.state.id;
                 if (id === sid) {
-                    throw new Error(
-                        'Patterns resulting to empty token is not allowed. ' +
-                        errorName);
+                    throw new Error(PATTERN_ERROR + errorName);
                 }
                 endStates[el++] = id;
                 //if (id !== sid) {
@@ -144,7 +144,4 @@ function build(name, regex, stateObject) {
     
 }
 
-
-
-
-module.exports = build;
+export default build;

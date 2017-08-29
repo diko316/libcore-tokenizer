@@ -1,6 +1,7 @@
 'use strict';
 
-var helper = require("./helper.js");
+import { clone } from "./helper.js";
+
 
 function Fragment(builder, pointer) {
     this.id = 'f' + (++builder.fgen);
@@ -137,14 +138,14 @@ Fragment.prototype = {
     
     clone: function () {
         var base = this.base,
-            clone = helper.clone(this);
+            cloned = clone(this);
         
         if (!base) {
-            clone.base = this;
+            cloned.base = this;
         }
         
-        clone.id = 'f' + (++this.builder.fgen);
-        return clone;
+        cloned.id = 'f' + (++this.builder.fgen);
+        return cloned;
     },
     
     split: function (repeat) {
@@ -272,4 +273,4 @@ Fragment.prototype = {
     
 };
 
-module.exports = Fragment;
+export default Fragment;

@@ -1,6 +1,10 @@
 'use strict';
 
-var libcore = require("libcore");
+import {
+            string,
+            number,
+            object
+        } from "libcore";
 
 function StateMap(start) {
     var states = {};
@@ -21,7 +25,7 @@ StateMap.prototype = {
     constructor: StateMap,
     
     generateState: function (id) {
-        if (libcore.string(id)) {
+        if (string(id)) {
             return id;
         }
         return 's' + (++this.stateGenId);
@@ -119,12 +123,11 @@ StateMap.prototype = {
     },
     
     importDefinition: function (json) {
-        var lib = libcore,
-            object = lib.object,
-            string = lib.string;
+        var isObject = object,
+            isString = string;
         var item;
         
-        if (string(json)) {
+        if (isString(json)) {
             try {
                 json = JSON.parse(json);
             }
@@ -134,31 +137,31 @@ StateMap.prototype = {
             }
         }
         
-        if (!object(json)) {
+        if (!isObject(json)) {
             throw new Error("Invalid JSON object parameter.");
         }
         
         // verify state gen id
         item = json.stateGenId;
-        if (!lib.number(item) || item < 0) {
+        if (!number(item) || item < 0) {
             throw new Error("Invalid state generator");
         }
         this.stateGenId = item;
         
         item = json.start;
-        if (!lib.string(item)) {
+        if (!isString(item)) {
             throw new Error("Invalid start state name");
         }
         this.start = item;
         
         item = json.states;
-        if (!object(item)) {
+        if (!isObject(item)) {
             throw new Error("Invalid state map object");
         }
         this.states = item;
         
         item = json.ends;
-        if (!object(item)) {
+        if (!isObject(item)) {
             throw new Error("Invalid end states object");
         }
         this.ends = item;
@@ -177,4 +180,4 @@ StateMap.prototype = {
 };
 
 
-module.exports = StateMap;
+export default StateMap;

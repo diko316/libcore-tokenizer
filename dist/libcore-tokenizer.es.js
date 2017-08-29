@@ -1,8 +1,4 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('libcore')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'libcore'], factory) :
-	(factory((global['libcore-tokenizer'] = {}),global.libcore));
-}(this, (function (exports,libcore) { 'use strict';
+import { array, assign, number, object, regex, string } from 'libcore';
 
 function StateMap(start) {
     var states = {};
@@ -23,7 +19,7 @@ StateMap.prototype = {
     constructor: StateMap,
     
     generateState: function (id) {
-        if (libcore.string(id)) {
+        if (string(id)) {
             return id;
         }
         return 's' + (++this.stateGenId);
@@ -123,8 +119,8 @@ StateMap.prototype = {
     },
     
     importDefinition: function (json) {
-        var isObject = libcore.object,
-            isString = libcore.string;
+        var isObject = object,
+            isString = string;
         var item;
         
         if (isString(json)) {
@@ -143,7 +139,7 @@ StateMap.prototype = {
         
         // verify state gen id
         item = json.stateGenId;
-        if (!libcore.number(item) || item < 0) {
+        if (!number(item) || item < 0) {
             throw new Error("Invalid state generator");
         }
         this.stateGenId = item;
@@ -863,7 +859,7 @@ Pointer.prototype = {
         var pointer = this,
             from = null,
             dupe = clone,
-            apply = libcore.assign,
+            apply = assign,
             includeNext = overrides !== false;
         var created, last;
         
@@ -1097,14 +1093,14 @@ Tokenizer$1.prototype = {
     constructor: Tokenizer$1,
     
     define: function (definitions) {
-        var isString = libcore.string,
-            isRegex = libcore.regex,
+        var isString = string,
+            isRegex = regex,
             map = this.map,
             build$$1 = build,
             name = null;
         var item, c, len;
         
-        if (!libcore.array(definitions)) {
+        if (!array(definitions)) {
             throw new Error("Invalid definitions parameter.");
         }
         
@@ -1243,10 +1239,6 @@ Tokenizer$1.prototype = {
     }
 };
 
-exports.Tokenizer = Tokenizer$1;
-exports['default'] = Tokenizer$1;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-//# sourceMappingURL=libcore-tokenizer.js.map
+export { Tokenizer$1 as Tokenizer };
+export default Tokenizer$1;
+//# sourceMappingURL=libcore-tokenizer.es.js.map

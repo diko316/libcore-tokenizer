@@ -1,20 +1,15 @@
 'use strict';
 
-var Tokenizer = require("../index.js");
+import "./prepare.js";
 
 
-global.createTokenizer = function() {
-    return new Tokenizer();
-};
+import "./api/definition.js";
+import "./api/import.js";
+import "./api/export.js";
+import "./api/sample.js";
 
-
-require("./api/definition.js");
-require("./api/import.js");
-require("./api/export.js");
-require("./api/sample.js");
-
-require("./regex/alternative.js");
-require("./regex/character-class.js");
-require("./regex/optional.js");
-require("./regex/repeat-none-or-more.js");
-require("./regex/repeat-one-or-more.js");
+import "./regex/alternative.js";
+import "./regex/character-class.js";
+import "./regex/optional.js";
+import "./regex/repeat-none-or-more.js";
+import "./regex/repeat-one-or-more.js";

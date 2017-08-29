@@ -141,5 +141,4 @@ function tokenize(index, regexString) {
                 [token, chr, next] : null;
 }
 
-
-module.exports = tokenize;
+export default tokenize;

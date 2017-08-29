@@ -1,3 +1,7 @@
 'use strict';
 
-module.exports = require("./tokenizer.js");
+import Tokenizer from "./tokenizer.js";
+
+export { Tokenizer };
+
+export default Tokenizer;

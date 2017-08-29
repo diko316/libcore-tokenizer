@@ -1,7 +1,11 @@
 'use strict';
 
-var helper = require("./helper.js"),
-    libcore = require("libcore");
+import {
+            assign
+        } from "libcore";
+        
+import { clone } from "./helper.js";
+
 
 function Pointer(chr, negative) {
     if (chr) {
@@ -22,8 +26,8 @@ Pointer.prototype = {
     clone: function (overrides) {
         var pointer = this,
             from = null,
-            dupe = helper.clone,
-            assign = libcore.assign,
+            dupe = clone,
+            apply = assign,
             includeNext = overrides !== false;
         var created, last;
         
@@ -34,7 +38,7 @@ Pointer.prototype = {
         for (; pointer; pointer = pointer.next) {
             created = dupe(pointer);
             if (overrides) {
-                assign(created, overrides);
+                apply(created, overrides);
             }
             
             if (from) {
@@ -112,4 +116,4 @@ Pointer.prototype = {
     
 };
 
-module.exports = Pointer;
+export default Pointer;

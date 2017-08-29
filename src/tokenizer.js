@@ -1,10 +1,14 @@
 'use strict';
 
-var libcore = require('libcore'),
-    StateMap = require("./regex/state-map.js"),
-    builder = require("./regex/state-builder.js");
+import {
+            string,
+            regex,
+            array
+        } from "libcore";
 
+import StateMap from "./regex/state-map.js";
 
+import builder from "./regex/state-builder.js";
 
 function Tokenizer() {
     this.map = new StateMap();
@@ -15,15 +19,14 @@ Tokenizer.prototype = {
     constructor: Tokenizer,
     
     define: function (definitions) {
-        var lib = libcore,
-            string = lib.string,
-            regex = lib.regex,
+        var isString = string,
+            isRegex = regex,
             map = this.map,
             build = builder,
             name = null;
         var item, c, len;
         
-        if (!lib.array(definitions)) {
+        if (!array(definitions)) {
             throw new Error("Invalid definitions parameter.");
         }
         
@@ -33,11 +36,11 @@ Tokenizer.prototype = {
         for (; len--;) {
             item = definitions[++c];
             
-            if (string(item)) {
+            if (isString(item)) {
                 name = item;
                 
             }
-            else if (regex(item)) {
+            else if (isRegex(item)) {
                 item = item.source;
                 if (!name) {
                     throw new Error("Token is not named " + item);
@@ -163,4 +166,4 @@ Tokenizer.prototype = {
 };
 
 
-module.exports = Tokenizer;
+export default Tokenizer;

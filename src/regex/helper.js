@@ -2,9 +2,8 @@
 
 function empty() {}
 
-module.exports = {
-    clone: function (instance) {
+export
+    function clone(instance) {
         empty.prototype = instance;
         return new empty();
     }
-};
