@@ -12,7 +12,9 @@ describe('Regular Expression Character Class "[]" and character range inside.',
                 "h_to_m", /[hijklm]+/,
                 "others", /[n-z]+/,
                 "number", /[\+|\-]?[0-9]+/,
-                "decimal", /[\+|\-]?[0-9]+(\.[0-9]+)?/
+                "decimal", /[\+|\-]?[0-9]+(\.[0-9]+)?/,
+                "string",   /\"(\\\"|[^\"])*\"/,
+                            /\'(\\\'|[^\'])*\'/,
             ]);
             return tokenizer;
         }

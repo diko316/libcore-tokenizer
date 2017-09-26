@@ -1,6 +1,6 @@
 {
   "name": "libcore-tokenizer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "NFA Tokenizer",
   "main": "dist/libcore-tokenizer.js",
   "module": "dist/libcore-tokenizer.es.js",
@@ -48,6 +48,6 @@
     "rollup-plugin-uglify": "^2.0.1"
   },
   "optionalDependencies": {
-    "libcore": "0.3.5"
+    "libcore": "0.3.7"
   }
 }

@@ -46,9 +46,12 @@ let pkg = require('../package.json'),
         }),
         require('rollup-plugin-buble')()
     ];
-    
+
+
 function configure(config, meta) {
-        var name = meta.name,
+        
+        var camelize = require("libcore").camelize,
+            name = meta.name,
             hasOwn = Object.prototype.hasOwnProperty,
             optionalObject = pkg.optionalDependencies,
             globals = {},
@@ -58,6 +61,7 @@ function configure(config, meta) {
                     file: meta.target,
                     format: 'umd',
                     name: name,
+                    amd: name,
                     exports: 'named',
                     sourcemap: true
                 },
@@ -80,6 +84,7 @@ function configure(config, meta) {
                     globals[access] = access;
             }
         }
+        
         
         config.input = 'src/index.js';
         

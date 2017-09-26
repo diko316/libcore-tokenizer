@@ -1,6 +1,6 @@
 'use strict';
 
-var Tokenizer = require("./index.js");
+import Tokenizer from "./index.js";
 
 function testTokenizer(tokenizer, subject) {
     var next = 0,
@@ -164,7 +164,20 @@ function test10() {
     console.log(tokenizer);
 }
 
-test10();
+function test11() {
+    var tokenizer = new Tokenizer();
+        
+    tokenizer.define([
+            "string", /\"(\\\"|[^\"])*\"/
+        ]);
+    
+    testTokenizer(tokenizer, '"aba"');
+    
+    console.log(tokenizer);
+}
+
+test11();
+//test10();
 //test9();
 //test8();
 //test7();
