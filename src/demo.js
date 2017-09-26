@@ -176,7 +176,25 @@ function test11() {
     console.log(tokenizer);
 }
 
-test11();
+function test12() {
+
+    var tokenizer = new Tokenizer();
+    tokenizer.define([
+        // "guitar_chords", /[a-defg]+/,
+        // "h_to_m", /[hijklm]+/,
+        // "others", /[n-z]+/,
+        // "number", /[\+|\-]?[0-9]+/,
+        // "decimal", /[\+|\-]?[0-9]+(\.[0-9]+)?/,
+        // "string",   /\"(\\\"|[^\"])*\"/,
+        //             /\'(\\\'|[^\'])*\'/,
+        "non_alphanumeric",
+                    /[^\+\-\"\'a-z0-9]+/
+    ]);
+    testTokenizer(tokenizer, '()&^%$#');
+}
+
+test12();
+//test11();
 //test10();
 //test9();
 //test8();

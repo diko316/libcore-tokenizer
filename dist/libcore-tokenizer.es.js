@@ -402,10 +402,9 @@ function parse(str) {
             bl = 0,
             bc = 0;
             
-        var token, chr, item, l, op, stackOp, fill, precedence, opName, from,
-            currentEnclosure, replacements;
+        var token, chr, item, l, op, stackOp, precedence,
+            fill, opName, from, currentEnclosure, replacements;
         
-            
         for (item = tokenize$$1(index, str); item; item = tokenize$$1(index, str))  {
             index = item[2];
             chr = item[1];
@@ -418,7 +417,6 @@ function parse(str) {
                 replacements = enclosedReplacements[currentEnclosure];
                 if (token in replacements) {
                     token = replacements[token];
-                    
                 }
             }
             
@@ -428,11 +426,13 @@ function parse(str) {
                 case '(':
                 case '[':
                 case '[^':
-                    fill = !!lastToken;
+                    // fill if there's lastToken and not "|"
+                    fill = !!lastToken && lastToken !== '|';
                 }
             }
             else {
                 switch (lastToken) {
+                case 'negative_char':
                 case 'char':
                 case ']':
                 case ']^':
@@ -456,6 +456,7 @@ function parse(str) {
                                 start,
                                 0];
             }
+            
             if (currentEnclosure === '[^') {
                 switch (token) {
                 case '-':
@@ -486,6 +487,7 @@ function parse(str) {
                     op = operator[token];
                     opName = op[0];
                     precedence = op[1];
+
                     
                     switch (opName) {
                     case end:
@@ -499,13 +501,14 @@ function parse(str) {
                             switch (stackOp[0]) {
                             case postfix:
                             case binary:
+                                
                                 if (precedence <= stackOp[1]) {
                                     queue[ql++] = stack[2];
                                     continue binaryCompare;
                                 }
                             
                             }
-                            break;
+                            break binaryCompare;
                         }
                         
                         if (opName !== end) {
@@ -972,7 +975,7 @@ function build(name, regex$$1, stateObject) {
     if (!(stateObject instanceof StateMap)) {
         stateObject = new StateMap();
     }
-    
+
     for (; l--;) {
         item = rpn[++c];
         token = item[0];

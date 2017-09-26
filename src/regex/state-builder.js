@@ -32,7 +32,7 @@ function build(name, regex, stateObject) {
     if (!(stateObject instanceof StateMap)) {
         stateObject = new StateMap();
     }
-    
+
     for (; l--;) {
         item = rpn[++c];
         token = item[0];

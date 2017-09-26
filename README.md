@@ -90,6 +90,6 @@ tokenizer.fromJSON(exportedJSON());
 * Optional `?` operator
 * Repeat `+` operator
 * Kleen Star `*` operator
-* Character Class `[]` operator and `0-9a-z` character ranges.
+* Character Class `[]`, and Negated Character Class `[^]` operators. Character Ranges like `0-9a-z` is also supported.
 * Grouping `()` operator *(Capture is not yet implemented)*
 

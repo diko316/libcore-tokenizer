@@ -2,7 +2,7 @@
 
 
 
-describe('Regular Expression Character Class "[]" and character range inside.',
+describe('Regular Expression Character Class "[^]" and character range inside.',
     function () {
         
         function predefined() {
@@ -14,22 +14,31 @@ describe('Regular Expression Character Class "[]" and character range inside.',
                 "number", /[\+|\-]?[0-9]+/,
                 "decimal", /[\+|\-]?[0-9]+(\.[0-9]+)?/,
                 "string",   /\"(\\\"|[^\"])*\"/,
-                            /\'(\\\'|[^\'])*\'/
+                            /\'(\\\'|[^\'])*\'/,
+                "non_alphanumeric",
+                            /[^\+\-\"\'a-z0-9]+/
             ]);
             return tokenizer;
         }
         
-        it("1. Should define tokens with character class operator.",
+        it("1. Should define tokens with character class and " +
+            "negative character class operator.",
             function () {
+                try {
+                    predefined();
+                }
+                catch (e) {
+                    console.log(e.toString());
+                }
                 expect(predefined).not.toThrow();
             });
         
         
         it("2. Should successfully tokenize string based on tokens with " +
-           'character class patterns.',
+           'character class and negative character class patterns.',
             function () {
                 var tokenizer = predefined(),
-                    subject = 'cdazn+1098m023.01';
+                    subject = 'cdazn+1098m023.01 ()&^%$#fd';
                     
                 expect(tokenizer.tokenize(0, subject)).
                     toEqual(["guitar_chords", "cda", 3]);
@@ -45,9 +54,15 @@ describe('Regular Expression Character Class "[]" and character range inside.',
                     
                 expect(tokenizer.tokenize(11, subject)).
                     toEqual(["decimal", "023.01", 17]);
-                    
+
                 expect(tokenizer.tokenize(17, subject)).
-                    toEqual(["$", "", 18]);
+                    toEqual(["non_alphanumeric", " ()&^%$#", 25]);
+
+                expect(tokenizer.tokenize(25, subject)).
+                    toEqual(["guitar_chords", "fd", 27]);
+
+                expect(tokenizer.tokenize(27, subject)).
+                    toEqual(["$", "", 28]);
             });
         
         

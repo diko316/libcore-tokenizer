@@ -89,10 +89,9 @@ export
             bl = 0,
             bc = 0;
             
-        var token, chr, item, l, op, stackOp, fill, precedence, opName, from,
-            currentEnclosure, replacements;
+        var token, chr, item, l, op, stackOp, precedence,
+            fill, opName, from, currentEnclosure, replacements;
         
-            
         for (item = tokenize(index, str); item; item = tokenize(index, str))  {
             index = item[2];
             chr = item[1];
@@ -105,7 +104,6 @@ export
                 replacements = enclosedReplacements[currentEnclosure];
                 if (token in replacements) {
                     token = replacements[token];
-                    
                 }
             }
             
@@ -115,11 +113,13 @@ export
                 case '(':
                 case '[':
                 case '[^':
-                    fill = !!lastToken;
+                    // fill if there's lastToken and not "|"
+                    fill = !!lastToken && lastToken !== '|';
                 }
             }
             else {
                 switch (lastToken) {
+                case 'negative_char':
                 case 'char':
                 case ']':
                 case ']^':
@@ -143,6 +143,7 @@ export
                                 start,
                                 0];
             }
+            
             if (currentEnclosure === '[^') {
                 switch (token) {
                 case '-':
@@ -173,6 +174,7 @@ export
                     op = operator[token];
                     opName = op[0];
                     precedence = op[1];
+
                     
                     switch (opName) {
                     case end:
@@ -186,13 +188,14 @@ export
                             switch (stackOp[0]) {
                             case postfix:
                             case binary:
+                                
                                 if (precedence <= stackOp[1]) {
                                     queue[ql++] = stack[2];
                                     continue binaryCompare;
                                 }
                             
                             }
-                            break;
+                            break binaryCompare;
                         }
                         
                         if (opName !== end) {
