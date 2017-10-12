@@ -9,6 +9,7 @@ function StateMap(start) {
         not: []
     };
     
+    this.priority = [];
     this.stateGenId = 0;
     this.start = start;
     this.states = states;
@@ -35,7 +36,7 @@ StateMap.prototype = {
             pending = [fragment],
             pl = 1;
         var state, stateObject, item, pointer, chr, to, list, l, id,
-            not, tl, targets, total, notIndex;
+            not, tl, targets, total, notIndex, endList, endIndex;
         
         idmap[fragment.state.id] = this.start;
         
@@ -112,6 +113,7 @@ StateMap.prototype = {
         
         // create end states
         for (l = endStates.length; l--;) {
+            // fixing race ends
             ends[idmap[endStates[l]]] = name;
         }
 
@@ -160,6 +162,13 @@ StateMap.prototype = {
         if (!isObject(item)) {
             throw new Error("Invalid end states object");
         }
+
+        item = json.priority;
+        if (!array(item)) {
+            throw new Error("Invalid priority list");
+        }
+        this.priority = item;
+
         this.ends = item;
         
         return this;
@@ -170,7 +179,8 @@ StateMap.prototype = {
             stateGenId: this.stateGenId,
             start: this.start,
             states: this.states,
-            ends: this.ends
+            ends: this.ends,
+            priority: this.priority
         };
     }
 };
@@ -1099,6 +1109,8 @@ Tokenizer$1.prototype = {
         var isString = string,
             isRegex = regex,
             map = this.map,
+            priority = map.priority,
+            pl = priority.length,
             build$$1 = build,
             name = null;
         var item, c, len;
@@ -1122,7 +1134,11 @@ Tokenizer$1.prototype = {
                 if (!name) {
                     throw new Error("Token is not named " + item);
                 }
-                
+
+                // add priority
+                if (priority.indexOf(name) === -1) {
+                    priority[pl++] = name;
+                }
                 build$$1(name, item, map);
                 
             }
@@ -1149,12 +1165,15 @@ Tokenizer$1.prototype = {
         var map = this.map,
             ends = map.ends,
             states = map.states,
+            rank = map.priority,
             cursor = [map.start, null],
             len = str.length,
             limit = len - from,
             index = from - 1,
-            found = null;
-        var chr, c, l, next, list, state, pointer, target, not, nmap;
+            found = null,
+            lastFound = found,
+            charIndex = 0;
+        var chr, c, l, next, list, state, pointer, target, not, nmap, priority;
         
         if (limit === 0) {
             return ['$', '', len + 1];
@@ -1166,12 +1185,15 @@ Tokenizer$1.prototype = {
         for (; limit--;) {
             chr = str.charAt(++index);
             next = null;
+
+            charIndex++;
+
             for (; cursor; cursor = cursor[1]) {
                 state = cursor[0];
                 pointer = states[state];
                 
                 if (state in ends) {
-                    found = [ends[state], index];
+                    found = [ends[state], index, found];
                 }
                 
                 // apply positive match
@@ -1187,7 +1209,7 @@ Tokenizer$1.prototype = {
                         
                         // found token
                         if (target in ends) {
-                            found = [ends[target], index + 1];
+                            found = [ends[target], index + 1, found];
                         }
                     }
                 }
@@ -1205,12 +1227,19 @@ Tokenizer$1.prototype = {
                         
                         // found token
                         if (target in ends) {
-                            found = [ends[target], index + 1];
+                            found = [ends[target], index + 1, found];
                         }
                     }
                 }
 
             }
+
+            // save last found 
+            if (found) {
+                lastFound = found;
+            }
+
+            found = null;
             
             if (next) {
                 cursor = next;
@@ -1220,8 +1249,18 @@ Tokenizer$1.prototype = {
             }
             
         }
-        
-        
+
+        // resolve highest priority
+        for (pointer = lastFound; pointer; pointer = pointer[2]) {
+            index = pointer[1];
+            priority = rank.indexOf(pointer[0]);
+
+            // replace if high index and lowest priority
+            if (!found || index > found[1] || priority < found[2]) {
+                found = [pointer[0], index, priority];
+            }
+            
+        }
         
         if (found) {
             
