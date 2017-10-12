@@ -166,6 +166,7 @@ StateMap.prototype = {
         if (!isObject(item)) {
             throw new Error("Invalid end states object");
         }
+        this.ends = item;
 
         item = json.priority;
         if (!libcore.array(item)) {
@@ -173,7 +174,7 @@ StateMap.prototype = {
         }
         this.priority = item;
 
-        this.ends = item;
+        
         
         return this;
     },
