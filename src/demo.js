@@ -193,7 +193,23 @@ function test12() {
     testTokenizer(tokenizer, '()&^%$#');
 }
 
-test12();
+function test13() {
+    
+    var tokenizer = new Tokenizer();
+    tokenizer.define([
+        "racer2",   /new/,
+        "racer1",   /[a-z][a-z]*/
+        
+        
+    ]);
+    testTokenizer(tokenizer, 'new');
+
+    console.log(tokenizer);
+}
+
+test13();
+
+//test12();
 //test11();
 //test10();
 //test9();

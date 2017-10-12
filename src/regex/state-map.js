@@ -3,7 +3,8 @@
 import {
             string,
             number,
-            object
+            object,
+            array
         } from "libcore";
 
 function StateMap(start) {
@@ -15,6 +16,7 @@ function StateMap(start) {
         not: []
     };
     
+    this.priority = [];
     this.stateGenId = 0;
     this.start = start;
     this.states = states;
@@ -39,7 +41,7 @@ StateMap.prototype = {
             pending = [fragment],
             pl = 1;
         var state, stateObject, item, pointer, chr, to, list, l, id,
-            not, tl, targets, total, notIndex;
+            not, tl, targets, total, notIndex, endList, endIndex;
         
         idmap[fragment.state.id] = this.start;
         
@@ -116,6 +118,7 @@ StateMap.prototype = {
         
         // create end states
         for (l = endStates.length; l--;) {
+            // fixing race ends
             ends[idmap[endStates[l]]] = name;
         }
 
@@ -164,6 +167,13 @@ StateMap.prototype = {
         if (!isObject(item)) {
             throw new Error("Invalid end states object");
         }
+
+        item = json.priority;
+        if (!array(item)) {
+            throw new Error("Invalid priority list");
+        }
+        this.priority = item;
+
         this.ends = item;
         
         return this;
@@ -174,7 +184,8 @@ StateMap.prototype = {
             stateGenId: this.stateGenId,
             start: this.start,
             states: this.states,
-            ends: this.ends
+            ends: this.ends,
+            priority: this.priority
         };
     }
 };
